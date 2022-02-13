@@ -1,0 +1,6 @@
+# ignores following folders
+bin/
+build/
+
+resources/audio/unused_audio
+

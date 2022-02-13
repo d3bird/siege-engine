@@ -1,0 +1,3 @@
+[submodule "resources/Assets_libs"]
+	path = resources/Assets_libs
+	url = https://github.com/d3bird/Assets_libs.git
