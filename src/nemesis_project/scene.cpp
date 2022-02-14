@@ -1,5 +1,7 @@
 #include "scene.h"
 
+#include "world/generation/generation_pipeline.h"
+
 scene::scene(){
 	API = NULL;
 	engine = NULL;
@@ -12,6 +14,10 @@ scene::~scene(){
 
 void scene::update() {
 
+	update_guis();
+}
+
+void scene::update_guis() {
 
 }
 
@@ -29,13 +35,17 @@ void scene::init(engine_api* api) {
 	if (spawner == NULL) {
 		return;
 	}
-	spawner_test();
+
+	city_generator pipe(spawner);
+
+	pipe.create_platform(10,10,10);
+
+	//spawner_test();
 
 
 	std::cout << "done scene init" << std::endl;
 
 }
-
 
 void scene::spawner_test() {
 

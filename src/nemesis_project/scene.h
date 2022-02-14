@@ -21,5 +21,7 @@ private:
 	optimized_spawner* spawner;
 	void spawner_test();
 
+	void update_guis();
+
 };
 
