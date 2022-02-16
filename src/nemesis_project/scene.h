@@ -23,5 +23,7 @@ private:
 
 	void update_guis();
 
+	void create_blank_world();
+
 };
 

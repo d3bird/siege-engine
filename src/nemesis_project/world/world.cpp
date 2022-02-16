@@ -1,52 +1,15 @@
 #include "world.h"
 
 
-world::world(map_data* map) {
-	//OBJM = objm;
+world::world() {
 	world_map = NULL;
-	map_info = NULL;
-
-	if (map != NULL) {
-		map_info = map;
-		world_map = map->map;
-		x_size = map->x_size;
-		y_size = map->y_size;
-		z_size = map->z_size;
-		inited = true;
-	}
-
-}
-world::world(map_data*** map) {
-	//OBJM = objm;
-	world_map = NULL;
-	map_info = NULL;
-
-	if (map != NULL) {
-		large_map = map;
-		large_map = map;
-		
-		inited = true;
-	}
 
 }
 
 world::~world() {
+	delete_map_data(world_map);
 }
 
-void world::update() {
-	//Thermal->update();
-}
-
-void world::spawn_object(int x, int y, int z, int object, float angle) {
-
-}
-void world::place_heat_source(int x, int y, int z) {
-
-}
-
-void world::find_pathing(int x_s, int y_s, int z_s, int x_e, int y_e, int z_e) {
-
-}
 
 void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* OBJM) {
 	std::cout << "initing world" << std::endl;
@@ -55,58 +18,29 @@ void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* OBJM) {
 	y_size= y_siz;
 	z_size= z_siz;
 
-	world_gen = new world_generator(OBJM);
-	map_info = world_gen->create_blank_world_cell(x_siz, y_siz, z_siz);
-	//world_gen->generate_room_test(map_info);
-	//world_gen->generate_hill_world(map_info);
-	world_gen->generate_valley_world(map_info);
-	//world_gen->generate_test_world(map_info);
+	world_map = new map_data();
 
-	/*if (OBJM == NULL) {
-		std::cout << "OBJM was NULL" << std::endl;
-		return;
-	}*/
-	//Thermal->set_time(time);
-	//Thermal->init(x_size, y_size, z_size, OBJM);
-	//Thermal->place_heat_source(0, 0, 0, 80, 5);
+	world_map->x_size = x_siz;
+	world_map->y_size = y_siz;
+	world_map->z_size = z_siz;
 
+	world_map->map = new map_cell**[y_size];
 
-	//zone* temp_zone = new farm_zone("farm zone");
-	//temp_zone->set_bounds(x_size, y_size, z_size);
-	//
-	//temp_zone->add_spot_to_zone(1, 0, 0);
-	//temp_zone->add_spot_to_zone(0, 0, 1);
-	//temp_zone->add_spot_to_zone(0, 0, 0);
-	//temp_zone->add_spot_to_zone(1, 0, 1);
-	//temp_zone->add_spot_to_zone(-1, 0, 1);
-	//temp_zone->add_spot_to_zone(1, 0, -1);
-	//temp_zone->add_spot_to_zone(1, -1, 1);
-
-	////temp_zone->remove_spot_from_zone(0, 0, 0);
-	////temp_zone->get_interaction_spot(PICKUP);
-	////temp_zone->update();
-	//temp_zone->debug_print();
-
-	//temp_zone->remove_spot_from_zone(0, 0, 0);
-
-	//temp_zone->debug_print();
+	for (int y = 0; y < y_size; y++) {
+		world_map->map[y] = new map_cell * [x_size];
+		for (int x = 0; x < x_size; x++) {
+			world_map->map[y][x] = new map_cell[z_size];
+		}
+	}
 
 
-	//body* b = new body;
-	//head* h = new head;
-	//arm* left = new arm;
-	//arm* right = new arm;
-	//leg* left_l = new leg;
-	//leg* right_l = new leg;
-	//build_a_person(b, h, left, right, left_l, right_l);
-
-	//print_body_strcuture(b);
-}
-
-bool world::is_valid_loc(int x, int y, int z) {
-	return (x >= 0 && x < x_size&&
-		z >= 0 && z < z_size&&
-		y >= 0 && y < y_size);
+	for (int x = 0; x < x_size; x++) {
+		for (int z = 0; z < z_size; z++) {
+			world_map->map[1][x][z].ground = OBJM->spawn_item(GRASS_FLOOR, x, 1, z);
+			world_map->map[0][x][z].ground = OBJM->spawn_item(DIRT_WALL, x, 0, z);
+		}
+	}
+	
 }
 
 void world::update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angle) {

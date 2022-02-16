@@ -125,14 +125,14 @@ world* generation_pipeline::create_world() {
 
 	int rendering_que = create_optimised_rendering_que(map_info[0][0]);
 
-	world *World = new world(map_info);
+	world* World = NULL;// new world(map_info);
 
-	if (World->generated_correctly()) {
-		std::cout << "this world was generated correctly" << std::endl;
-	}
-	else {
-		std::cout << "this world was not generated correctly" << std::endl;
-	}
+	//if (World->generated_correctly()) {
+	//	std::cout << "this world was generated correctly" << std::endl;
+	//}
+	//else {
+	//	std::cout << "this world was not generated correctly" << std::endl;
+	//}
 
 	//World->init(x_size_world, y_size_world, z_size_world, OBJM);
 	return World;
@@ -156,14 +156,14 @@ world* generation_pipeline::create_world_single_cell() {
 	world_gen->generate_valley_world(map_info);
 	//world_gen->generate_test_world(map_info);
 
-	world* World = new world(map_info);
+	world* World = NULL;// new world(map_info);
 
-	if (World->generated_correctly()) {
+	/*if (World->generated_correctly()) {
 		std::cout << "this world was generated correctly" << std::endl;
 	}
 	else {
 		std::cout << "this world was not generated correctly" << std::endl;
-	}
+	}*/
 
 	//World->init(x_size_world, y_size_world, z_size_world, OBJM);
 	return World;

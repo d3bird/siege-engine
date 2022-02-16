@@ -36,15 +36,25 @@ void scene::init(engine_api* api) {
 		return;
 	}
 
-	city_generator pipe(spawner);
+	//city_generator pipe(spawner);
 
-	pipe.create_platform(10,10,10);
+	//pipe.create_platform(10,10,10);
+
+	create_blank_world();
 
 	//spawner_test();
 
 
 	std::cout << "done scene init" << std::endl;
 
+}
+
+void scene::create_blank_world() {
+	//city_generator pipe(spawner);
+
+	world* worlds = new world();
+
+	worlds->init(10, 10, 10, spawner);
 }
 
 void scene::spawner_test() {
