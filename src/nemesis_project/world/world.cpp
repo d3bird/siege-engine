@@ -3,11 +3,26 @@
 
 world::world() {
 	world_map = NULL;
-
+	belts = NULL;
 }
 
 world::~world() {
 	delete_map_data(world_map);
+}
+
+void world::place_belt(int x, int y, int z, int dir) {
+
+	if (belts != NULL && is_inbounds_of_map(x, y, z, world_map)) {
+
+		int ID = belts->place_belt(x, y, z, dir);
+
+		if (ID < 0) {
+			std::cout << "the belt failed to place" << std::endl;
+		}
+
+
+
+	}
 }
 
 
@@ -33,7 +48,7 @@ void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* OBJM) {
 		}
 	}
 
-
+	//create the map
 	for (int x = 0; x < x_size; x++) {
 		for (int z = 0; z < z_size; z++) {
 			world_map->map[1][x][z].ground = OBJM->spawn_item(GRASS_FLOOR, x, 1, z);
@@ -41,6 +56,8 @@ void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* OBJM) {
 		}
 	}
 	
+	//create the managers
+	belts = new belt_manager();
 }
 
 void world::update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angle) {
