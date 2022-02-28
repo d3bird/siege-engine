@@ -13,21 +13,24 @@ world::~world() {
 void world::place_belt(int x, int y, int z, int dir) {
 
 	if (belts != NULL && is_inbounds_of_map(x, y, z, world_map)) {
-
-		int ID = belts->place_belt(x, y, z, dir);
-
-		if (ID < 0) {
-			std::cout << "the belt failed to place" << std::endl;
+		item_info* belt = belts->place_belt(x, y, z, dir);
+		if (belt == NULL) {
+			std::cout << "can not place belt, belt was null" << std::endl;
 		}
-
-
-
+		else {
+			world_map->map[y][x][z].ground = belt;
+		}
+	}
+	else {
+		std::cout << "can not place belt, out of bounds" << std::endl;
 	}
 }
 
 
-void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* OBJM) {
+void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* objm) {
 	std::cout << "initing world" << std::endl;
+
+	OBJM = objm;
 
 	x_size = x_siz;
 	y_size= y_siz;
@@ -47,17 +50,16 @@ void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* OBJM) {
 			world_map->map[y][x] = new map_cell[z_size];
 		}
 	}
-
-	//create the map
-	for (int x = 0; x < x_size; x++) {
-		for (int z = 0; z < z_size; z++) {
-			world_map->map[1][x][z].ground = OBJM->spawn_item(GRASS_FLOOR, x, 1, z);
-			world_map->map[0][x][z].ground = OBJM->spawn_item(DIRT_WALL, x, 0, z);
-		}
-	}
 	
 	//create the managers
-	belts = new belt_manager();
+	belts = new belt_manager(OBJM);
+	doors = new door_data::door_manager();
+
+	//for the belt and door testing
+	gen_test_world(OBJM);
+
+	// for the aircraft testing
+	//gen_flight_world();
 }
 
 void world::update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angle) {
@@ -78,5 +80,75 @@ void world::update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angl
 	update_pac.item_id = obj->item_id;
 
 	OBJM->update_item_matrix(&update_pac);
+
+}
+
+void world::gen_test_world(optimized_spawner* OBJM) {
+
+//create the map
+
+	for (int x = 0; x < x_size; x++) {
+		for (int z = 0; z < z_size; z++) {
+			world_map->map[1][x][z].floor = OBJM->spawn_item(GRASS_FLOOR, x, 1, z);
+			world_map->map[0][x][z].ground = OBJM->spawn_item(DIRT_WALL, x, 0, z);
+		}
+	}
+	
+	//create the belts
+
+	//for (int x = 1; x < x_size-1; x++) {
+	//	for (int z = 1; z < z_size-1; z++) {
+	//		if ((x == 1 || x == x_size - 2) ||
+	//			(z == 1 || z == z_size - 2)) {
+	//			if (x == 1 && z ==1) {
+	//				world_map->map[1][x][z].ground = OBJM->spawn_item(BELT_2, x, 1, z);
+	//			}
+	//			else if (x == 1 && z == z_size-2) {
+	//				world_map->map[1][x][z].ground = OBJM->spawn_item(BELT_2, x, 1, z,90);
+	//			}
+	//			else if (x == x_size-2 && z == 1) {
+	//				world_map->map[1][x][z].ground = OBJM->spawn_item(BELT_2, x, 1, z, 270);
+	//			}
+	//			else if (x == x_size-2 && z == z_size-2) {
+	//				world_map->map[1][x][z].ground = OBJM->spawn_item(BELT_2, x, 1, z,180);
+	//			}
+	//			else {
+	//				if (z == 1 || z ==z_size-2) {
+	//					world_map->map[1][x][z].ground = OBJM->spawn_item(BELT_1, x, 1, z);
+	//				}
+	//				else {
+	//					world_map->map[1][x][z].ground = OBJM->spawn_item(BELT_1, x, 1, z,90);
+	//				}
+	//			}
+	//			
+	//		}
+	//	}
+	//}
+	place_belt(0, 1, 0, 0);
+
+	place_belt(0, 1, 1, 0);
+	place_belt(0, 1, 2, 0);
+	place_belt(0, 1, 3, 0);
+	place_belt(0, 1, 4, 0);
+
+	//world_map->map[1][2][0].ground = OBJM->spawn_item(STONE_WALL, 2, 1, 0);
+	//world_map->map[1][0][1].ground = OBJM->spawn_item(STONE_WALL, 0, 1, 1);
+
+	belts->print_all_belts();
+}
+
+
+void world::gen_flight_world() {
+
+
+
+
+
+}
+
+void world::spawn_door(door_data::door* data) {
+	if (data == NULL) {
+		return;
+	}
 
 }
