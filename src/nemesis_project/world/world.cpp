@@ -26,6 +26,13 @@ void world::place_belt(int x, int y, int z, int dir) {
 	}
 }
 
+void world::place_door(door_data::opening type, int x_start, int y_start, int z_start,
+	int x_end, int y_end, int z_end) {
+
+	door_data::door* data = doors->place_door(type, x_start, y_start, z_start, x_end, y_end, z_end);
+
+	spawn_door_objs(data);
+}
 
 void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* objm) {
 	std::cout << "initing world" << std::endl;
@@ -135,6 +142,10 @@ void world::gen_test_world(optimized_spawner* OBJM) {
 	//world_map->map[1][0][1].ground = OBJM->spawn_item(STONE_WALL, 0, 1, 1);
 
 	belts->print_all_belts();
+
+
+	std::cout << "spawning the test door" << std::endl;
+	place_door(door_data::LEFT, x_size-1, 1, 0, x_size-1, 5, 7);
 }
 
 
@@ -146,9 +157,28 @@ void world::gen_flight_world() {
 
 }
 
-void world::spawn_door(door_data::door* data) {
+void world::spawn_door_objs(door_data::door* data) {
 	if (data == NULL) {
 		return;
+	}
+
+	if (data->d_sec != NULL) {
+		std::cout << "spawning in the door" << std::endl;
+		for (int x = 0; x < data->ar_x; x++) {
+			for (int z = 0; z < data->ar_z; z++) {
+				if (data->d_sec[x][z].door_sec == NULL) {
+					data->d_sec[x][z].door_sec = OBJM->spawn_item(DOOR_SECTION,
+						data->d_sec[x][z].x_current, data->d_sec[x][z].y_current, data->d_sec[x][z].z_current,
+						data->d_sec[x][z].angle);
+				}
+			}
+
+		}
+
+	}
+	else {
+		std::cout << "failed t0 spawn in the door" << std::endl;
+
 	}
 
 }
