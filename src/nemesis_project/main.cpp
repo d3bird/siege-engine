@@ -92,6 +92,7 @@ int main() {
             process_movement(window);
         }
         API->draw();
+        testing.display_guis();
         testing.update();
     }
 

@@ -8,6 +8,8 @@ public:
 	scene();
 	~scene();
 
+	void display_guis();
+
 	void update();
 
 	void init(engine_api* api);
@@ -24,6 +26,9 @@ private:
 	void update_guis();
 
 	void create_blank_world();
+
+
+	world* worlds;
 
 };
 

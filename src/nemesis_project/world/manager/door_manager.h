@@ -60,18 +60,22 @@ namespace door_data {
 		door_manager();
 		~door_manager();
 
+		void update(double passed_time);
+
 		door* place_door(opening type, int x_start, int y_start, int z_start,
 			int x_end, int y_end, int z_end);
-
 		void delete_door(door* input);
 
 		door* get_door(int index);
+
+		void toggle_door(int index);
+		void set_door_open_state(int index, bool open);
 
 	private:
 
 		int ID_index;
 		std::vector<door*>doors;
-
+		std::vector<door*>update_doors;
 		//helper functions
 
 		bool is_y_opening(int x_start, int y_start, int z_start,

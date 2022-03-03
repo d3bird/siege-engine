@@ -10,6 +10,10 @@ world::~world() {
 	delete_map_data(world_map);
 }
 
+void world::draw_gui() {
+
+}
+
 void world::place_belt(int x, int y, int z, int dir) {
 
 	if (belts != NULL && is_inbounds_of_map(x, y, z, world_map)) {
@@ -96,8 +100,8 @@ void world::gen_test_world(optimized_spawner* OBJM) {
 
 	for (int x = 0; x < x_size; x++) {
 		for (int z = 0; z < z_size; z++) {
-			world_map->map[1][x][z].floor = OBJM->spawn_item(GRASS_FLOOR, x, 1, z);
-			world_map->map[0][x][z].ground = OBJM->spawn_item(DIRT_WALL, x, 0, z);
+			world_map->map[1][x][z].floor = OBJM->spawn_item(STONE_FLOOR, x, 1, z);
+			world_map->map[0][x][z].ground = OBJM->spawn_item(STONE_FLOOR, x, 0, z);
 		}
 	}
 	

@@ -175,6 +175,35 @@ namespace door_data {
 
 	}
 
+	void door_manager::toggle_door(int index) {
+		if (index >= 0 && index < doors.size()) {
+			doors[index]->open = !doors[index]->open;
+			if (!doors[index]->need_update) {
+				doors[index]->need_update = true;
+				update_doors.push_back(doors[index]);
+			}
+
+		}
+		else {
+			std::cout << "can not trigger door, out of bounds" << std::endl;
+		}
+	}
+
+	void door_manager::set_door_open_state(int index, bool open) {
+		if (index >= 0 && index < doors.size()) {
+			if (doors[index]->open != open) {
+				doors[index]->open = open;
+				if (!doors[index]->need_update) {
+					doors[index]->need_update = true;
+					update_doors.push_back(doors[index]);
+				}
+			}
+		}
+		else {
+			std::cout << "can not set door open state, out of bounds" << std::endl;
+		}
+	}
+
 	//helper functions
 
 	bool door_manager::is_y_opening(int x_start, int y_start, int z_start,

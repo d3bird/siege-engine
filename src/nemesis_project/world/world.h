@@ -1,6 +1,7 @@
 #pragma once
 
 #include "manager/belt_manager.h"
+#include "manager/manager_guis/door_manager_gui.h"
 #include "manager/door_manager.h"
 
 #include "../core/optimized_spawner.h"
@@ -11,6 +12,8 @@ public:
 	world();
 
 	~world();
+
+	void draw_gui();
 
 	void place_belt(int x, int y, int z, int dir);
 	void place_door(door_data::opening type, int x_start, int y_start, int z_start,
@@ -30,6 +33,7 @@ private:
 
 	belt_manager* belts;
 	door_data::door_manager* doors;
+	door_manager_gui* door_gui;
 	optimized_spawner* OBJM;
 
 	void spawn_door_objs(door_data::door* data);

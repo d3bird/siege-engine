@@ -17,6 +17,10 @@ void scene::update() {
 	update_guis();
 }
 
+void scene::display_guis() {
+	worlds->draw_gui();
+}
+
 void scene::update_guis() {
 
 }
@@ -52,7 +56,7 @@ void scene::init(engine_api* api) {
 void scene::create_blank_world() {
 	//city_generator pipe(spawner);
 
-	world* worlds = new world();
+	worlds = new world();
 
 	worlds->init(10, 10, 10, spawner);
 }
