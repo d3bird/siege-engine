@@ -44,8 +44,8 @@ void scene::init(engine_api* api) {
 
 	//pipe.create_platform(10,10,10);
 
-	create_blank_world();
-
+	//create_blank_world();
+	aircraft_test();
 	//spawner_test();
 
 
@@ -91,5 +91,29 @@ void scene::spawner_test() {
 	}
 	else {
 		std::cout << "spawner was NULL" << std::endl;
+	}
+}
+
+void scene::aircraft_test() {
+	std::cout << "testing aircraft" << std::endl;
+	if (spawner != NULL) {
+		int x_size = 15;
+		int z_size = 15;
+		int y = 0;
+
+		//spawn a temp groud under the planes 
+		for (int x = 0; x < x_size; x++) {
+			for (int z = 0; z < z_size; z++) {
+					spawner->spawn_item(DIRT_WALL, x, y, z);
+					//spawner->spawn_item(GRASS_FLOOR, x, y+1, z);
+			}
+		}
+
+		aircraft_control* AirContorl = new aircraft_control(spawner);
+		AirContorl->init(AIRCRAFT_T);
+
+	}
+	else {
+		std::cout << "can not test aircraft when there is no spawner" << std::endl;
 	}
 }

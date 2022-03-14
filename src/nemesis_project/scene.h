@@ -2,6 +2,9 @@
 
 #include "core/create_engine.h"
 
+#include "world/world.h"
+#include "aircraft/aircraft_manager.h"
+
 class scene
 {
 public:
@@ -27,8 +30,8 @@ private:
 
 	void create_blank_world();
 
+	world* worlds = NULL;
 
-	world* worlds;
-
+	void aircraft_test();
 };
 
