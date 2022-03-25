@@ -45,7 +45,8 @@ void scene::init(engine_api* api) {
 	//pipe.create_platform(10,10,10);
 
 	//create_blank_world();
-	aircraft_test();
+	//aircraft_test();
+	radio_test();
 	//spawner_test();
 
 
@@ -115,5 +116,59 @@ void scene::aircraft_test() {
 	}
 	else {
 		std::cout << "can not test aircraft when there is no spawner" << std::endl;
+	}
+}
+
+void scene::radio_test() {
+	if (spawner != NULL) {
+
+		int x_size = 15;
+		int z_size = 15;
+		int y = 0;
+
+
+		//spawn a temp groud under the planes 
+		for (int x = 0; x < x_size; x++) {
+			for (int z = 0; z < z_size; z++) {
+				spawner->spawn_item(DIRT_WALL, x, y, z);
+				spawner->spawn_item(GRASS_FLOOR, x, y + 1, z);
+			}
+		}
+
+		//makesure that the models work
+
+		bool model_test = true;
+
+		if (model_test) {
+			spawner->spawn_item(BROADCAST_TOWER, 1, 1, 1);
+			spawner->spawn_item(RADIO_CONSOLE, 6, 1, 1);
+			spawner->spawn_item(WALL_SPEAKER, 8, 1, 1);
+			spawner->spawn_item(SUPPORT, 9, 1, 1);
+			spawner->spawn_item(SUPPORT, 9, 2, 1);
+			spawner->spawn_item(SUPPORT, 9, 3, 1);
+			spawner->spawn_item(SUPPORT, 9, 4, 1);
+			spawner->spawn_item(SPEAKER_TOP, 9, 5, 1);
+		}
+		else {
+
+			for (y = 1; y < 3; y++) {
+				for (int x = x_size - 5; x < x_size; x++) {
+					for (int z = z_size - 5; z < z_size; z++) {
+						spawner->spawn_item(DIRT_WALL, x, y, z);
+						spawner->spawn_item(GRASS_FLOOR, x, y + 1, z);
+					}
+				}
+			}
+
+			spawner->spawn_item(BROADCAST_TOWER, x_size - 3, y, z_size - 3);
+			spawner->spawn_item(RADIO_CONSOLE, x_size-3, 1, z_size-6, 90);
+
+			int x_cent = x_size / 2;
+			int z_cent = z_size / 2;
+
+
+
+		}
+
 	}
 }

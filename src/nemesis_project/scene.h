@@ -33,5 +33,6 @@ private:
 	world* worlds = NULL;
 
 	void aircraft_test();
+	void radio_test();
 };
 
