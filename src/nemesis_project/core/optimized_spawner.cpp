@@ -198,9 +198,16 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("TILE_FLOOR", paths.get_objs_loc() + "terrian/tile_floor.obj", buffer_size, TILE_FLOOR);
 	//table["TILE_FLOOR"] = obj_temp;
 
-	//these two models cause a crash when they are loaded
 	obj_temp = OBJM->add_model("AIRCRAFT", paths.get_objs_loc() + "aircraft/aircraft.obj", buffer_size, AIRCRAFT_T);
 	obj_temp = OBJM->add_model("AIRCRAFT_LANDING_PAD", paths.get_objs_loc() + "aircraft/air_tile.obj", buffer_size, AIRCRAFT_LANDING_PAD);
+
+
+	obj_temp = OBJM->add_model("BROADCAST_TOWER", paths.get_objs_loc() + "radio/radio_tower_temp.obj", buffer_size, BROADCAST_TOWER);
+	obj_temp = OBJM->add_model("RADIO_CONSOLE", paths.get_objs_loc() + "radio/console.obj", buffer_size, RADIO_CONSOLE);
+	obj_temp = OBJM->add_model("WALL_SPEAKER", paths.get_objs_loc() + "radio/wall_speaker.obj", buffer_size, WALL_SPEAKER);
+	obj_temp = OBJM->add_model("SUPPORT", paths.get_objs_loc() + "radio/support.obj", buffer_size, SUPPORT);
+	obj_temp = OBJM->add_model("SPEAKER_TOP", paths.get_objs_loc() + "radio/support_speaker.obj", buffer_size, SPEAKER_TOP);
+
 
 	std::cout << "done" << std::endl;
 }
