@@ -16,7 +16,7 @@ void world::draw_gui() {
 
 void world::place_belt(int x, int y, int z, int dir) {
 
-	if (belts != NULL && is_inbounds_of_map(x, y, z, world_map)) {
+	if (belts != NULL && is_inbounds_of_map_local(x, y, z, world_map)) {
 		item_info* belt = belts->place_belt(x, y, z, dir);
 		if (belt == NULL) {
 			std::cout << "can not place belt, belt was null" << std::endl;
@@ -38,36 +38,17 @@ void world::place_door(door_data::opening type, int x_start, int y_start, int z_
 	spawn_door_objs(data);
 }
 
-void world::init(int x_siz, int y_siz, int z_siz, optimized_spawner* objm) {
+void world::init(optimized_spawner* objm) {
 	std::cout << "initing world" << std::endl;
 
 	OBJM = objm;
-
-	x_size = x_siz;
-	y_size= y_siz;
-	z_size= z_siz;
-
-	world_map = new map_data();
-
-	world_map->x_size = x_siz;
-	world_map->y_size = y_siz;
-	world_map->z_size = z_siz;
-
-	world_map->map = new map_cell**[y_size];
-
-	for (int y = 0; y < y_size; y++) {
-		world_map->map[y] = new map_cell * [x_size];
-		for (int x = 0; x < x_size; x++) {
-			world_map->map[y][x] = new map_cell[z_size];
-		}
-	}
 	
 	//create the managers
 	belts = new belt_manager(OBJM);
 	doors = new door_data::door_manager();
 
 	//for the belt and door testing
-	gen_test_world(OBJM);
+	//gen_test_world(OBJM);
 
 	// for the aircraft testing
 	//gen_flight_world();

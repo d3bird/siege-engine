@@ -19,9 +19,9 @@ public:
 	void place_door(door_data::opening type, int x_start, int y_start, int z_start,
 		int x_end, int y_end, int z_end);
 
-	void init(int x_size, int y_size, int z_size, optimized_spawner* OBJM);
+	void init(optimized_spawner* OBJM);
 
-	map_data* world_map;
+	local_map_data* world_map;
 
 private:
 

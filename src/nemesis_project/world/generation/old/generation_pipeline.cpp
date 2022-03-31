@@ -8,11 +8,6 @@ generation_pipeline::generation_pipeline(optimized_spawner* objm) {
 
 	world_gen = new world_generator(OBJM);
 	city_gen = new city_generator(OBJM);
-
-
-
-
-
 }
 
 generation_pipeline::~generation_pipeline() {
@@ -95,7 +90,7 @@ mobil_platform* generation_pipeline::create_mobil_city() {
 	int y_size_city = given_settings->city_settings->y_size;
 	int z_size_city = given_settings->city_settings->z_size;
 
-	map_data* temp = city_gen->create_platform(x_size_city, y_size_city, z_size_city);
+	local_map_data* temp = city_gen->create_platform(x_size_city, y_size_city, z_size_city);
 
 	temp = city_gen->turn_platform_into_factory(temp);
 
@@ -111,7 +106,7 @@ world* generation_pipeline::create_world() {
 	}
 
 	//generates the map and the objects
-	map_data*** map_info= world_gen->create_full_world_map(given_settings->world_settings);
+	local_map_data*** map_info= world_gen->create_full_world_map(given_settings->world_settings);
 
 	//creates the details in the map
 	create_motion_systems(map_info);
@@ -148,7 +143,7 @@ world* generation_pipeline::create_world_single_cell() {
 	int y_size_world = given_settings->world_settings->y_size;
 	int z_size_world = given_settings->world_settings->z_size;
 
-	map_data* map_info;
+	local_map_data* map_info;
 
 	map_info = world_gen->create_blank_world_cell(x_size_world, y_size_world, z_size_world);
 	//world_gen->generate_room_test(map_info);
@@ -170,7 +165,7 @@ world* generation_pipeline::create_world_single_cell() {
 }
 
 
-int generation_pipeline::create_optimised_rendering_que(map_data* input, bool set_primary) {
+int generation_pipeline::create_optimised_rendering_que(local_map_data* input, bool set_primary) {
 	//int output =-1;
 
 	//if (input == NULL) {
@@ -225,7 +220,7 @@ int generation_pipeline::create_optimised_rendering_que(map_data* input, bool se
 //helper functions
 
 //moves the objects to their respective spots
-void generation_pipeline::offset_world_map(map_data*** input) {
+void generation_pipeline::offset_world_map(local_map_data*** input) {
 	if (input == NULL) {
 		return;
 	}
@@ -245,7 +240,7 @@ void generation_pipeline::offset_world_map(map_data*** input) {
 
 }
 
-void generation_pipeline::offset_world_map(map_data* input){//moves the objects to their respective spots
+void generation_pipeline::offset_world_map(local_map_data* input){//moves the objects to their respective spots
 	if (input == NULL) {
 		return;
 	}
@@ -296,35 +291,35 @@ void generation_pipeline::offset_world_map(map_data* input){//moves the objects 
 
 }
 
-void generation_pipeline::create_motion_systems(map_data*** input){// creates the motion systems for the maps
+void generation_pipeline::create_motion_systems(local_map_data*** input){// creates the motion systems for the maps
 	if (input == NULL) {
 		return;
 	}
 }
 
-void  generation_pipeline::create_motion_systems(map_data* input){
+void  generation_pipeline::create_motion_systems(local_map_data* input){
 	if (input == NULL) {
 		return;
 	}
 }
 
-void  generation_pipeline::create_thermal_systems(map_data*** input){// creates the thernak systems for the maps
+void  generation_pipeline::create_thermal_systems(local_map_data*** input){// creates the thernak systems for the maps
 	if (input == NULL) {
 		return;
 	}
 }
 
-void  generation_pipeline::create_thermal_systems(map_data* input) {
+void  generation_pipeline::create_thermal_systems(local_map_data* input) {
 	if (input == NULL) {
 		return;
 	}
 }
 
-bool  generation_pipeline::check(map_data*** input) {// checks the generated maps for errors
+bool  generation_pipeline::check(local_map_data*** input) {// checks the generated maps for errors
 	return true;
 }
 
-bool  generation_pipeline::check(map_data* input) {
+bool  generation_pipeline::check(local_map_data* input) {
 	return true;
 }
 

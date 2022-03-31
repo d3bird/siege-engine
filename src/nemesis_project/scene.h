@@ -34,5 +34,7 @@ private:
 
 	void aircraft_test();
 	void radio_test();
+
+	void world_generation_test();
 };
 

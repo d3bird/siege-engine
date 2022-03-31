@@ -8,7 +8,7 @@
 
 class mobil_platform{
 public:
-	mobil_platform(map_data* map_in);
+	mobil_platform(local_map_data* map_in);
 	~mobil_platform();
 
 	
@@ -48,7 +48,7 @@ public:
 	int get_z_size() { return z_size; }
 
 	map_cell*** get_platform_map() { return platform_map; }
-	map_data* get_map_info() { return map_info; }
+	local_map_data* get_map_info() { return map_info; }
 
 
 private:
@@ -66,7 +66,7 @@ private:
 	//pathing* paths;
 
 	map_cell*** platform_map;
-	map_data* map_info;
+	local_map_data* map_info;
 
 	int total_spaces;
 	int x_size;

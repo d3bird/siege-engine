@@ -1,6 +1,6 @@
 #include "scene.h"
 
-#include "world/generation/generation_pipeline.h"
+#include "world/generation/world_generation.h"
 
 scene::scene(){
 	API = NULL;
@@ -46,7 +46,8 @@ void scene::init(engine_api* api) {
 
 	//create_blank_world();
 	//aircraft_test();
-	radio_test();
+	world_generation_test();
+	//radio_test();
 	//spawner_test();
 
 
@@ -59,7 +60,7 @@ void scene::create_blank_world() {
 
 	worlds = new world();
 
-	worlds->init(10, 10, 10, spawner);
+	//worlds->init(10, 10, 10, spawner);
 }
 
 void scene::spawner_test() {
@@ -171,4 +172,13 @@ void scene::radio_test() {
 		}
 
 	}
+}
+
+void scene::world_generation_test() {
+
+	world_generation pipe(spawner);
+
+	world_gen_settings* test = pipe.flat_land_settings();
+
+	world* testing = pipe.create_world(test);
 }

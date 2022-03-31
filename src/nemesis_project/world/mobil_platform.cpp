@@ -1,7 +1,7 @@
 #include "mobil_platform.h"
 
 
-mobil_platform::mobil_platform(map_data* map_in) {
+mobil_platform::mobil_platform(local_map_data* map_in) {
 	map_info = NULL;
 
 	map_info = map_in;
@@ -36,7 +36,7 @@ void mobil_platform::init(int x_siz, int y_siz, int z_siz, optimized_spawner* OB
 		}
 	}
 
-	map_info = new map_data;
+	map_info = new local_map_data;
 	map_info->x_size = x_size;
 	map_info->y_size = y_size;
 	map_info->z_size = z_size;

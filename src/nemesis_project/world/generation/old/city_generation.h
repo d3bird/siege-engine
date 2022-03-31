@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../object_data.hpp"
-#include "../../utility/logger.h"
+#include "../../object_data.hpp"
+#include "../../../utility/logger.h"
 #include <time.h>
 
-#include "../../core/optimized_spawner.h"
-#include "../terrian_data.hpp"
+#include "../../../core/optimized_spawner.h"
+#include "../../terrian_data.hpp"
 
-#include "../../utility/random_gen.hpp"
+#include "../../../utility/random_gen.hpp"
 
-#include "../mobil_platform.h"
+#include "../../mobil_platform.h"
 
 #include <vector>
 
@@ -58,21 +58,21 @@ struct city_gen_sets {
 	std::vector< gen_room_info*> rooms_to_gen;
 };
 
-//this class creates map_data and modifys map_data to create differnt worlds
+//this class creates local_map_data and modifys local_map_data to create differnt worlds
 class city_generator {
 public:
 	city_generator(optimized_spawner* objm);
 	~city_generator();
 
 	//creates a blank platform
-	map_data* create_platform(int x_siz, int y_siz, int z_siz);
+	local_map_data* create_platform(int x_siz, int y_siz, int z_siz);
 	
 	//creates a platfrom from generation settings
-	map_data* create_city_from_settings(city_gen_sets* settings, map_data* map_in);
+	local_map_data* create_city_from_settings(city_gen_sets* settings, local_map_data* map_in);
 
-	map_data* turn_platform_into_factory(map_data* input = NULL);
+	local_map_data* turn_platform_into_factory(local_map_data* input = NULL);
 
-	void place_wheel_on_city(map_data* input);
+	void place_wheel_on_city(local_map_data* input);
 
 	//create defult generation settings
 	city_gen_sets* generate_def_gen_room_info();
@@ -114,30 +114,30 @@ private:
 		bool made_changes = false;
 	};
 
-	bool check_fix_area(area_data& check, map_data* map_in);
+	bool check_fix_area(area_data& check, local_map_data* map_in);
 
 	//generic creation function
-	void create_city_base(map_data* map_in);
-	bool fill_in_edge_walls(map_data* map_in, int start, int end);
-	bool fill_in_floor(map_data* map_in, int floor);
+	void create_city_base(local_map_data* map_in);
+	bool fill_in_edge_walls(local_map_data* map_in, int start, int end);
+	bool fill_in_floor(local_map_data* map_in, int floor);
 
-	int amount_possible_split_floor_into_rooms(map_data* map_in, int floor, int r_width, int r_length);
-	int split_floor_into_rooms(map_data* map_in, int floor, int r_width, int r_length);
+	int amount_possible_split_floor_into_rooms(local_map_data* map_in, int floor, int r_width, int r_length);
+	int split_floor_into_rooms(local_map_data* map_in, int floor, int r_width, int r_length);
 
-	int amount_possible_split_area_into_rooms(map_data* map_in, int floor, int r_width, int r_length,area_data& area);
-	int split_area_into_rooms(map_data* map_in, int floor, int r_width, int r_length, area_data &area);
+	int amount_possible_split_area_into_rooms(local_map_data* map_in, int floor, int r_width, int r_length,area_data& area);
+	int split_area_into_rooms(local_map_data* map_in, int floor, int r_width, int r_length, area_data &area);
 
-	void create_crane(map_data* map_in, area_data& area);
+	void create_crane(local_map_data* map_in, area_data& area);
 
 	int* create_prioorty_que_from_settings(city_gen_sets* settings);
 
 	//specific creation functions
 
 	//hooks the wheelbox up to a gearbox or a furnace on whatever floor they are on
-	bool hook_wheel_box_up(map_data* input, bool just_furnace);
+	bool hook_wheel_box_up(local_map_data* input, bool just_furnace);
 
 	//create a production floor
-	bool create_production_floor(map_data* input, int floor);
+	bool create_production_floor(local_map_data* input, int floor);
 
 
 	optimized_spawner* OBJM;

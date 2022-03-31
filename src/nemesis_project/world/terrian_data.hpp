@@ -79,7 +79,7 @@ struct wheels {
 	std::vector<item_info*> wheel_blocks;
 };
 
-struct map_data {
+struct local_map_data {
 	int x_size;
 	int y_size;
 	int z_size;
@@ -100,14 +100,25 @@ struct map_data {
 	std::vector< room*> rooms_on_map;
 };
 
-static bool is_inbounds_of_map(int x, int y, int z, map_data* map) {
+struct map_data {
+
+	int x_size;
+	int y_size;
+	int z_size;
+
+	local_map_data*** world_map;
+};
+
+static bool is_inbounds_of_map_local(int x, int y, int z, local_map_data* map) {
 	return (map != NULL &&
 		x >= 0 && x < map->x_size &&
 		y >= 0 && y < map->y_size &&
 		z >= 0 && z < map->z_size);
 }
 
-static void clear_checked(int layer, map_data* map) {
+
+
+static void clear_checked(int layer, local_map_data* map) {
 	int y = layer;
 
 	if (map == NULL) {
@@ -126,13 +137,13 @@ static void clear_checked(int layer, map_data* map) {
 
 static int max_room_size = 500;
 
-static bool is_enclosed(int x, int y, int z, map_data* map) {
+static bool is_enclosed(int x, int y, int z, local_map_data* map) {
 
 	if (map == NULL) {
 		std::cout << "map is null" << std::endl;
 		return false;
 	}
-	if (!is_inbounds_of_map(x,y,z,map)) {
+	if (!is_inbounds_of_map_local(x,y,z,map)) {
 		std::cout << "not in bounds" << std::endl;
 		return false;
 	}
@@ -173,19 +184,19 @@ static bool is_enclosed(int x, int y, int z, map_data* map) {
 				int x_n = test->x;
 				int y_n = test->y;
 				int z_n = test->z;
-				if (is_inbounds_of_map(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
+				if (is_inbounds_of_map_local(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n + 1][z_n]);
 					world_map[y_n][x_n + 1][z_n].checked = true;
 				}
-				if (is_inbounds_of_map(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
+				if (is_inbounds_of_map_local(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n - 1][z_n]);
 					world_map[y_n][x_n - 1][z_n].checked = true;
 				}
-				if (is_inbounds_of_map(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
+				if (is_inbounds_of_map_local(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n + 1]);
 					world_map[y_n][x_n][z_n + 1].checked = true;
 				}
-				if (is_inbounds_of_map(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
+				if (is_inbounds_of_map_local(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n - 1]);
 					world_map[y_n][x_n][z_n - 1].checked = true;
 				}
@@ -210,13 +221,13 @@ static bool is_enclosed(int x, int y, int z, map_data* map) {
 }
 
 //generates a 2d room
-static room* generate_room(int x, int y, int z, map_data* map) {
+static room* generate_room(int x, int y, int z, local_map_data* map) {
 
 	if (map == NULL) {
 		std::cout << "map is null" << std::endl;
 		return NULL;
 	}
-	if (!is_inbounds_of_map(x, y, z, map)) {
+	if (!is_inbounds_of_map_local(x, y, z, map)) {
 		std::cout << "not in bounds" << std::endl;
 		return NULL;
 	}
@@ -258,22 +269,22 @@ static room* generate_room(int x, int y, int z, map_data* map) {
 				int x_n = test->x;
 				int y_n = test->y;
 				int z_n = test->z;
-				if (is_inbounds_of_map(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
+				if (is_inbounds_of_map_local(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n + 1][z_n]);
 					world_map[y_n][x_n + 1][z_n].checked = true;
 				}
 				
-				if (is_inbounds_of_map(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
+				if (is_inbounds_of_map_local(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n - 1][z_n]);
 					world_map[y_n][x_n - 1][z_n].checked = true;
 				}
 			
-				if (is_inbounds_of_map(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
+				if (is_inbounds_of_map_local(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n + 1]);
 					world_map[y_n][x_n][z_n + 1].checked = true;
 				}
 				
-				if (is_inbounds_of_map(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
+				if (is_inbounds_of_map_local(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n - 1]);
 					world_map[y_n][x_n][z_n - 1].checked = true;
 				}
@@ -297,13 +308,13 @@ static room* generate_room(int x, int y, int z, map_data* map) {
 	return output_room;
 }
 
-static map_data* merge_maps(map_data* larger, map_data* smaller) {
+static local_map_data* merge_maps(local_map_data* larger, local_map_data* smaller) {
 
 	return NULL;
 }
 
 
-static void delete_map_data(map_data* in) {
+static void delete_map_data(local_map_data* in) {
 	if (in == NULL) {
 		return;
 	}
