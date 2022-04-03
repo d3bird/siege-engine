@@ -94,7 +94,7 @@ mobil_platform* generation_pipeline::create_mobil_city() {
 
 	temp = city_gen->turn_platform_into_factory(temp);
 
-	mobil_platform* mobil_city = new mobil_platform(temp);
+	mobil_platform* mobil_city = NULL;// new mobil_platform(temp);
 	//mobil_city->init(x_size_city, y_size_city, z_size_city, OBJM);
 	return mobil_city;
 }

@@ -1,6 +1,7 @@
 #include "scene.h"
 
 #include "world/generation/world_generation.h"
+#include "world/generation/city_generation.h"
 
 scene::scene(){
 	API = NULL;
@@ -181,4 +182,9 @@ void scene::world_generation_test() {
 	world_gen_settings* test = pipe.flat_land_settings();
 
 	world* testing = pipe.create_world(test);
+
+	city_generation city(spawner);
+
+	mobil_platform* plat = city.create_mobile_plat(city.get_flat_city_settings());
+
 }

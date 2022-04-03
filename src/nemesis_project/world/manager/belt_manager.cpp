@@ -69,7 +69,7 @@ bool belt_manager::does_belt_exist(belt* test) {
 	//}
 }
 
-bool belt_manager::does_belt_exist(loc test) {
+bool belt_manager::does_belt_exist(loc_i<int> test) {
 	//for the vecotr
 	//for (int i = 0; i < belts.size(); i++) {
 	//	if (belts[i] != NULL && !belts[i]->old) {
@@ -139,7 +139,7 @@ float belt_manager::get_belt_angle(int id) {
 }
 
 
-bool belt_manager::con_exist(int dir, loc loc_org, loc loc_conn) {
+bool belt_manager::con_exist(int dir, loc_i<int> loc_org, loc_i<int> loc_conn) {
 	//0 = north
 	//1 = south
 	//2 = east

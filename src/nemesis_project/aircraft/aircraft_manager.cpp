@@ -23,7 +23,7 @@ void aircraft_control::update_models() {
 }
 
 
-int aircraft_control::spawn_plane(loc spawn_loc, int plane_type) {
+int aircraft_control::spawn_plane(loc_i<int> spawn_loc, int plane_type) {
 	
 	plane_data* output = factory->spawn_plane(spawn_loc.x, spawn_loc.y, spawn_loc.z, plane_type);
 	
@@ -44,7 +44,7 @@ int aircraft_control::spawn_plane(loc spawn_loc, int plane_type) {
 	return models_in_use.size()-1;
 }
 
-void aircraft_control::place_landing_site(loc location, bool flight_strip) {
+void aircraft_control::place_landing_site(loc_i<int> location, bool flight_strip) {
 landing_site* land = new landing_site;
 	land->location_start = location;
 	land->location_end = location;
@@ -63,13 +63,13 @@ landing_site* land = new landing_site;
 
 void aircraft_control::init(int plane_enum) {
 
-	place_landing_site(loc(0, 1, 0), false);
-	place_landing_site(loc(10, 1, 10), false);
+	place_landing_site(loc_i<int>(0, 1, 0), false);
+	place_landing_site(loc_i<int>(10, 1, 10), false);
 
 	factory = new aircraft_factory(plane_enum);	
 	flight_brain = new flight_controller();
 
-	spawn_plane(loc(0, 1, 0), 0);
+	spawn_plane(loc_i<int>(0, 1, 0), 0);
 
 	plane_data* plane = planes[0];
 

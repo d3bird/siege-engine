@@ -6,10 +6,10 @@
 #include <vector>
 
 struct landing_site {
-	loc location_start;
+	loc_i<int> location_start;
 
 	bool air_strip;
-	loc location_end;
+	loc_i<int> location_end;
 
 	bool inuse;
 	bool plane_traveling_to;
@@ -23,7 +23,7 @@ struct plane_route {
 	landing_site* starting_spot;
 	landing_site* ending_spot;
 
-	std::vector<loc> points;
+	std::vector<loc_i<int> > points;
 
 	bool patrol;
 

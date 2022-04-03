@@ -1,23 +1,24 @@
 #pragma once
 
-struct loc {
-	int x =-1;
-	int y =-1;
-	int z=-1;
+template<class T>
+struct loc_i {
+	T x =-1;
+	T  y =-1;
+	T  z=-1;
 
-	loc() {
+	loc_i() {
 		x = -1;
 		y = -1;
 		z = -1;
 	}
 
-	loc(int x0, int y0, int z0) {
+	loc_i(T  x0, T  y0, T  z0) {
 		x = x0;
 		y = y0;
 		z = z0;
 	}
 
-	bool operator==(const loc& other) {
+	bool operator==(const loc_i& other) {
 		return (x == other.x &&
 			y == other.y &&
 			z == other.z);

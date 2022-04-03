@@ -15,7 +15,7 @@ enum broadcast_type{NOTHING =0, NEWS, MUSIC, PROPIGANDA, TALK_SHOW};
 struct radio_tower {
 
 	int broadcasting_distance;
-	loc location;
+	loc_i<int> location;
 
 	bool bradcasting;
 	bool linked_to_station;
@@ -28,7 +28,7 @@ struct radio_tower {
 struct radio_station;
 
 struct radio_speakers {
-	loc location;
+	loc_i<int> location;
 	radio_station* playing;
 
 	bool wall_speaker;
@@ -37,7 +37,7 @@ struct radio_speakers {
 };
 
 struct console {
-	loc location;
+	loc_i<int> location;
 	radio_station* controlling;
 };
 

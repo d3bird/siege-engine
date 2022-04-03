@@ -15,9 +15,9 @@ public:
 
 	void update();
 
-	int spawn_plane(loc spawn_loc, int plane_type);
+	int spawn_plane(loc_i<int> spawn_loc, int plane_type);
 
-	void place_landing_site(loc location, bool flight_strip);
+	void place_landing_site(loc_i<int> location, bool flight_strip);
 
 	std::vector<landing_site*>& get_landing_sites();
 	std::vector<landing_site*>& get_open_landing_sites();
