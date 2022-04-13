@@ -25,6 +25,8 @@ public:
 	
 	void init(int plane_enum);
 
+	void start_animation_sim( const loc_i<int> &start_loc);
+
 private:
 
 	void update_models();

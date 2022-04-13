@@ -5,6 +5,14 @@
 #include "../terrian_data.hpp"
 #include "../../core/optimized_spawner.h"
 
+//these are chunks that are to be hard coded
+struct hard_chunk {
+	int x;
+	int y;
+	int z;
+	int type;
+};
+
 struct world_gen_settings {
 	int x_cell_size;
 	int y_cell_size;
@@ -16,6 +24,8 @@ struct world_gen_settings {
 
 	bool flat_land;
 	int ground_level;
+
+	std::vector< hard_chunk*> hard_chunks;
 
 };
 

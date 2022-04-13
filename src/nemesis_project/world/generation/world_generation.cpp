@@ -68,7 +68,7 @@ world* world_generation::create_world(world_gen_settings* input, bool force) {
 						for (int z = 0; z < z_siz; z++) {
 							local_map[y][x][z].ground = spawner->spawn_item(STONE_WALL,
 								x + x_off, y + y_off, z + z_off);
-							local_map[y + 1][x][z].ground = spawner->spawn_item(STONE_FLOOR,
+							local_map[y + 1][x][z].ground = spawner->spawn_item(GRASS_FLOOR,
 								x + x_off, y + 1 + y_off, z + z_off);
 						}
 					}

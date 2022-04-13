@@ -183,6 +183,12 @@ void scene::world_generation_test() {
 
 	world* testing = pipe.create_world(test);
 
+	aircraft_control* AirContorl = new aircraft_control(spawner);
+
+	loc_i<int> start_loc(5,5,5);
+	AirContorl->start_animation_sim(start_loc);
+
+
 	city_generation city(spawner);
 
 	mobil_platform* plat = city.create_mobile_plat(city.get_flat_city_settings());

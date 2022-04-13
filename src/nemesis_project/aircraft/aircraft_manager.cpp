@@ -90,6 +90,18 @@ void aircraft_control::init(int plane_enum) {
 	}
 }
 
+void aircraft_control::start_animation_sim(const loc_i<int>& start_loc) {
+	std::cout << "starting the animation test of the aircraft" << std::endl;
+
+	factory = new aircraft_factory(AIRCRAFT_T);
+	flight_brain = new flight_controller();
+
+
+	spawn_plane(start_loc, 0);
+
+	plane_data* plane = planes[0];
+}
+
 std::vector<landing_site*>& aircraft_control::get_landing_sites() {
 	return landing_sites;
 }

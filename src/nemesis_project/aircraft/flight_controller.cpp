@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-flight_controller::flight_controller()
-{
+flight_controller::flight_controller(){
+	fly_sim = false;
 }
 
 flight_controller::~flight_controller()
@@ -12,6 +12,7 @@ flight_controller::~flight_controller()
 
 //upate the plane on route
 void flight_controller::update() {
+
 	for (int i = 0; i < routes.size(); i++) {
 
 	}
@@ -31,4 +32,12 @@ bool flight_controller::fly_plane(plane_data *plane, plane_route* route) {
 	}
 
 	return added_to_updates;
+}
+
+void flight_controller::update_fly_sim() {
+
+}
+
+void flight_controller::init_fly_sim() {
+
 }
