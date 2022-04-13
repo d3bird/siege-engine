@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-#include "../location.hpp"
+#include "../../common_obj/location.hpp"
 
 
 //news increase productivity

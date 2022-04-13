@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "terrian_data.hpp"
-#include "location.hpp"
+#include "../common_obj/location.hpp"
 #include "../core/optimized_spawner.h"
 
 class mobil_platform{

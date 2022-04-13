@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../world/location.hpp"
+#include "../common_obj/location.hpp"
 #include "aircraft_data.hpp"
 
 #include <vector>
