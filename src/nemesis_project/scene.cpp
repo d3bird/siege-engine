@@ -112,7 +112,7 @@ void scene::aircraft_test() {
 			}
 		}
 
-		aircraft_control* AirContorl = new aircraft_control(spawner);
+		aircraft_manager* AirContorl = new aircraft_manager(spawner);
 		AirContorl->init(AIRCRAFT_T);
 
 	}
@@ -183,7 +183,7 @@ void scene::world_generation_test() {
 
 	world* testing = pipe.create_world(test);
 
-	aircraft_control* AirContorl = new aircraft_control(spawner);
+	aircraft_manager* AirContorl = new aircraft_manager(spawner);
 
 	loc_i<int> start_loc(5,5,5);
 	AirContorl->start_animation_sim(start_loc);

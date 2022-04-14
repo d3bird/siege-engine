@@ -2,28 +2,28 @@
 
 #include <iostream>
 
-aircraft_control::aircraft_control(optimized_spawner* objm) {
+aircraft_manager::aircraft_manager(optimized_spawner* objm) {
 	OBJM = objm;
 	factory = NULL;
 	flight_brain = NULL;
 }
 
-aircraft_control::~aircraft_control() {
+aircraft_manager::~aircraft_manager() {
 
 }
 
-void aircraft_control::update() {
+void aircraft_manager::update() {
 	flight_brain->update();
 
 	update_models();
 }
 
-void aircraft_control::update_models() {
+void aircraft_manager::update_models() {
 
 }
 
 
-int aircraft_control::spawn_plane(loc_i<int> spawn_loc, int plane_type) {
+int aircraft_manager::spawn_plane(loc_i<int> spawn_loc, int plane_type) {
 	
 	plane_data* output = factory->spawn_plane(spawn_loc.x, spawn_loc.y, spawn_loc.z, plane_type);
 	
@@ -44,7 +44,7 @@ int aircraft_control::spawn_plane(loc_i<int> spawn_loc, int plane_type) {
 	return models_in_use.size()-1;
 }
 
-void aircraft_control::place_landing_site(loc_i<int> location, bool flight_strip) {
+void aircraft_manager::place_landing_site(loc_i<int> location, bool flight_strip) {
 landing_site* land = new landing_site;
 	land->location_start = location;
 	land->location_end = location;
@@ -61,7 +61,7 @@ landing_site* land = new landing_site;
 	landing_sites_open.push_back(land);
 }
 
-void aircraft_control::init(int plane_enum) {
+void aircraft_manager::init(int plane_enum) {
 
 	place_landing_site(loc_i<int>(0, 1, 0), false);
 	place_landing_site(loc_i<int>(10, 1, 10), false);
@@ -90,7 +90,7 @@ void aircraft_control::init(int plane_enum) {
 	}
 }
 
-void aircraft_control::start_animation_sim(const loc_i<int>& start_loc) {
+void aircraft_manager::start_animation_sim(const loc_i<int>& start_loc) {
 	std::cout << "starting the animation test of the aircraft" << std::endl;
 
 	factory = new aircraft_factory(AIRCRAFT_T);
@@ -102,14 +102,14 @@ void aircraft_control::start_animation_sim(const loc_i<int>& start_loc) {
 	plane_data* plane = planes[0];
 }
 
-std::vector<landing_site*>& aircraft_control::get_landing_sites() {
+std::vector<landing_site*>& aircraft_manager::get_landing_sites() {
 	return landing_sites;
 }
 
-std::vector<landing_site*>& aircraft_control::get_open_landing_sites() {
+std::vector<landing_site*>& aircraft_manager::get_open_landing_sites() {
 	return  landing_sites_open;
 }
 
-std::vector<landing_site*>& aircraft_control::get_filled_landing_sites() {
+std::vector<landing_site*>& aircraft_manager::get_filled_landing_sites() {
 	return  landing_sites_closed;
 }

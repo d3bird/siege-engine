@@ -7,11 +7,11 @@
 
 #include "../core/optimized_spawner.h"
 
-class aircraft_control
+class aircraft_manager
 {
 public:
-	aircraft_control(optimized_spawner * objm);
-	~aircraft_control();
+	aircraft_manager(optimized_spawner * objm);
+	~aircraft_manager();
 
 	void update();
 
