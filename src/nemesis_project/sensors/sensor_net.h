@@ -2,7 +2,9 @@
 
 #include <vector>
 
-#include "sensor_data.hpp"
+#include "sensors/sensor_data.hpp"
+#include "tracks/track_manager.h"
+
 
 class sensor_net
 {
@@ -13,6 +15,8 @@ public:
 	void place_radar(int x, int y, int z);
 	void place_radio_tower(int x, int y, int z);
 	void place_cable(int x, int y, int z);
+
+	bool in_range_of_radar(int x, int y, int z);
 
 	std::vector< radar*> radars;
 	std::vector< radio*> radios;

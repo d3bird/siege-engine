@@ -31,7 +31,6 @@ void sensor_net::place_cable(int x, int y, int z) {
 
 }
 
-
 sensor_base* sensor_net::create_sensor_base() {
 	sensor_base* output = new sensor_base;
 
@@ -44,4 +43,9 @@ sensor_base* sensor_net::create_sensor_base() {
 	output->radio = false;
 	output->connected = false;
 	return output;
+}
+
+bool sensor_net::in_range_of_radar(int x, int y, int z) {
+
+	return false;
 }

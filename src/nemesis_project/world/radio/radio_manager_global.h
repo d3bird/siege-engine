@@ -12,7 +12,6 @@ public:
 	radio_manager_global();
 	~radio_manager_global();
 
-
 	std::vector<radio_station*>* get_radio_stations_inrange(int x, int y, int z);
 
 private:

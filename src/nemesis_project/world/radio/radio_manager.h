@@ -18,7 +18,7 @@ public:
 	//to other objects
 	radio_tower* create_broadcast_tower(int x, int y, int z);
 	radio_speakers* create_speaker_tower(int x, int y, int z, int height);
-	console* create_broadcast_console(int x, int y, int z);
+	console* create_broadcast_console(int x, int y, int z, float angle);
 	radio_speakers* create_wall_speaker(int x, int y, int z, float angle);
 	radio_station* create_radio_station(broadcast_type type);
 
@@ -43,6 +43,8 @@ private:
 	radio_factory* factory;
 
 	bool moving;
+
+	radio_station* current_station;
 
 	//these should be replace with a map to increase preformance in the future
 	std::vector<radio_speakers*> speakers;

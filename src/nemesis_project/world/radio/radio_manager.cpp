@@ -4,6 +4,7 @@
 radio_manager::radio_manager(optimized_spawner* objm, bool move){
 	factory = new radio_factory(objm);
 	moving = move;
+	current_station = NULL;
 }
 
 radio_manager::~radio_manager(){
@@ -24,8 +25,8 @@ radio_speakers* radio_manager::create_speaker_tower(int x, int y, int z, int hei
 
 }
 
-console* radio_manager::create_broadcast_console(int x, int y, int z) {
-	console* output = factory->place_console(x, y, z);
+console* radio_manager::create_broadcast_console(int x, int y, int z, float angle) {
+	console* output = factory->place_console(x, y, z , NULL);
 	consoles.push_back(output);
 	return output;
 
