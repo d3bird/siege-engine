@@ -121,7 +121,7 @@ local_map_data*** world_generator::create_full_world_map(world_gen_settings* set
 
 	for (int i = 0; i < settings->cells_wide; i++) {
 		for (int q = 0; q < settings->cells_long; q++) {
-			std::pair<int, int> loc_i = std::make_pair(i, q);
+			std::pair<int, int> loc = std::make_pair(i, q);
 			biomes biome = FOREST;
 
 			if (i % 2 == 0 || q % 2 == 1) {
@@ -132,7 +132,7 @@ local_map_data*** world_generator::create_full_world_map(world_gen_settings* set
 				biome = AIR_DROP;
 			}
 
-			cell_biomes.push_back(std::make_pair(biome, loc_i));
+			cell_biomes.push_back(std::make_pair(biome, loc));
 		}
 	}
 

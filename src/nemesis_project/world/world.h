@@ -7,6 +7,10 @@
 #include "../core/optimized_spawner.h"
 #include "terrian_data.hpp"
 
+#include "radio/radio_manager_global.h"
+
+#include "rail/rail_manager.h"
+
 class world {
 public:
 	world();
@@ -15,13 +19,13 @@ public:
 
 	void draw_gui();
 
-	void place_belt(int x, int y, int z, int dir);
+/*	void place_belt(int x, int y, int z, int dir);
 	void place_door(door_data::opening type, int x_start, int y_start, int z_start,
 		int x_end, int y_end, int z_end);
-
+*/
 	void init(optimized_spawner* OBJM);
 
-	local_map_data* world_map;
+	map_data* world_map;
 
 private:
 
@@ -36,15 +40,10 @@ private:
 	door_manager_gui* door_gui;
 	optimized_spawner* OBJM;
 
-	void spawn_door_objs(door_data::door* data);
+	//void spawn_door_objs(door_data::door* data);
 
 
 	void update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angle);
-
-	//this is for testing purposes 
-	void gen_test_world(optimized_spawner* OBJM);
-
-	void gen_flight_world();
 
 };
 

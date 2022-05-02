@@ -24,9 +24,9 @@ class logger
 	{
 		file_name = name;
 	}
-	void set_location(std::string loc_i)
+	void set_location(std::string loc)
 	{
-		file_loc = loc_i;
+		file_loc = loc;
 	}
 
   private:

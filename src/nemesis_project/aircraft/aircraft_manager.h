@@ -15,9 +15,9 @@ public:
 
 	void update();
 
-	int spawn_plane(loc_i<int> spawn_loc, int plane_type);
+	int spawn_plane(loc<int> spawn_loc, int plane_type);
 
-	void place_landing_site(loc_i<int> location, bool flight_strip);
+	void place_landing_site(loc<int> location, bool flight_strip);
 
 	std::vector<landing_site*>& get_landing_sites();
 	std::vector<landing_site*>& get_open_landing_sites();
@@ -25,7 +25,7 @@ public:
 	
 	void init(int plane_enum);
 
-	void start_animation_sim( const loc_i<int> &start_loc);
+	void start_animation_sim( const loc<int> &start_loc);
 
 private:
 

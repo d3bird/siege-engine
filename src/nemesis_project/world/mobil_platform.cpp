@@ -94,7 +94,7 @@ void mobil_platform::change_angle(double delta_angle) {
 }
 
 
-void mobil_platform::move_plat_to_loc(loc_i<double> location) {
+void mobil_platform::move_plat_to_loc(loc<double> location) {
 }
 
 

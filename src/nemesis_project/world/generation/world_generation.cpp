@@ -80,7 +80,7 @@ world* world_generation::create_world(world_gen_settings* input, bool force) {
 
 		}
 
-
+		output->world_map = world_map;
 	}
 	return output;
 }

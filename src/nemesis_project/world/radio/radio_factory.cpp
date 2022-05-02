@@ -20,7 +20,7 @@ radio_factory::~radio_factory(){
 
 radio_speakers* radio_factory::place_speaker(int x, int y, int z, float angle, radio_station* station) {
 	radio_speakers* output = new radio_speakers;
-	output->location = loc_i<int>(x, y, z);
+	output->location = loc<int>(x, y, z);
 	output->playing = station;
 	output->broadcasting_distance = braodcast_distance_speaker;
 	output->wall_speaker = true;
@@ -32,7 +32,7 @@ radio_speakers* radio_factory::place_speaker(int x, int y, int z, float angle, r
 
 console* radio_factory::place_console(int x, int y, int z, radio_station* station) {
 	console* output = new console;
-	output->location = loc_i<int>(x, y, z);
+	output->location = loc<int>(x, y, z);
 	output->controlling = station;
 	if (spawn_objs) {
 		OBJM->spawn_item(RADIO_CONSOLE, x, y, z);
@@ -41,7 +41,7 @@ console* radio_factory::place_console(int x, int y, int z, radio_station* statio
 }
 radio_tower* radio_factory::place_radio_tower(int x, int y, int z) {
 	radio_tower* output = new radio_tower;
-	output->location = loc_i<int>(x, y, z);
+	output->location = loc<int>(x, y, z);
 	output->bradcasting = false;
 	output->linked_to_station = false;
 	output->obstructed = false;
@@ -59,7 +59,7 @@ radio_speakers* radio_factory::place_speaker_tower(int x, int y, int z, int heig
 	}
 
 	radio_speakers* output = new radio_speakers;
-	output->location = loc_i<int>(x, y, z);
+	output->location = loc<int>(x, y, z);
 	output->playing = station;
 
 	if (height > 6) {

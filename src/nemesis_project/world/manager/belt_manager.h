@@ -29,7 +29,7 @@ private:
 
 	struct belt {
 		
-		loc_i<int> location;
+		loc<int> location;
 		//0 = north
 		//1 = south
 		//2 = east
@@ -51,7 +51,7 @@ private:
 		bool old = false;
 
 		belt(int id, int dir,  int x, int y, int z) {
-			location = loc_i<int>(x, y, z);
+			location = loc<int>(x, y, z);
 			ID = id;
 			direction = dir;
 			type = 0;
@@ -65,21 +65,21 @@ private:
 			}
 			return false;
 		}
-		bool operator==(const loc_i<int>& other) {
+		bool operator==(const loc<int>& other) {
 			return location == other;
 		}
 	};
 
 
 	bool does_belt_exist(belt* test);
-	bool does_belt_exist(loc_i<int> test);
+	bool does_belt_exist(loc<int> test);
 
 	std::vector<belt*> belts;
-	//std::unordered_map<loc_i, belt*>belts;
+	//std::unordered_map<loc, belt*>belts;
 
 	bool connect_belt(belt* input);
 
-	bool con_exist(int dir, loc_i<int> loc_org, loc_i<int> loc_conn);
+	bool con_exist(int dir, loc<int> loc_org, loc<int> loc_conn);
 };
 
 //world_map->map[1][2][0].ground = OBJM->spawn_item(STONE_WALL, 2, 1, 0);

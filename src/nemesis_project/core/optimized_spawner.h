@@ -15,6 +15,7 @@ public:
 	item_info* spawn_item(item_type type, int x, int y, int z, glm::mat4* given_mat = NULL);
 	item_info* spawn_item(item_type type, int x, int y, int z, float angle );
 
+	void update_item_matrix(update_pak* up, glm::mat4 mat);
 	void update_item_matrix(update_pak* up);
 
 	void delete_item_from_buffer(item_info* obj);

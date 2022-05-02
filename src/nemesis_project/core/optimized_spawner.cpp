@@ -35,6 +35,13 @@ void optimized_spawner::delete_item_from_buffer(item_info* obj) {
 	}
 }
 
+void optimized_spawner::update_item_matrix(update_pak* up, glm::mat4 mat) {
+	if (OBJM != NULL) {
+		OBJM->update_item_matrix(up, mat);
+	}
+}
+
+
 void optimized_spawner::update_item_matrix(update_pak* up) {
 	if (OBJM != NULL) {
 		OBJM->update_item_matrix(up);

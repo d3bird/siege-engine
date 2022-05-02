@@ -16,7 +16,7 @@ public:
 	void change_angle(double delta_angle);
 
 	//moves the p[latform so 0,0,0 starts at the location that is given
-	void move_plat_to_loc(loc_i<double> location);
+	void move_plat_to_loc(loc<double> location);
 
 	//creates the mangers
 	void init(optimized_spawner* spawn);
