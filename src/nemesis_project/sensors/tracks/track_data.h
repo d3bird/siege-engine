@@ -1,5 +1,6 @@
 #pragma	once 
-#include "../common_obj/location.hpp"
+#include "../../common_obj/location.hpp"
+
 
 /* the track class
 * a track is the location of a tpye of object that is updated by
@@ -8,20 +9,26 @@
 * the tracks manager is localised 
 */
 
+
+
 class track{
 public:
 	track(int id);
 	~track();
 
-
-
-	//operators
-	//track& operator=(const track& other);
-	bool operator==(const track& other);
-	bool operator==(const int& id);
-
+	void update_location(const loc<double> &location);
+	void update_rotation();
+	
+	
+	
 private:
 	int ID;
+
+	double x_velocity;
+	double y_velocity;
+	double z_velocity;
+
+	loc<double> location;
 
 };
 

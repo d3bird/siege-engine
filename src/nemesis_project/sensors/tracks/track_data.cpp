@@ -7,16 +7,3 @@ track::track(int id){
 track::~track(){
 
 }
-//
-//track& track::operator=(const track& other) {
-//
-//	return NULL;
-//}
-
-bool track::operator==(const track& other) {
-	return false;
-}
-
-bool track::operator==(const int& id) {
-	return ID == id;
-}
