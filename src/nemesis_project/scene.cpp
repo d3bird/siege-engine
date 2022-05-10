@@ -188,7 +188,7 @@ void scene::world_generation_test() {
 	loc<int> start_loc(5,5,5);
 	AirContorl->start_animation_sim(start_loc);
 
-
+	
 
 /*
 	city_generation city(spawner);

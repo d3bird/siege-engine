@@ -29,6 +29,8 @@ namespace railRoad {
 	private:
 		std::vector<int> old_IDs;
 
+		std::vector<rail> rails;
+		std::vector<cart> carts;
 
 	};
 
