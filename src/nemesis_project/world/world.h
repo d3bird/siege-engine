@@ -14,8 +14,9 @@
 class world {
 public:
 	world();
-
 	~world();
+
+	void update(double deltaTime);
 
 	void draw_gui();
 
@@ -23,6 +24,16 @@ public:
 	void place_door(door_data::opening type, int x_start, int y_start, int z_start,
 		int x_end, int y_end, int z_end);
 */
+
+	//cart functions
+	bool place_rail(loc<int>& location);
+	bool can_place_rail(loc<int>& location);
+	int place_cart(loc<int>& location);//returns the id of the cart
+	bool can_place_cart(loc<int>& location);
+	void toggle_cart(int id);
+
+	void prin_rail_info();
+
 	void init(optimized_spawner* OBJM);
 
 	map_data* world_map;
@@ -39,6 +50,8 @@ private:
 	door_data::door_manager* doors;
 	door_manager_gui* door_gui;
 	optimized_spawner* OBJM;
+
+	railRoad::rail_manager* rail_mgr;
 
 	//void spawn_door_objs(door_data::door* data);
 

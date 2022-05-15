@@ -14,6 +14,10 @@ void world::draw_gui() {
 
 }
 
+void world::update(double deltaTime) {
+
+}
+
 /*
 void world::place_belt(int x, int y, int z, int dir) {
 
@@ -50,11 +54,7 @@ void world::init(optimized_spawner* objm) {
 	belts = new belt_manager(OBJM);
 	doors = new door_data::door_manager();
 
-	//for the belt and door testing
-	//gen_test_world(OBJM);
-
-	// for the aircraft testing
-	//gen_flight_world();
+	rail_mgr = new railRoad::rail_manager();
 }
 
 void world::update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angle) {
@@ -77,6 +77,60 @@ void world::update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angl
 	OBJM->update_item_matrix(&update_pac);
 
 }
+
+bool world::place_rail(loc<int>& location) {
+	bool output = can_place_rail(location);
+
+	if (output) {
+		OBJM->spawn_item(RAIL, location.x, location.y, location.z);
+		rail_mgr->add_rail(location);
+	}
+	return output;
+}
+
+bool world::can_place_rail(loc<int>& location) {
+	bool output = true;
+
+	std::pair < loc<int>, loc<int> > world_locs = get_map_local_cords(location, world_map);
+
+	//check to makesure the locs are valid
+	if (world_locs.first == loc<int>()) {
+
+		//check to makesure that there are no other objects 
+
+		output = false;
+	}
+
+	return output;
+}
+
+
+int world::place_cart(loc<int>& location) {
+	bool placable = can_place_cart(location);
+	int output = -1;
+	if (placable) {
+		output = rail_mgr->place_cart(location);
+		OBJM->spawn_item(CART, location.x, location.y, location.z);
+	}
+	else {
+		std::cout << "fail to place cart" << std::endl;
+	}
+	return output;
+}
+
+bool world::can_place_cart(loc<int>& location) {
+	return rail_mgr->can_place_cart(location);
+}
+
+void world::toggle_cart(int id) {
+	rail_mgr->toggle_cart(id);
+}
+
+void world::prin_rail_info() {
+	rail_mgr->print_info();
+}
+
+
 /*
 void world::spawn_door_objs(door_data::door* data) {
 	if (data == NULL) {

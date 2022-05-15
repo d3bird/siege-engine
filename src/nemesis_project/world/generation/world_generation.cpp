@@ -59,9 +59,9 @@ world* world_generation::create_world(world_gen_settings* input, bool force) {
 					int y_off = world_map->world_map[y_m][x_m][z_m].y_off_set;
 					int z_off = world_map->world_map[y_m][x_m][z_m].z_off_set;
 
-					std::cout << "x_off: " << x_off << std::endl;
-					std::cout << "y_off: " << y_off << std::endl;
-					std::cout << "z_off: " << z_off << std::endl;
+					//std::cout << "x_off: " << x_off << std::endl;
+					//std::cout << "y_off: " << y_off << std::endl;
+					//std::cout << "z_off: " << z_off << std::endl;
 
 					int y = 0;// input->ground_level;
 					for (int x = 0; x < x_siz; x++) {

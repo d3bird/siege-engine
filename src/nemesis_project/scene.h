@@ -5,6 +5,8 @@
 #include "world/world.h"
 #include "aircraft/aircraft_manager.h"
 
+#include "testing/world_test.h"
+
 class scene
 {
 public:
@@ -24,6 +26,10 @@ private:
 
 	create_engine* engine;
 	optimized_spawner* spawner;
+	
+	//testing classes
+	testing::world_test world_t;
+
 	void spawner_test();
 
 	void update_guis();
@@ -36,5 +42,7 @@ private:
 	void radio_test();
 
 	void world_generation_test();
+
+
 };
 

@@ -6,14 +6,15 @@ namespace railRoad {
 
 	class cart {
 	public:
-		cart(int aID, rail* start_loc);
+		cart(int aID,  rail& start_loc);
 
-		void move_location(rail* new_loc) { location = new_loc; }
+		void move_location(rail& new_loc) { location = new_loc; }
 
 		int get_ID() { return ID; }
-		rail* get_location() { return location; }
+		rail* get_location() { return &location; }
 
 		bool operator ==(const cart& right);
+		bool operator ==(const int& id);
 		void operator +=(double vel);
 		void operator -=(double vel);
 
@@ -24,7 +25,7 @@ namespace railRoad {
 		void change_speed(double vel);
 
 		int ID;
-		rail* location;
+		rail location;
 
 		double velocity;
 

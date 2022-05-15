@@ -17,8 +17,11 @@ namespace railRoad {
 		rail_manager();
 		~rail_manager();
 
+		void update(double deltaTime);
+
 		bool can_place_cart(loc<int>& location);
-		bool can_place_rail(loc<int>& location);
+		int place_cart(loc<int>& location);
+		void toggle_cart(int id);
 
 		bool add_rail(int x, int y, int z);
 		bool remove_rail(int x, int y, int z);
@@ -26,12 +29,19 @@ namespace railRoad {
 		bool add_rail(loc<int> &location);
 		bool remove_rail(loc<int> &location);
 
+		void print_info();
+
+		//since the carts are moving and not linked to any objects
+		//they are public to any class that is handling the objs
+		std::vector<cart> carts;
+
 	private:
 		std::vector<int> old_IDs;
 
 		std::vector<rail> rails;
-		std::vector<cart> carts;
-
+		
+		int cart_id;
+		int rail_id;
 	};
 
 }

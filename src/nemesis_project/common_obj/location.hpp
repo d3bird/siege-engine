@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 template<class T>
 struct loc {
 	T x =-1;
@@ -18,10 +20,16 @@ struct loc {
 		z = z0;
 	}
 
+
 	bool operator==(const loc& other) {
 		return (x == other.x &&
 			y == other.y &&
 			z == other.z);
 	}
 
+	void  operator=(const loc& other) {
+		x = other.x;
+		y = other.y;
+		z = other.z;
+	}
 };

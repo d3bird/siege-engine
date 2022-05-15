@@ -14,7 +14,7 @@ scene::~scene(){
 }
 
 void scene::update() {
-
+	worlds->update(1);
 	update_guis();
 }
 
@@ -40,6 +40,8 @@ void scene::init(engine_api* api) {
 	if (spawner == NULL) {
 		return;
 	}
+
+	//deltaTime = API->get_timing()->get_time_change_static();
 
 	//city_generator pipe(spawner);
 
@@ -90,10 +92,10 @@ void scene::spawner_test() {
 		}
 
 
-		std::cout << "done spawner spawning" << std::endl;
+std::cout << "done spawner spawning" << std::endl;
 	}
 	else {
-		std::cout << "spawner was NULL" << std::endl;
+	std::cout << "spawner was NULL" << std::endl;
 	}
 }
 
@@ -107,8 +109,8 @@ void scene::aircraft_test() {
 		//spawn a temp groud under the planes 
 		for (int x = 0; x < x_size; x++) {
 			for (int z = 0; z < z_size; z++) {
-					spawner->spawn_item(DIRT_WALL, x, y, z);
-					//spawner->spawn_item(GRASS_FLOOR, x, y+1, z);
+				spawner->spawn_item(DIRT_WALL, x, y, z);
+				//spawner->spawn_item(GRASS_FLOOR, x, y+1, z);
 			}
 		}
 
@@ -163,7 +165,7 @@ void scene::radio_test() {
 			}
 
 			spawner->spawn_item(BROADCAST_TOWER, x_size - 3, y, z_size - 3);
-			spawner->spawn_item(RADIO_CONSOLE, x_size-3, 1, z_size-6, 90);
+			spawner->spawn_item(RADIO_CONSOLE, x_size - 3, 1, z_size - 6, 90);
 
 			int x_cent = x_size / 2;
 			int z_cent = z_size / 2;
@@ -185,14 +187,30 @@ void scene::world_generation_test() {
 
 	aircraft_manager* AirContorl = new aircraft_manager(spawner);
 
-	loc<int> start_loc(5,5,5);
+	loc<int> start_loc(5, 5, 5);
 	AirContorl->start_animation_sim(start_loc);
 
-	
+	for (int i = 0; i < 40; i++) {
+		if (!testing->place_rail(loc<int>(2 + i, 1, 1))) {
+			std::cout << "failed to place rail" << std::endl;
+		}
 
-/*
-	city_generation city(spawner);
 
-	mobil_platform* plat = city.create_mobile_plat(city.get_flat_city_settings());
-	*/
+	}
+
+	testing->prin_rail_info();
+
+	int cart_id = testing->place_cart(loc<int>(2, 1, 1));
+	if (cart_id != -1) {
+		testing->toggle_cart(cart_id);
+	} {
+		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
+	}
+	//spawner->spawn_item(CART, 2, 1, 1);
+
+	/*
+		city_generation city(spawner);
+
+		mobil_platform* plat = city.create_mobile_plat(city.get_flat_city_settings());
+		*/
 }
