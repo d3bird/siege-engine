@@ -1,5 +1,7 @@
 #include "location.h"
 
+//============================ INT =========================
+
 loc<int>::loc() {
 	x = -1;
 	y = -1;
@@ -25,6 +27,8 @@ void  loc<int>::operator=(const loc<int>& other) {
 	y = other.y;
 	z = other.z;
 }
+
+//============================ DOUBLE =========================
 
 loc<double>::loc() {
 	x = -1;
@@ -52,6 +56,7 @@ void  loc<double>::operator=(const loc<double>& other) {
 	z = other.z;
 }
 
+//============================ FLOAT =========================
 
 loc<float>::loc() {
 	x = -1;
