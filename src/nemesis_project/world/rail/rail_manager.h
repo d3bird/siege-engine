@@ -2,7 +2,7 @@
 
 #include "rail.h"
 #include "cart.h"
-#include "../../common_obj/location.hpp"
+#include "../../common_obj/location.h"
 
 #include <vector>
 /**

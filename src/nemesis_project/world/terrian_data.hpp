@@ -10,7 +10,7 @@
 #include "zones/zone.h"
 #include "zones/farm_zone.h"
 
-#include "../common_obj/location.hpp"
+#include "../common_obj/location.h"
 
 struct room;
 

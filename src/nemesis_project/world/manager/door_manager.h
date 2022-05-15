@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../common_obj/location.hpp"
+#include "../../common_obj/location.h"
 
 #include "../../core/optimized_spawner.h"
 
