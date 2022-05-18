@@ -216,9 +216,9 @@ bool city_generator::hook_wheel_box_up(local_map_data* input, bool just_furnace)
 				int box_z = z_loc;
 
 				if ((gridmap[box_y][box_x][box_z].ground == NULL &&
-					is_inbounds_of_map_local(box_x, box_y, box_z, input)) &&
+					input->is_inbounds_of_map_local(box_x, box_y, box_z, input)) &&
 					(gridmap[box_y][box_x - 1][box_z].ground == NULL &&
-						is_inbounds_of_map_local(box_x - 1, box_y, box_z, input))) {
+						input->is_inbounds_of_map_local(box_x - 1, box_y, box_z, input))) {
 
 					gridmap[box_y][box_x][box_z].ground = OBJM->spawn_item(GEAR_BOX_FRAME, box_x, box_y, box_z);
 					gridmap[box_y][box_x - 1][box_z].ground = OBJM->spawn_item(BEAM_T, x_loc - 1, y_loc, z_loc);
@@ -226,24 +226,24 @@ bool city_generator::hook_wheel_box_up(local_map_data* input, bool just_furnace)
 					//find a spot for the furnace
 
 					if (gridmap[box_y][box_x][box_z - 2].ground == NULL &&// gridmap[box_y][box_x][box_z - 1].ground == NULL &&
-						is_inbounds_of_map_local(box_x, box_y, box_z - 2, input)) {
+						input->is_inbounds_of_map_local(box_x, box_y, box_z - 2, input)) {
 						gridmap[box_y][box_x][box_z - 2].ground = OBJM->spawn_item(FURNACE_T, box_x, box_y, box_z - 2);
 						gridmap[box_y][box_x][box_z - 1].ground = OBJM->spawn_item(BEAM_T, box_x, box_y, box_z - 1);
 					}
 					else if (gridmap[box_y][box_x][box_z + 2].ground == NULL &&// gridmap[box_y][box_x][box_z + 1].ground == NULL &&
-						is_inbounds_of_map_local(box_x, box_y, box_z + 2, input)) {
+						input->is_inbounds_of_map_local(box_x, box_y, box_z + 2, input)) {
 						gridmap[box_y][box_x][box_z + 2].ground = OBJM->spawn_item(FURNACE_T, box_x, box_y, box_z + 2);
 						gridmap[box_y][box_x][box_z + 1].ground = OBJM->spawn_item(BEAM_T, box_x, box_y, box_z + 1);
 					}
 					//uncomment the else if multiple furnacescan be spawned here
 					//else
 					if (gridmap[box_y][box_x - 2][box_z].ground == NULL && //gridmap[box_y][box_x - 1][box_z].ground == NULL &&
-						is_inbounds_of_map_local(box_x - 2, box_y, box_z, input)) {
+						input->is_inbounds_of_map_local(box_x - 2, box_y, box_z, input)) {
 						gridmap[box_y][box_x - 2][box_z].ground = OBJM->spawn_item(FURNACE_T, box_x - 2, box_y, box_z);
 						gridmap[box_y][box_x - 1][box_z].ground = OBJM->spawn_item(BEAM_T, box_x - 1, box_y, box_z);
 					}
 					else if (gridmap[box_y][box_x + 2][box_z].ground == NULL && //gridmap[box_y][box_x + 1][box_z].ground == NULL &&
-						is_inbounds_of_map_local(box_x + 2, box_y, box_z, input)) {
+						input->is_inbounds_of_map_local(box_x + 2, box_y, box_z, input)) {
 						gridmap[box_y][box_x + 2][box_z].ground = OBJM->spawn_item(FURNACE_T, box_x + 2, box_y, box_z);
 						gridmap[box_y][box_x + 1][box_z].ground = OBJM->spawn_item(BEAM_T, box_x + 1, box_y, box_z);
 					}
@@ -264,9 +264,9 @@ bool city_generator::hook_wheel_box_up(local_map_data* input, bool just_furnace)
 				int box_z = z_loc;
 
 				if ((gridmap[box_y][box_x][box_z].ground == NULL &&
-					is_inbounds_of_map_local(box_x, box_y, box_z, input)) &&
+					input->is_inbounds_of_map_local(box_x, box_y, box_z, input)) &&
 					(gridmap[box_y][box_x + 1][box_z].ground == NULL &&
-						is_inbounds_of_map_local(box_x + 1, box_y, box_z, input))) {
+						input->is_inbounds_of_map_local(box_x + 1, box_y, box_z, input))) {
 
 					gridmap[box_y][box_x][box_z].ground = OBJM->spawn_item(GEAR_BOX_FRAME, box_x, box_y, box_z);
 					gridmap[box_y][box_x + 1][box_z].ground = OBJM->spawn_item(BEAM_T, x_loc + 1, y_loc, z_loc);
@@ -274,24 +274,24 @@ bool city_generator::hook_wheel_box_up(local_map_data* input, bool just_furnace)
 					//find a spot for the furnace
 
 					if (gridmap[box_y][box_x][box_z + 2].ground == NULL && //gridmap[box_y][box_x][box_z + 1].ground == NULL &&
-						is_inbounds_of_map_local(box_x, box_y, box_z + 2, input)) {
+						input->is_inbounds_of_map_local(box_x, box_y, box_z + 2, input)) {
 						gridmap[box_y][box_x][box_z + 2].ground = OBJM->spawn_item(FURNACE_T, box_x, box_y, box_z + 2);
 						gridmap[box_y][box_x][box_z + 1].ground = OBJM->spawn_item(BEAM_T, box_x, box_y, box_z + 1);
 					}
 					else if (gridmap[box_y][box_x][box_z - 2].ground == NULL &&// gridmap[box_y][box_x][box_z - 1].ground == NULL &&
-						is_inbounds_of_map_local(box_x, box_y, box_z - 2, input)) {
+						input->is_inbounds_of_map_local(box_x, box_y, box_z - 2, input)) {
 						gridmap[box_y][box_x][box_z - 2].ground = OBJM->spawn_item(FURNACE_T, box_x, box_y, box_z - 2);
 						gridmap[box_y][box_x][box_z - 1].ground = OBJM->spawn_item(BEAM_T, box_x, box_y, box_z - 1);
 					}
 					//uncomment the else if multiple furnacescan be spawned here
 					//else
 					if (gridmap[box_y][box_x + 2][box_z].ground == NULL && //gridmap[box_y][box_x + 1][box_z].ground == NULL &&
-						is_inbounds_of_map_local(box_x - 2, box_y, box_z, input)) {
+						input->is_inbounds_of_map_local(box_x - 2, box_y, box_z, input)) {
 						gridmap[box_y][box_x + 2][box_z].ground = OBJM->spawn_item(FURNACE_T, box_x + 2, box_y, box_z);
 						gridmap[box_y][box_x + 1][box_z].ground = OBJM->spawn_item(BEAM_T, box_x + 1, box_y, box_z);
 					}
 					else if (gridmap[box_y][box_x - 2][box_z].ground == NULL && //gridmap[box_y][box_x - 1][box_z].ground == NULL &&
-						is_inbounds_of_map_local(box_x - 2, box_y, box_z, input)) {
+						input->is_inbounds_of_map_local(box_x - 2, box_y, box_z, input)) {
 						gridmap[box_y][box_x - 2][box_z].ground = OBJM->spawn_item(FURNACE_T, box_x - 2, box_y, box_z);
 						gridmap[box_y][box_x - 1][box_z].ground = OBJM->spawn_item(BEAM_T, box_x - 1, box_y, box_z);
 					}
@@ -592,7 +592,7 @@ int city_generator::split_area_into_rooms(local_map_data* map_in, int floor, int
 	while (placing) {
 
 
-		if (is_inbounds_of_map_local(x, y, z, map_in)) {
+		if (map_in->is_inbounds_of_map_local(x, y, z, map_in)) {
 
 			/*	if (x + r_width >= map_in->x_size || z + r_length >= map_in->z_size) {
 					std::cout << "ROOM WOULD HAVE GONE OUT OF BOUNDS" << std::endl;

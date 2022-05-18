@@ -7,117 +7,11 @@
 #include <vector>
 #include <string>
 
-#include "zones/zone.h"
-#include "zones/farm_zone.h"
-
-#include "../common_obj/location.h"
-
-struct room;
-
-struct additional_proporities {
-	std::vector< item_info*> additional_items;
-};
-
-struct map_cell {
-	int x;
-	int y;
-	int z;
-
-	item_info* ground = NULL;//this is the main object in the square (could be a wall, table etc..)
-	item_info* floor = NULL;
-
-	bool gen_without_items = false;
-	int ground_type = CUBE_T;
-	int floor_type = CUBE_T;
-
-
-	additional_proporities* props = NULL;
-
-	zone* zone_on_top = NULL;
-
-	map_cell* link_to_platform = NULL;
-
-	bool inclosed = false;
-	bool checked = false;
-	bool failed_to_find_room = false;
-
-	room* part_of_room = NULL;
-
-	bool passibe() {
-		if (ground != NULL) {
-			switch (ground->type)
-			{
-			case LADDER_T:
-				return true;
-				break;
-			default:
-				return false;
-				break;
-			}
-		}
-		else {
-			return floor != NULL;
-		}
-	}
-
-};
-
-struct room {
-	std::string room_name;
-	std::vector< map_cell*> cells_in_room;
-};
-
-struct wheel {
-	int turn_speed = 1;
-	bool pos_directio = true;
-
-	int wheight_limit = 0;
-	item_info* obj = NULL;
-	item_info* wheel_block_link = NULL;
-};
-
-struct wheels {
-	std::vector<wheel*> wheels;
-	std::vector<item_info*> wheel_blocks;
-};
-
-struct local_map_data {
-	int x_size;
-	int y_size;
-	int z_size;
-	map_cell*** map= NULL;// the local map
-
-	bool generated_blank = false;
-
-	bool mobil = false;
-	wheels* Wheels = NULL;
-
-	int ground_level = 0;
-
-	bool merged_to_larger_map = false;
-	int x_off_set = 0;
-	int y_off_set = 0;
-	int z_off_set = 0;
-
-	std::vector< room*> rooms_on_map;
-};
-
-struct map_data {
-
-	int x_size;
-	int y_size;
-	int z_size;
-
-	local_map_data*** world_map = NULL;
-};
-
-static bool is_inbounds_of_map_local(int x, int y, int z, local_map_data* map) {
-	return (map != NULL &&
-		x >= 0 && x < map->x_size &&
-		y >= 0 && y < map->y_size &&
-		z >= 0 && z < map->z_size);
-}
-
+#include "terrian/mobil_data.h"
+#include "terrian/map_cell.h"
+#include "terrian/local_map.h"
+#include "terrian/world_map.h"
+#include "terrian/terrian_analyzer.h"
 
 
 static void clear_checked(int layer, local_map_data* map) {
@@ -145,7 +39,7 @@ static bool is_enclosed(int x, int y, int z, local_map_data* map) {
 		std::cout << "map is null" << std::endl;
 		return false;
 	}
-	if (!is_inbounds_of_map_local(x,y,z,map)) {
+	if (!map->is_inbounds_of_map_local(x,y,z,map)) {
 		std::cout << "not in bounds" << std::endl;
 		return false;
 	}
@@ -186,19 +80,19 @@ static bool is_enclosed(int x, int y, int z, local_map_data* map) {
 				int x_n = test->x;
 				int y_n = test->y;
 				int z_n = test->z;
-				if (is_inbounds_of_map_local(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
+				if (map->is_inbounds_of_map_local(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n + 1][z_n]);
 					world_map[y_n][x_n + 1][z_n].checked = true;
 				}
-				if (is_inbounds_of_map_local(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
+				if (map->is_inbounds_of_map_local(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n - 1][z_n]);
 					world_map[y_n][x_n - 1][z_n].checked = true;
 				}
-				if (is_inbounds_of_map_local(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
+				if (map->is_inbounds_of_map_local(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n + 1]);
 					world_map[y_n][x_n][z_n + 1].checked = true;
 				}
-				if (is_inbounds_of_map_local(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
+				if (map->is_inbounds_of_map_local(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n - 1]);
 					world_map[y_n][x_n][z_n - 1].checked = true;
 				}
@@ -229,7 +123,7 @@ static room* generate_room(int x, int y, int z, local_map_data* map) {
 		std::cout << "map is null" << std::endl;
 		return NULL;
 	}
-	if (!is_inbounds_of_map_local(x, y, z, map)) {
+	if (!map->is_inbounds_of_map_local(x, y, z, map)) {
 		std::cout << "not in bounds" << std::endl;
 		return NULL;
 	}
@@ -271,22 +165,22 @@ static room* generate_room(int x, int y, int z, local_map_data* map) {
 				int x_n = test->x;
 				int y_n = test->y;
 				int z_n = test->z;
-				if (is_inbounds_of_map_local(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
+				if (map->is_inbounds_of_map_local(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n + 1][z_n]);
 					world_map[y_n][x_n + 1][z_n].checked = true;
 				}
 				
-				if (is_inbounds_of_map_local(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
+				if (map->is_inbounds_of_map_local(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n - 1][z_n]);
 					world_map[y_n][x_n - 1][z_n].checked = true;
 				}
 			
-				if (is_inbounds_of_map_local(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
+				if (map->is_inbounds_of_map_local(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n + 1]);
 					world_map[y_n][x_n][z_n + 1].checked = true;
 				}
 				
-				if (is_inbounds_of_map_local(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
+				if (map->is_inbounds_of_map_local(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n - 1]);
 					world_map[y_n][x_n][z_n - 1].checked = true;
 				}
@@ -351,65 +245,4 @@ static void delete_map_data(local_map_data* in) {
 
 	}
 
-}
-
-
-#include <iostream>
-#include <cmath>
-/*
-* This function returns the which chunk, then the local cords for that chunck
-* returns -1 if the funct fails
-*/
-static std::pair < loc<int>, loc<int> > get_map_local_cords(loc<int>& cords, map_data* map) {
-	std::pair < loc<int>, loc<int> > output;
-
-	//std::cout << "finding loc at these cords" << std::endl;
-	//std::cout << cords.x << "," << cords.y << "," << cords.z << std::endl;
-
-	if (map->world_map != NULL) {
-		int chunk_x_size = map->world_map[0][0][0].x_size;
-		int chunk_y_size = map->world_map[0][0][0].y_size;
-		int chunk_z_size = map->world_map[0][0][0].z_size;
-
-		int world_x_size = chunk_x_size * map->x_size;
-		int world_y_size = chunk_y_size * map->y_size;
-		int world_z_size = chunk_z_size * map->z_size;
-
-		if (world_x_size <= 0 || world_y_size <= 0 || world_z_size <= 0 || 
-			cords.x >= world_x_size || cords.y >= world_y_size || cords.z >= world_z_size) {
-			std::cout << cords.x << "," << cords.y << "," << cords.z << std::endl;
-			std::cout << "failed" << std::endl;
-			return output;
-		}
-		else {
-		//	std::cout << "finding local cords on world" << std::endl;
-
-		//	std::cout << "chunk_x_size: " << chunk_x_size << std::endl;
-		//	std::cout << "chunk_y_size: " << chunk_y_size << std::endl;
-		//	std::cout << "chunk_z_size: " << chunk_z_size << std::endl;
-		//	std::cout << std::endl;
-		//	std::cout << "world_x_size: " << world_x_size << std::endl;
-		//	std::cout << "world_y_size: " << world_y_size << std::endl;
-		//	std::cout << "world_z_size: " << world_z_size << std::endl;
-
-			output.first.x = (int)std::floor(cords.x / chunk_x_size);
-			output.first.y = (int)std::floor(cords.y / chunk_y_size);
-			output.first.z = (int)std::floor(cords.z / chunk_z_size);
-
-			output.second.x = cords.x - (output.first.x * chunk_x_size);
-			output.second.y = cords.y - (output.first.y * chunk_y_size);
-			output.second.z = cords.z - (output.first.z * chunk_z_size);
-
-		//	std::cout << "x chunk: " << output.first.x << std::endl;
-		/*	std::cout << "y chunk: " << output.first.y << std::endl;
-			std::cout << "z chunk: " << output.first.z << std::endl;
-			std::cout << std::endl;
-			std::cout << "x local: " << output.second.x << std::endl;
-			std::cout << "y local: " << output.second.y << std::endl;
-			std::cout << "z local: " << output.second.z << std::endl;*/
-		}
-
-	}
-
-	return output;
 }

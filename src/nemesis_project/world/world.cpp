@@ -111,7 +111,7 @@ bool world::place_rail(loc<int>& location) {
 bool world::can_place_rail(loc<int>& location) {
 	bool output = true;
 
-	std::pair < loc<int>, loc<int> > world_locs = get_map_local_cords(location, world_map);
+	std::pair < loc<int>, loc<int> > world_locs = world_map->get_map_local_cords(location, world_map);
 
 	//check to makesure the locs are valid
 	if (world_locs.first == loc<int>()) {

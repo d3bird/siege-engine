@@ -500,7 +500,7 @@ void world_generator::generate_plane_scroll(local_map_data* input, bool spawn_it
 		for (int x = 0; x < x_size; x++) {
 			for (int z = 0; z < z_size; z++) {
 				//std::cout << "making spot: " << x << " , " << z << std::endl;
-				if (is_inbounds_of_map_local(x, y, z, input)) {
+				if (input->is_inbounds_of_map_local(x, y, z, input)) {
 					input->map[y][x][z].gen_without_items = true;
 					input->map[y][x][z].floor_type = FLOOR_TEMP;
 					input->map[y][x][z].ground_type = WALL_TEMP;
@@ -529,48 +529,48 @@ void world_generator::smooth_in_ramps(local_map_data* input) {
 	for (int y = 0; y < input->y_size; y++) {
 		for (int x = 0; x < input->x_size; x++) {
 			for (int z = 0; z < input->z_size; z++) {
-				if (is_inbounds_of_map_local(x, y, z, input)) {
+				if (input->is_inbounds_of_map_local(x, y, z, input)) {
 					if (world_map[y][x][z].ground != NULL) {
 						if (world_map[y][x][z].ground->type == WALL_TEMP) {
-							if (is_inbounds_of_map_local(x - 1, y, z, input)) {
+							if (input->is_inbounds_of_map_local(x - 1, y, z, input)) {
 								if (world_map[y][x - 1][z].ground == NULL && world_map[y][x - 1][z].floor != NULL) {
 									world_map[y][x - 1][z].ground = OBJM->spawn_item(RAMP_T, x - 1, y, z);
 								}
 							}
-							if (is_inbounds_of_map_local(x + 1, y, z, input)) {
+							if (input->is_inbounds_of_map_local(x + 1, y, z, input)) {
 								if (world_map[y][x + 1][z].ground == NULL && world_map[y][x + 1][z].floor != NULL) {
 									world_map[y][x + 1][z].ground = OBJM->spawn_item(RAMP_T, x + 1, y, z);
 									update_obj_angle(world_map[y][x + 1][z].ground, 180);
 								}
 							}
-							if (is_inbounds_of_map_local(x, y, z - 1, input)) {
+							if (input->is_inbounds_of_map_local(x, y, z - 1, input)) {
 								if (world_map[y][x][z - 1].ground == NULL && world_map[y][x][z - 1].floor != NULL) {
 									world_map[y][x][z - 1].ground = OBJM->spawn_item(RAMP_T, x, y, z - 1);
 									update_obj_angle(world_map[y][x][z - 1].ground, 270);
 								}
 							}
-							if (is_inbounds_of_map_local(x, y, z + 1, input)) {
+							if (input->is_inbounds_of_map_local(x, y, z + 1, input)) {
 								if (world_map[y][x][z + 1].ground == NULL && world_map[y][x][z + 1].floor != NULL) {
 									world_map[y][x][z + 1].ground = OBJM->spawn_item(RAMP_T, x, y, z + 1);
 									update_obj_angle(world_map[y][x][z + 1].ground, 90);
 								}
 							}
-							if (is_inbounds_of_map_local(x - 1, y, z - 1, input)) {
+							if (input->is_inbounds_of_map_local(x - 1, y, z - 1, input)) {
 								if (world_map[y][x - 1][z - 1].ground == NULL && world_map[y][x - 1][z - 1].floor != NULL) {
 									cornors.push_back(world_map[y][x - 1][z - 1].ground);
 								}
 							}
-							if (is_inbounds_of_map_local(x - 1, y, z + 1, input)) {
+							if (input->is_inbounds_of_map_local(x - 1, y, z + 1, input)) {
 								if (world_map[y][x - 1][z + 1].ground == NULL && world_map[y][x - 1][z + 1].floor != NULL) {
 									cornors.push_back(world_map[y][x - 1][z + 1].ground);
 								}
 							}
-							if (is_inbounds_of_map_local(x + 1, y, z - 1, input)) {
+							if (input->is_inbounds_of_map_local(x + 1, y, z - 1, input)) {
 								if (world_map[y][x + 1][z - 1].ground == NULL && world_map[y][x + 1][z - 1].floor != NULL) {
 									cornors.push_back(world_map[y][x + 1][z - 1].ground);
 								}
 							}
-							if (is_inbounds_of_map_local(x + 1, y, z + 1, input)) {
+							if (input->is_inbounds_of_map_local(x + 1, y, z + 1, input)) {
 								if (world_map[y][x + 1][z + 1].ground == NULL && world_map[y][x + 1][z + 1].floor != NULL) {
 									cornors.push_back(world_map[y][x + 1][z + 1].ground);
 								}
@@ -733,7 +733,7 @@ void world_generator::place_trees_in_area(int start_x, int start_y, int start_z,
 			int x = (int) x_spot[i];
 			int y = (int) y_spot[i];
 			int z = (int) z_spot[i];
-			if (is_inbounds_of_map_local(x, y, z, input)) {
+			if (input->is_inbounds_of_map_local(x, y, z, input)) {
 				if (world_map[y][x][z].floor != NULL && world_map[y][x][z].ground == NULL) {
 					world_map[y][x][z].ground = OBJM->spawn_item(CUBE_TREE_T, x, y, z);
 					spawned++;
@@ -747,7 +747,7 @@ void world_generator::place_trees_in_area(int start_x, int start_y, int start_z,
 		for (int y = y_start; y < y_start + y_width; y++) {
 			for (int x = x_start; x < x_start + x_width; x++) {
 				for (int z = z_start; z < z_start + z_width; z++) {
-					if (is_inbounds_of_map_local(x, y, z, input)) {
+					if (input->is_inbounds_of_map_local(x, y, z, input)) {
 						if (world_map[y][x][z].floor != NULL && world_map[y][x][z].ground == NULL) {
 							world_map[y][x][z].ground = OBJM->spawn_item(CUBE_TREE_T, x, y, z);
 							spawned++;
@@ -797,7 +797,7 @@ void world_generator::update_obj_angle(item_info* obj, float angle) {
 
 void world_generator::place_furnaces(int x, int y, int z, int x_width, int z_width, local_map_data* input) {
 
-	if (is_inbounds_of_map_local(x, y, z, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z, input)) {
 		if (input->map[y][x][z].floor != NULL) {
 			OBJM->delete_item_from_buffer(input->map[y][x][z].floor);
 		}
@@ -810,17 +810,17 @@ void world_generator::place_furnaces(int x, int y, int z, int x_width, int z_wid
 			OBJM->spawn_item(GEAR_BEAM_T, x, y, z));
 	}
 
-	if (is_inbounds_of_map_local(x, y, z + 1, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z + 1, input)) {
 		input->map[y][x][z + 1].ground = OBJM->spawn_item(BEAM_T, x, y, z + 1);
 	}
 
-	if (is_inbounds_of_map_local(x, y, z + 2, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z + 2, input)) {
 		input->map[y][x][z + 2].ground = OBJM->spawn_item(BEAM_T, x, y, z + 2);
 	}
 	
 	x += 4;
 
-	if (is_inbounds_of_map_local(x, y, z, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z, input)) {
 		input->map[y][x][z].ground = OBJM->spawn_item(FURNACE_T, x, y, z);
 		if (input->map[y][x][z].floor != NULL) {
 			OBJM->delete_item_from_buffer(input->map[y][x][z].floor);
@@ -833,17 +833,17 @@ void world_generator::place_furnaces(int x, int y, int z, int x_width, int z_wid
 			OBJM->spawn_item(GEAR_BEAM_T, x, y, z));
 	}
 
-	if (is_inbounds_of_map_local(x, y, z + 1, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z + 1, input)) {
 		input->map[y][x][z + 1].ground = OBJM->spawn_item(BEAM_T, x, y, z + 1);
 	}
 
-	if (is_inbounds_of_map_local(x, y, z + 2, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z + 2, input)) {
 		input->map[y][x][z + 2].ground = OBJM->spawn_item(BEAM_T, x, y, z + 2);
 	}
 
 	z += 3;
 
-	if (is_inbounds_of_map_local(x, y, z, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z, input)) {
 		//input->map[y][x][z].ground = OBJM->spawn_item(GEAR_BOX_FRAME, x, y, z);
 
 		if (input->map[y][x][z].floor != NULL) {
@@ -870,7 +870,7 @@ void world_generator::place_furnaces(int x, int y, int z, int x_width, int z_wid
 	}
 
 	x -= 2;
-	if (is_inbounds_of_map_local(x, y, z, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z, input)) {
 		//input->map[y][x][z].ground = OBJM->spawn_item(GEAR_BOX_FRAME, x, y, z);
 
 		if (input->map[y][x][z].floor != NULL) {
@@ -897,7 +897,7 @@ void world_generator::place_furnaces(int x, int y, int z, int x_width, int z_wid
 	}
 
 	x -= 2;
-	if (is_inbounds_of_map_local(x, y, z, input)) {
+	if (input->is_inbounds_of_map_local(x, y, z, input)) {
 		//input->map[y][x][z].ground = OBJM->spawn_item(GEAR_BOX_FRAME, x, y, z);
 
 		if (input->map[y][x][z].floor != NULL) {

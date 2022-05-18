@@ -39,7 +39,7 @@ std::pair<int, int> testing::world_test::test_cords_world_map(world* testing) {
 							int x_cord = x + (wx * chunk_x);
 							int y_cord = y + (wy * chunk_y);
 							int z_cord = z + (wz * chunk_z);
-							std::pair < loc<int>, loc<int> >output = get_map_local_cords(
+							std::pair < loc<int>, loc<int> >output = testing->world_map->get_map_local_cords(
 								loc<int>(x_cord, y_cord, z_cord), testing->world_map);
 
 							test_run++;
