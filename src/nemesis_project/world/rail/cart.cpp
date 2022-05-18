@@ -6,6 +6,7 @@ railRoad::cart::cart(int aID,  rail& start_loc) {
 	velocity = 0;
 	max_speed = 50;
 	location = start_loc;
+	cart_obj = NULL;
 }
 
 bool railRoad::cart::operator ==(const cart& right) {

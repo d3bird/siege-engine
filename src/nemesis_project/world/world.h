@@ -10,6 +10,7 @@
 #include "radio/radio_manager_global.h"
 
 #include "rail/rail_manager.h"
+#include "../utility/motion_manager.h"
 
 class world {
 public:
@@ -34,7 +35,7 @@ public:
 
 	void prin_rail_info();
 
-	void init(optimized_spawner* OBJM);
+	void init(optimized_spawner* OBJM, motion_manger * mmm);
 
 	map_data* world_map;
 
@@ -50,13 +51,16 @@ private:
 	door_data::door_manager* doors;
 	door_manager_gui* door_gui;
 	optimized_spawner* OBJM;
-
-	railRoad::rail_manager* rail_mgr;
+	motion_manger* updater;
+	railRoad::rail_manager rail_mgr;
 
 	//void spawn_door_objs(door_data::door* data);
 
 
 	void update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angle);
+
+	//updating functions
+	void update_rails(double time_change);
 
 };
 

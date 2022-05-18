@@ -13,8 +13,8 @@ scene::~scene(){
 
 }
 
-void scene::update() {
-	worlds->update(1);
+void scene::update(double deltaTime) {
+	worlds->update(deltaTime);
 	update_guis();
 }
 
@@ -183,7 +183,11 @@ void scene::world_generation_test() {
 
 	world_gen_settings* test = pipe.flat_land_settings();
 
-	world* testing = pipe.create_world(test);
+	motion_manger* updater = new motion_manger(spawner);
+
+	world* testing = pipe.create_world(test, updater);
+
+	
 
 	aircraft_manager* AirContorl = new aircraft_manager(spawner);
 

@@ -11,12 +11,12 @@ world_generation::~world_generation() {
 
 }
 
-world* world_generation::create_world(world_gen_settings* input, bool force) {
+world* world_generation::create_world(world_gen_settings* input, motion_manger* updater, bool force) {
 	world* output = NULL;
 	if (is_settings_valid(input) || force) {
 		//create the base object
 		output = new world;
-		output->init(spawner);
+		output->init(spawner, updater);
 
 		print_settings(input);
 

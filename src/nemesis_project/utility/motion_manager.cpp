@@ -13,6 +13,31 @@ motion_manger::~motion_manger()
 {
 }
 
+void motion_manger::update_item(item_info* obj) {
+
+	if (obj == NULL) {
+		return;
+	}
+
+	update_pak update_pac;
+
+	update_pac.x = obj->x_m;
+	update_pac.y = obj->y_m;
+	update_pac.z = obj->z_m;
+
+	update_pac.x_scale = 1;
+	update_pac.y_scale = 1;
+	update_pac.z_scale = 1;
+
+	update_pac.angle = obj->angle;
+
+	update_pac.buffer_loc = obj->buffer_loc;
+	update_pac.item_id = obj->item_id;
+
+	OBJM->update_item_matrix(&update_pac);
+
+}
+
 
 void motion_manger::update_item_matrix(update_pak& up) {
 

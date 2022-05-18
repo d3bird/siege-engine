@@ -13,11 +13,6 @@ railRoad::rail_manager::~rail_manager() {
 	carts.clear();
 }
 
-void railRoad::rail_manager::update(double deltaTime) {
-
-
-}
-
 bool railRoad::rail_manager::can_place_cart(loc<int>& location) {
 
 	for (int i = 0; i < rails.size(); i++) {

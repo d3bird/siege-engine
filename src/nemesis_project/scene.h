@@ -15,7 +15,7 @@ public:
 
 	void display_guis();
 
-	void update();
+	void update(double deltaTime);
 
 	void init(engine_api* api);
 

@@ -5,15 +5,13 @@
 
 #include <vector>
 
-class motion_manger
-{
+class motion_manger{
 public:
 	motion_manger();
 	motion_manger(optimized_spawner* objm);
 	~motion_manger();
 
-
-
+	void update_item(item_info* obj);
 	void update_item_matrix(update_pak& up);
 	
 	void push_updates();

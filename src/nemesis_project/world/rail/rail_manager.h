@@ -5,6 +5,7 @@
 #include "../../common_obj/location.h"
 
 #include <vector>
+
 /**
 * This class handles the placement of the carts and rails
 * it will connect rails together and link the cart to a rail
@@ -17,8 +18,6 @@ namespace railRoad {
 		rail_manager();
 		~rail_manager();
 
-		void update(double deltaTime);
-
 		bool can_place_cart(loc<int>& location);
 		int place_cart(loc<int>& location);
 		void toggle_cart(int id);
@@ -30,6 +29,8 @@ namespace railRoad {
 		bool remove_rail(loc<int> &location);
 
 		void print_info();
+
+
 
 		//since the carts are moving and not linked to any objects
 		//they are public to any class that is handling the objs

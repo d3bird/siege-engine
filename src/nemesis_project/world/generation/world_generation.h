@@ -5,6 +5,8 @@
 #include "../terrian_data.hpp"
 #include "../../core/optimized_spawner.h"
 
+#include "../../utility/motion_manager.h"
+
 //these are chunks that are to be hard coded
 struct hard_chunk {
 	int x;
@@ -34,7 +36,7 @@ public:
 	world_generation(optimized_spawner* spawn);
 	~world_generation();
 
-	world* create_world(world_gen_settings* input, bool force = false);
+	world* create_world(world_gen_settings* input, motion_manger* updater,  bool force = false);
 
 	//premade settings
 

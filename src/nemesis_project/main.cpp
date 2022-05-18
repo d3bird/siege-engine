@@ -93,7 +93,7 @@ int main() {
         }
         API->draw();
         testing.display_guis();
-        testing.update();
+        testing.update(*deltaTime);
     }
 
 
