@@ -26,7 +26,8 @@ private:
 
 	create_engine* engine;
 	optimized_spawner* spawner;
-	
+	motion_manger* updater;
+
 	//testing classes
 	testing::world_test world_t;
 
@@ -44,5 +45,11 @@ private:
 	void world_generation_test();
 
 
+	//misc vars
+	int start;
+	int end;
+	bool dir = false;
+	int speed = 5;
+	item_info* temp_cart = NULL;
 };
 

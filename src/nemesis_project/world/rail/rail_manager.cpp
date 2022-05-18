@@ -30,8 +30,10 @@ int railRoad::rail_manager::place_cart(loc<int>& location) {
 
 	for (int i = 0; i < rails.size(); i++) {
 		if (rails[i].get_loc() == location) {
-			railRoad::cart temp(cart_id, rails[i]);
+			//railRoad::cart temp(cart_id, rails[i]);
+			carts.push_back(railRoad::cart(cart_id, rails[i]));
 			cart_id++;
+		//	std::cout << "adding a cart to the vector" << std::endl;
 			return cart_id - 1;
 		}
 	}

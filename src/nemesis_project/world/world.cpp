@@ -130,17 +130,23 @@ int world::place_cart(loc<int>& location) {
 	int output = -1;
 	if (placable) {
 		output = rail_mgr.place_cart(location);
-		item_info * temp = OBJM->spawn_item(CART, location.x, location.y, location.z);
-		
-		//yes I know that this is not the best, but it can be optimised latter
-		for (int i = 0; i < rail_mgr.carts.size(); i++) {
-			if (rail_mgr.carts[i] == output) {
-				rail_mgr.carts[i].cart_obj = temp;
-				std::cout << "linked the obj with teh cart" << std::endl;
-				break;
+
+		if (output != -1) {
+
+			item_info* temp = OBJM->spawn_item(CART, location.x, location.y, location.z);
+
+			//yes I know that this is not the best, but it can be optimised latter
+			for (int i = 0; i < rail_mgr.carts.size(); i++) {
+				if (rail_mgr.carts[i] == output) {
+					rail_mgr.carts[i].cart_obj = temp;
+					std::cout << "linked the obj with teh cart" << std::endl;
+					break;
+				}
 			}
 		}
-
+		else {
+			std::cout << "railroad mgr failed to create a cartt object" << std::endl;
+		}
 	}
 	else {
 		std::cout << "fail to place cart" << std::endl;

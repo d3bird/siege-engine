@@ -16,6 +16,25 @@ scene::~scene(){
 void scene::update(double deltaTime) {
 	worlds->update(deltaTime);
 	update_guis();
+
+	if (temp_cart != NULL) {
+		double distance = deltaTime * speed;
+		if (dir) {
+			temp_cart->x_m += distance;
+			if (temp_cart->x_m >= end) {
+				dir = false;
+				temp_cart->x_m = end;
+			}
+		}
+		else {
+			temp_cart->x_m -= distance;
+			if (temp_cart->x_m <= start) {
+				dir = true;
+				temp_cart->x_m = start;
+			}
+		}
+		updater->update_item(temp_cart);
+	}
 }
 
 void scene::display_guis() {
@@ -36,7 +55,7 @@ void scene::init(engine_api* api) {
 
 	engine = new create_engine();
 	spawner = engine->init(API);
-
+	updater = new motion_manger(spawner);
 	if (spawner == NULL) {
 		return;
 	}
@@ -183,8 +202,6 @@ void scene::world_generation_test() {
 
 	world_gen_settings* test = pipe.flat_land_settings();
 
-	motion_manger* updater = new motion_manger(spawner);
-
 	world* testing = pipe.create_world(test, updater);
 
 	
@@ -198,18 +215,20 @@ void scene::world_generation_test() {
 		if (!testing->place_rail(loc<int>(2 + i, 1, 1))) {
 			std::cout << "failed to place rail" << std::endl;
 		}
-
-
 	}
 
-	testing->prin_rail_info();
+	temp_cart = spawner->spawn_item(CART, 2, 1, 1);
+	start = 2;
+	end = 39;
 
 	int cart_id = testing->place_cart(loc<int>(2, 1, 1));
 	if (cart_id != -1) {
 		testing->toggle_cart(cart_id);
-	} {
+	}else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
 	}
+
+testing->prin_rail_info();
 	//spawner->spawn_item(CART, 2, 1, 1);
 
 	/*
