@@ -40,7 +40,7 @@ void motion_manger::update_item(item_info* obj) {
 
 
 void motion_manger::update_item_matrix(update_pak& up) {
-
+	OBJM->update_item_matrix(&up);
 }
 
 void motion_manger::push_updates() {
