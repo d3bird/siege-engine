@@ -10,7 +10,8 @@ public:
 	local_map_data();
 	~local_map_data();
 
-	bool is_inbounds_of_map_local(int x, int y, int z, local_map_data* map);
+	void delete_map_data();
+	bool is_inbounds_of_map_local(int x, int y, int z);
 
 	int x_size;
 	int y_size;

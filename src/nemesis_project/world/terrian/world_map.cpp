@@ -15,20 +15,20 @@ map_data::~map_data(){
 * This function returns the which chunk, then the local cords for that chunck
 * returns -1 if the funct fails
 */
- std::pair < loc<int>, loc<int> > map_data::get_map_local_cords(loc<int>& cords, map_data* map) {
+ std::pair < loc<int>, loc<int> > map_data::get_map_local_cords(loc<int>& cords) {
 	std::pair < loc<int>, loc<int> > output;
 
 	//std::cout << "finding loc at these cords" << std::endl;
 	//std::cout << cords.x << "," << cords.y << "," << cords.z << std::endl;
 
-	if (map->world_map != NULL) {
-		int chunk_x_size = map->world_map[0][0][0].x_size;
-		int chunk_y_size = map->world_map[0][0][0].y_size;
-		int chunk_z_size = map->world_map[0][0][0].z_size;
+	if (world_map != NULL) {
+		int chunk_x_size = world_map[0][0][0].x_size;
+		int chunk_y_size = world_map[0][0][0].y_size;
+		int chunk_z_size = world_map[0][0][0].z_size;
 
-		int world_x_size = chunk_x_size * map->x_size;
-		int world_y_size = chunk_y_size * map->y_size;
-		int world_z_size = chunk_z_size * map->z_size;
+		int world_x_size = chunk_x_size * x_size;
+		int world_y_size = chunk_y_size * y_size;
+		int world_z_size = chunk_z_size * z_size;
 
 		if (world_x_size <= 0 || world_y_size <= 0 || world_z_size <= 0 ||
 			cords.x >= world_x_size || cords.y >= world_y_size || cords.z >= world_z_size) {

@@ -39,7 +39,7 @@ static bool is_enclosed(int x, int y, int z, local_map_data* map) {
 		std::cout << "map is null" << std::endl;
 		return false;
 	}
-	if (!map->is_inbounds_of_map_local(x,y,z,map)) {
+	if (!map->is_inbounds_of_map_local(x,y,z)) {
 		std::cout << "not in bounds" << std::endl;
 		return false;
 	}
@@ -80,19 +80,19 @@ static bool is_enclosed(int x, int y, int z, local_map_data* map) {
 				int x_n = test->x;
 				int y_n = test->y;
 				int z_n = test->z;
-				if (map->is_inbounds_of_map_local(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
+				if (map->is_inbounds_of_map_local(x_n + 1, y_n, z_n) && !world_map[y_n][x_n + 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n + 1][z_n]);
 					world_map[y_n][x_n + 1][z_n].checked = true;
 				}
-				if (map->is_inbounds_of_map_local(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
+				if (map->is_inbounds_of_map_local(x_n - 1, y_n, z_n) && !world_map[y_n][x_n - 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n - 1][z_n]);
 					world_map[y_n][x_n - 1][z_n].checked = true;
 				}
-				if (map->is_inbounds_of_map_local(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
+				if (map->is_inbounds_of_map_local(x_n, y_n, z_n + 1) && !world_map[y_n][x_n][z_n + 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n + 1]);
 					world_map[y_n][x_n][z_n + 1].checked = true;
 				}
-				if (map->is_inbounds_of_map_local(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
+				if (map->is_inbounds_of_map_local(x_n, y_n, z_n - 1) && !world_map[y_n][x_n][z_n - 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n - 1]);
 					world_map[y_n][x_n][z_n - 1].checked = true;
 				}
@@ -123,7 +123,7 @@ static room* generate_room(int x, int y, int z, local_map_data* map) {
 		std::cout << "map is null" << std::endl;
 		return NULL;
 	}
-	if (!map->is_inbounds_of_map_local(x, y, z, map)) {
+	if (!map->is_inbounds_of_map_local(x, y, z)) {
 		std::cout << "not in bounds" << std::endl;
 		return NULL;
 	}
@@ -165,22 +165,22 @@ static room* generate_room(int x, int y, int z, local_map_data* map) {
 				int x_n = test->x;
 				int y_n = test->y;
 				int z_n = test->z;
-				if (map->is_inbounds_of_map_local(x_n + 1, y_n, z_n, map) && !world_map[y_n][x_n + 1][z_n].checked) {
+				if (map->is_inbounds_of_map_local(x_n + 1, y_n, z_n) && !world_map[y_n][x_n + 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n + 1][z_n]);
 					world_map[y_n][x_n + 1][z_n].checked = true;
 				}
 				
-				if (map->is_inbounds_of_map_local(x_n - 1, y_n, z_n, map) && !world_map[y_n][x_n - 1][z_n].checked) {
+				if (map->is_inbounds_of_map_local(x_n - 1, y_n, z_n) && !world_map[y_n][x_n - 1][z_n].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n - 1][z_n]);
 					world_map[y_n][x_n - 1][z_n].checked = true;
 				}
 			
-				if (map->is_inbounds_of_map_local(x_n, y_n, z_n + 1, map) && !world_map[y_n][x_n][z_n + 1].checked) {
+				if (map->is_inbounds_of_map_local(x_n, y_n, z_n + 1) && !world_map[y_n][x_n][z_n + 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n + 1]);
 					world_map[y_n][x_n][z_n + 1].checked = true;
 				}
 				
-				if (map->is_inbounds_of_map_local(x_n, y_n, z_n - 1, map) && !world_map[y_n][x_n][z_n - 1].checked) {
+				if (map->is_inbounds_of_map_local(x_n, y_n, z_n - 1) && !world_map[y_n][x_n][z_n - 1].checked) {
 					cells_to_check.push_back(&world_map[y_n][x_n][z_n - 1]);
 					world_map[y_n][x_n][z_n - 1].checked = true;
 				}
@@ -209,40 +209,3 @@ static local_map_data* merge_maps(local_map_data* larger, local_map_data* smalle
 	return NULL;
 }
 
-
-static void delete_map_data(local_map_data* in) {
-	if (in == NULL) {
-		return;
-	}
-
-	//checks to makesure that the map was compleatly deleted
-	if (in->map != NULL) {
-		int count = 0;
-		for (int y = 0; y < in->y_size; y++) {
-			for (int x = 0; x < in->x_size; x++) {
-				for (int z = 0; z < in->z_size; z++) {
-					if (in->map[y][x][z].ground != NULL) {
-						count++;
-					}
-					if (in->map[y][x][z].floor != NULL) {
-						count++;
-					}
-				}
-			}
-		}
-		if (count != 0) {
-			std::cout << "WARRNING: " << count << " objs where not delete ahead of time" << std::endl;
-		}
-	}
-
-	//delete the wheels
-	if (in->Wheels != NULL) {
-		
-	}
-
-	//delete the rooms
-	if (in->rooms_on_map.size() >0) {
-
-	}
-
-}

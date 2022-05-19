@@ -14,7 +14,7 @@ public:
 
 	local_map_data*** world_map = NULL;
 
-	std::pair < loc<int>, loc<int> > get_map_local_cords(loc<int>& cords, map_data* map);
+	std::pair < loc<int>, loc<int> > get_map_local_cords(loc<int>& cords);
 
 private:
 
