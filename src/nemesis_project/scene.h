@@ -19,6 +19,8 @@ public:
 
 	void init(engine_api* api);
 
+	void key_press();
+
 private:
 	engine_api* API;
 
@@ -51,5 +53,13 @@ private:
 	bool dir = false;
 	int speed = 5;
 	item_info* temp_cart = NULL;
+	world* testing_w;
+
+	//
+
+	//everything need to test the crane manager
+	crane_manager crane_mgr;
+	int place_crane(const loc<int> &location, int height, int radius);
+	void toggle_crane(int id);
 };
 

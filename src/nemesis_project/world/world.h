@@ -23,10 +23,10 @@ public:
 
 	void draw_gui();
 
-/*	void place_belt(int x, int y, int z, int dir);
+	/*void place_belt(int x, int y, int z, int dir);
 	void place_door(door_data::opening type, int x_start, int y_start, int z_start,
-		int x_end, int y_end, int z_end);
-*/
+		int x_end, int y_end, int z_end);*/
+
 
 	//cart functions
 	bool place_rail(loc<int>& location);
@@ -34,10 +34,6 @@ public:
 	int place_cart(loc<int>& location);//returns the id of the cart
 	bool can_place_cart(loc<int>& location);
 	void toggle_cart(int id);
-
-	int place_crane(loc<int> location, int height, int radius);
-	void toggle_crane(int id);
-
 	void prin_rail_info();
 
 	void init(optimized_spawner* OBJM, motion_manger * mmm);
@@ -45,6 +41,10 @@ public:
 	map_data* world_map;
 
 private:
+
+	//updating functions
+	void update_rails(double time_change);
+//	void spawn_door_objs(door_data::door* data);
 
 	bool inited = false;
 
@@ -58,16 +58,5 @@ private:
 	optimized_spawner* OBJM;
 	motion_manger* updater;
 	railRoad::rail_manager rail_mgr;
-
-	crane_manager crane_mgr;
-	crane_manager_gui crane_gui;
-	//void spawn_door_objs(door_data::door* data);
-
-
-	void update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angle);
-
-	//updating functions
-	void update_rails(double time_change);
-
 };
 

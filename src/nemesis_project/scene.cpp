@@ -7,6 +7,7 @@ scene::scene(){
 	API = NULL;
 	engine = NULL;
 	spawner = NULL;
+	testing_w = NULL;
 }
 
 scene::~scene(){
@@ -15,6 +16,7 @@ scene::~scene(){
 
 void scene::update(double deltaTime) {
 	worlds->update(deltaTime);
+	crane_mgr.update(deltaTime);
 	update_guis();
 
 	if (temp_cart != NULL) {
@@ -37,8 +39,9 @@ void scene::update(double deltaTime) {
 	}
 }
 
+
 void scene::display_guis() {
-	worlds->draw_gui();
+//	worlds->draw_gui();
 }
 
 void scene::update_guis() {
@@ -202,7 +205,7 @@ void scene::world_generation_test() {
 
 	world_gen_settings* test = pipe.flat_land_settings();
 
-	world* testing = pipe.create_world(test, updater);
+	testing_w = pipe.create_world(test, updater);
 
 
 
@@ -212,7 +215,7 @@ void scene::world_generation_test() {
 	AirContorl->start_animation_sim(start_loc);
 
 	for (int i = 0; i < 40; i++) {
-		if (!testing->place_rail(loc<int>(2 + i, 1, 1))) {
+		if (!testing_w->place_rail(loc<int>(2 + i, 1, 1))) {
 			std::cout << "failed to place rail" << std::endl;
 		}
 	}
@@ -221,15 +224,15 @@ void scene::world_generation_test() {
 	start = 2;
 	end = 39;
 
-	int cart_id = testing->place_cart(loc<int>(2, 1, 1));
+	int cart_id = testing_w->place_cart(loc<int>(2, 1, 1));
 	if (cart_id != -1) {
-		testing->toggle_cart(cart_id);
+		testing_w->toggle_cart(cart_id);
 	}
 	else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
 	}
 
-	testing->prin_rail_info();
+	testing_w->prin_rail_info();
 	//spawner->spawn_item(CART, 2, 1, 1);
 
 	/*
@@ -238,6 +241,57 @@ void scene::world_generation_test() {
 		mobil_platform* plat = city.create_mobile_plat(city.get_flat_city_settings());
 		*/
 
-	testing->place_crane(loc<int>(13, 1, 13), 12, 10);
+
+	place_crane(loc<int>(13, 1, 13), 12, 10);
+
+}
+
+void scene::key_press() {
+}
+
+int scene::place_crane(const loc<int> &location, int height, int radius) {
+	int output = -1;
+	item_info* temp = 0;
+
+	std::cout << "creating crane" << std::endl;
+
+	std::cout << height << " , " << radius << std::endl;
+
+	crane* new_crane = crane_mgr.create_crane(height, radius);
+	if (new_crane == NULL) {
+		std::cout << "failed creating crane" << std::endl;
+		return output;
+	}
+
+	//make the central pillar
+	for (int i = 0; i < height; i++) {
+		temp = spawner->spawn_item(CRANE_B, location.x, location.y + i, location.z);
+		if (temp != NULL) {
+			new_crane->base.push_back(temp);
+		}
+	}
+
+	//make the arm
+	for (int i = location.x - 1; i < radius + location.x - 1; i++) {
+		temp = spawner->spawn_item(CUBE_T, i, location.y + height - 1, location.z);
+		if (temp != NULL) {
+			crane::crane_sect new_sect;
+			new_sect.obj = temp;
+			new_crane->arm.push_back(new_sect);
+		}
+	}
+
+
+	new_crane->print_info();
+
+	std::cout << "done creating crane" << std::endl;
+
+	return output;
+}
+
+
+void scene::toggle_crane(int id) {
+
+
 
 }
