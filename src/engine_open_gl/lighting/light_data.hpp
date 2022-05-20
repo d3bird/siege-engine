@@ -20,7 +20,7 @@ struct def_light
 struct lighting_scene
 {
 
-	int index = -1;
+	size_t index = -1;
 
 	int max_lights= 10;
 	int current_lights = 0;

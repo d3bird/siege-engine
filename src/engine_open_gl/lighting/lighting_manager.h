@@ -20,7 +20,7 @@ public:
 
 	void update();
 
-	int create_light_scene(int max_lights, bool set_as_current = false);
+	size_t create_light_scene(int max_lights, bool set_as_current = false);
 	void delete_light_scene(int index);
 
 	void set_current_scene(int index);
@@ -40,7 +40,7 @@ public:
 	//getters
 	lighting_scene* get_current_scene() { return current_scene; }
 	bool need_to_update() { return need_update; }
-	int get_scene_amount() { return l_scenes.size(); }
+	size_t get_scene_amount() { return l_scenes.size(); }
 
 private:
 

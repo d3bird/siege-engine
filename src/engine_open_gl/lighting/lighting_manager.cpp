@@ -20,8 +20,8 @@ void light_mgr::update() {
 
 }
 
-int light_mgr::create_light_scene(int max_lights, bool set_as_current) {
-    int output = -1;
+size_t light_mgr::create_light_scene(int max_lights, bool set_as_current) {
+    size_t output = -1;
     if (max_lights >= max_lights_scence) {
         std::cout << "max_lights was >= max_lights_scence, setting to engine max" << std::endl;
     }
