@@ -220,6 +220,7 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("CART", paths.get_objs_loc() + "rail/cart.obj", buffer_size, CART);
 	obj_temp = OBJM->add_model("WHEELS", paths.get_objs_loc() + "rail/wheels.obj", buffer_size, CART_WHEELS);
 
+	obj_temp = OBJM->add_model("CRANE_B", paths.get_objs_loc() + "crane/c_base.obj", buffer_size, CRANE_B);
 
 	std::cout << "done" << std::endl;
 }

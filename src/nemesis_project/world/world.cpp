@@ -12,12 +12,13 @@ world::~world() {
 }
 
 void world::draw_gui() {
-
+	crane_gui.draw();
 }
 
 void world::update(double deltaTime) {
 	//std::cout << deltaTime << std::endl;
 	//update_rails(deltaTime);
+	crane_mgr.update(deltaTime);
 }
 
 void world::update_rails(double time_change) {
@@ -37,6 +38,27 @@ void world::update_rails(double time_change) {
 
 		}
 	}
+}
+
+int world::place_crane(loc<int> location, int height, int radius) {
+	int output =-1;
+
+	//make the central pillar
+	for (int i = 0; i < height; i++) {
+		OBJM->spawn_item(CRANE_B, location.x, location.y + i, location.z);
+	}
+
+	//make the arm
+	for (int i = location.x - 1; i < radius + location.x - 1; i++) {
+		OBJM->spawn_item(CUBE_T, i, location.y +height - 1, location.z);
+	}
+
+
+	return output;
+}
+
+void world::toggle_crane(int id) {
+
 }
 
 /*
@@ -74,7 +96,6 @@ void world::init(optimized_spawner* objm, motion_manger* mmm) {
 	//create the managers
 	belts = new belt_manager(OBJM);
 	doors = new door_data::door_manager();
-
 }
 
 void world::update_obj_angle(item_info* obj, optimized_spawner* OBJM, float angle) {

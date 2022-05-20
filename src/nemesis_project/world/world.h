@@ -11,6 +11,8 @@
 
 #include "rail/rail_manager.h"
 #include "../utility/motion_manager.h"
+#include "crane/crane_manager.h"
+#include "crane/crane_manager_gui.h"
 
 class world {
 public:
@@ -33,6 +35,9 @@ public:
 	bool can_place_cart(loc<int>& location);
 	void toggle_cart(int id);
 
+	int place_crane(loc<int> location, int height, int radius);
+	void toggle_crane(int id);
+
 	void prin_rail_info();
 
 	void init(optimized_spawner* OBJM, motion_manger * mmm);
@@ -54,6 +59,8 @@ private:
 	motion_manger* updater;
 	railRoad::rail_manager rail_mgr;
 
+	crane_manager crane_mgr;
+	crane_manager_gui crane_gui;
 	//void spawn_door_objs(door_data::door* data);
 
 

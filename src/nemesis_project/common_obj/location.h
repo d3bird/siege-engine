@@ -10,6 +10,7 @@ template<> class loc<int> {
 public:
 
 	loc();
+	~loc(){}
 	loc(int  x0, int  y0, int  z0);
 
 	int x;
@@ -19,6 +20,7 @@ public:
 	bool operator==(const loc<int>& other);
 	void  operator=(const loc<int>& other);
 
+
 private:
 
 };
@@ -27,6 +29,7 @@ template<> class loc<double> {
 public:
 
 	loc();
+	~loc() {}
 	loc(double  x0, double  y0, double  z0);
 
 	double x;
@@ -44,6 +47,7 @@ template<> class loc<float> {
 public:
 
 	loc();
+	~loc() {}
 	loc(float  x0, float  y0, float  z0);
 
 	float x;

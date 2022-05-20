@@ -204,7 +204,7 @@ void scene::world_generation_test() {
 
 	world* testing = pipe.create_world(test, updater);
 
-	
+
 
 	aircraft_manager* AirContorl = new aircraft_manager(spawner);
 
@@ -224,11 +224,12 @@ void scene::world_generation_test() {
 	int cart_id = testing->place_cart(loc<int>(2, 1, 1));
 	if (cart_id != -1) {
 		testing->toggle_cart(cart_id);
-	}else {
+	}
+	else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
 	}
 
-testing->prin_rail_info();
+	testing->prin_rail_info();
 	//spawner->spawn_item(CART, 2, 1, 1);
 
 	/*
@@ -236,4 +237,7 @@ testing->prin_rail_info();
 
 		mobil_platform* plat = city.create_mobile_plat(city.get_flat_city_settings());
 		*/
+
+	testing->place_crane(loc<int>(13, 1, 13), 12, 10);
+
 }
