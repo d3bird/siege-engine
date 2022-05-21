@@ -27,17 +27,24 @@ void railRoad::rail_manager::update(double deltaTime) {
 
 }
 
-bool railRoad::rail_manager::can_place_cart(loc<int>& location) {
-
+int railRoad::rail_manager::can_place_cart(loc<int>& location) {
+	int output = 0;
 	for (int i = 0; i < rails.size(); i++) {
 
 	//	std::cout << rails[i]->get_loc().x<<","<< rails[i]->get_loc().y<<","<<rails[i]->get_loc().z
 	//		<< " == " << location.x<<","<< location.y<<","<< location.z << std::endl;
 		if (rails[i]->get_loc() == location) {
-			return true;
+		
+			if (rails[i]->get_axais()) {
+				output = 1;
+			}
+			else {
+				output = 2;
+			}
+
 		}
 	}
-	return false;
+	return output;
 }
 
 int railRoad::rail_manager::place_cart(loc<int>& location) {
@@ -60,7 +67,7 @@ void railRoad::rail_manager::toggle_cart(int id) {
 	for (int i = 0; i < carts.size(); i++) {
 		if (carts[i] == id) {
 			std::cout << "toggling cart: "<<id << std::endl;
-			carts[i].set_velocity(10);
+			//carts[i].set_velocity(10);
 			carts[i].set_running(true);
 			return;
 		}
@@ -68,18 +75,27 @@ void railRoad::rail_manager::toggle_cart(int id) {
 
 }
 
+void  railRoad::rail_manager::set_cart_vel(int id, double velocity) {
+	for (int i = 0; i < carts.size(); i++) {
+		if (carts[i] == id) {
+			carts[i].set_velocity(velocity);
+			return;
+		}
+	}
+}
 
-bool railRoad::rail_manager::add_rail(int x, int y, int z) {
-	return add_rail(loc<int>(x,y,z));
+
+bool railRoad::rail_manager::add_rail(int x, int y, int z, bool x_axis) {
+	return add_rail(loc<int>(x,y,z), x_axis);
 }
 
 bool railRoad::rail_manager::remove_rail(int x, int y, int z) {
 	return remove_rail(loc<int>(x, y, z));;
 }
 
-bool railRoad::rail_manager::add_rail(loc<int>& location) {
+bool railRoad::rail_manager::add_rail(loc<int>& location, bool x_axis) {
 
-	rail* temp = new rail(rail_id, location);
+	rail* temp = new rail(rail_id, location, x_axis);
 
 	//std::cout << "rail_id: " << rail_id << std::endl;
 

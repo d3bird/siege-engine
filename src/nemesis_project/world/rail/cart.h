@@ -40,6 +40,7 @@ namespace railRoad {
 	private:
 
 		void change_speed(double vel);
+		void apply_extra_distance(double x_amount,double z_amount);
 
 		int ID;
 		rail * location;

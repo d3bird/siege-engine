@@ -50,6 +50,12 @@ bool  railRoad::rail::can_connect(rail* other, bool connect) {
 			// 4 == down
 
 			loc<int> other_loc = other->get_loc();
+
+			//must be on the same axis
+			if (location.y != other_loc.y) {
+				return false;
+			}
+
 			//std::cout << other_loc.x << " == " << location.x << std::endl;
 		//	std::cout << other_loc.z << " == " << location.z << std::endl;
 			if (x_axais) {

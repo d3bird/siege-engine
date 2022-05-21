@@ -5,7 +5,7 @@
 railRoad::cart::cart(int aID,  rail* start_loc) {
 	ID = aID;
 	velocity = 0;
-	max_speed = 50;
+	max_speed = 20;
 	location = start_loc;
 	cart_obj = NULL;
 	running = true;
@@ -41,8 +41,10 @@ void railRoad::cart::update(double deltaTime) {
 		else {
 			std::cout << "the next connection1 was null" << std::endl;
 			print_info();
-			running = false;
-			velocity = 0;
+			//running = false;
+			//velocity = 0;
+			std::cout << "reversing direction" << std::endl;
+			velocity *= -1;
 			return;
 		}
 	}
@@ -56,13 +58,16 @@ void railRoad::cart::update(double deltaTime) {
 		else {
 			std::cout << "the next connection2 was null" << std::endl;
 			print_info();
-			running = false;
-			velocity = 0;
+			//running = false;
+			//velocity = 0;
+			std::cout << "reversing direction" << std::endl;
+			velocity *= -1;
 			return;
 		}
 	}
 	else if (velocity == 0) {
 		running = false;
+		//velocity *= -1;
 		return;
 	}
 
@@ -72,16 +77,21 @@ void railRoad::cart::update(double deltaTime) {
 	z_end *= 2;
 
 	bool pos_change = false;
+	double extra_x = 0;
+	double extra_z = 0;
+
 	if (x < x_end) {
 		x += change;
 		pos_change = true;
 		if (x > x_end) {
+			extra_x = x - x_end;
 			x = x_end;
 		}
 	}else if (x > x_end) {
 		x -= change;
 		pos_change = true;
 		if (x < x_end) {
+			extra_x = x_end -x ;
 			x = x_end;
 		}
 	}
@@ -90,6 +100,7 @@ void railRoad::cart::update(double deltaTime) {
 		z += change;
 		pos_change = true;
 		if (z > z_end) {
+			extra_z = z - z_end;
 			z = z_end;
 		}
 	}
@@ -97,6 +108,7 @@ void railRoad::cart::update(double deltaTime) {
 		z -= change;
 		pos_change = true;
 		if (z < z_end) {
+			extra_z = z_end - z;
 			z = z_end;
 		}
 	}
@@ -107,26 +119,33 @@ void railRoad::cart::update(double deltaTime) {
 		rail* next = NULL;
 		if (velocity > 0) {
 			next = location->get_connection1();
-			std::cout << "grabbing new connection" << std::endl;
+		//	std::cout << "grabbing new connection1" << std::endl;
 		}
 		else if (velocity < 0) {
-			next = location->get_connection1();
-			std::cout << "grabbing new connection" << std::endl;
+			next = location->get_connection2();
+			//std::cout << "grabbing new connection2" << std::endl;
 
 		}
-		else {
-			std::cout << "how did it get here" << std::endl;
-		}
+		apply_extra_distance(extra_x, extra_z);
 		location = next;
 	}
 	else {
-		std::cout << "current obj cords " << x << " " << z << std::endl;
-		std::cout << "end obj cords "<<x_end<<" "<<z_end << std::endl;
+		//std::cout << "current obj cords " << x << " " << z << std::endl;
+		//std::cout << "end obj cords "<<x_end<<" "<<z_end << std::endl;
 		cart_obj->x_m = x;
 		cart_obj->y_m = y;
 		cart_obj->z_m = z;
 	}
 
+}
+
+//this applies the extra distance that was caught when moving to the next spot
+void  railRoad::cart::apply_extra_distance(double x_amount, double z_amount) {
+	//this solution will only really work for strieght paths and should be changed when
+	//curves are added
+	cart_obj->x_m += x_amount;
+	//cart_obj->y_m += y;
+	cart_obj->z_m += z_amount;
 }
 
 

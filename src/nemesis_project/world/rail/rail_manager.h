@@ -21,14 +21,16 @@ namespace railRoad {
 
 		void update(double deltaTime);
 
-		bool can_place_cart(loc<int>& location);
+		int can_place_cart(loc<int>& location);
 		int place_cart(loc<int>& location);
 		void toggle_cart(int id);
+		void set_cart_vel(int id, double velocity);
 
-		bool add_rail(int x, int y, int z);
+
+		bool add_rail(int x, int y, int z, bool x_axis);
 		bool remove_rail(int x, int y, int z);
 
-		bool add_rail(loc<int> &location);
+		bool add_rail(loc<int> &location, bool x_axis);
 		bool remove_rail(loc<int> &location);
 
 		void print_info();
