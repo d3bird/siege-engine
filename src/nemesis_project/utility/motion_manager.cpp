@@ -1,5 +1,7 @@
 #include "motion_manager.h"
 
+#include <iostream>
+
 motion_manger::motion_manger() {
 	OBJM = NULL;
 
@@ -16,6 +18,7 @@ motion_manger::~motion_manger()
 void motion_manger::update_item(item_info* obj) {
 
 	if (obj == NULL) {
+		std::cout << "can not update the obj was NULL" << std::endl;
 		return;
 	}
 

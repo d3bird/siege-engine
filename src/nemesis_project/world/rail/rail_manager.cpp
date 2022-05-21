@@ -2,9 +2,10 @@
 
 #include <iostream>
 
-railRoad::rail_manager::rail_manager() {
+railRoad::rail_manager::rail_manager(motion_manger* mm) {
 	cart_id = 0;
 	rail_id = 0;
+	MM = mm;
 }
 
 railRoad::rail_manager::~rail_manager() {
@@ -13,13 +14,26 @@ railRoad::rail_manager::~rail_manager() {
 	carts.clear();
 }
 
+void railRoad::rail_manager::update(double deltaTime) {
+	//std::cout << deltaTime << std::endl;
+
+	for (int i = 0; i < carts.size(); i++) {
+		if (carts[i].is_running()) {
+			carts[i].update(deltaTime);
+			//carts[i].cart_obj->x_m += (5 * deltaTime);
+			MM->update_item(carts[i].cart_obj);
+		}
+	}
+
+}
+
 bool railRoad::rail_manager::can_place_cart(loc<int>& location) {
 
 	for (int i = 0; i < rails.size(); i++) {
 
-	//	std::cout << rails[i].get_loc().x<<","<< rails[i].get_loc().y<<","<<rails[i].get_loc().z
+	//	std::cout << rails[i]->get_loc().x<<","<< rails[i]->get_loc().y<<","<<rails[i]->get_loc().z
 	//		<< " == " << location.x<<","<< location.y<<","<< location.z << std::endl;
-		if (rails[i].get_loc() == location) {
+		if (rails[i]->get_loc() == location) {
 			return true;
 		}
 	}
@@ -29,9 +43,9 @@ bool railRoad::rail_manager::can_place_cart(loc<int>& location) {
 int railRoad::rail_manager::place_cart(loc<int>& location) {
 
 	for (int i = 0; i < rails.size(); i++) {
-		if (rails[i].get_loc() == location) {
+		if (rails[i]->get_loc() == location) {
 			//railRoad::cart temp(cart_id, rails[i]);
-			carts.push_back(railRoad::cart(cart_id, rails[i]));
+			carts.push_back(railRoad::cart(cart_id,(rails[i])));
 			cart_id++;
 		//	std::cout << "adding a cart to the vector" << std::endl;
 			return cart_id - 1;
@@ -46,6 +60,8 @@ void railRoad::rail_manager::toggle_cart(int id) {
 	for (int i = 0; i < carts.size(); i++) {
 		if (carts[i] == id) {
 			std::cout << "toggling cart: "<<id << std::endl;
+			carts[i].set_velocity(10);
+			carts[i].set_running(true);
 			return;
 		}
 	}
@@ -63,14 +79,14 @@ bool railRoad::rail_manager::remove_rail(int x, int y, int z) {
 
 bool railRoad::rail_manager::add_rail(loc<int>& location) {
 
-	rail temp(rail_id, location);
+	rail* temp = new rail(rail_id, location);
 
 	//std::cout << "rail_id: " << rail_id << std::endl;
 
 	//connect to the other rails
 	int connections = 0;
 	for (int i = 0; i < rails.size(); i++) {
-		if (temp.can_connect(&rails[i], true)) {
+		if (temp->can_connect(rails[i], true)) {
 			connections++;
 			if (connections == 2) {
 				//std::cout << "connect to two rails" << std::endl;
@@ -108,10 +124,10 @@ void railRoad::rail_manager::print_info() {
 
 	for (int i = 0; i < rails.size(); i++) {
 			int temp = 0;
-		if (rails[i].get_connection1() != NULL) {
+		if (rails[i]->get_connection1() != NULL) {
 			temp++;
 		}
-		if (rails[i].get_connection2() != NULL) {
+		if (rails[i]->get_connection2() != NULL) {
 			temp++;
 		}
 		if (temp == 1) {
@@ -129,4 +145,9 @@ void railRoad::rail_manager::print_info() {
 	std::cout << "1 connection:" << connection1 << std::endl;
 	std::cout << "2 connection:" << connection2 << std::endl;
 
+	return;
+	//print all the rails
+	for (int i = 0; i < rails.size(); i++) {
+		std::cout << "rail: "<<i<<" " << rails[i]->get_x()<<" " << rails[i]->get_z()<< std::endl;
+	}
 }

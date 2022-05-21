@@ -15,27 +15,7 @@ void world::draw_gui() {
 }
 
 void world::update(double deltaTime) {
-	//std::cout << deltaTime << std::endl;
-	//update_rails(deltaTime);
-}
 
-void world::update_rails(double time_change) {
-
-	for (int i = 0; i < rail_mgr.carts.size(); i++) {
-		if (rail_mgr.carts[i].cart_obj != NULL && rail_mgr.carts[i].get_velocity() != 0) {
-			bool dir = rail_mgr.carts[i].get_velocity() < 0 ? false : true;
-
-			updater->update_item(rail_mgr.carts[i].cart_obj);
-
-			if (dir) {//to 
-
-			}
-			else {
-
-			}
-
-		}
-	}
 }
 
 
@@ -48,76 +28,6 @@ void world::init(optimized_spawner* objm, motion_manger* mmm) {
 	belts = new belt_manager(OBJM);
 	doors = new door_data::door_manager();
 }
-
-
-bool world::place_rail(loc<int>& location) {
-	bool output = can_place_rail(location);
-
-	if (output) {
-		OBJM->spawn_item(RAIL, location.x, location.y, location.z);
-		rail_mgr.add_rail(location);
-	}
-	return output;
-}
-
-bool world::can_place_rail(loc<int>& location) {
-	bool output = true;
-
-	std::pair < loc<int>, loc<int> > world_locs = world_map->get_map_local_cords(location);
-
-	//check to makesure the locs are valid
-	if (world_locs.first == loc<int>()) {
-
-		//check to makesure that there are no other objects 
-
-		output = false;
-	}
-
-	return output;
-}
-
-
-int world::place_cart(loc<int>& location) {
-	bool placable = can_place_cart(location);
-	int output = -1;
-	if (placable) {
-		output = rail_mgr.place_cart(location);
-
-		if (output != -1) {
-
-			item_info* temp = OBJM->spawn_item(CART, location.x, location.y, location.z);
-
-			//yes I know that this is not the best, but it can be optimised latter
-			for (int i = 0; i < rail_mgr.carts.size(); i++) {
-				if (rail_mgr.carts[i] == output) {
-					rail_mgr.carts[i].cart_obj = temp;
-					std::cout << "linked the obj with teh cart" << std::endl;
-					break;
-				}
-			}
-		}
-		else {
-			std::cout << "railroad mgr failed to create a cartt object" << std::endl;
-		}
-	}
-	else {
-		std::cout << "fail to place cart" << std::endl;
-	}
-	return output;
-}
-
-bool world::can_place_cart(loc<int>& location) {
-	return rail_mgr.can_place_cart(location);
-}
-
-void world::toggle_cart(int id) {
-	rail_mgr.toggle_cart(id);
-}
-
-void world::prin_rail_info() {
-	rail_mgr.print_info();
-}
-
 
 /*
 void world::spawn_door_objs(door_data::door* data) {

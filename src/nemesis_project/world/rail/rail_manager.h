@@ -3,6 +3,7 @@
 #include "rail.h"
 #include "cart.h"
 #include "../../common_obj/location.h"
+#include "../../utility/motion_manager.h"
 
 #include <vector>
 
@@ -15,8 +16,10 @@ namespace railRoad {
 
 	class rail_manager {
 	public:
-		rail_manager();
+		rail_manager(motion_manger* mm);
 		~rail_manager();
+
+		void update(double deltaTime);
 
 		bool can_place_cart(loc<int>& location);
 		int place_cart(loc<int>& location);
@@ -30,8 +33,6 @@ namespace railRoad {
 
 		void print_info();
 
-
-
 		//since the carts are moving and not linked to any objects
 		//they are public to any class that is handling the objs
 		std::vector<cart> carts;
@@ -39,10 +40,11 @@ namespace railRoad {
 	private:
 		std::vector<int> old_IDs;
 
-		std::vector<rail> rails;
+		std::vector<rail*> rails;
 		
 		int cart_id;
 		int rail_id;
+		motion_manger* MM;
 	};
 
 }

@@ -3,7 +3,7 @@
 #include "world/generation/world_generation.h"
 #include "world/generation/city_generation.h"
 
-scene::scene(){
+scene::scene(): rail_mgr(NULL) {
 	API = NULL;
 	engine = NULL;
 	spawner = NULL;
@@ -17,9 +17,10 @@ scene::~scene(){
 void scene::update(double deltaTime) {
 	worlds->update(deltaTime);
 	crane_mgr.update(deltaTime);
-	update_guis();
 
-	if (temp_cart != NULL) {
+	rail_mgr.update(deltaTime);
+
+	/*if (temp_cart != NULL) {
 		double distance = deltaTime * speed;
 		if (dir) {
 			temp_cart->x_m += distance;
@@ -36,16 +37,12 @@ void scene::update(double deltaTime) {
 			}
 		}
 		updater->update_item(temp_cart);
-	}
+	}*/
 }
 
 
 void scene::display_guis() {
 //	worlds->draw_gui();
-}
-
-void scene::update_guis() {
-
 }
 
 void scene::init(engine_api* api) {
@@ -214,36 +211,29 @@ void scene::world_generation_test() {
 	loc<int> start_loc(5, 5, 5);
 	AirContorl->start_animation_sim(start_loc);
 
+	rail_mgr = railRoad::rail_manager(updater);
+
 	for (int i = 0; i < 40; i++) {
-		if (!testing_w->place_rail(loc<int>(2 + i, 1, 1))) {
+		if (!place_rail(loc<int>(2 + i, 1, 1))) {
 			std::cout << "failed to place rail" << std::endl;
 		}
 	}
 
-	temp_cart = spawner->spawn_item(CART, 2, 1, 1);
+	//temp_cart = spawner->spawn_item(CART, 2, 1, 1);
 	start = 2;
 	end = 39;
 
-	int cart_id = testing_w->place_cart(loc<int>(2, 1, 1));
+	int cart_id = place_cart(loc<int>(2, 1, 1));
 	if (cart_id != -1) {
-		testing_w->toggle_cart(cart_id);
+		toggle_cart(cart_id);
 	}
 	else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
 	}
 
-	testing_w->prin_rail_info();
-	//spawner->spawn_item(CART, 2, 1, 1);
-
-	/*
-		city_generation city(spawner);
-
-		mobil_platform* plat = city.create_mobile_plat(city.get_flat_city_settings());
-		*/
-
+	prin_rail_info();
 
 	place_crane(loc<int>(13, 1, 13), 12, 10);
-
 }
 
 void scene::key_press() {
@@ -294,4 +284,73 @@ void scene::toggle_crane(int id) {
 
 
 
+}
+
+
+bool scene::place_rail(loc<int>& location) {
+	bool output = can_place_rail(location);
+
+	if (output) {
+		spawner->spawn_item(RAIL, location.x, location.y, location.z);
+		rail_mgr.add_rail(location);
+	}
+	return output;
+}
+
+bool scene::can_place_rail(loc<int>& location) {
+	bool output = true;
+	return true;
+	std::pair < loc<int>, loc<int> > world_locs;// = world_map->get_map_local_cords(location);
+
+	//check to makesure the locs are valid
+	if (world_locs.first == loc<int>()) {
+
+		//check to makesure that there are no other objects 
+
+		output = false;
+	}
+
+	return output;
+}
+
+
+int scene::place_cart(loc<int>& location) {
+	bool placable = can_place_cart(location);
+	int output = -1;
+	if (placable) {
+		output = rail_mgr.place_cart(location);
+
+		if (output != -1) {
+
+			item_info* temp = spawner->spawn_item(CART, location.x, location.y, location.z);
+
+			//yes I know that this is not the best, but it can be optimised latter
+			for (int i = 0; i < rail_mgr.carts.size(); i++) {
+				if (rail_mgr.carts[i] == output) {
+					rail_mgr.carts[i].cart_obj = temp;
+					std::cout << "linked the obj with teh cart" << std::endl;
+					break;
+				}
+			}
+		}
+		else {
+			std::cout << "railroad mgr failed to create a cartt object" << std::endl;
+		}
+	}
+	else {
+		std::cout << "fail to place cart" << std::endl;
+	}
+	return output;
+}
+
+bool scene::can_place_cart(loc<int>& location) {
+	return rail_mgr.can_place_cart(location);
+}
+
+void scene::toggle_cart(int id) {
+	rail_mgr.toggle_cart(id);
+}
+
+void scene::prin_rail_info() {
+	rail_mgr.print_info();
 }

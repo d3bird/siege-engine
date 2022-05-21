@@ -35,7 +35,6 @@ private:
 
 	void spawner_test();
 
-	void update_guis();
 
 	void create_blank_world();
 
@@ -52,7 +51,7 @@ private:
 	int end;
 	bool dir = false;
 	int speed = 5;
-	item_info* temp_cart = NULL;
+	//item_info* temp_cart = NULL;
 	world* testing_w;
 
 	//
@@ -61,5 +60,15 @@ private:
 	crane_manager crane_mgr;
 	int place_crane(const loc<int> &location, int height, int radius);
 	void toggle_crane(int id);
+
+	//everything needd to run the rail system
+	bool place_rail(loc<int>& location);
+	bool can_place_rail(loc<int>& location);
+	int place_cart(loc<int>& location);//returns the id of the cart
+	bool can_place_cart(loc<int>& location);
+	void toggle_cart(int id);
+	void prin_rail_info();
+	railRoad::rail_manager rail_mgr;
+
 };
 
