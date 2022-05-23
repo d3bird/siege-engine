@@ -1,0 +1,41 @@
+rewrite the world class 
+
+implement the rail system
+- need to fix the crashing
+
+fix the imgui to be easier to import outside the engine (and update it to the newest version)
+implement a system to use models with bones
+implement a system where the engine does not import models until the are needed
+integrate the roation object into the opengl engine
+add proper object selecting into the engine
+finish implementing the audio engine
+finish implementing the lighitng engine
+add shadows
+
+implement cranes for minining and lifting
+-need to determin the points to move the sectionsof the crane to
+
+implements and test the radio mangager
+implement large openening doors
+implement the belt system
+implement the machines/crafting stations
+implement the pathing for the people
+implement aircraft 
+implement sensornet
+implement cannon based weapons
+implement missle based weapons
+implement electrical system
+implement the furnace to burn items 
+implement a presure based pipe system
+add the people
+make people be able to accept jobs
+implement zones
+implement a stockpile system
+implement a farm zone
+add plant life
+make plant life farmible
+make plant life spread
+add the animal life
+make animals eat plants and reproduce
+add terrian generaton
+implement the moving platforms

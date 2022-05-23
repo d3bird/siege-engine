@@ -34,6 +34,8 @@ namespace railRoad {
 		bool remove_rail(loc<int> &location);
 
 		void print_info();
+		void print_rail_connections();
+		void check_for_bad_connections();
 
 		//since the carts are moving and not linked to any objects
 		//they are public to any class that is handling the objs

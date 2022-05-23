@@ -251,9 +251,56 @@ void scene::world_generation_test() {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
 	}
 
-	prin_rail_info();
+	//create a block of rails to test the connection
 
-	place_crane(loc<int>(13, 1, 13), 12, 10);
+
+	for (int x = 10; x < 20; x++) {
+		for (int z = 10; z < 20; z++) {
+			//if (z % 2 == 0) {
+				if (!place_rail(loc<int>(x, 1, z), true)) {
+					std::cout << "failed to place rail" << std::endl;
+				}
+		//	}
+			if (x == 10) {
+			//if (x == 10) {
+				cart_id = place_cart(loc<int>(x, 1, z));
+				if (cart_id != -1) {
+					toggle_cart(cart_id, 2* cart_id);
+				}
+				else {
+					std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
+				}
+			}
+		}
+	}
+
+	prin_rail_info();
+	rail_mgr.print_rail_connections();
+	rail_mgr.check_for_bad_connections();
+
+	place_crane(loc<int>(10, 1, 6), 12, 10);
+
+	//testing out the slanted rails
+
+	//for (int i = 0; i < 12; i++) {
+	//	if (!place_rail(loc<int>(1+i, 1, 0), false)) {
+	//		std::cout << "failed to place rail" << std::endl;
+	//	}
+
+	//	/*if (i == 11) {
+	//		cart_id = place_cart(loc<int>(1+i, 1, 0));
+	//		if (cart_id != -1) {
+	//			toggle_cart(cart_id, 2);
+	//		}
+	//		else {
+	//			std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
+	//		}
+	//	}*/
+
+	//}
+
+	//spawner->spawn_item(SLANT_RAIL, 0, 1, 0);
+	//spawner->spawn_item(HOPPER, 2, 1, 3);
 }
 
 void scene::key_press() {

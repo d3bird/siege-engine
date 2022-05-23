@@ -8,24 +8,26 @@ railRoad::rail::rail() {
 	location = loc<int>(-1, -1, -1);
 	connecttion1 = 0;
 	connecttion2 = 0;
-
+	type = STRAIGHT;
 	x_axais = true;
 }
 
-railRoad::rail::rail(int aID, int aX, int aY, int aZ, bool axias) {
+railRoad::rail::rail(int aID, int aX, int aY, int aZ, rail_type aType, bool axias) {
 	ID = aID;
 
 	location = loc<int>(aX, aY, aZ);
 	connecttion1 = 0;
 	connecttion2 = 0;
+	type = aType;
 	x_axais = axias;
 }
 
-railRoad::rail::rail(int aID, loc<int>& alocation, bool axias) {
+railRoad::rail::rail(int aID, loc<int>& alocation, rail_type aType, bool axias) {
 	location = alocation;
 	ID = aID;
 	connecttion1 = 0;
 	connecttion2 = 0;
+	type = aType;
 	x_axais = axias;
 }
 
@@ -51,29 +53,33 @@ bool  railRoad::rail::can_connect(rail* other, bool connect) {
 
 			loc<int> other_loc = other->get_loc();
 
+
 			//must be on the same axis
 			if (location.y != other_loc.y) {
 				return false;
 			}
 
 			//std::cout << other_loc.x << " == " << location.x << std::endl;
-		//	std::cout << other_loc.z << " == " << location.z << std::endl;
+			//std::cout << other_loc.z << " == " << location.z << std::endl;
 			if (x_axais) {
 
-				if (other_loc.x == location.x + 1) {
-					pos = 1;
-				}
-				else if (other_loc.x == location.x - 1) {
-					pos = 2;
+				if (other_loc.z == location.z) {
+					if (other_loc.x == location.x + 1) {
+						pos = 1;
+					}
+					else if (other_loc.x == location.x - 1) {
+						pos = 2;
+					}
 				}
 			}
 			else {
-
-				if (other_loc.z == location.z + 1) {
-					pos = 3;
-				}
-				else if (other_loc.z == location.z - 1) {
-					pos = 4;
+				if (other_loc.x == location.x) {
+					if (other_loc.z == location.z + 1) {
+						pos = 3;
+					}
+					else if (other_loc.z == location.z - 1) {
+						pos = 4;
+					}
 				}
 			}
 

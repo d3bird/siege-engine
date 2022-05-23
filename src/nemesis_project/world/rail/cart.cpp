@@ -39,11 +39,11 @@ void railRoad::cart::update(double deltaTime) {
 			change = deltaTime * velocity;
 		}
 		else {
-			std::cout << "the next connection1 was null" << std::endl;
-			print_info();
+			//std::cout << "the next connection1 was null" << std::endl;
+			//print_info();
 			//running = false;
 			//velocity = 0;
-			std::cout << "reversing direction" << std::endl;
+			//std::cout << "reversing direction" << std::endl;
 			velocity *= -1;
 			return;
 		}
@@ -56,11 +56,11 @@ void railRoad::cart::update(double deltaTime) {
 			change = deltaTime * velocity * -1;
 		}
 		else {
-			std::cout << "the next connection2 was null" << std::endl;
-			print_info();
+			//std::cout << "the next connection2 was null" << std::endl;
+			//print_info();
 			//running = false;
 			//velocity = 0;
-			std::cout << "reversing direction" << std::endl;
+			//std::cout << "reversing direction" << std::endl;
 			velocity *= -1;
 			return;
 		}

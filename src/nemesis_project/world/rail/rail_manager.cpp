@@ -95,7 +95,7 @@ bool railRoad::rail_manager::remove_rail(int x, int y, int z) {
 
 bool railRoad::rail_manager::add_rail(loc<int>& location, bool x_axis) {
 
-	rail* temp = new rail(rail_id, location, x_axis);
+	rail* temp = new rail(rail_id, location, railRoad::STRAIGHT, x_axis);
 
 	//std::cout << "rail_id: " << rail_id << std::endl;
 
@@ -166,4 +166,55 @@ void railRoad::rail_manager::print_info() {
 	for (int i = 0; i < rails.size(); i++) {
 		std::cout << "rail: "<<i<<" " << rails[i]->get_x()<<" " << rails[i]->get_z()<< std::endl;
 	}
+}
+
+
+void railRoad::rail_manager::check_for_bad_connections() {
+	int null = 0;
+	int wrong_axis = 0;
+	int too_far = 0;
+	int straight = 0;
+	for (int i = 0; i < rails.size(); i++) {
+		if (rails[i] == NULL) {
+			null++;
+		}
+		else {
+			if (rails[i]->get_type() == railRoad::STRAIGHT) {
+				straight++;
+				rail* con1 = rails[i]->get_connection1();
+				rail* con2 = rails[i]->get_connection2();
+
+				if (con1 != NULL) {
+					int x1 = con1->get_x();
+					int y1 = con1->get_y();
+					int z1 = con1->get_z();
+
+					int x0 = rails[i]->get_x();
+					int y0 = rails[i]->get_y();
+					int z0 = rails[i]->get_z();
+
+					if (rails[i]->get_axais() != con1->get_axais()) {
+						wrong_axis++;
+					}
+					else {
+
+						if (rails[i]->get_axais()) {
+
+						}
+						else {
+
+						}
+
+					}
+
+
+				}
+			}
+		}
+	}
+
+}
+
+void  railRoad::rail_manager::print_rail_connections() {
+
 }
