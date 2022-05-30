@@ -18,6 +18,9 @@ namespace railRoad {
 
 		loc<int> get_loc() { return location; }
 
+		loc<double> get_loc_array(int index);
+		int get_location_amount() { return location_amount; }
+
 		int get_ID() { return ID; }
 
 		void set_connection1(rail* con) { connecttion1 = con; }
@@ -36,14 +39,22 @@ namespace railRoad {
 
 	private:
 
+		bool straight_connection(rail* other, bool connect);
+		bool slanted_connection(rail* other, bool connect);
+
+
+		bool can_connect_point(rail* other, loc<int> location, int connection);
+
 		int ID;
 
 		loc<int> location;
-		//this is for the slants and curves 
-		loc<int> second_location;//if the rail has another endpoint
 
-		rail* connecttion1;//left up
-		rail* connecttion2;//right down
+		//this is for the slants and curves 
+		loc<double>* location_array;//if the rail has another endpoint
+		int location_amount;
+
+		rail* connecttion1;//left up     | bottom for slant
+		rail* connecttion2;//right down  | top for slant
 
 		//this determins what axais the rail is on
 		bool x_axais;

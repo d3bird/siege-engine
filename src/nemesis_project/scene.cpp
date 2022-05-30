@@ -213,7 +213,7 @@ void scene::world_generation_test() {
 
 	//create the rail at the bottom of the map
 	for (int i = 0; i < 40; i++) {
-		if (!place_rail(loc<int>(2 + i, 1, 3), true)) {
+		if (!place_rail(loc<int>(2 + i, 1, 3), true, railRoad::STRAIGHT)) {
 			std::cout << "failed to place rail" << std::endl;
 		}
 	}
@@ -233,7 +233,7 @@ void scene::world_generation_test() {
 	//create the rail going over top of the rail
 
 	for (int i = 0; i < 12; i++) {
-		if (!place_rail(loc<int>(6, 2, 1 + i), false)) {
+		if (!place_rail(loc<int>(6, 2, 1 + i), false, railRoad::STRAIGHT)) {
 			std::cout << "failed to place rail" << std::endl;
 		}
 		spawner->spawn_item(STONE_FLOOR, 6, 2, 1 + i);
@@ -257,7 +257,7 @@ void scene::world_generation_test() {
 	for (int x = 10; x < 20; x++) {
 		for (int z = 10; z < 20; z++) {
 			//if (z % 2 == 0) {
-				if (!place_rail(loc<int>(x, 1, z), true)) {
+				if (!place_rail(loc<int>(x, 1, z), true, railRoad::STRAIGHT)) {
 					std::cout << "failed to place rail" << std::endl;
 				}
 		//	}
@@ -274,32 +274,36 @@ void scene::world_generation_test() {
 		}
 	}
 
-	prin_rail_info();
-	rail_mgr.print_rail_connections();
-	rail_mgr.check_for_bad_connections();
 
-	place_crane(loc<int>(10, 1, 6), 12, 10);
 
 	//testing out the slanted rails
 
-	//for (int i = 0; i < 12; i++) {
-	//	if (!place_rail(loc<int>(1+i, 1, 0), false)) {
-	//		std::cout << "failed to place rail" << std::endl;
-	//	}
+	for (int i = 0; i < 12; i++) {
+		if (!place_rail(loc<int>(1+i, 1, 0), true, railRoad::STRAIGHT)) {
+			std::cout << "failed to place rail" << std::endl;
+		}
 
-	//	/*if (i == 11) {
-	//		cart_id = place_cart(loc<int>(1+i, 1, 0));
-	//		if (cart_id != -1) {
-	//			toggle_cart(cart_id, 2);
-	//		}
-	//		else {
-	//			std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
-	//		}
-	//	}*/
+		if (i == 11) {
+			cart_id = place_cart(loc<int>(1+i, 1, 0));
+			if (cart_id != -1) {
+				toggle_cart(cart_id, 7);
+			}
+			else {
+				std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
+			}
+		}
 
-	//}
+	}
 
-	//spawner->spawn_item(SLANT_RAIL, 0, 1, 0);
+	if (!place_rail(loc<int>(0, 1, 0), true, railRoad::SLANT)) {
+		std::cout << "failed to place slant rail" << std::endl;
+	}
+
+	prin_rail_info();
+	//rail_mgr.print_rail_connections();
+	//rail_mgr.check_for_bad_connections();
+
+	place_crane(loc<int>(10, 1, 6), 12, 10);
 	//spawner->spawn_item(HOPPER, 2, 1, 3);
 }
 
@@ -354,16 +358,37 @@ void scene::toggle_crane(int id) {
 }
 
 
-bool scene::place_rail(loc<int>& location,bool x_axis) {
+bool scene::place_rail(loc<int>& location,bool x_axis, railRoad::rail_type aType) {
 	bool output = can_place_rail(location);
 
 	if (output) {
-		item_info * temp =spawner->spawn_item(RAIL, location.x, location.y, location.z);
+		item_info* temp = NULL;
+
+		switch (aType)
+		{
+		case railRoad::CURVE:
+			std::cout << "there is no model for this rail" << std::endl;
+			break;
+		case railRoad::STRAIGHT:
+			temp = spawner->spawn_item(RAIL, location.x, location.y, location.z);
+			break;
+		case railRoad::SLANT:
+			temp = spawner->spawn_item(SLANT_RAIL, location.x, location.y, location.z);
+			break;
+		default:
+			std::cout << "there is no model for this rail" << std::endl;
+			break;
+		}
+
+		if (temp == NULL) {
+			return false;
+		}
+
 		if (!x_axis) {
 			temp->angle = 90;
 			updater->update_item(temp);
 		}
-		rail_mgr.add_rail(location, x_axis);
+		rail_mgr.add_rail(location, x_axis, aType);
 	}
 	return output;
 }

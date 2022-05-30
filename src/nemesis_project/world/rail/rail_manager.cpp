@@ -85,17 +85,17 @@ void  railRoad::rail_manager::set_cart_vel(int id, double velocity) {
 }
 
 
-bool railRoad::rail_manager::add_rail(int x, int y, int z, bool x_axis) {
-	return add_rail(loc<int>(x,y,z), x_axis);
+bool railRoad::rail_manager::add_rail(int x, int y, int z, bool x_axis, rail_type aType) {
+	return add_rail(loc<int>(x,y,z), x_axis, aType);
 }
 
 bool railRoad::rail_manager::remove_rail(int x, int y, int z) {
 	return remove_rail(loc<int>(x, y, z));;
 }
 
-bool railRoad::rail_manager::add_rail(loc<int>& location, bool x_axis) {
+bool railRoad::rail_manager::add_rail(loc<int>& location, bool x_axis, rail_type aType) {
 
-	rail* temp = new rail(rail_id, location, railRoad::STRAIGHT, x_axis);
+	rail* temp = new rail(rail_id, location, aType, x_axis);
 
 	//std::cout << "rail_id: " << rail_id << std::endl;
 
@@ -137,7 +137,8 @@ void railRoad::rail_manager::print_info() {
 	int connection1 = 0;
 	int connection2 = 0;
 	int connection0 = 0;
-
+	int straight = 0;
+	int slant = 0;
 	for (int i = 0; i < rails.size(); i++) {
 			int temp = 0;
 		if (rails[i]->get_connection1() != NULL) {
@@ -155,11 +156,33 @@ void railRoad::rail_manager::print_info() {
 		else {
 			connection0++;
 		}
-	}
 
+		switch (rails[i]->get_type())
+		{
+		case railRoad::STRAIGHT:
+			straight++;
+			break;
+		case railRoad::SLANT:
+			slant++;
+			break;
+		default:
+			std::cout << "this is a unknown connection" << std::endl;
+			break;
+		}
+	}
+	std::cout << "straight rails: " << straight << std::endl;
+	std::cout << "slanted rails: " << slant << std::endl;
 	std::cout << "0 connection:" << connection0 << std::endl;
 	std::cout << "1 connection:" << connection1 << std::endl;
 	std::cout << "2 connection:" << connection2 << std::endl;
+
+	//print out the second loc for the slant rail
+	for (int i = 0; i < rails.size(); i++) {
+		if (rails[i]->get_type() == railRoad::SLANT) {
+			std::cout << "slanted rail: " << i << " " << rails[i]->get_loc_array(1).x
+				<< " " << rails[i]->get_loc_array(1).y << " " << rails[i]->get_loc_array(1).z << std::endl;
+		}
+	}
 
 	return;
 	//print all the rails

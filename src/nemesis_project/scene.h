@@ -62,7 +62,7 @@ private:
 	void toggle_crane(int id);
 
 	//everything needd to run the rail system
-	bool place_rail(loc<int>& location, bool x_axis);
+	bool place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType);
 	bool can_place_rail(loc<int>& location);
 	int place_cart(loc<int>& location);//returns the id of the cart
 	int can_place_cart(loc<int>& location);

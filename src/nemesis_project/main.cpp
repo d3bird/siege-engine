@@ -79,6 +79,9 @@ int main() {
     Time = API->get_timing();
     deltaTime = Time->get_time_change_static();
 
+    glm::vec3 cam_start = glm::vec3(20, 10, -20);
+    camera->set_pos(&cam_start);
+
 
     //load the test application scene
     scene testing;

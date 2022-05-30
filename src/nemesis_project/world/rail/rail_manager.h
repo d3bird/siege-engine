@@ -27,10 +27,10 @@ namespace railRoad {
 		void set_cart_vel(int id, double velocity);
 
 
-		bool add_rail(int x, int y, int z, bool x_axis);
+		bool add_rail(int x, int y, int z, bool x_axis, rail_type aType);
 		bool remove_rail(int x, int y, int z);
 
-		bool add_rail(loc<int> &location, bool x_axis);
+		bool add_rail(loc<int> &location, bool x_axis, rail_type aType);
 		bool remove_rail(loc<int> &location);
 
 		void print_info();
