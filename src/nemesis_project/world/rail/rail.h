@@ -17,7 +17,8 @@ namespace railRoad {
 		int get_z() { return location.z; }
 
 		loc<int> get_loc() { return location; }
-
+		int get_rotation() { return rotation; }
+		void set_rotation(int rot) { rotation = rot; }
 		loc<double> get_loc_array(int index);
 		int get_location_amount() { return location_amount; }
 
@@ -42,6 +43,7 @@ namespace railRoad {
 		bool straight_connection(rail* other, bool connect);
 		bool slanted_connection(rail* other, bool connect);
 
+		int rotation;// what angle the section is set to
 
 		bool can_connect_point(rail* other, loc<int> location, int connection);
 
