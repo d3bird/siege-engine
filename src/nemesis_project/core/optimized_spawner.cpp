@@ -205,8 +205,8 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("TILE_FLOOR", paths.get_objs_loc() + "terrian/tile_floor.obj", buffer_size, TILE_FLOOR);
 	//table["TILE_FLOOR"] = obj_temp;
 
-	//obj_temp = OBJM->add_model("AIRCRAFT", paths.get_objs_loc() + "aircraft/aircraft.obj", buffer_size, AIRCRAFT_T);
-	obj_temp = OBJM->add_model("AIRCRAFT", paths.get_objs_loc() + "aircraft/bomber.obj", buffer_size, AIRCRAFT_T);
+	obj_temp = OBJM->add_model("AIRCRAFT", paths.get_objs_loc() + "aircraft/aircraft.obj", buffer_size, AIRCRAFT_T);
+	obj_temp = OBJM->add_model("BOMBER", paths.get_objs_loc() + "aircraft/bomber.obj", buffer_size, BOMBER);
 	obj_temp = OBJM->add_model("AIRCRAFT_LANDING_PAD", paths.get_objs_loc() + "aircraft/air_tile.obj", buffer_size, AIRCRAFT_LANDING_PAD);
 
 
@@ -218,6 +218,7 @@ void optimized_spawner::import_models() {
 	
 	obj_temp = OBJM->add_model("RAIL", paths.get_objs_loc() + "rail/rail.obj", buffer_size, RAIL);
 	obj_temp = OBJM->add_model("SLANT_RAIL", paths.get_objs_loc() + "rail/rail_splant.obj", buffer_size, SLANT_RAIL);
+	obj_temp = OBJM->add_model("CURVE_RAIL", paths.get_objs_loc() + "rail/rail_curve.obj", buffer_size, CURVE_RAIL);
 	obj_temp = OBJM->add_model("HOPPER", paths.get_objs_loc() + "rail/hopper.obj", buffer_size, HOPPER);
 	obj_temp = OBJM->add_model("CART", paths.get_objs_loc() + "rail/cart.obj", buffer_size, CART);
 	obj_temp = OBJM->add_model("WHEELS", paths.get_objs_loc() + "rail/wheels.obj", buffer_size, CART_WHEELS);

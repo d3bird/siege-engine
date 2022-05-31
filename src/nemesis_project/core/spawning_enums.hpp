@@ -19,7 +19,7 @@ enum item_type {
 	
 	//aircraft
 	CARRY_ALL_T, LANDING_PAD,
-	AIRCRAFT_T, AIRCRAFT_LANDING_PAD,
+	AIRCRAFT_T, AIRCRAFT_LANDING_PAD, BOMBER,
 
 	//radio stuff
 

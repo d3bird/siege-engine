@@ -204,10 +204,65 @@ void scene::world_generation_test() {
 
 	testing_w = pipe.create_world(test, updater);
 
+	//spawn some trees 
+
+	spawner->spawn_item(CUBE_TREE_T, 8, 1, 5);
+
+	//code to test out the aircraft
+
 	aircraft_manager* AirContorl = new aircraft_manager(spawner);
+
+	//fighter landing pad
+	spawner->spawn_item(AIRCRAFT_LANDING_PAD, 4, 2, 5);
+	for (int x = 0; x < 3; x++) {
+		for (int z = 0; z < 3; z++) {
+			spawner->spawn_item(CONCRETE_WALL, 3 + x, 1, 4 + z);
+		}
+	}
+
+	//BOMBER landing pad
+	spawner->spawn_item(AIRCRAFT_LANDING_PAD, 20, 2, 7);
+	spawner->spawn_item(BOMBER, 20, 2, 7);
+	for (int x = 0; x < 3; x++) {
+		for (int z = 0; z < 3; z++) {
+			spawner->spawn_item(CONCRETE_WALL, 19 + x, 1, 6 + z);
+		}
+	}
 
 	loc<int> start_loc(5, 5, 5);
 	AirContorl->start_animation_sim(start_loc);
+
+	//code to test out the radio systems (just models for now)
+	int x_off = 0;
+	int z_off = 10;
+	spawner->spawn_item(BROADCAST_TOWER, 2, 1, 5 + z_off);
+	spawner->spawn_item(RADIO_CONSOLE, 5, 1, 2 + z_off);
+	spawner->spawn_item(WALL_SPEAKER, 8, 1, 1 + z_off);
+	spawner->spawn_item(SUPPORT, 9, 1, 1 + z_off);
+	spawner->spawn_item(SUPPORT, 9, 2, 1 + z_off);
+	spawner->spawn_item(SUPPORT, 9, 3, 1 + z_off);
+	spawner->spawn_item(SUPPORT, 9, 4, 1 + z_off);
+	spawner->spawn_item(SPEAKER_TOP, 9, 5, 1 + z_off);
+
+	//spawn the human for scale
+
+	spawner->spawn_item(HEAD_T, 3, 1, -1 + z_off);
+	spawner->spawn_item(BODY_T, 3, 1, -1 + z_off);
+	spawner->spawn_item(LEFT_LEG, 3, 1, -1 + z_off);
+	spawner->spawn_item(RIGHT_LEG, 3, 1, -1 + z_off);
+	spawner->spawn_item(LEFT_ARM, 3, 1, -1 + z_off);
+	spawner->spawn_item(RIGHT_ARM, 3, 1, -1 + z_off);
+
+
+	//code to test out the weapon system
+	spawner->spawn_item(ROATING_TURRET, 2, 1, 9 + z_off);
+	spawner->spawn_item(TURRET_BASE, 2, 1, 9 + z_off);
+	spawner->spawn_item(SAM_ATTACH, 2, 1, 9 + z_off);
+	spawner->spawn_item(SMALL_MISSLE, 3, 1, 9 + z_off);
+	spawner->spawn_item(SMALL_MISSLE, 4, 1, 9 + z_off);
+
+
+	//code to test out the rails
 
 	rail_mgr = railRoad::rail_manager(updater);
 
@@ -243,6 +298,30 @@ void scene::world_generation_test() {
 
 	}
 
+
+	if (!place_rail(loc<int>(12, 1, 1), true, railRoad::STRAIGHT)) {
+	}
+
+	cart_id = place_cart(loc<int>(12, 1, 1));
+	if (cart_id != -1) {
+		toggle_cart(cart_id, 25);
+	}
+	else {
+		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
+	}
+
+	if (!place_rail(loc<int>(11, 1, 1), true, railRoad::STRAIGHT)) {
+	}
+
+
+	if (!place_rail(loc<int>(8, 2, 1), true, railRoad::STRAIGHT)) {
+		std::cout << "failed to place slant rail" << std::endl;
+	}
+
+if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
+		std::cout << "failed to place slant rail" << std::endl;
+	}
+
 	cart_id = place_cart(loc<int>(6, 2, 1));
 	if (cart_id != -1) {
 		toggle_cart(cart_id, 2);
@@ -274,8 +353,6 @@ void scene::world_generation_test() {
 		}
 	}
 
-
-
 	//testing out the slanted rails
 
 	for (int i = 0; i < 12; i++) {
@@ -299,11 +376,54 @@ void scene::world_generation_test() {
 		std::cout << "failed to place slant rail" << std::endl;
 	}
 
+	if (!place_rail(loc<int>(3, 1, 7), true, railRoad::CURVE)) {
+		std::cout << "failed to place curve rail" << std::endl;
+	}
+
+	place_rail(loc<int>(3, 1, 7), true, railRoad::STRAIGHT);
+	place_rail(loc<int>(4, 1, 7), true, railRoad::STRAIGHT);
+	place_rail(loc<int>(5, 1, 7), true, railRoad::STRAIGHT);
+
+	place_rail(loc<int>(1, 1, 4), false, railRoad::STRAIGHT);
+	place_rail(loc<int>(1, 1, 3), false, railRoad::STRAIGHT);
+	place_rail(loc<int>(1, 1, 5), false, railRoad::STRAIGHT);
+
+	cart_id = place_cart(loc<int>(1, 1, 4));
+	if (cart_id != -1) {
+		toggle_cart(cart_id, 5);
+	}
+	else {
+		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
+	}
+
+	cart_id = place_cart(loc<int>(3, 1, 7));
+	if (cart_id != -1) {
+		toggle_cart(cart_id, 9);
+	}
+	else {
+		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
+	}
+
+	spawner->spawn_item(HOPPER, 6, 2, -1 + z_off);
+	spawner->spawn_item(DIRT_WALL, 7, 1, -2 + z_off);
+	spawner->spawn_item(DIRT_WALL, 7, 1, 0 + z_off);
+	spawner->spawn_item(DIRT_WALL, 5, 1, -2 + z_off);
+	spawner->spawn_item(DIRT_WALL, 5, 1, 0 + z_off);
+
+	spawner->spawn_item(CONCRETE_FLOOR, 7, 2, -2 + z_off);
+	spawner->spawn_item(CONCRETE_FLOOR, 7, 2, 0 + z_off);
+	spawner->spawn_item(CONCRETE_FLOOR, 5, 2, -2 + z_off);
+	spawner->spawn_item(CONCRETE_FLOOR, 5, 2, 0 + z_off);
+
 	prin_rail_info();
 	//rail_mgr.print_rail_connections();
 	//rail_mgr.check_for_bad_connections();
 
-	place_crane(loc<int>(10, 1, 6), 12, 10);
+	//code to test out the cranes
+
+	int new_crane = place_crane(loc<int>(10, 1, 6), 12, 10);
+	toggle_crane(new_crane);
+
 	//spawner->spawn_item(HOPPER, 2, 1, 3);
 }
 
@@ -334,11 +454,11 @@ int scene::place_crane(const loc<int> &location, int height, int radius) {
 
 	//make the arm
 	for (int i = location.x - 1; i < radius + location.x - 1; i++) {
-		temp = spawner->spawn_item(CUBE_T, i, location.y + height - 1, location.z);
+		temp = spawner->spawn_item(CUBE_T, i, location.y + height - 2, location.z);
 		if (temp != NULL) {
 			crane::crane_sect new_sect;
 			new_sect.obj = temp;
-			new_crane->arm.push_back(new_sect);
+			new_crane->arm.push_back(temp);
 		}
 	}
 
@@ -352,9 +472,7 @@ int scene::place_crane(const loc<int> &location, int height, int radius) {
 
 
 void scene::toggle_crane(int id) {
-
-
-
+	crane_mgr.toggle_crane(id);
 }
 
 
@@ -367,7 +485,8 @@ bool scene::place_rail(loc<int>& location,bool x_axis, railRoad::rail_type aType
 		switch (aType)
 		{
 		case railRoad::CURVE:
-			std::cout << "there is no model for this rail" << std::endl;
+			temp = spawner->spawn_item(CURVE_RAIL, location.x, location.y, location.z);
+
 			break;
 		case railRoad::STRAIGHT:
 			temp = spawner->spawn_item(RAIL, location.x, location.y, location.z);
