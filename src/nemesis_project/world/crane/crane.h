@@ -9,8 +9,9 @@ class crane
 {
 public:
 	crane();
-	crane(int heigh, int radiu, int id);
+	crane(int heigh, int radiu, loc<int>location, int id);
 	~crane();
+
 
 
 	int get_ID() { return ID; }
@@ -18,13 +19,15 @@ public:
 	int get_height() { return height; }
 	int get_radius() { return radius; }
 
+
 	bool is_running() { return running; }
 	bool is_aproaching_dest() { return aproaching_dest; }
 
 	void set_running(bool run) { running = run; }
+	void set_aproaching_dest(bool dest) { aproaching_dest = dest; }
 
 	void set_dest(const loc<int>& aDest);
-	loc<int> get_destination() { return dest; }
+	//loc<int> get_destination() { return dest; }
 
 	void update(double detlaTime);
 
@@ -39,7 +42,7 @@ public:
 	};
 
 	std::vector<item_info*> base;
-	std::vector<crane_sect> arm;
+	std::vector<item_info*> arm;
 
 private:
 
@@ -48,5 +51,10 @@ private:
 	int radius;
 	bool running;
 	bool aproaching_dest;
-	loc<int>dest;
+	loc<int>base_loc;
+	loc<int>arm_loc;
+
+	float current_angle;
+	float destination_angle;
+	float rot_speed;
 };

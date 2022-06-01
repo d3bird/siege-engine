@@ -3,7 +3,7 @@
 #include "world/generation/world_generation.h"
 #include "world/generation/city_generation.h"
 
-scene::scene(): rail_mgr(NULL) {
+scene::scene(): crane_mgr(NULL), rail_mgr(NULL) {
 	API = NULL;
 	engine = NULL;
 	spawner = NULL;
@@ -203,6 +203,9 @@ void scene::world_generation_test() {
 	world_gen_settings* test = pipe.flat_land_settings();
 
 	testing_w = pipe.create_world(test, updater);
+
+	//creating managers
+	crane_mgr = crane_manager(updater);
 
 	//spawn some trees 
 
@@ -438,7 +441,7 @@ int scene::place_crane(const loc<int> &location, int height, int radius) {
 
 	std::cout << height << " , " << radius << std::endl;
 
-	crane* new_crane = crane_mgr.create_crane(height, radius);
+	crane* new_crane = crane_mgr.create_crane(location, height, radius);
 	if (new_crane == NULL) {
 		std::cout << "failed creating crane" << std::endl;
 		return output;
@@ -462,7 +465,8 @@ int scene::place_crane(const loc<int> &location, int height, int radius) {
 		}
 	}
 
-
+	new_crane->set_running(true);
+	new_crane->set_aproaching_dest(true);
 	new_crane->print_info();
 
 	std::cout << "done creating crane" << std::endl;
