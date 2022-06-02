@@ -45,6 +45,8 @@ private:
 
 	void world_generation_test();
 
+	void show_crane_area_test();
+	bool running_tests = false;
 
 	//misc vars
 	int start;
@@ -60,6 +62,7 @@ private:
 	crane_manager crane_mgr;
 	int place_crane(const loc<int> &location, int height, int radius);
 	void toggle_crane(int id);
+	crane* get_crane(int id);
 
 	//everything needd to run the rail system
 	bool place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType);

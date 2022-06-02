@@ -15,6 +15,12 @@ scene::~scene(){
 }
 
 void scene::update(double deltaTime) {
+
+	if (running_tests) {
+
+		return;
+	}
+
 	worlds->update(deltaTime);
 	crane_mgr.update(deltaTime);
 
@@ -68,10 +74,12 @@ void scene::init(engine_api* api) {
 
 	//create_blank_world();
 	//aircraft_test();
-	world_generation_test();
+
 	//radio_test();
 	//spawner_test();
+	running_tests = true;
 
+	world_generation_test();
 
 	std::cout << "done scene init" << std::endl;
 
@@ -196,6 +204,20 @@ void scene::radio_test() {
 	}
 }
 
+void scene::show_crane_area_test() {
+
+	crane_mgr = crane_manager(updater);
+
+	int output = place_crane(loc<int>(10, 2, 10), 7, 7);
+
+	std::vector<loc<int> > list =crane_mgr.get_converate(0);
+
+	for (int i = 0; i < list.size(); i++) {
+		spawner->spawn_item(CUBE_T, list[i].x, list[i].y, list[i].z);
+	}
+
+}
+
 void scene::world_generation_test() {
 
 	world_generation pipe(spawner);
@@ -207,6 +229,10 @@ void scene::world_generation_test() {
 	//creating managers
 	crane_mgr = crane_manager(updater);
 
+	if (running_tests) {
+		show_crane_area_test();
+		return;
+	}
 	//spawn some trees 
 
 	spawner->spawn_item(CUBE_TREE_T, 8, 1, 5);
@@ -459,10 +485,14 @@ int scene::place_crane(const loc<int> &location, int height, int radius) {
 	for (int i = location.x - 1; i < radius + location.x - 1; i++) {
 		temp = spawner->spawn_item(CUBE_T, i, location.y + height - 2, location.z);
 		if (temp != NULL) {
-			crane::crane_sect new_sect;
-			new_sect.obj = temp;
 			new_crane->arm.push_back(temp);
 		}
+	}
+
+	//make the attachment
+	temp = spawner->spawn_item(CUBE_T, 0, location.y + height - 2, location.z);
+	if (temp != NULL) {
+		new_crane->attachment =(temp);
 	}
 
 	new_crane->set_running(true);
@@ -477,6 +507,11 @@ int scene::place_crane(const loc<int> &location, int height, int radius) {
 
 void scene::toggle_crane(int id) {
 	crane_mgr.toggle_crane(id);
+}
+
+
+crane* scene::get_crane(int id) {
+	return crane_mgr.get_crane(id);
 }
 
 

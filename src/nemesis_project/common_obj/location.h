@@ -18,6 +18,7 @@ public:
 	int z;
 
 	bool operator==(const loc<int>& other);
+	bool operator!=(const loc<int>& other);
 	void  operator=(const loc<int>& other);
 
 
@@ -37,6 +38,7 @@ public:
 	double z;
 
 	bool operator==(const loc<double>& other);
+	bool operator!=(const loc<double>& other);
 	void  operator=(const loc<double>& other);
 
 private:
@@ -55,6 +57,7 @@ public:
 	float z;
 
 	bool operator==(const loc<float>& other);
+	bool operator!=(const loc<float>& other);
 	void  operator=(const loc<float>& other);
 
 private:

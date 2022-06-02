@@ -18,7 +18,15 @@ class crane_manager {
 	void update(double detlaTime);
 	void toggle_crane(int id);
 
+	crane* get_crane(int id);
+
+
+	std::vector<loc<int> >  get_converate(int id, int y = 1);
+
 	private:
+
+		void create_rand_dest(crane* input);
+
 		motion_manger* updater;
 
 	//	std::unordered_map<loc<int>, crane> cranes;

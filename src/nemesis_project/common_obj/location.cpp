@@ -22,6 +22,12 @@ bool loc<int>::operator==(const loc<int>& other) {
 		z == other.z);
 }
 
+bool loc<int>::operator!=(const loc<int>& other) {
+	return (x != other.x ||
+		y != other.y ||
+		z != other.z);
+}
+
 void  loc<int>::operator=(const loc<int>& other) {
 	x = other.x;
 	y = other.y;
@@ -50,6 +56,12 @@ bool loc<double>::operator==(const loc<double>& other) {
 		z == other.z);
 }
 
+bool loc<double>::operator!=(const loc<double>& other) {
+	return (x != other.x ||
+		y != other.y ||
+		z != other.z);
+}
+
 void  loc<double>::operator=(const loc<double>& other) {
 	x = other.x;
 	y = other.y;
@@ -76,6 +88,12 @@ bool loc<float>::operator==(const loc<float>& other) {
 	return (x == other.x &&
 		y == other.y &&
 		z == other.z);
+}
+
+bool loc<float>::operator!=(const loc<float>& other) {
+	return (x != other.x ||
+		y != other.y ||
+		z != other.z);
 }
 
 void  loc<float>::operator=(const loc<float>& other) {
