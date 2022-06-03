@@ -9,6 +9,16 @@ find . -name '*.hpp' | xargs wc -l | grep total
 echo "lines in .cpp"
 find . -name '*.cpp' | xargs wc -l | grep total
 echo
+echo "lines of code in the engine"
+echo
+cd ../engine_open_gl
+echo "lines in .h"
+find . -name '*.h' | xargs wc -l | grep total
+echo "lines in .hpp"
+find . -name '*.hpp' | xargs wc -l | grep total
+echo "lines in .cpp"
+find . -name '*.cpp' | xargs wc -l | grep total
+echo
 echo "lines of code in the entire project"
 echo
 cd ../
