@@ -27,5 +27,12 @@ enum item_type {
 	WALL_SPEAKER, SUPPORT, SPEAKER_TOP,
 	RAIL, CART, CART_WHEELS, HOPPER, SLANT_RAIL, CURVE_RAIL,
 
-	CRANE_B
+	//crane stuff
+
+	CRANE_B,
+
+	//ground vehicles
+	TRUCK3, HEADLIGHTS, FLW, FRW, BLW, BRW
+
+
 };

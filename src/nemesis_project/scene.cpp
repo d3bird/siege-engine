@@ -3,7 +3,7 @@
 #include "world/generation/world_generation.h"
 #include "world/generation/city_generation.h"
 
-scene::scene(): crane_mgr(NULL), rail_mgr(NULL) {
+scene::scene(): crane_mgr(NULL), rail_mgr(NULL), vehicle_mgr(NULL) {
 	API = NULL;
 	engine = NULL;
 	spawner = NULL;
@@ -77,7 +77,7 @@ void scene::init(engine_api* api) {
 
 	//radio_test();
 	//spawner_test();
-	running_tests = true;
+	running_tests = false;
 
 	world_generation_test();
 
@@ -454,6 +454,17 @@ if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 	toggle_crane(new_crane);
 
 	//spawner->spawn_item(HOPPER, 2, 1, 3);
+
+
+	//the testing code for the vehicles
+
+	vehicle_mgr = vehicle_manager(updater);
+
+	place_truck(loc<int>(2, 1, 9));
+	place_truck(loc<int>(0, 1, 9));
+	place_truck(loc<int>(2, 1, 11));
+	place_truck(loc<int>( 0, 1, 11));
+
 }
 
 void scene::key_press() {
@@ -628,4 +639,20 @@ void scene::toggle_cart(int id, double velocity) {
 
 void scene::prin_rail_info() {
 	rail_mgr.print_info();
+}
+
+int scene::place_truck(loc<int>& spawn) {
+	int output = vehicle_mgr.create_truck( spawn);
+	vehicle_mgr.all_vehicles[0]->body = spawner->spawn_item(TRUCK3, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->headlights = spawner->spawn_item(HEADLIGHTS, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->FLW = spawner->spawn_item(FLW, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->FRW = spawner->spawn_item(FRW, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->BLW = spawner->spawn_item(BLW, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->BRW = spawner->spawn_item(BRW, spawn.x, spawn.y, spawn.z);
+	
+	return output;
+}
+
+bool scene::set_truck_dest(int id, loc<int>& spawn) {
+	return vehicle_mgr.drive_truck(id, spawn);
 }

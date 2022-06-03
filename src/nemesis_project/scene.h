@@ -7,6 +7,8 @@
 
 #include "testing/world_test.h"
 
+#include "vehicles/vehicle_manager.h"
+
 class scene
 {
 public:
@@ -73,5 +75,9 @@ private:
 	void prin_rail_info();
 	railRoad::rail_manager rail_mgr;
 
+	//everything to do with the ground vehicle system
+	vehicle_manager vehicle_mgr;
+	int place_truck(loc<int> & spawn);
+	bool set_truck_dest(int id, loc<int>& spawn);
 };
 
