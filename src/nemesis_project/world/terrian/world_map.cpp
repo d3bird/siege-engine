@@ -4,18 +4,30 @@
 #include <cmath>
 
 map_data::map_data(){
-
+	x_size = -1;
+	y_size = -1;
+	z_size = -1;
+	world_map = NULL;
 }
 
 map_data::~map_data(){
 
 }
 
+bool map_data::has_been_inited() {
+	return (x_size != -1 &&
+		y_size != -1 &&
+		z_size != -1 &&
+world_map != NULL);
+
+}
+
+
 /*
 * This function returns the which chunk, then the local cords for that chunck
 * returns -1 if the funct fails
 */
- std::pair < loc<int>, loc<int> > map_data::get_map_local_cords(loc<int>& cords) {
+std::pair < loc<int>, loc<int> > map_data::get_map_local_cords(const loc<int>& cords) {
 	std::pair < loc<int>, loc<int> > output;
 
 	//std::cout << "finding loc at these cords" << std::endl;
@@ -67,4 +79,102 @@ map_data::~map_data(){
 	}
 
 	return output;
+}
+
+bool map_data::can_place_ground_obj(const loc<int>& cords, bool requires_floor) {
+	std::pair < loc<int>, loc<int> > temp = get_map_local_cords(cords);
+	return can_place_ground_obj(temp.first, temp.second, requires_floor);
+}
+
+bool map_data::can_place_ground_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, bool requires_floor) {
+
+	if (world_map == NULL) {
+		std::cout << " the world map was null" << std::endl;
+		return false;
+	}
+
+	bool output = is_valid_locaL_cords(chunk_cords, local_cords);
+
+	if (requires_floor) {
+		output = output&& !is_cords_floor_NULL(chunk_cords, local_cords);
+	}
+
+	return output;
+}
+
+bool map_data::attach_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground) {
+	bool output = false;
+
+	if (floor || ground) {
+
+		std::pair < loc<int>, loc<int> > temp = get_map_local_cords(cords);
+		output = is_valid_locaL_cords(temp.first, temp.second);
+		if (output) {
+			if (ground) {
+				if (is_cords_ground_NULL(temp.first, temp.second)) {
+					set_ground_obj(temp.first, temp.second, obj);
+				}
+			}
+			if (floor) {
+				if (is_cords_floor_NULL(temp.first, temp.second)) {
+					set_floor_obj(temp.first, temp.second, obj);
+				}
+			}
+		}
+		else {
+			std::cout << "not valid cords" << std::endl;
+		}
+	}
+
+	return output;
+}
+
+
+bool map_data::is_valid_chunck(const loc<int>& cords) {
+	return ((cords.x >= 0 && cords.x < x_size) &&
+		(cords.y >= 0 && cords.y < y_size) &&
+		(cords.z >= 0 && cords.z < z_size));
+}
+
+bool map_data::is_valid_locaL_cords(const loc<int>& chunk_cords, const loc<int>& local_cords) {
+	bool output = is_valid_chunck(chunk_cords);
+
+	if (output) {
+		output = world_map[chunk_cords.y][chunk_cords.x][chunk_cords.z].is_inbounds_of_map_local
+		(local_cords.x, local_cords.y, local_cords.z);
+	}
+
+	return output;
+}
+
+bool map_data::is_cords_ground_NULL(const loc<int>& chunk_cords, const loc<int>& local_cords) {
+	bool output = false;
+
+	if(world_map[chunk_cords.y][chunk_cords.x][chunk_cords.z].
+		map[local_cords.y][local_cords.x][local_cords.z].ground == NULL){
+		output = true;
+	}
+
+	 return output;
+ }
+
+bool map_data::is_cords_floor_NULL(const loc<int>& chunk_cords, const loc<int>& local_cords) {
+	bool output = false;
+
+	if (world_map[chunk_cords.y][chunk_cords.x][chunk_cords.z].
+		map[local_cords.y][local_cords.x][local_cords.z].floor == NULL) {
+		output = true;
+	}
+
+	return output;
+}
+
+inline void map_data::set_floor_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, item_info* obj) {
+	world_map[chunk_cords.y][chunk_cords.x][chunk_cords.z].
+		map[local_cords.y][local_cords.x][local_cords.z].floor = obj;
+}
+
+inline void map_data::set_ground_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, item_info* obj) {
+	world_map[chunk_cords.y][chunk_cords.x][chunk_cords.z].
+		map[local_cords.y][local_cords.x][local_cords.z].floor = obj;
 }
