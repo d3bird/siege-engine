@@ -22,7 +22,7 @@ void object_manger::draw() {
 	for (int q = 0; q < items.size(); q++) {
 
 		//std::cout << q << " out of " << items.size()<< std::endl;//useful to findout which model is breaking
-		if (items[q]->draw && q != 15) {
+		if (items[q]->draw&& items[q]->amount != 0) {
 			glm::mat4* matrix_temp = items[q]->modelMatrices;
 			glBindBuffer(GL_ARRAY_BUFFER, items[q]->buffer);
 			if (items[q]->updatemats) {
