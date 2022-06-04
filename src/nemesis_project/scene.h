@@ -9,6 +9,8 @@
 
 #include "vehicles/vehicle_manager.h"
 
+#include "environment/environment.h"
+
 class scene
 {
 public:
@@ -58,13 +60,7 @@ private:
 	//item_info* temp_cart = NULL;
 	world* testing_w;
 
-	//
-
-	//everything need to test the crane manager
-	crane_manager crane_mgr;
-	int place_crane(const loc<int> &location, int height, int radius);
-	void toggle_crane(int id);
-	crane* get_crane(int id);
+	environment* env;
 
 	//everything needd to run the rail system
 	bool place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType);

@@ -3,11 +3,12 @@
 #include "world/generation/world_generation.h"
 #include "world/generation/city_generation.h"
 
-scene::scene(): crane_mgr(NULL), rail_mgr(NULL), vehicle_mgr(NULL) {
+scene::scene(): rail_mgr(NULL), vehicle_mgr(NULL) {
 	API = NULL;
 	engine = NULL;
 	spawner = NULL;
 	testing_w = NULL;
+	env = NULL;
 }
 
 scene::~scene(){
@@ -21,9 +22,9 @@ void scene::update(double deltaTime) {
 		return;
 	}
 
-	worlds->update(deltaTime);
-	crane_mgr.update(deltaTime);
-
+	//worlds->update(deltaTime);
+	//crane_mgr.update(deltaTime);
+	env->update(deltaTime);
 	rail_mgr.update(deltaTime);
 
 	/*if (temp_cart != NULL) {
@@ -206,15 +207,15 @@ void scene::radio_test() {
 
 void scene::show_crane_area_test() {
 
-	crane_mgr = crane_manager(updater);
+	//crane_mgr = crane_manager(updater);
 
-	int output = place_crane(loc<int>(10, 2, 10), 7, 7);
+	//int output = place_crane(loc<int>(10, 2, 10), 7, 7);
 
-	std::vector<loc<int> > list =crane_mgr.get_converate(0);
+	//std::vector<loc<int> > list =crane_mgr.get_converate(0);
 
-	for (int i = 0; i < list.size(); i++) {
-		spawner->spawn_item(CUBE_T, list[i].x, list[i].y, list[i].z);
-	}
+	//for (int i = 0; i < list.size(); i++) {
+	//	spawner->spawn_item(CUBE_T, list[i].x, list[i].y, list[i].z);
+	//}
 
 }
 
@@ -226,8 +227,10 @@ void scene::world_generation_test() {
 
 	testing_w = pipe.create_world(test, updater);
 
+	env = new environment(spawner, updater);
+
 	//creating managers
-	crane_mgr = crane_manager(updater);
+	//crane_mgr = crane_manager(updater);
 
 	if (running_tests) {
 		show_crane_area_test();
@@ -450,8 +453,8 @@ if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 
 	//code to test out the cranes
 
-	int new_crane = place_crane(loc<int>(10, 1, 6), 12, 10);
-	toggle_crane(new_crane);
+	int new_crane = env->place_crane(loc<int>(10, 1, 6), 12, 10);
+	env->toggle_crane(new_crane);
 
 	//spawner->spawn_item(HOPPER, 2, 1, 3);
 
@@ -469,62 +472,6 @@ if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 
 void scene::key_press() {
 }
-
-int scene::place_crane(const loc<int> &location, int height, int radius) {
-	int output = -1;
-	item_info* temp = 0;
-
-	std::cout << "creating crane" << std::endl;
-
-	std::cout << height << " , " << radius << std::endl;
-
-	crane* new_crane = crane_mgr.create_crane(location, height, radius);
-	if (new_crane == NULL) {
-		std::cout << "failed creating crane" << std::endl;
-		return output;
-	}
-
-	//make the central pillar
-	for (int i = 0; i < height; i++) {
-		temp = spawner->spawn_item(CRANE_B, location.x, location.y + i, location.z);
-		if (temp != NULL) {
-			new_crane->base.push_back(temp);
-		}
-	}
-
-	//make the arm
-	for (int i = location.x - 1; i < radius + location.x - 1; i++) {
-		temp = spawner->spawn_item(CUBE_T, i, location.y + height - 2, location.z);
-		if (temp != NULL) {
-			new_crane->arm.push_back(temp);
-		}
-	}
-
-	//make the attachment
-	temp = spawner->spawn_item(CUBE_T, 0, location.y + height - 2, location.z);
-	if (temp != NULL) {
-		new_crane->attachment =(temp);
-	}
-
-	new_crane->set_running(true);
-	new_crane->set_aproaching_dest(true);
-	new_crane->print_info();
-
-	std::cout << "done creating crane" << std::endl;
-
-	return output;
-}
-
-
-void scene::toggle_crane(int id) {
-	crane_mgr.toggle_crane(id);
-}
-
-
-crane* scene::get_crane(int id) {
-	return crane_mgr.get_crane(id);
-}
-
 
 bool scene::place_rail(loc<int>& location,bool x_axis, railRoad::rail_type aType) {
 	bool output = can_place_rail(location);
