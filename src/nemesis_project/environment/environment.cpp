@@ -1,6 +1,6 @@
 #include "environment.h"
 
-environment::environment(optimized_spawner* os, motion_manger* mm) :crane_mgr(mm) {
+environment::environment(optimized_spawner* os, motion_manger* mm) :crane_mgr(mm), rail_mgr(mm) {
 	spawner = os;
 	updater = mm;
 }
@@ -11,9 +11,124 @@ environment::~environment(){
 
 void environment::update(double time_change) {
 	crane_mgr.update(time_change);
+	rail_mgr.update(time_change);
+
+}
+
+bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType) {
+	bool output = can_place_rail(location);
+
+	if (output) {
+		item_info* temp = NULL;
+
+		switch (aType)
+		{
+		case railRoad::CURVE:
+			temp = spawner->spawn_item(CURVE_RAIL, location.x, location.y, location.z);
+
+			break;
+		case railRoad::STRAIGHT:
+			temp = spawner->spawn_item(RAIL, location.x, location.y, location.z);
+			break;
+		case railRoad::SLANT:
+			temp = spawner->spawn_item(SLANT_RAIL, location.x, location.y, location.z);
+			break;
+		default:
+			std::cout << "there is no model for this rail" << std::endl;
+			break;
+		}
+
+		if (temp == NULL) {
+			return false;
+		}
+
+		if (!x_axis) {
+			temp->angle = 90;
+			updater->update_item(temp);
+		}
+		rail_mgr.add_rail(location, x_axis, aType);
+	}
+	return output;
+}
+
+bool environment::can_place_rail(loc<int>& location) {
+	bool output = true;
+	return true;
+	std::pair < loc<int>, loc<int> > world_locs;// = world_map->get_map_local_cords(location);
+
+	//check to makesure the locs are valid
+	if (world_locs.first == loc<int>()) {
+
+		//check to makesure that there are no other objects 
+
+		output = false;
+	}
+
+	return output;
 }
 
 
+int environment::place_cart(loc<int>& location) {
+	int rail_state = can_place_cart(location);
+	bool placable;
+
+	switch (rail_state)
+	{
+	case 1:
+	case 2:
+		placable = true;
+		break;
+	case 0:
+	default:
+		placable = false;
+		break;
+	}
+
+	int output = -1;
+	if (placable) {
+		output = rail_mgr.place_cart(location);
+
+		if (output != -1) {
+
+			item_info* temp = spawner->spawn_item(CART, location.x, location.y, location.z);
+
+			//the rail is facing another direction
+			if (rail_state == 2) {
+				temp->angle = 90;
+				updater->update_item(temp);
+			}
+
+			//yes I know that this is not the best, but it can be optimised latter
+			for (int i = 0; i < rail_mgr.carts.size(); i++) {
+				if (rail_mgr.carts[i] == output) {
+					rail_mgr.carts[i].cart_obj = temp;
+					std::cout << "linked the obj with the cart" << std::endl;
+					break;
+				}
+			}
+		}
+		else {
+			std::cout << "railroad mgr failed to create a cart object" << std::endl;
+		}
+	}
+	else {
+		std::cout << "fail to place cart" << std::endl;
+	}
+	return output;
+}
+
+int environment::can_place_cart(loc<int>& location) {
+	return rail_mgr.can_place_cart(location);
+}
+
+void environment::toggle_cart(int id, double velocity) {
+	rail_mgr.set_cart_vel(id, velocity);
+	rail_mgr.toggle_cart(id);
+}
+
+void environment::prin_rail_info() {
+	rail_mgr.print_info();
+}
 
 int environment::place_crane(const loc<int>& location, int height, int radius) {
 	int output = -1;

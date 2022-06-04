@@ -62,14 +62,7 @@ private:
 
 	environment* env;
 
-	//everything needd to run the rail system
-	bool place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType);
-	bool can_place_rail(loc<int>& location);
-	int place_cart(loc<int>& location);//returns the id of the cart
-	int can_place_cart(loc<int>& location);
-	void toggle_cart(int id, double velocity);
-	void prin_rail_info();
-	railRoad::rail_manager rail_mgr;
+
 
 	//everything to do with the ground vehicle system
 	vehicle_manager vehicle_mgr;

@@ -3,7 +3,7 @@
 #include "world/generation/world_generation.h"
 #include "world/generation/city_generation.h"
 
-scene::scene(): rail_mgr(NULL), vehicle_mgr(NULL) {
+scene::scene():  vehicle_mgr(NULL) {
 	API = NULL;
 	engine = NULL;
 	spawner = NULL;
@@ -25,7 +25,6 @@ void scene::update(double deltaTime) {
 	//worlds->update(deltaTime);
 	//crane_mgr.update(deltaTime);
 	env->update(deltaTime);
-	rail_mgr.update(deltaTime);
 
 	/*if (temp_cart != NULL) {
 		double distance = deltaTime * speed;
@@ -296,11 +295,11 @@ void scene::world_generation_test() {
 
 	//code to test out the rails
 
-	rail_mgr = railRoad::rail_manager(updater);
+
 
 	//create the rail at the bottom of the map
 	for (int i = 0; i < 40; i++) {
-		if (!place_rail(loc<int>(2 + i, 1, 3), true, railRoad::STRAIGHT)) {
+		if (!env->place_rail(loc<int>(2 + i, 1, 3), true, railRoad::STRAIGHT)) {
 			std::cout << "failed to place rail" << std::endl;
 		}
 	}
@@ -309,9 +308,9 @@ void scene::world_generation_test() {
 	start = 2;
 	end = 39;
 
-	int cart_id = place_cart(loc<int>(2, 1, 3));
+	int cart_id = env->place_cart(loc<int>(2, 1, 3));
 	if (cart_id != -1) {
-		toggle_cart(cart_id, 10);
+		env->toggle_cart(cart_id, 10);
 	}
 	else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
@@ -320,7 +319,7 @@ void scene::world_generation_test() {
 	//create the rail going over top of the rail
 
 	for (int i = 0; i < 12; i++) {
-		if (!place_rail(loc<int>(6, 2, 1 + i), false, railRoad::STRAIGHT)) {
+		if (!env->place_rail(loc<int>(6, 2, 1 + i), false, railRoad::STRAIGHT)) {
 			std::cout << "failed to place rail" << std::endl;
 		}
 		spawner->spawn_item(STONE_FLOOR, 6, 2, 1 + i);
@@ -331,32 +330,32 @@ void scene::world_generation_test() {
 	}
 
 
-	if (!place_rail(loc<int>(12, 1, 1), true, railRoad::STRAIGHT)) {
+	if (!env->place_rail(loc<int>(12, 1, 1), true, railRoad::STRAIGHT)) {
 	}
 
-	cart_id = place_cart(loc<int>(12, 1, 1));
+	cart_id = env->place_cart(loc<int>(12, 1, 1));
 	if (cart_id != -1) {
-		toggle_cart(cart_id, 25);
+		env->toggle_cart(cart_id, 25);
 	}
 	else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
 	}
 
-	if (!place_rail(loc<int>(11, 1, 1), true, railRoad::STRAIGHT)) {
+	if (!env->place_rail(loc<int>(11, 1, 1), true, railRoad::STRAIGHT)) {
 	}
 
 
-	if (!place_rail(loc<int>(8, 2, 1), true, railRoad::STRAIGHT)) {
+	if (!env->place_rail(loc<int>(8, 2, 1), true, railRoad::STRAIGHT)) {
 		std::cout << "failed to place slant rail" << std::endl;
 	}
 
-if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
+if (!env->place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 		std::cout << "failed to place slant rail" << std::endl;
 	}
 
-	cart_id = place_cart(loc<int>(6, 2, 1));
+	cart_id = env->place_cart(loc<int>(6, 2, 1));
 	if (cart_id != -1) {
-		toggle_cart(cart_id, 2);
+		env->toggle_cart(cart_id, 2);
 	}
 	else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
@@ -368,15 +367,15 @@ if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 	for (int x = 10; x < 20; x++) {
 		for (int z = 10; z < 20; z++) {
 			//if (z % 2 == 0) {
-				if (!place_rail(loc<int>(x, 1, z), true, railRoad::STRAIGHT)) {
+				if (!env->place_rail(loc<int>(x, 1, z), true, railRoad::STRAIGHT)) {
 					std::cout << "failed to place rail" << std::endl;
 				}
 		//	}
 			if (x == 10) {
 			//if (x == 10) {
-				cart_id = place_cart(loc<int>(x, 1, z));
+				cart_id = env->place_cart(loc<int>(x, 1, z));
 				if (cart_id != -1) {
-					toggle_cart(cart_id, 2* cart_id);
+					env->toggle_cart(cart_id, 2* cart_id);
 				}
 				else {
 					std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
@@ -388,14 +387,14 @@ if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 	//testing out the slanted rails
 
 	for (int i = 0; i < 12; i++) {
-		if (!place_rail(loc<int>(1+i, 1, 0), true, railRoad::STRAIGHT)) {
+		if (!env->place_rail(loc<int>(1+i, 1, 0), true, railRoad::STRAIGHT)) {
 			std::cout << "failed to place rail" << std::endl;
 		}
 
 		if (i == 11) {
-			cart_id = place_cart(loc<int>(1+i, 1, 0));
+			cart_id = env->place_cart(loc<int>(1+i, 1, 0));
 			if (cart_id != -1) {
-				toggle_cart(cart_id, 7);
+				env->toggle_cart(cart_id, 7);
 			}
 			else {
 				std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
@@ -404,33 +403,33 @@ if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 
 	}
 
-	if (!place_rail(loc<int>(0, 1, 0), true, railRoad::SLANT)) {
+	if (!env->place_rail(loc<int>(0, 1, 0), true, railRoad::SLANT)) {
 		std::cout << "failed to place slant rail" << std::endl;
 	}
 
-	if (!place_rail(loc<int>(3, 1, 7), true, railRoad::CURVE)) {
+	if (!env->place_rail(loc<int>(3, 1, 7), true, railRoad::CURVE)) {
 		std::cout << "failed to place curve rail" << std::endl;
 	}
 
-	place_rail(loc<int>(3, 1, 7), true, railRoad::STRAIGHT);
-	place_rail(loc<int>(4, 1, 7), true, railRoad::STRAIGHT);
-	place_rail(loc<int>(5, 1, 7), true, railRoad::STRAIGHT);
+	env->place_rail(loc<int>(3, 1, 7), true, railRoad::STRAIGHT);
+	env->place_rail(loc<int>(4, 1, 7), true, railRoad::STRAIGHT);
+	env->place_rail(loc<int>(5, 1, 7), true, railRoad::STRAIGHT);
 
-	place_rail(loc<int>(1, 1, 4), false, railRoad::STRAIGHT);
-	place_rail(loc<int>(1, 1, 3), false, railRoad::STRAIGHT);
-	place_rail(loc<int>(1, 1, 5), false, railRoad::STRAIGHT);
+	env->place_rail(loc<int>(1, 1, 4), false, railRoad::STRAIGHT);
+	env->place_rail(loc<int>(1, 1, 3), false, railRoad::STRAIGHT);
+	env->place_rail(loc<int>(1, 1, 5), false, railRoad::STRAIGHT);
 
-	cart_id = place_cart(loc<int>(1, 1, 4));
+	cart_id = env->place_cart(loc<int>(1, 1, 4));
 	if (cart_id != -1) {
-		toggle_cart(cart_id, 5);
+		env->toggle_cart(cart_id, 5);
 	}
 	else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
 	}
 
-	cart_id = place_cart(loc<int>(3, 1, 7));
+	cart_id = env->place_cart(loc<int>(3, 1, 7));
 	if (cart_id != -1) {
-		toggle_cart(cart_id, 9);
+		env->toggle_cart(cart_id, 9);
 	}
 	else {
 		std::cout << "failed to toggle cart, cart was not spawned" << std::endl;
@@ -447,7 +446,7 @@ if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 	spawner->spawn_item(CONCRETE_FLOOR, 5, 2, -2 + z_off);
 	spawner->spawn_item(CONCRETE_FLOOR, 5, 2, 0 + z_off);
 
-	prin_rail_info();
+	env->prin_rail_info();
 	//rail_mgr.print_rail_connections();
 	//rail_mgr.check_for_bad_connections();
 
@@ -473,120 +472,7 @@ if (!place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 void scene::key_press() {
 }
 
-bool scene::place_rail(loc<int>& location,bool x_axis, railRoad::rail_type aType) {
-	bool output = can_place_rail(location);
 
-	if (output) {
-		item_info* temp = NULL;
-
-		switch (aType)
-		{
-		case railRoad::CURVE:
-			temp = spawner->spawn_item(CURVE_RAIL, location.x, location.y, location.z);
-
-			break;
-		case railRoad::STRAIGHT:
-			temp = spawner->spawn_item(RAIL, location.x, location.y, location.z);
-			break;
-		case railRoad::SLANT:
-			temp = spawner->spawn_item(SLANT_RAIL, location.x, location.y, location.z);
-			break;
-		default:
-			std::cout << "there is no model for this rail" << std::endl;
-			break;
-		}
-
-		if (temp == NULL) {
-			return false;
-		}
-
-		if (!x_axis) {
-			temp->angle = 90;
-			updater->update_item(temp);
-		}
-		rail_mgr.add_rail(location, x_axis, aType);
-	}
-	return output;
-}
-
-bool scene::can_place_rail(loc<int>& location) {
-	bool output = true;
-	return true;
-	std::pair < loc<int>, loc<int> > world_locs;// = world_map->get_map_local_cords(location);
-
-	//check to makesure the locs are valid
-	if (world_locs.first == loc<int>()) {
-
-		//check to makesure that there are no other objects 
-
-		output = false;
-	}
-
-	return output;
-}
-
-
-int scene::place_cart(loc<int>& location) {
-	int rail_state = can_place_cart(location);
-	bool placable;
-
-	switch (rail_state)
-	{
-	case 1:
-	case 2:
-		placable = true;
-		break;
-	case 0:
-	default:
-		placable = false;
-		break;
-	}
-
-	int output = -1;
-	if (placable) {
-		output = rail_mgr.place_cart(location);
-
-		if (output != -1) {
-
-			item_info* temp = spawner->spawn_item(CART, location.x, location.y, location.z);
-
-			//the rail is facing another direction
-			if (rail_state == 2) {
-				temp->angle = 90;
-				updater->update_item(temp);
-			}
-
-			//yes I know that this is not the best, but it can be optimised latter
-			for (int i = 0; i < rail_mgr.carts.size(); i++) {
-				if (rail_mgr.carts[i] == output) {
-					rail_mgr.carts[i].cart_obj = temp;
-					std::cout << "linked the obj with the cart" << std::endl;
-					break;
-				}
-			}
-		}
-		else {
-			std::cout << "railroad mgr failed to create a cart object" << std::endl;
-		}
-	}
-	else {
-		std::cout << "fail to place cart" << std::endl;
-	}
-	return output;
-}
-
-int scene::can_place_cart(loc<int>& location) {
-	return rail_mgr.can_place_cart(location);
-}
-
-void scene::toggle_cart(int id, double velocity) {
-	rail_mgr.set_cart_vel(id,velocity);
-	rail_mgr.toggle_cart(id);
-}
-
-void scene::prin_rail_info() {
-	rail_mgr.print_info();
-}
 
 int scene::place_truck(loc<int>& spawn) {
 	int output = vehicle_mgr.create_truck( spawn);
