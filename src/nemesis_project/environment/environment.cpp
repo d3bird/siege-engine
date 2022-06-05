@@ -3,6 +3,7 @@
 environment::environment(optimized_spawner* os, motion_manger* mm) :crane_mgr(mm), rail_mgr(mm) {
 	spawner = os;
 	updater = mm;
+	world_map = NULL;
 }
 
 environment::~environment(){
@@ -46,24 +47,24 @@ bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_typ
 			temp->angle = 90;
 			updater->update_item(temp);
 		}
+
+		if (!world_map->attach_obj(location, temp, false, true)) {
+			std::cout << "failed to attach rail to world map" << std::endl;
+		}
+
 		rail_mgr.add_rail(location, x_axis, aType);
 	}
 	return output;
 }
 
 bool environment::can_place_rail(loc<int>& location) {
-	bool output = true;
+	bool output = false;
 	return true;
-	std::pair < loc<int>, loc<int> > world_locs;// = world_map->get_map_local_cords(location);
+	if (world_map != NULL) {
 
-	//check to makesure the locs are valid
-	if (world_locs.first == loc<int>()) {
+		output = world_map->can_place_ground_obj(location, true);
 
-		//check to makesure that there are no other objects 
-
-		output = false;
 	}
-
 	return output;
 }
 

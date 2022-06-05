@@ -62,8 +62,6 @@ private:
 
 	environment* env;
 
-
-
 	//everything to do with the ground vehicle system
 	vehicle_manager vehicle_mgr;
 	int place_truck(loc<int> & spawn);

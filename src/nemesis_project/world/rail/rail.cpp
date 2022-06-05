@@ -135,7 +135,7 @@ bool  railRoad::rail::can_connect(rail* other, bool connect) {
 		break;
 	case railRoad::CURVE:
 	default:
-		std::cout << "there is no connection for this rail type" << std::endl;
+	//	std::cout << "there is no connection for this rail type" << std::endl;
 		break;
 	}
 

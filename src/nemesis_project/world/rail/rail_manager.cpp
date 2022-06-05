@@ -239,5 +239,4 @@ void railRoad::rail_manager::check_for_bad_connections() {
 }
 
 void  railRoad::rail_manager::print_rail_connections() {
-
 }

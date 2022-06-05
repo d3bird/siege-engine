@@ -227,6 +227,8 @@ void scene::world_generation_test() {
 	testing_w = pipe.create_world(test, updater);
 
 	env = new environment(spawner, updater);
+	env->set_map_data(testing_w->world_map);
+
 
 	//creating managers
 	//crane_mgr = crane_manager(updater);

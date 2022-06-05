@@ -86,7 +86,7 @@ std::vector<loc<int> >  crane_manager::get_converate(int id, int y) {
 #include<time.h>
 
 void crane_manager::create_rand_dest(crane* input) {
-	std::cout << "setting new destination for "<< input->get_ID() << std::endl;
+//	std::cout << "setting new destination for "<< input->get_ID() << std::endl;
 
 	srand(time(0));
 
@@ -102,9 +102,9 @@ void crane_manager::create_rand_dest(crane* input) {
 	bool result = input->set_dest(destination);
 
 	if (!result) {
-		std::cout << "failed to create a new destination" << std::endl;
-		std::cout << "dest: "<<destination.x << " " << destination.z << std::endl;
-		std::cout << "dest: " << input->get_location().x << " " << input->get_location().z << std::endl;
+		////std::cout << "failed to create a new destination" << std::endl;
+		//std::cout << "dest: "<<destination.x << " " << destination.z << std::endl;
+		//std::cout << "dest: " << input->get_location().x << " " << input->get_location().z << std::endl;
 	}
 
 }

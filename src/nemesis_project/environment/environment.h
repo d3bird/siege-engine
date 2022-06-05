@@ -6,6 +6,7 @@
 #include "../world/crane/crane_manager.h"
 #include "../world/rail/rail_manager.h"
 
+#include "../world/terrian/world_map.h"
 
 class environment
 {
@@ -13,13 +14,14 @@ public:
 	environment(optimized_spawner *os, motion_manger* mm);
 	~environment();
 
+	void set_map_data(map_data* map) { world_map = map; }
+
 	void update(double time_change);
 
 	//everything needed for the crane system
 	int place_crane(const loc<int>& location, int height, int radius);
 	void toggle_crane(int id);
 	crane* get_crane(int id);
-
 
 	//everything needd to run the rail system
 	bool place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType);
@@ -39,6 +41,7 @@ private:
 	crane_manager crane_mgr;
 	railRoad::rail_manager rail_mgr;
 
-
+	//map related information
+	map_data* world_map;
 };
 

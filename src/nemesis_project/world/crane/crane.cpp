@@ -163,7 +163,7 @@ void crane::update(double detlaTime) {
 
 	if (reached_angle) {
 		aproaching_dest = false;
-		std::cout << "no longer aproaching the dest" << std::endl;
+		//std::cout << "no longer aproaching the dest" << std::endl;
 	}
 }
 
@@ -178,7 +178,7 @@ bool crane::set_dest(const loc<int>& aDest) {
 
 	}
 	else {
-		std::cout << "can not reach given destination" << std::endl;
+	//	std::cout << "can not reach given destination" << std::endl;
 	}
 
 	return output;
