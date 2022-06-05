@@ -6,6 +6,10 @@
 #include "../world/crane/crane_manager.h"
 #include "../world/rail/rail_manager.h"
 
+#include "../world/furnace/furnace_manager.h"
+#include "../world/liquid/liquid_manager.h"
+
+
 #include "../world/terrian/world_map.h"
 
 class environment
@@ -31,6 +35,14 @@ public:
 	void toggle_cart(int id, double velocity);
 	void prin_rail_info();
 
+	//everything to do with the furnace system
+	int create_furnace(const std::vector<loc<int> > &spots);
+	void add_mass_to_furnace(int id, double mass);
+	void print_furnace_info(int id = -1);
+
+	//everything to do with the liquid system
+
+
 private:
 
 	//engine related objects
@@ -40,6 +52,7 @@ private:
 	//managers
 	crane_manager crane_mgr;
 	railRoad::rail_manager rail_mgr;
+	furnace_manager furnace_mgr;
 
 	//map related information
 	map_data* world_map;

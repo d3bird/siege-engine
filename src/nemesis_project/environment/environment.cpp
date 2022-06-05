@@ -13,7 +13,7 @@ environment::~environment(){
 void environment::update(double time_change) {
 	crane_mgr.update(time_change);
 	rail_mgr.update(time_change);
-
+	furnace_mgr.update(time_change);
 }
 
 bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType) {
@@ -150,6 +150,7 @@ int environment::place_crane(const loc<int>& location, int height, int radius) {
 		temp = spawner->spawn_item(CRANE_B, location.x, location.y + i, location.z);
 		if (temp != NULL) {
 			new_crane->base.push_back(temp);
+			world_map->attach_obj(loc<int>(location.x, location.y + i, location.z), temp, false, true);
 		}
 	}
 
@@ -184,4 +185,13 @@ void environment::toggle_crane(int id) {
 
 crane* environment::get_crane(int id) {
 	return crane_mgr.get_crane(id);
+}
+
+
+int environment::create_furnace(const std::vector<loc<int> >& spots) {
+	return furnace_mgr.create_furnace(spots);
+}
+
+void environment::add_mass_to_furnace(int id, double mass) {
+	furnace_mgr.add_mass_to_furnace(id, mass);
 }
