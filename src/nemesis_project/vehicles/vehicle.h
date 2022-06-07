@@ -11,7 +11,7 @@ public:
 	~grnd_vehicle();
 
 	//updates the object cords
-	void update(const loc<double>& new_location);
+	void update(const loc<double>& new_location, bool mult = true);
 
 	void set_current_loc() { update(obj_cords); }
 

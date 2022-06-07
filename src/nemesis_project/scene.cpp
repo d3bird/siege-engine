@@ -469,7 +469,7 @@ if (!env->place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 	env->place_truck(loc<int>( 0, 1, 11));
 
 	env->place_car_worksation(loc<int>(25, 1, 11));
-
+	env->spawn_car_on_station(0);
 
 }
 

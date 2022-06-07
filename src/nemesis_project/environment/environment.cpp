@@ -228,3 +228,7 @@ int environment::place_car_worksation(loc<int>& spawn) {
 
 	return output;
 }
+
+void environment::spawn_car_on_station(int id) {
+	vehicle_mgr.spawn_car_on_station(id);
+}

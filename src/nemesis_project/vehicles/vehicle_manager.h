@@ -19,6 +19,7 @@ public:
 
 	int create_truck_workstation(const loc<int>& location);
 	car_workstation* get_station(int ID);
+	void spawn_car_on_station(int id);
 
 	std::vector< grnd_vehicle* > all_vehicles;
 
