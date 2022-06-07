@@ -3,7 +3,7 @@
 #include "world/generation/world_generation.h"
 #include "world/generation/city_generation.h"
 
-scene::scene():  vehicle_mgr(NULL) {
+scene::scene() {
 	API = NULL;
 	engine = NULL;
 	spawner = NULL;
@@ -462,32 +462,14 @@ if (!env->place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 
 	//the testing code for the vehicles
 
-	vehicle_mgr = vehicle_manager(updater);
 
-	place_truck(loc<int>(2, 1, 9));
-	place_truck(loc<int>(0, 1, 9));
-	place_truck(loc<int>(2, 1, 11));
-	place_truck(loc<int>( 0, 1, 11));
+	env->place_truck(loc<int>(2, 1, 9));
+	env->place_truck(loc<int>(0, 1, 9));
+	env->place_truck(loc<int>(2, 1, 11));
+	env->place_truck(loc<int>( 0, 1, 11));
 
 }
 
 void scene::key_press() {
-}
 
-
-
-int scene::place_truck(loc<int>& spawn) {
-	int output = vehicle_mgr.create_truck( spawn);
-	vehicle_mgr.all_vehicles[0]->body = spawner->spawn_item(TRUCK3, spawn.x, spawn.y, spawn.z);
-	vehicle_mgr.all_vehicles[0]->headlights = spawner->spawn_item(HEADLIGHTS, spawn.x, spawn.y, spawn.z);
-	vehicle_mgr.all_vehicles[0]->FLW = spawner->spawn_item(FLW, spawn.x, spawn.y, spawn.z);
-	vehicle_mgr.all_vehicles[0]->FRW = spawner->spawn_item(FRW, spawn.x, spawn.y, spawn.z);
-	vehicle_mgr.all_vehicles[0]->BLW = spawner->spawn_item(BLW, spawn.x, spawn.y, spawn.z);
-	vehicle_mgr.all_vehicles[0]->BRW = spawner->spawn_item(BRW, spawn.x, spawn.y, spawn.z);
-	
-	return output;
-}
-
-bool scene::set_truck_dest(int id, loc<int>& spawn) {
-	return vehicle_mgr.drive_truck(id, spawn);
 }

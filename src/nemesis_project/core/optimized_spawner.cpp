@@ -225,14 +225,15 @@ void optimized_spawner::import_models() {
 
 	obj_temp = OBJM->add_model("CRANE_B", paths.get_objs_loc() + "crane/c_base.obj", buffer_size, CRANE_B);
 
-										//TRUCK3, HEADLIGHTS, FLW, FRW, BLW, BRL
-
 	obj_temp = OBJM->add_model("TRUCK3", paths.get_objs_loc() + "vehicles/truck3.obj", buffer_size, TRUCK3);
 	obj_temp = OBJM->add_model("HEADLIGHTS", paths.get_objs_loc() + "vehicles/truck3_light.obj", buffer_size, HEADLIGHTS);
 	obj_temp = OBJM->add_model("FLW", paths.get_objs_loc() + "vehicles/truck3_FLW.obj", buffer_size, FLW);
 	obj_temp = OBJM->add_model("FRW", paths.get_objs_loc() + "vehicles/truck3_FRW.obj", buffer_size, FRW);
 	obj_temp = OBJM->add_model("BLW", paths.get_objs_loc() + "vehicles/truck3_BLW.obj", buffer_size, BLW);
 	obj_temp = OBJM->add_model("BRW", paths.get_objs_loc() + "vehicles/truck3_BRW.obj", buffer_size, BRW);
+
+	obj_temp = OBJM->add_model("CAR_WORKSHOP_LIFT", paths.get_objs_loc() + "vehicles/car_platform.obj", buffer_size, CAR_WORKSHOP_LIFT);
+	obj_temp = OBJM->add_model("CAR_WORKSHOP_LEAVER", paths.get_objs_loc() + "vehicles/station_leaver.obj", buffer_size, CAR_WORKSHOP_LEAVER);
 
 	std::cout << "done" << std::endl;
 }

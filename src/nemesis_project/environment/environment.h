@@ -9,7 +9,7 @@
 #include "../world/furnace/furnace_manager.h"
 #include "../world/liquid/liquid_manager.h"
 
-
+#include "../vehicles/vehicle_manager.h"
 #include "../world/terrian/world_map.h"
 
 class environment
@@ -43,6 +43,10 @@ public:
 	//everything to do with the liquid system
 
 
+	//everything to do with the ground vehicle system
+	int place_truck(loc<int>& spawn);
+	bool set_truck_dest(int id, loc<int>& spawn);
+
 private:
 
 	//engine related objects
@@ -53,6 +57,7 @@ private:
 	crane_manager crane_mgr;
 	railRoad::rail_manager rail_mgr;
 	furnace_manager furnace_mgr;
+	vehicle_manager vehicle_mgr;
 
 	//map related information
 	map_data* world_map;

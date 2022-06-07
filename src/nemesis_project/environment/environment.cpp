@@ -1,6 +1,7 @@
 #include "environment.h"
 
-environment::environment(optimized_spawner* os, motion_manger* mm) :crane_mgr(mm), rail_mgr(mm) {
+environment::environment(optimized_spawner* os, motion_manger* mm):
+	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm) {
 	spawner = os;
 	updater = mm;
 	world_map = NULL;
@@ -194,4 +195,20 @@ int environment::create_furnace(const std::vector<loc<int> >& spots) {
 
 void environment::add_mass_to_furnace(int id, double mass) {
 	furnace_mgr.add_mass_to_furnace(id, mass);
+}
+
+int environment::place_truck(loc<int>& spawn) {
+	int output = vehicle_mgr.create_truck(spawn);
+	vehicle_mgr.all_vehicles[0]->body = spawner->spawn_item(TRUCK3, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->headlights = spawner->spawn_item(HEADLIGHTS, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->FLW = spawner->spawn_item(FLW, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->FRW = spawner->spawn_item(FRW, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->BLW = spawner->spawn_item(BLW, spawn.x, spawn.y, spawn.z);
+	vehicle_mgr.all_vehicles[0]->BRW = spawner->spawn_item(BRW, spawn.x, spawn.y, spawn.z);
+
+	return output;
+}
+
+bool environment::set_truck_dest(int id, loc<int>& spawn) {
+	return vehicle_mgr.drive_truck(id, spawn);
 }
