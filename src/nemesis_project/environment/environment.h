@@ -46,6 +46,8 @@ public:
 	//everything to do with the ground vehicle system
 	int place_truck(loc<int>& spawn);
 	bool set_truck_dest(int id, loc<int>& spawn);
+	int place_car_worksation(loc<int>& spawn);
+
 
 private:
 

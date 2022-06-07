@@ -15,6 +15,7 @@ void environment::update(double time_change) {
 	crane_mgr.update(time_change);
 	rail_mgr.update(time_change);
 	furnace_mgr.update(time_change);
+	vehicle_mgr.update(time_change);
 }
 
 bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType) {
@@ -211,4 +212,19 @@ int environment::place_truck(loc<int>& spawn) {
 
 bool environment::set_truck_dest(int id, loc<int>& spawn) {
 	return vehicle_mgr.drive_truck(id, spawn);
+}
+
+int environment::place_car_worksation(loc<int>& spawn) {
+	int output = -1;
+	output = vehicle_mgr.create_truck_workstation(spawn);
+	car_workstation* temp = vehicle_mgr.get_station(output);
+	if (temp != NULL) {
+		temp->lift = spawner->spawn_item(CAR_WORKSHOP_LIFT, spawn.x, spawn.y, spawn.z);
+		temp->leaver = spawner->spawn_item(CAR_WORKSHOP_LEAVER, spawn.x, spawn.y, spawn.z);
+	}
+	else {
+		std::cout << "failed to spawn the car workstation" << std::endl;
+	}
+
+	return output;
 }
