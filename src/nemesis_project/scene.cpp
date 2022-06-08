@@ -477,7 +477,8 @@ if (!env->place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 
 	env->spawn_plane(pad1);
 	env->spawn_plane(pad2);
-
+	env->send_craft_patrol(0, loc<int>(15, 10, 15));
+	env->draw_plane_route(0);
 }
 
 void scene::key_press() {

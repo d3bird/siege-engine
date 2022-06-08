@@ -58,6 +58,9 @@ public:
 
 	void send_craft_to_site(int plane, loc<int> location);
 	void send_craft_to_land_site(int plane, int land_pad);
+	void send_craft_patrol(int plane, loc<int> location);
+
+	void draw_plane_route(int id);
 
 private:
 

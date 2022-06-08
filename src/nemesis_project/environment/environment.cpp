@@ -271,3 +271,20 @@ void environment::send_craft_to_site(int plane, loc<int> location) {
 void environment::send_craft_to_land_site(int plane, int land_pad) {
 	 aircraft_mgr.send_craft_to_land_site(plane,land_pad);
 }
+
+void environment::send_craft_patrol(int plane, loc<int> location) {
+	std::cout << "creating an orbiting patrol" << std::endl;
+	aircraft_mgr.send_craft_patrol(plane, location);
+}
+
+void environment::draw_plane_route(int id) {
+	aircraft* temp= aircraft_mgr.get_aircraft(id);
+	if (temp != NULL && temp->current_route != NULL) {
+		for (int i = 0; i < temp->current_route->waypoints.size(); i++) {
+			spawner->spawn_item(CUBE_T,
+				temp->current_route->waypoints[i].x/2,
+				temp->current_route->waypoints[i].y/2,
+				temp->current_route->waypoints[i].z/2);
+		}
+	}
+}

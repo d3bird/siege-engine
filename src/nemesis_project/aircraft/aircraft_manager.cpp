@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-aircraft_manager::aircraft_manager(motion_manger*mm) {
+aircraft_manager::aircraft_manager(motion_manger*mm):FC(mm) {
 	aircraft_id = 0;
 	landing_id = 0;
 	updater = mm;
@@ -13,7 +13,7 @@ aircraft_manager::~aircraft_manager() {
 }
 
 void aircraft_manager::update(double time) {
-
+	FC.update(time);
 }
 
 int aircraft_manager::spawn_landing_pad(loc<int> location) {
@@ -61,6 +61,7 @@ aircraft* aircraft_manager::get_aircraft(int id) {
 
 	return output;
 }
+
 landing_site* aircraft_manager::get_landing_site(int id) {
 	landing_site* output = NULL;
 //	std::cout << "looking for pad: " <<id<< std::endl;
@@ -76,3 +77,14 @@ landing_site* aircraft_manager::get_landing_site(int id) {
 
 	return output;
 }
+
+void aircraft_manager::send_craft_patrol(int plane, loc<int> location) {
+	aircraft* temp = get_aircraft(plane);
+	if (temp != NULL) {
+		FC.send_craft_patrol(temp, location);
+	}
+	else {
+		std::cout << "can not create patrol, plane NULL" << std::endl;
+	}
+}
+

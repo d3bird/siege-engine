@@ -22,6 +22,9 @@ public:
 	void send_craft_to_site(int plane, loc<int> location);
 	void send_craft_to_land_site(int plane, int land_pad);
 
+	//will send the plane to a obit around a point
+	void send_craft_patrol(int plane, loc<int> location);
+
 	//getters
 	aircraft* get_aircraft(int id);
 	landing_site* get_landing_site(int id);

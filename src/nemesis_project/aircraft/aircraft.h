@@ -2,6 +2,7 @@
 
 #include "../common_obj/location.h"
 #include <rendering/rendering_object_data.hpp>
+#include "air_route.hpp"
 
 class aircraft
 {
@@ -17,6 +18,7 @@ public:
 	loc<int> get_location() { return location; }
 
 	item_info* obj;
+	route* current_route;
 
 private:
 	int ID;
