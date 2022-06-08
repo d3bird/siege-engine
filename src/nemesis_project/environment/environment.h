@@ -12,6 +12,8 @@
 #include "../vehicles/vehicle_manager.h"
 #include "../world/terrian/world_map.h"
 
+#include "../aircraft/aircraft_manager.h"
+
 class environment
 {
 public:
@@ -50,6 +52,13 @@ public:
 	int place_car_worksation(loc<int>& spawn);
 	void spawn_car_on_station(int id);
 
+	//everything to do with the aircraft
+	int spawn_landing_pad(loc<int> location);
+	int spawn_plane(int landing_pad);
+
+	void send_craft_to_site(int plane, loc<int> location);
+	void send_craft_to_land_site(int plane, int land_pad);
+
 private:
 
 	//engine related objects
@@ -61,6 +70,7 @@ private:
 	railRoad::rail_manager rail_mgr;
 	furnace_manager furnace_mgr;
 	vehicle_manager vehicle_mgr;
+	aircraft_manager aircraft_mgr;
 
 	//map related information
 	map_data* world_map;

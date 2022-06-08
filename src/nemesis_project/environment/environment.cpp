@@ -1,7 +1,7 @@
 #include "environment.h"
 
 environment::environment(optimized_spawner* os, motion_manger* mm):
-	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm) {
+	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm) {
 	spawner = os;
 	updater = mm;
 	world_map = NULL;
@@ -16,6 +16,7 @@ void environment::update(double time_change) {
 	rail_mgr.update(time_change);
 	furnace_mgr.update(time_change);
 	vehicle_mgr.update(time_change);
+	aircraft_mgr.update(time_change);
 }
 
 bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType) {
@@ -231,4 +232,42 @@ int environment::place_car_worksation(loc<int>& spawn) {
 
 void environment::spawn_car_on_station(int id) {
 	vehicle_mgr.spawn_car_on_station(id);
+}
+
+
+int environment::spawn_landing_pad(loc<int> location) {
+	int output = aircraft_mgr.spawn_landing_pad(location);
+	landing_site* temp = aircraft_mgr.get_landing_site(output);
+	if (temp != NULL) {
+		loc<int> location = temp->get_location();
+		std::cout << "pad loc" << location.x << " " << location.y << " " << location.z << std::endl;
+		temp->obj = spawner->spawn_item(AIRCRAFT_LANDING_PAD, location.x, location.y, location.z);
+	}
+	else {
+		std::cout << "failed to spawn landing site" << std::endl;
+	}
+	return output;
+}
+
+int environment::spawn_plane(int landing_pad) {
+	int output= aircraft_mgr.spawn_plane(landing_pad);
+
+	aircraft* temp = aircraft_mgr.get_aircraft(output);
+	if (temp != NULL) {
+		loc<int> location = temp->get_location();
+		std::cout <<"craft loc"<< location.x << " " << location.y << " " << location.z << std::endl;
+		temp->obj = spawner->spawn_item(AIRCRAFT_T, location.x, location.y, location.z);
+	}
+	else {
+		std::cout << "failed to spawn plane" << std::endl;
+	}
+	return output;
+}
+
+void environment::send_craft_to_site(int plane, loc<int> location) {
+	 aircraft_mgr.send_craft_to_site(plane ,location);
+}
+
+void environment::send_craft_to_land_site(int plane, int land_pad) {
+	 aircraft_mgr.send_craft_to_land_site(plane,land_pad);
 }

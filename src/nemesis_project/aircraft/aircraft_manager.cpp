@@ -2,114 +2,77 @@
 
 #include <iostream>
 
-aircraft_manager::aircraft_manager(optimized_spawner* objm) {
-	OBJM = objm;
-	factory = NULL;
-	flight_brain = NULL;
+aircraft_manager::aircraft_manager(motion_manger*mm) {
+	aircraft_id = 0;
+	landing_id = 0;
+	updater = mm;
 }
 
 aircraft_manager::~aircraft_manager() {
 
 }
 
-void aircraft_manager::update() {
-	flight_brain->update();
-
-	update_models();
-}
-
-void aircraft_manager::update_models() {
+void aircraft_manager::update(double time) {
 
 }
 
+int aircraft_manager::spawn_landing_pad(loc<int> location) {
+	landing_site* temp = new landing_site(landing_id);
+	temp->set_location(location);
+	landing_id++;
+	landing_areas.push_back(temp);
+	return temp->get_ID();
+}
 
-int aircraft_manager::spawn_plane(loc<int> spawn_loc, int plane_type) {
-	
-	plane_data* output = factory->spawn_plane(spawn_loc.x, spawn_loc.y, spawn_loc.z, plane_type);
-	
-	if (output == NULL) {
-		std::cout << "failed to spawn plane" << std::endl;
+int aircraft_manager::spawn_plane(int landing_pad) {
+	landing_site* site = get_landing_site(landing_pad);
+
+	if (site == NULL) {
+		std::cout << "can not spawn plane here, pad is NULL" << std::endl;
 		return -1;
 	}
-	
-	int model_amount = 1;
-	output->amount_models = model_amount;
-	output->model_index = new int[model_amount];
-	models_in_use.push_back(OBJM->spawn_item(AIRCRAFT_T, spawn_loc.x, spawn_loc.y, spawn_loc.z, 180));
-	output->model_index[0] = models_in_use.size() - 1;
-	
-	
-	planes.push_back(output);
-	models_in_use.push_back(models_in_use[models_in_use.size() - 1]);
-	return models_in_use.size()-1;
+	loc<int> location = site->get_location();
+
+	aircraft* temp = new aircraft(aircraft_id);
+	temp->set_location(location);
+	aircraft_id++;
+	aircrafts.push_back(temp);
+	return temp->get_ID();
 }
 
-void aircraft_manager::place_landing_site(loc<int> location, bool flight_strip) {
-landing_site* land = new landing_site;
-	land->location_start = location;
-	land->location_end = location;
+void aircraft_manager::send_craft_to_site(int plane, loc<int> location) {
 
-	land->air_strip = flight_strip;
-
-	land->inuse = false;
-	land->plane_traveling_to = false;
-	land->plane_need_service = false;
-
-	land->plane = NULL;
-
-	landing_sites.push_back(land);
-	landing_sites_open.push_back(land);
 }
 
-void aircraft_manager::init(int plane_enum) {
+void aircraft_manager::send_craft_to_land_site(int plane, int land_pad) {
 
-	place_landing_site(loc<int>(0, 1, 0), false);
-	place_landing_site(loc<int>(10, 1, 10), false);
+}
 
-	factory = new aircraft_factory(plane_enum);	
-	flight_brain = new flight_controller();
+aircraft* aircraft_manager::get_aircraft(int id) {
+	aircraft* output = NULL;
 
-	spawn_plane(loc<int>(0, 1, 0), 0);
-
-	plane_data* plane = planes[0];
-
-	//OBJM->spawn_item(AIRCRAFT_T, 0, 1, 0, 180);
-	OBJM->spawn_item(AIRCRAFT_LANDING_PAD, 0, 1, 0);
-	OBJM->spawn_item(AIRCRAFT_LANDING_PAD, 10, 1, 10);
-
-	plane_route* testing = new plane_route;
-	
-	testing->starting_spot = landing_sites[0];
-	testing->ending_spot = landing_sites[1];
-	testing->patrol = false;
-
-
-	bool valid = flight_brain->fly_plane(plane, testing);
-	if (valid) {
-		std::cout << "the plane is going to take off" << std::endl;
+	for (size_t i = 0; i < aircrafts.size(); i++)
+	{
+		if (aircrafts[i]->get_ID() == id) {
+			output = aircrafts[i];
+			break;
+		}
 	}
+
+	return output;
 }
+landing_site* aircraft_manager::get_landing_site(int id) {
+	landing_site* output = NULL;
+//	std::cout << "looking for pad: " <<id<< std::endl;
+	for (size_t i = 0; i < landing_areas.size(); i++)
+	{
+		//std::cout << "pad: " << landing_areas[i]->get_ID() << std::endl;
+		if (landing_areas[i]->get_ID() == id) {
+		//	std::cout << "found the pad" << std::endl;
+			output = landing_areas[i];
+			break;
+		}
+	}
 
-void aircraft_manager::start_animation_sim(const loc<int>& start_loc) {
-	std::cout << "starting the animation test of the aircraft" << std::endl;
-
-	factory = new aircraft_factory(AIRCRAFT_T);
-	flight_brain = new flight_controller();
-
-
-	spawn_plane(start_loc, 0);
-
-	plane_data* plane = planes[0];
-}
-
-std::vector<landing_site*>& aircraft_manager::get_landing_sites() {
-	return landing_sites;
-}
-
-std::vector<landing_site*>& aircraft_manager::get_open_landing_sites() {
-	return  landing_sites_open;
-}
-
-std::vector<landing_site*>& aircraft_manager::get_filled_landing_sites() {
-	return  landing_sites_closed;
+	return output;
 }

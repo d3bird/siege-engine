@@ -26,7 +26,7 @@ void car_workstation::update(double time) {
 			orginal = leaver->y_m;
 			end_pos = start_pos +3;
 			need_to_set_pos = false;
-			std::cout << "setting the possitions" << std::endl;
+			//std::cout << "setting the possitions" << std::endl;
 		}
 	}
 	else {
@@ -39,7 +39,7 @@ void car_workstation::update(double time) {
 			if (lift->y_m >= end_pos) {
 				lift->y_m = end_pos;
 				direction = false;
-				std::cout << "switching directions" << std::endl;
+				//std::cout << "switching directions" << std::endl;
 			}
 		}
 		else {
@@ -48,7 +48,7 @@ void car_workstation::update(double time) {
 			if (lift->y_m <= start_pos) {
 				lift->y_m = start_pos;
 				direction = true;
-				std::cout << "switching directions" << std::endl;
+				//std::cout << "switching directions" << std::endl;
 			}
 		}
 

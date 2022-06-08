@@ -141,8 +141,8 @@ void scene::aircraft_test() {
 			}
 		}
 
-		aircraft_manager* AirContorl = new aircraft_manager(spawner);
-		AirContorl->init(AIRCRAFT_T);
+		//aircraft_manager* AirContorl = new aircraft_manager(spawner);
+	//	AirContorl->init(AIRCRAFT_T);
 
 	}
 	else {
@@ -227,7 +227,7 @@ void scene::world_generation_test() {
 	testing_w = pipe.create_world(test, updater);
 
 	env = new environment(spawner, updater);
-	env->set_map_data(testing_w->world_map);
+	env->set_map_data(testing_w->world_map); 
 
 
 	//creating managers
@@ -243,10 +243,11 @@ void scene::world_generation_test() {
 
 	//code to test out the aircraft
 
-	aircraft_manager* AirContorl = new aircraft_manager(spawner);
+	//aircraft_manager* AirContorl = new aircraft_manager(spawner);
 
 	//fighter landing pad
-	spawner->spawn_item(AIRCRAFT_LANDING_PAD, 4, 2, 5);
+	//spawner->spawn_item(AIRCRAFT_LANDING_PAD, 4, 2, 5);
+	int pad1 =env->spawn_landing_pad(loc<int>(4, 2, 5));
 	for (int x = 0; x < 3; x++) {
 		for (int z = 0; z < 3; z++) {
 			spawner->spawn_item(CONCRETE_WALL, 3 + x, 1, 4 + z);
@@ -254,8 +255,9 @@ void scene::world_generation_test() {
 	}
 
 	//BOMBER landing pad
-	spawner->spawn_item(AIRCRAFT_LANDING_PAD, 20, 2, 7);
-	spawner->spawn_item(BOMBER, 20, 2, 7);
+	//spawner->spawn_item(AIRCRAFT_LANDING_PAD, 20, 2, 7);
+	//spawner->spawn_item(BOMBER, 20, 2, 7);
+	int pad2 = env->spawn_landing_pad(loc<int>(20, 2, 7));
 	for (int x = 0; x < 3; x++) {
 		for (int z = 0; z < 3; z++) {
 			spawner->spawn_item(CONCRETE_WALL, 19 + x, 1, 6 + z);
@@ -263,7 +265,9 @@ void scene::world_generation_test() {
 	}
 
 	loc<int> start_loc(5, 5, 5);
-	AirContorl->start_animation_sim(start_loc);
+
+
+	//AirContorl->start_animation_sim(start_loc);
 
 	//code to test out the radio systems (just models for now)
 	int x_off = 0;
@@ -470,6 +474,9 @@ if (!env->place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 
 	env->place_car_worksation(loc<int>(25, 1, 11));
 	env->spawn_car_on_station(0);
+
+	env->spawn_plane(pad1);
+	env->spawn_plane(pad2);
 
 }
 

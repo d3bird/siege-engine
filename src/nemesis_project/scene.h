@@ -2,12 +2,7 @@
 
 #include "core/create_engine.h"
 
-#include "world/world.h"
-#include "aircraft/aircraft_manager.h"
-
 #include "testing/world_test.h"
-
-#include "vehicles/vehicle_manager.h"
 
 #include "environment/environment.h"
 

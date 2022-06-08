@@ -1,46 +1,40 @@
 #pragma once
 
-#include "aircraft_factory.h"
+#include "aircraft.h"
+#include "landing_site.h"
 #include "flight_controller.h"
 
-#include "plane_route.hpp"
-
-#include "../core/optimized_spawner.h"
+#include <vector>
+#include "../common_obj/location.h"
+#include "../utility/motion_manager.h"
 
 class aircraft_manager
 {
 public:
-	aircraft_manager(optimized_spawner * objm);
+	aircraft_manager(motion_manger* mm);
 	~aircraft_manager();
 
-	void update();
+	void update(double time);
 
-	int spawn_plane(loc<int> spawn_loc, int plane_type);
+	int spawn_landing_pad(loc<int> location);
+	int spawn_plane(int landing_pad);
 
-	void place_landing_site(loc<int> location, bool flight_strip);
+	void send_craft_to_site(int plane, loc<int> location);
+	void send_craft_to_land_site(int plane, int land_pad);
 
-	std::vector<landing_site*>& get_landing_sites();
-	std::vector<landing_site*>& get_open_landing_sites();
-	std::vector<landing_site*>& get_filled_landing_sites();
-	
-	void init(int plane_enum);
-
-	void start_animation_sim( const loc<int> &start_loc);
+	//getters
+	aircraft* get_aircraft(int id);
+	landing_site* get_landing_site(int id);
 
 private:
 
-	void update_models();
+	motion_manger* updater;
 
-	optimized_spawner* OBJM;
-	aircraft_factory* factory;
-	flight_controller* flight_brain;
+	flight_controller FC;
 
-	std::vector< landing_site*> landing_sites;
-	std::vector< landing_site*> landing_sites_open;
-	std::vector< landing_site*> landing_sites_closed;
+	std::vector<aircraft*> aircrafts;
+	std::vector<landing_site*> landing_areas;
 
-	std::vector<item_info*> models_in_use;
-
-	std::vector<plane_data*> planes;
+	int aircraft_id;
+	int landing_id;
 };
-
