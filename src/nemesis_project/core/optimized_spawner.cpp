@@ -235,5 +235,8 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("CAR_WORKSHOP_LIFT", paths.get_objs_loc() + "vehicles/car_platform.obj", buffer_size, CAR_WORKSHOP_LIFT);
 	obj_temp = OBJM->add_model("CAR_WORKSHOP_LEAVER", paths.get_objs_loc() + "vehicles/station_leaver.obj", buffer_size, CAR_WORKSHOP_LEAVER);
 
+	obj_temp = OBJM->add_model("FAN_FRAME", paths.get_objs_loc() + "decoration/frame.obj", buffer_size, FAN_FRAME);
+	obj_temp = OBJM->add_model("FAN", paths.get_objs_loc() + "decoration/fan.obj", buffer_size, FAN);
+
 	std::cout << "done" << std::endl;
 }

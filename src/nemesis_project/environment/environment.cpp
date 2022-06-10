@@ -1,7 +1,8 @@
 #include "environment.h"
 
 environment::environment(optimized_spawner* os, motion_manger* mm):
-	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm) {
+	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm),
+	decor_manager(mm) {
 	spawner = os;
 	updater = mm;
 	world_map = NULL;
@@ -17,6 +18,7 @@ void environment::update(double time_change) {
 	furnace_mgr.update(time_change);
 	vehicle_mgr.update(time_change);
 	aircraft_mgr.update(time_change);
+	decor_manager.update(time_change);
 }
 
 bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType) {
@@ -287,4 +289,11 @@ void environment::draw_plane_route(int id) {
 				temp->current_route->waypoints[i].z/2);
 		}
 	}
+}
+
+void environment::place_fanx3x3(const loc<int>& location){
+
+	item_info* frame = spawner->spawn_item(FAN_FRAME, location.x, location.y, location.z);
+	item_info* fan = spawner->spawn_item(FAN, location.x, location.y, location.z);
+	decor_manager.place_fanx3x3(location, frame, fan);
 }

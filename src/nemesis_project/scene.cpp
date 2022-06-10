@@ -463,6 +463,8 @@ if (!env->place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 
 	//spawner->spawn_item(HOPPER, 2, 1, 3);
 
+	//misc testing
+	env->place_fanx3x3(loc<int>(40, 1, 6));
 
 	//the testing code for the vehicles
 
