@@ -12,10 +12,9 @@ public:
 
 	bool operator==(const int& id);
 
-	void set_location(const loc<int>& loca) { location = loca; }
-
 	int get_ID() { return ID; }
 	loc<int> get_location() { return location; }
+	void set_location(loc<int> alocation);
 
 	item_info* obj;
 	route* current_route;

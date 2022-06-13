@@ -88,3 +88,17 @@ void aircraft_manager::send_craft_patrol(int plane, loc<int> location) {
 	}
 }
 
+void aircraft_manager::testing_sim(std::vector<item_info*> working_models) {
+	sim_models = working_models;
+
+	if (sim_models.size() > 0) {
+		aircraft* temp = new aircraft(aircraft_id);
+		temp->obj = sim_models[0];
+		aircraft_id++;
+
+		std::cout << "working_models " << working_models.size() << std::endl;
+		std::cout << "sim_models " << sim_models.size() << std::endl;
+		sim_models.erase(sim_models.begin());
+		FC.start_sim(temp, sim_models);
+	}
+}

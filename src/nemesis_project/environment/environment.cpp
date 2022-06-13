@@ -291,6 +291,19 @@ void environment::draw_plane_route(int id) {
 	}
 }
 
+void environment::run_air_sim() {
+	std::vector<item_info*> working_models;
+
+	working_models.push_back(spawner->spawn_item(AIRCRAFT_T, -1, -1, -1));
+	working_models.push_back(spawner->spawn_item(CUBE_T, -1, -1, -1));
+	working_models.push_back(spawner->spawn_item(CUBE_T, -1, -1, -1));
+	working_models.push_back(spawner->spawn_item(CUBE_T, -1, -1, -1));
+	working_models.push_back(spawner->spawn_item(CUBE_T, -1, -1, -1));
+
+	aircraft_mgr.testing_sim(working_models);
+}
+
+
 void environment::place_fanx3x3(const loc<int>& location){
 
 	item_info* frame = spawner->spawn_item(FAN_FRAME, location.x, location.y, location.z);

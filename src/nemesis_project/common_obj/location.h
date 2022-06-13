@@ -21,6 +21,7 @@ public:
 	bool operator!=(const loc<int>& other);
 	void  operator=(const loc<int>& other);
 
+	std::string to_string();
 
 private:
 
@@ -41,6 +42,8 @@ public:
 	bool operator!=(const loc<double>& other);
 	void  operator=(const loc<double>& other);
 
+	std::string to_string();
+
 private:
 
 };
@@ -59,6 +62,8 @@ public:
 	bool operator==(const loc<float>& other);
 	bool operator!=(const loc<float>& other);
 	void  operator=(const loc<float>& other);
+
+	std::string to_string();
 
 private:
 

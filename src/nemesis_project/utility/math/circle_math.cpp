@@ -1,7 +1,5 @@
 #include "circle_math.h"
 
-
-
 #ifndef PI
 #define PI 3.14159265
 #endif // !PI

@@ -4,9 +4,11 @@
 
 void mathfunc::check_circle_math() {
 	std::cout << std::endl;
-	std::cout << "starting math testing code" << std::endl;
+	std::cout << "starting circle math testing code" << std::endl;
 	int passsed = 0;
 	int failed = 0;
+
+	std::cout << "running unit tests for the calc_angle function" << std::endl;
 
 	loc<double> start(0, 0, 0);
 	loc<double> other_point(10, 0, 0);
@@ -183,14 +185,17 @@ void mathfunc::check_circle_math() {
 	std::cout << "passed " << passsed << std::endl;
 	std::cout << "failed " << failed << std::endl;
 	std::cout << "done with angle tests" << std::endl;
-	while (true)
-	{
-
-	}
 }
 
 void mathfunc::check_distance_math() {
+	std::cout << std::endl;
+	std::cout << "running tests for the distance math" << std::endl;
+	int passsed = 0;
+	int failed = 0;
 
+	std::cout << "passed " << passsed << std::endl;
+	std::cout << "failed " << failed << std::endl;
+	std::cout << "done with angle tests" << std::endl;
 }
 
 void mathfunc::check_all_math() {
@@ -198,4 +203,5 @@ void mathfunc::check_all_math() {
 	check_circle_math();
 	check_distance_math();
 
+	//while (true);
 }

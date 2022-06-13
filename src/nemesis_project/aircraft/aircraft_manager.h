@@ -16,6 +16,9 @@ public:
 
 	void update(double time);
 
+	//test the flight movement
+	void testing_sim(std::vector<item_info*> working_models);
+
 	int spawn_landing_pad(loc<int> location);
 	int spawn_plane(int landing_pad);
 
@@ -37,6 +40,9 @@ private:
 
 	std::vector<aircraft*> aircrafts;
 	std::vector<landing_site*> landing_areas;
+	
+	std::vector<item_info*> sim_models;
+	bool running_sim;
 
 	int aircraft_id;
 	int landing_id;

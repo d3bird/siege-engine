@@ -16,7 +16,7 @@ public:
 
 	void send_craft_patrol(aircraft* plane, loc<int> location);
 
-
+	void start_sim(aircraft* craft, std::vector<item_info*> awaypoints);
 private:
 	std::vector<aircraft*> planes;
 	motion_manger* updater;
@@ -24,6 +24,28 @@ private:
 	void create_orbit_patrol(aircraft* plane);
 	bool orbit_check(const loc<int>& aDest, const loc<int>& aCenter, int radius);
 
+	//flight functions
+	void direct_fly(double time, aircraft* plane);
+	void turning_fly(double time, aircraft* plane);
 
+	//this just test the core flying of the ship to predefined waypoints
+	void test_fly(double time, aircraft* plane);
+
+	bool is_point_in_wayarea(const double x, const double z, const loc<double>& point);
+
+	// the size of the waypoint the aircraft must hit
+	double way_x_size;
+	double way_y_size;
+	double way_z_size;
+
+	//stuff needed for the simulation
+
+	void sim_update(double time);
+	void set_waypoints();
+	bool waypoint_reset = true;
+	bool running_sim;
+	aircraft* sim_craft;
+	std::vector<item_info*> waypoints;
+	int index;
 };
 

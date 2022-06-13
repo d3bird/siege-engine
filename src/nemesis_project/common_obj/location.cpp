@@ -34,6 +34,11 @@ void  loc<int>::operator=(const loc<int>& other) {
 	z = other.z;
 }
 
+std::string loc<int>::to_string() {
+	return std::to_string(x)+ ","+ std::to_string(y) +","+ std::to_string(z);
+}
+
+
 //============================ DOUBLE =========================
 
 loc<double>::loc() {
@@ -68,6 +73,10 @@ void  loc<double>::operator=(const loc<double>& other) {
 	z = other.z;
 }
 
+std::string loc<double>::to_string() {
+	return std::to_string(x) + "," + std::to_string(y) + "," + std::to_string(z);
+}
+
 //============================ FLOAT =========================
 
 loc<float>::loc() {
@@ -100,4 +109,8 @@ void  loc<float>::operator=(const loc<float>& other) {
 	x = other.x;
 	y = other.y;
 	z = other.z;
+}
+
+std::string loc<float>::to_string() {
+	return std::to_string(x) + "," + std::to_string(y) + "," + std::to_string(z);
 }

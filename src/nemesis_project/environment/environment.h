@@ -63,6 +63,8 @@ public:
 
 	void draw_plane_route(int id);
 
+	void run_air_sim();
+
 	// everything to do with the decoration
 
 	void place_fanx3x3(const loc<int>& location);
@@ -80,6 +82,7 @@ private:
 	vehicle_manager vehicle_mgr;
 	aircraft_manager aircraft_mgr;
 	decor::decor_mgr decor_manager;
+
 	//map related information
 	map_data* world_map;
 };

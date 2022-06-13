@@ -3,6 +3,8 @@
 #include "world/generation/world_generation.h"
 #include "world/generation/city_generation.h"
 
+#include "utility/math/math_check.h"
+
 scene::scene() {
 	API = NULL;
 	engine = NULL;
@@ -477,10 +479,13 @@ if (!env->place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 	env->place_car_worksation(loc<int>(25, 1, 11));
 	env->spawn_car_on_station(0);
 
+	mathfunc::check_circle_math();
+
 	env->spawn_plane(pad1);
 	env->spawn_plane(pad2);
 	env->send_craft_patrol(0, loc<int>(15, 10, 15));
-	env->draw_plane_route(0);
+	//env->draw_plane_route(0);
+	env->run_air_sim();
 }
 
 void scene::key_press() {

@@ -7,8 +7,25 @@ struct route {
 
 	std::vector<loc<double> > waypoints;
 	std::vector<loc<double> > starting_waypoints;
-	bool repeat;
+	bool repeat = true;
+	bool done = false;
+	bool found_angle = false;
 	loc<double> start_loc;
 	loc<int> orbit_loc;
 	int index = 0;
+
+	void increment_index() {
+		index++;
+		if (index >= waypoints.size()) {
+			index = 0;
+			if (!repeat) {
+				done = true;
+			}
+		}
+	}
+
+	loc<double> get_current_waypoint() {
+		return waypoints[index];
+	}
+
 };
