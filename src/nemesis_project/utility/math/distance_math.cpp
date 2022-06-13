@@ -36,7 +36,7 @@ bool mathfunc::move_plane_forward(loc<double>& start, double change, double angl
 
 	double distance = calc_distance(start, point);
 
-	if (distance -.01 <= change+.01) {
+	if (distance - .5 <= change + .5) {
 		passed_through = true;
 	}
 

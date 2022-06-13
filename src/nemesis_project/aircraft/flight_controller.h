@@ -24,9 +24,13 @@ private:
 	void create_orbit_patrol(aircraft* plane);
 	bool orbit_check(const loc<int>& aDest, const loc<int>& aCenter, int radius);
 
+	bool pos_angle_change(double current_angle, double needed_angle);
+	double get_new_angle(double current_angle, double needed_angle, double change, bool pos);
+
 	//flight functions
 	void direct_fly(double time, aircraft* plane);
 	void turning_fly(double time, aircraft* plane);
+	void rotate_then_fly(double time, aircraft* plane);;
 
 	//this just test the core flying of the ship to predefined waypoints
 	void test_fly(double time, aircraft* plane);
