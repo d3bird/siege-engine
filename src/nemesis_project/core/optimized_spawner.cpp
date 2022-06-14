@@ -216,6 +216,11 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("SUPPORT", paths.get_objs_loc() + "radio/support.obj", buffer_size, SUPPORT);
 	obj_temp = OBJM->add_model("SPEAKER_TOP", paths.get_objs_loc() + "radio/support_speaker.obj", buffer_size, SPEAKER_TOP);
 	
+	obj_temp = OBJM->add_model("DROP_SHIP_BODY", paths.get_objs_loc() + "ship/drop_ship_bodyMK2.obj", buffer_size, DROP_SHIP_BODY);
+	obj_temp = OBJM->add_model("DROP_SHIP_ENGINE", paths.get_objs_loc() + "ship/drop_ship_engineMK2.obj", buffer_size, DROP_SHIP_ENGINE);
+	obj_temp = OBJM->add_model("DROP_SHIP_DOOR_R", paths.get_objs_loc() + "ship/drop_ship_doorRMK2.obj", buffer_size, DROP_SHIP_DOOR_R);
+	obj_temp = OBJM->add_model("DROP_SHIP_DOOR_L", paths.get_objs_loc() + "ship/drop_ship_doorLMK2.obj", buffer_size, DROP_SHIP_DOOR_L);
+
 	obj_temp = OBJM->add_model("RAIL", paths.get_objs_loc() + "rail/rail.obj", buffer_size, RAIL);
 	obj_temp = OBJM->add_model("SLANT_RAIL", paths.get_objs_loc() + "rail/rail_splant.obj", buffer_size, SLANT_RAIL);
 	obj_temp = OBJM->add_model("CURVE_RAIL", paths.get_objs_loc() + "rail/rail_curve.obj", buffer_size, CURVE_RAIL);

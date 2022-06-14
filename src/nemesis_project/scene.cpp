@@ -486,6 +486,13 @@ if (!env->place_rail(loc<int>(10, 1, 1), true, railRoad::SLANT)) {
 	env->send_craft_patrol(0, loc<int>(15, 10, 15));
 	//env->draw_plane_route(0);
 	env->run_air_sim();
+
+	//DROP_SHIP_BODY, DROP_SHIP_ENGINE, DROP_SHIP_DOOR_R, DROP_SHIP_DOOR_L,
+	spawner->spawn_item(DROP_SHIP_BODY, 0, 8, 0);
+	spawner->spawn_item(DROP_SHIP_ENGINE, 0, 8, 0);
+	spawner->spawn_item(DROP_SHIP_DOOR_R, 0, 8, 0);
+	spawner->spawn_item(DROP_SHIP_DOOR_L, 0, 8, 0);
+
 }
 
 void scene::key_press() {
