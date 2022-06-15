@@ -1,7 +1,9 @@
 #pragma once
 
-#include "aircraft.h"
-#include "landing_site.h"
+
+#include "landing_spots/auto_pad.h"
+#include "landing_spots/landing_site.h"
+
 #include "flight_controller.h"
 
 #include <vector>
@@ -22,6 +24,8 @@ public:
 	int spawn_landing_pad(loc<int> location);
 	int spawn_plane(int landing_pad);
 
+	int spawn_drop_ship(loc<int> location);
+
 	void send_craft_to_site(int plane, loc<int> location);
 	void send_craft_to_land_site(int plane, int land_pad);
 
@@ -30,6 +34,8 @@ public:
 
 	//getters
 	aircraft* get_aircraft(int id);
+	drop_ship* get_drop_ship(int id);
+
 	landing_site* get_landing_site(int id);
 
 private:
@@ -39,6 +45,8 @@ private:
 	flight_controller FC;
 
 	std::vector<aircraft*> aircrafts;
+	std::vector<drop_ship*> drop_ships;
+
 	std::vector<landing_site*> landing_areas;
 	
 	std::vector<item_info*> sim_models;

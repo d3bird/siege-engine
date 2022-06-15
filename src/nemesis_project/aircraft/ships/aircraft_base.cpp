@@ -1,4 +1,4 @@
-#include "aircraft.h"
+#include "aircraft_base.h"
 
 aircraft::aircraft(int id) {
 	ID = id;

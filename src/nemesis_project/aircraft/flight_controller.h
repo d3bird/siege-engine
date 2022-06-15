@@ -1,6 +1,8 @@
 #pragma once
 
-#include "aircraft.h"
+#include "ships/aircraft_base.h"
+#include "ships/drop_ship.h"
+
 #include "air_route.hpp"
 #include "../utility/motion_manager.h"
 

@@ -14,6 +14,23 @@ aircraft_manager::~aircraft_manager() {
 
 void aircraft_manager::update(double time) {
 	FC.update(time);
+
+	for (int i = 0; i < drop_ships.size(); i++) {
+
+		//test code to make sure the door animation works
+
+		if (drop_ships[i]->are_doors_open()) {
+			drop_ships[i]->close_doors();
+		}
+		else {
+			drop_ships[i]->open_doors();
+		}
+
+		//update just the doors
+		drop_ships[i]->update_models(time);
+		updater->update_item(drop_ships[i]->left_doors);
+		updater->update_item(drop_ships[i]->right_doors);
+	}
 }
 
 int aircraft_manager::spawn_landing_pad(loc<int> location) {
@@ -40,6 +57,14 @@ int aircraft_manager::spawn_plane(int landing_pad) {
 	return temp->get_ID();
 }
 
+int aircraft_manager::spawn_drop_ship(loc<int> location) {
+	drop_ship * temp = new drop_ship(aircraft_id);
+	temp->set_location(location);
+	aircraft_id++;
+	drop_ships.push_back(temp);
+	return temp->get_ID();
+}
+
 void aircraft_manager::send_craft_to_site(int plane, loc<int> location) {
 
 }
@@ -55,6 +80,20 @@ aircraft* aircraft_manager::get_aircraft(int id) {
 	{
 		if (aircrafts[i]->get_ID() == id) {
 			output = aircrafts[i];
+			break;
+		}
+	}
+
+	return output;
+}
+
+drop_ship* aircraft_manager::get_drop_ship(int id) {
+	drop_ship* output = NULL;
+
+	for (size_t i = 0; i < drop_ships.size(); i++)
+	{
+		if (drop_ships[i]->get_ID() == id) {
+			output = drop_ships[i];
 			break;
 		}
 	}

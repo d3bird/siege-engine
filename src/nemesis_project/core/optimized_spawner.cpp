@@ -221,6 +221,10 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("DROP_SHIP_DOOR_R", paths.get_objs_loc() + "ship/drop_ship_doorRMK2.obj", buffer_size, DROP_SHIP_DOOR_R);
 	obj_temp = OBJM->add_model("DROP_SHIP_DOOR_L", paths.get_objs_loc() + "ship/drop_ship_doorLMK2.obj", buffer_size, DROP_SHIP_DOOR_L);
 
+	obj_temp = OBJM->add_model("AUTO_PAD", paths.get_objs_loc() + "ship/auto_pad.obj", buffer_size, AUTO_PAD);
+	obj_temp = OBJM->add_model("FUEL_TANKS", paths.get_objs_loc() + "ship/fuel_tanks.obj", buffer_size, FUEL_TANKS);
+
+
 	obj_temp = OBJM->add_model("RAIL", paths.get_objs_loc() + "rail/rail.obj", buffer_size, RAIL);
 	obj_temp = OBJM->add_model("SLANT_RAIL", paths.get_objs_loc() + "rail/rail_splant.obj", buffer_size, SLANT_RAIL);
 	obj_temp = OBJM->add_model("CURVE_RAIL", paths.get_objs_loc() + "rail/rail_curve.obj", buffer_size, CURVE_RAIL);

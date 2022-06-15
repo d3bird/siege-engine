@@ -266,6 +266,24 @@ int environment::spawn_plane(int landing_pad) {
 	return output;
 }
 
+int environment::spawn_drop_ship(loc<int> location) {
+	int ship = aircraft_mgr.spawn_drop_ship(location);
+	drop_ship* shipper = aircraft_mgr.get_drop_ship(ship);
+
+	if (ship != NULL) {
+		//DROP_SHIP_BODY, DROP_SHIP_ENGINE, DROP_SHIP_DOOR_R, DROP_SHIP_DOOR_L,
+		shipper->body= spawner->spawn_item(DROP_SHIP_BODY, location.x, location.y, location.z);
+		shipper->engines = spawner->spawn_item(DROP_SHIP_ENGINE, location.x, location.y, location.z);
+		shipper->right_doors = spawner->spawn_item(DROP_SHIP_DOOR_R, location.x, location.y, location.z);
+		shipper->left_doors = spawner->spawn_item(DROP_SHIP_DOOR_L, location.x, location.y, location.z);
+	}
+	else {
+		std::cout << "failed to retrive dropship to asign models" << std::endl;
+	}
+
+	return ship;
+}
+
 void environment::send_craft_to_site(int plane, loc<int> location) {
 	 aircraft_mgr.send_craft_to_site(plane ,location);
 }
