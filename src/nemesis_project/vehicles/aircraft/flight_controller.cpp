@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-#include "../utility/math/circle_math.h"
-#include "../utility/math/distance_math.h"
+#include "../../utility/math/circle_math.h"
+#include "../../utility/math/distance_math.h"
 
 flight_controller::flight_controller(motion_manger* mm)
 {
@@ -319,29 +319,29 @@ void flight_controller::start_sim(aircraft* craft, std::vector<item_info*> awayp
 	//while (true);
 
 
-	if (craft != NULL && awaypoints.size()>0) {
+	if (craft != NULL && awaypoints.size() > 0) {
 		running_sim = true;
-sim_craft = craft;
-waypoints = awaypoints;
-sim_craft->set_location(loc<int>(10, 10, 10));
-updater->update_item(sim_craft->obj);
+		sim_craft = craft;
+		waypoints = awaypoints;
+		sim_craft->set_location(loc<int>(10, 10, 10));
+		updater->update_item(sim_craft->obj);
 
-srand(time(NULL));
+		srand(time(NULL));
 
-set_waypoints();
+		set_waypoints();
 
-std::cout << "starting flight simulation with: " << std::endl;
-std::cout << "1 aircraft " << std::endl;
-std::cout << waypoints.size() << " waypoints" << std::endl;
+		std::cout << "starting flight simulation with: " << std::endl;
+		std::cout << "1 aircraft " << std::endl;
+		std::cout << waypoints.size() << " waypoints" << std::endl;
 	}
 	else {
-	std::cout << "sim failed to start" << std::endl;
-	if (craft == NULL) {
-		std::cout << "the airplane was null" << std::endl;
-	}
-	if (waypoints.empty()) {
-		std::cout << "the waypoints where empty" << std::endl;
-	}
+		std::cout << "sim failed to start" << std::endl;
+		if (craft == NULL) {
+			std::cout << "the airplane was null" << std::endl;
+		}
+		if (waypoints.empty()) {
+			std::cout << "the waypoints where empty" << std::endl;
+		}
 	}
 
 	//while (true);

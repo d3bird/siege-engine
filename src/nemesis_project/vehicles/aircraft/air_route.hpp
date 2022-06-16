@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../common_obj/location.h"
+#include "../../common_obj/location.h"
 #include <vector>
 
 struct route {

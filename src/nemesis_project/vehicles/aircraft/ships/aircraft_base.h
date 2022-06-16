@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../common_obj/location.h"
+#include "../../../common_obj/location.h"
 #include "../air_route.hpp"
 #include <rendering/rendering_object_data.hpp>
 

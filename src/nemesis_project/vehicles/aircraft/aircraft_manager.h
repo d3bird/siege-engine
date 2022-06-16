@@ -7,8 +7,8 @@
 #include "flight_controller.h"
 
 #include <vector>
-#include "../common_obj/location.h"
-#include "../utility/motion_manager.h"
+#include "../../common_obj/location.h"
+#include "../../utility/motion_manager.h"
 
 class aircraft_manager
 {

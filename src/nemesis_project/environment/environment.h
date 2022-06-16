@@ -9,10 +9,10 @@
 #include "../world/furnace/furnace_manager.h"
 #include "../world/liquid/liquid_manager.h"
 
-#include "../vehicles/vehicle_manager.h"
+#include "../vehicles/ground/vehicle_manager.h"
 #include "../world/terrian/world_map.h"
 
-#include "../aircraft/aircraft_manager.h"
+#include "../vehicles/aircraft/aircraft_manager.h"
 #include "../world/decoration/decor_manager.h"
 
 class environment

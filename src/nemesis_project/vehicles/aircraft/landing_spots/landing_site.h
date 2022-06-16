@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../common_obj/location.h"
+#include "../../../common_obj/location.h"
 #include <rendering/rendering_object_data.hpp>
 
 class landing_site
