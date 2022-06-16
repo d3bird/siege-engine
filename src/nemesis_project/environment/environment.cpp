@@ -295,6 +295,20 @@ int environment::spawn_landing_pad(loc<int> location) {
 	return output;
 }
 
+int environment::spawn_landing_strip(loc<int> location) {
+	int output = aircraft_mgr.spawn_landing_strip(location);
+	landing_strip* temp = aircraft_mgr.get_landing_strip(output);
+	if (temp != NULL) {
+		loc<int> location = temp->get_location();
+		std::cout << "strip loc" << location.x << " " << location.y << " " << location.z << std::endl;
+		temp->obj = spawner->spawn_item(LANDING_STRIP, location.x, location.y, location.z);
+	}
+	else {
+		std::cout << "failed to spawn landing site" << std::endl;
+	}
+	return output;
+}
+
 int environment::spawn_plane(int landing_pad) {
 	int output= aircraft_mgr.spawn_plane(landing_pad);
 

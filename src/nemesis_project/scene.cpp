@@ -488,6 +488,7 @@ void scene::world_generation_test() {
 	env->run_air_sim();
 
 	env->spawn_drop_ship(loc<int>(30, 2, 10));
+	env->spawn_landing_strip(loc<int>(30, 2, 20));
 
 }
 

@@ -62,6 +62,7 @@ public:
 
 	//everything to do with the aircraft
 	int spawn_landing_pad(loc<int> location);
+	int spawn_landing_strip(loc<int> location);
 	int spawn_plane(int landing_pad);
 
 	int spawn_drop_ship(loc<int> location);

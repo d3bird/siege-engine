@@ -3,6 +3,7 @@
 
 #include "landing_spots/auto_pad.h"
 #include "landing_spots/landing_site.h"
+#include "landing_spots/landing_strip.h"
 
 #include "flight_controller.h"
 
@@ -22,6 +23,7 @@ public:
 	void testing_sim(std::vector<item_info*> working_models);
 
 	int spawn_landing_pad(loc<int> location);
+	int spawn_landing_strip(loc<int> location);
 	int spawn_plane(int landing_pad);
 
 	int spawn_drop_ship(loc<int> location);
@@ -37,6 +39,7 @@ public:
 	drop_ship* get_drop_ship(int id);
 
 	landing_site* get_landing_site(int id);
+	landing_strip* get_landing_strip(int id);
 
 private:
 
@@ -48,6 +51,7 @@ private:
 	std::vector<drop_ship*> drop_ships;
 
 	std::vector<landing_site*> landing_areas;
+	std::vector<landing_strip*> landing_strips;
 	
 	std::vector<item_info*> sim_models;
 	bool running_sim;

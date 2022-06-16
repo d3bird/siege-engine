@@ -41,6 +41,14 @@ int aircraft_manager::spawn_landing_pad(loc<int> location) {
 	return temp->get_ID();
 }
 
+int aircraft_manager::spawn_landing_strip(loc<int> location) {
+	landing_strip* temp = new landing_strip(landing_id);
+	temp->set_location(location);
+	landing_id++;
+	landing_strips.push_back(temp);
+	return temp->get_ID();
+}
+
 int aircraft_manager::spawn_plane(int landing_pad) {
 	landing_site* site = get_landing_site(landing_pad);
 
@@ -110,6 +118,22 @@ landing_site* aircraft_manager::get_landing_site(int id) {
 		if (landing_areas[i]->get_ID() == id) {
 		//	std::cout << "found the pad" << std::endl;
 			output = landing_areas[i];
+			break;
+		}
+	}
+
+	return output;
+}
+
+landing_strip* aircraft_manager::get_landing_strip(int id) {
+	landing_strip* output = NULL;
+	//	std::cout << "looking for pad: " <<id<< std::endl;
+	for (size_t i = 0; i < landing_strips.size(); i++)
+	{
+		//std::cout << "pad: " << landing_areas[i]->get_ID() << std::endl;
+		if (landing_strips[i]->get_ID() == id) {
+			//	std::cout << "found the pad" << std::endl;
+			output = landing_strips[i];
 			break;
 		}
 	}

@@ -208,7 +208,7 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("AIRCRAFT", paths.get_objs_loc() + "aircraft/aircraft.obj", buffer_size, AIRCRAFT_T);
 	obj_temp = OBJM->add_model("BOMBER", paths.get_objs_loc() + "aircraft/bomber.obj", buffer_size, BOMBER);
 	obj_temp = OBJM->add_model("AIRCRAFT_LANDING_PAD", paths.get_objs_loc() + "aircraft/air_tile.obj", buffer_size, AIRCRAFT_LANDING_PAD);
-
+	obj_temp = OBJM->add_model("LANDING_STRIP", paths.get_objs_loc() + "aircraft/landing_strip.obj", buffer_size, LANDING_STRIP);
 
 	obj_temp = OBJM->add_model("BROADCAST_TOWER", paths.get_objs_loc() + "radio/radio_tower_temp.obj", buffer_size, BROADCAST_TOWER);
 	obj_temp = OBJM->add_model("RADIO_CONSOLE", paths.get_objs_loc() + "radio/console.obj", buffer_size, RADIO_CONSOLE);
@@ -223,7 +223,6 @@ void optimized_spawner::import_models() {
 
 	obj_temp = OBJM->add_model("AUTO_PAD", paths.get_objs_loc() + "ship/auto_pad.obj", buffer_size, AUTO_PAD);
 	obj_temp = OBJM->add_model("FUEL_TANKS", paths.get_objs_loc() + "ship/fuel_tanks.obj", buffer_size, FUEL_TANKS);
-
 
 	obj_temp = OBJM->add_model("RAIL", paths.get_objs_loc() + "rail/rail.obj", buffer_size, RAIL);
 	obj_temp = OBJM->add_model("SLANT_RAIL", paths.get_objs_loc() + "rail/rail_splant.obj", buffer_size, SLANT_RAIL);
