@@ -129,6 +129,13 @@ bool map_data::attach_obj(const loc<int>& cords, item_info* obj, bool floor, boo
 	return output;
 }
 
+item_info* map_data::replace_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground){
+	item_info* output = NULL;
+
+
+
+	return output;
+}
 
 bool map_data::is_valid_chunck(const loc<int>& cords) {
 	return ((cords.x >= 0 && cords.x < x_size) &&

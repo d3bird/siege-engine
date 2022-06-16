@@ -30,7 +30,7 @@ item_info* optimized_spawner::spawn_item(item_type type, int x, int y, int z, fl
 }
 
 void optimized_spawner::delete_item_from_buffer(item_info* obj) {
-	if (OBJM != NULL) {
+	if (OBJM != NULL && obj != NULL) {
 		OBJM->delete_item_from_buffer(obj);
 	}
 }

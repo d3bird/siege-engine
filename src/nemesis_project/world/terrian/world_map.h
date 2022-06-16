@@ -23,6 +23,9 @@ public:
 
 	bool attach_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground);
 
+	//returns the object that replaced
+	item_info* replace_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground);
+
 private:
 	
 	//check for validation

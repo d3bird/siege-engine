@@ -21,6 +21,50 @@ void environment::update(double time_change) {
 	decor_manager.update(time_change);
 }
 
+bool environment::spawn_ground_item(item_type type, const loc<int>& location) {
+	item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
+	bool ouptut = world_map->attach_obj(location, temp,false,true);
+	//if it failed to attach the item then delete the object
+	if (!ouptut) {
+		std::cout << "fail to spawn_ground_item" << std::endl;
+		spawner->delete_item_from_buffer(temp);
+	}
+
+	return ouptut;
+}
+
+bool environment::spawn_floor_item(item_type type, const loc<int>& location) {
+	item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
+	bool ouptut = world_map->attach_obj(location, temp, true, false);
+	//if it failed to attach the item then delete the object
+	if (!ouptut) {
+		std::cout << "fail to spawn_ground_item" << std::endl;
+		spawner->delete_item_from_buffer(temp);
+	}
+
+	return ouptut;
+}
+
+void environment::replace_ground_item(item_type type, const loc<int>& location) {
+	item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
+	item_info* old = world_map->replace_obj(location, temp, false, true);
+	//if it failed to attach the item then delete the object
+	if (old != NULL) {
+		std::cout << "removing replaced object" << std::endl;
+		spawner->delete_item_from_buffer(old);
+	}
+}
+
+void environment::replace_floor_item(item_type type, const loc<int>& location) {
+	item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
+	item_info* old = world_map->replace_obj(location, temp, true, false);
+	//if it failed to attach the item then delete the object
+	if (old != NULL) {
+		std::cout << "removing replaced object" << std::endl;
+		spawner->delete_item_from_buffer(old);
+	}
+}
+
 bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType) {
 	bool output = can_place_rail(location);
 
