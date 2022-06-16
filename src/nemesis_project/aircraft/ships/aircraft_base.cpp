@@ -1,11 +1,14 @@
 #include "aircraft_base.h"
 
-aircraft::aircraft(int id) {
-	ID = id;
-	obj = NULL;
-	current_route = NULL;
-	angle_speed = 30;
-	move_speed = 5;
+aircraft::aircraft(int id) :
+	ID(id),
+	obj(NULL),
+	current_route(NULL),
+	angle_speed(30),
+	move_speed(5),
+	angle(0)
+{
+
 }
 
 aircraft::~aircraft() {
@@ -17,6 +20,21 @@ bool aircraft::operator==(const int& id) {
 	return ID == id;
 }
 
+int aircraft::get_ID() { 
+	return ID; 
+}
+
+loc<int> aircraft::get_location() {
+	return location;
+}
+
+double aircraft::get_move_speed_static() { 
+	return move_speed;
+}
+
+double aircraft::get_angle_speed_static() {
+	return angle_speed;
+}
 
 void aircraft::set_location(loc<int> alocation) {
 	location = alocation;

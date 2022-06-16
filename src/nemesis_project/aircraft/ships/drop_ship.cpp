@@ -4,29 +4,28 @@
 drop_ship::drop_ship(int id) {
 	ID = id;
 
-	turn_speed= 30;
+	turn_speed = 30;
 	move_speed = 20;
-	 ID = id;
-	  doors_opening = false;
-	 doors_open = false;
-	 door_move_speed = 5;
-	 door_offset = 2;
-	 current_off = 0;
+	doors_opening = false;
+	doors_open = false;
+	door_move_speed = 5;
+	door_offset = 2;
+	current_off = 0;
 
-	 parked = true;
-	 ready_to_take_off = false;
-	 unloading = true;
-	 getting_ready_take_off = false;
-	 getting_ready_park = false;
-	 doors_closing = false;
-	 doors_closed = true;
+	parked = true;
+	ready_to_take_off = false;
+	unloading = true;
+	getting_ready_take_off = false;
+	getting_ready_park = false;
+	doors_closing = false;
+	doors_closed = true;
 
-	 body = NULL;
-	 engines = NULL;
-	 left_doors = NULL;
-	 right_doors = NULL;
+	body = NULL;
+	engines = NULL;
+	left_doors = NULL;
+	right_doors = NULL;
 
-	 current_route = NULL;
+	current_route = NULL;
 
 }
 
