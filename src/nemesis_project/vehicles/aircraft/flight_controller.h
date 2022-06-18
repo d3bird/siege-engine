@@ -8,6 +8,9 @@
 
 #include <vector>
 
+/*flight_controller
+* this manager managers the flying animation and how the plane moves between the given points
+*/
 class flight_controller
 {
 public:

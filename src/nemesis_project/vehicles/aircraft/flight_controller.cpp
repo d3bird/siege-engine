@@ -555,15 +555,15 @@ void flight_controller::test_fly(double time, aircraft* plane) {
 	double apx = 1;
 	if (reached_angle || (current_angle <= needed_angle - apx &&
 		current_angle >= needed_angle + apx)) {
-		std::cout << "arrived at angle" << std::endl;
+		//std::cout << "arrived at angle" << std::endl;
 
 	}
 	if (mathfunc::move_plane_forward(location, dist_change, current_angle, next_point)) {
 		readed_point = true;
 	}
 
-	std::cout << "dest " << next_point.to_string() << std::endl;
-	std::cout << "location " << location.to_string() << std::endl;
+	//std::cout << "dest " << next_point.to_string() << std::endl;
+	//std::cout << "location " << location.to_string() << std::endl;
 
 	plane->update_model_loc(location, current_angle);
 	updater->update_item(plane->obj);

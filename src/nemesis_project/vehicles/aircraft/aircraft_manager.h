@@ -6,10 +6,18 @@
 #include "landing_spots/landing_strip.h"
 
 #include "flight_controller.h"
+#include "route_planner.h"
 
 #include <vector>
 #include "../../common_obj/location.h"
 #include "../../utility/motion_manager.h"
+
+
+/*aircraft_manager
+* This manager is the high level entry point to control the air vehicles
+* it manages the aircraft enties and sends them to the flight controler to move through waypoints
+* it also keeps track of the landing sites so it can tell the route planner to navigate between theses sites
+*/
 
 class aircraft_manager
 {
@@ -46,6 +54,7 @@ private:
 	motion_manger* updater;
 
 	flight_controller FC;
+	route_planner route_plan;
 
 	std::vector<aircraft*> aircrafts;
 	std::vector<drop_ship*> drop_ships;

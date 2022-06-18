@@ -162,6 +162,7 @@ void aircraft_manager::testing_sim(std::vector<item_info*> working_models) {
 		std::cout << "working_models " << working_models.size() << std::endl;
 		std::cout << "sim_models " << sim_models.size() << std::endl;
 		sim_models.erase(sim_models.begin());
+		//route_plan.active_sim(temp, sim_models.size());
 		FC.start_sim(temp, sim_models);
 	}
 }
