@@ -15,6 +15,8 @@
 #include "../vehicles/aircraft/aircraft_manager.h"
 #include "../world/decoration/decor_manager.h"
 
+#include "../vehicles/missiles/missile_manager.h"
+
 class environment
 {
 public:
@@ -75,6 +77,13 @@ public:
 
 	void run_air_sim();
 
+	//everything to do with the missile system
+
+	void spawn_missile(const loc<int>& spawn);
+	void spawn_missile_lancher(const loc<int>& spawn);
+	void spawn_missile_w_lancher(const loc<int>& spawn);
+
+
 	// everything to do with the decoration
 
 	void place_fanx3x3(const loc<int>& location);
@@ -92,6 +101,7 @@ private:
 	vehicle_manager vehicle_mgr;
 	aircraft_manager aircraft_mgr;
 	decor::decor_mgr decor_manager;
+	missile_manager missile_mgr;
 
 	//map related information
 	map_data* world_map;

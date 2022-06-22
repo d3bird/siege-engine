@@ -490,6 +490,11 @@ void scene::world_generation_test() {
 	env->spawn_drop_ship(loc<int>(30, 2, 10));
 	env->spawn_landing_strip(loc<int>(30, 2, 20));
 
+	env->spawn_missile(loc<int>(27, 2, 15));
+	env->spawn_missile_lancher(loc<int>(30, 2, 15));
+	env->spawn_missile_w_lancher(loc<int>(34, 2, 15));
+
+
 }
 
 void scene::key_press() {

@@ -2,7 +2,7 @@
 
 environment::environment(optimized_spawner* os, motion_manger* mm):
 	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm),
-	decor_manager(mm) {
+	decor_manager(mm), missile_mgr(mm) {
 	spawner = os;
 	updater = mm;
 	world_map = NULL;
@@ -377,6 +377,28 @@ void environment::run_air_sim() {
 	working_models.push_back(spawner->spawn_item(CUBE_T, -1, -1, -1));
 
 	aircraft_mgr.testing_sim(working_models);
+}
+
+void environment::spawn_missile(const loc<int>& spawn) {
+	item_info* mis = spawner->spawn_item(MISSILE3X1, spawn.x, spawn.y, spawn.z);
+	missile_mgr.spawn_missile(spawn, mis);
+
+}
+
+void environment::spawn_missile_lancher(const loc<int>& spawn) {
+	item_info* lan = spawner->spawn_item(M_LAUNCHER, spawn.x, spawn.y, spawn.z);
+	missile_mgr.spawn_launcher(spawn, lan);
+}
+
+void environment::spawn_missile_w_lancher(const loc<int>& spawn) {
+	item_info* mis = spawner->spawn_item(MISSILE3X1, spawn.x, spawn.y+ 5, spawn.z);
+	item_info* lan = spawner->spawn_item(M_LAUNCHER, spawn.x, spawn.y, spawn.z);
+
+	int lan_id = missile_mgr.spawn_launcher(spawn, lan);
+	int mis_lan = missile_mgr.spawn_missile(spawn, mis);
+
+	missile_mgr.move_missile_to_launcher(mis_lan, lan_id);
+
 }
 
 

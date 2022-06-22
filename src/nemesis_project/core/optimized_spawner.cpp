@@ -221,6 +221,10 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("DROP_SHIP_DOOR_R", paths.get_objs_loc() + "ship/drop_ship_doorRMK2.obj", buffer_size, DROP_SHIP_DOOR_R);
 	obj_temp = OBJM->add_model("DROP_SHIP_DOOR_L", paths.get_objs_loc() + "ship/drop_ship_doorLMK2.obj", buffer_size, DROP_SHIP_DOOR_L);
 
+	obj_temp = OBJM->add_model("MISSILE3X1", paths.get_objs_loc() + "missiles/missile1X3.obj", buffer_size, MISSILE3X1);
+	obj_temp = OBJM->add_model("DROP_SHIP_DOOR_L", paths.get_objs_loc() + "missiles/launcher.obj", buffer_size, M_LAUNCHER);
+
+
 	obj_temp = OBJM->add_model("AUTO_PAD", paths.get_objs_loc() + "ship/auto_pad.obj", buffer_size, AUTO_PAD);
 	obj_temp = OBJM->add_model("FUEL_TANKS", paths.get_objs_loc() + "ship/fuel_tanks.obj", buffer_size, FUEL_TANKS);
 
