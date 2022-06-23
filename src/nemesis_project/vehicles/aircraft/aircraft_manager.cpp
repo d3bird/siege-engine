@@ -159,10 +159,15 @@ void aircraft_manager::testing_sim(std::vector<item_info*> working_models) {
 		temp->obj = sim_models[0];
 		aircraft_id++;
 
+		aircraft* temp2 = new aircraft(aircraft_id);
+		temp2->obj = sim_models[1];
+		aircraft_id++;
+
 		std::cout << "working_models " << working_models.size() << std::endl;
 		std::cout << "sim_models " << sim_models.size() << std::endl;
 		sim_models.erase(sim_models.begin());
+		sim_models.erase(sim_models.begin());
 		//route_plan.active_sim(temp, sim_models.size());
-		FC.start_sim(temp, sim_models);
+		FC.start_sim(temp, temp2, sim_models);
 	}
 }

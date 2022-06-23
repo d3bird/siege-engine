@@ -6,7 +6,7 @@ aircraft::aircraft(int id) :
 	current_route(NULL),
 	angle_speed(30),
 	move_speed(5),
-	angle(0)
+	angle()
 {
 
 }
@@ -93,19 +93,20 @@ double aircraft::get_angle_speed(double distance, double angle_change_req) {
 	return output;
 }
 
-void aircraft::update_model_loc(const loc<double>& alocation, double asangle) {
+void aircraft::update_model_loc(const loc<double>& alocation,const rotation& asangle) {
 	current_location = alocation;
 	angle = asangle;
 
 	obj->x_m = current_location.x;
 	obj->y_m = current_location.y;
 	obj->z_m = current_location.z;
-	obj->angles.set_y_angle(angle);
+	obj->angles = angle;
 }
 
 void aircraft::update_model_loc_from_saved() {
 	obj->x_m = current_location.x;
 	obj->y_m = current_location.y;
 	obj->z_m = current_location.z;
-	obj->angles.set_y_angle(angle);
+	obj->angles = angle;
+
 }

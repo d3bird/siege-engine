@@ -23,7 +23,7 @@ public:
 	double get_angle_speed(double distance, double angle_change_req);
 	double get_angle_speed_static();
 
-	void update_model_loc(const loc<double>& alocation, double aangle);
+	void update_model_loc(const loc<double>& alocation,const rotation &aangle);
 	void update_model_loc_from_saved();
 
 	item_info* obj;
@@ -31,7 +31,7 @@ public:
 
 protected:
 	loc<double> current_location;
-	double angle;
+	rotation angle;
 
 private:
 	int ID;

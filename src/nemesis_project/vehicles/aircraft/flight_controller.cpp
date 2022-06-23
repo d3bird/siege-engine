@@ -314,7 +314,7 @@ void flight_controller::create_orbit_patrol(aircraft* plane) {
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-void flight_controller::start_sim(aircraft* craft, std::vector<item_info*> awaypoints) {
+void flight_controller::start_sim(aircraft* craft, aircraft* craft2,  std::vector<item_info*> awaypoints) {
 	//std::cout << "awaypoints" << awaypoints.size() << std::endl;
 	//while (true);
 
@@ -322,16 +322,23 @@ void flight_controller::start_sim(aircraft* craft, std::vector<item_info*> awayp
 	if (craft != NULL && awaypoints.size() > 0) {
 		running_sim = true;
 		sim_craft = craft;
+		sim_craft2 = craft2;
 		waypoints = awaypoints;
 		sim_craft->set_location(loc<int>(10, 10, 10));
 		updater->update_item(sim_craft->obj);
+
+		int crafr_num = 1;
+		if (sim_craft2 != NULL) {
+			crafr_num++;
+			sim_craft2->set_location(loc<int>(0, 10, 0));
+		}
 
 		srand(time(NULL));
 
 		set_waypoints();
 
 		std::cout << "starting flight simulation with: " << std::endl;
-		std::cout << "1 aircraft " << std::endl;
+		std::cout << crafr_num<<" aircraft " << std::endl;
 		std::cout << waypoints.size() << " waypoints" << std::endl;
 	}
 	else {
@@ -414,6 +421,9 @@ void flight_controller::sim_update(double time) {
 		//}
 
 	test_fly(time, sim_craft);
+		if (sim_craft2 != NULL) {
+			angle_update(time);
+		}
 }
 
 void flight_controller::rotate_then_fly(double time, aircraft* plane) {
@@ -504,7 +514,12 @@ void flight_controller::test_fly(double time, aircraft* plane) {
 	bool reached_angle = false;
 
 	float needed_angle = mathfunc::calc_angle(location, next_point);
-	float current_angle = plane->obj->angles.get_y_angle();
+	float current_angle_y = plane->obj->angles.get_y_angle();
+	float current_angle_x = plane->obj->angles.get_x_angle();
+	float current_angle_z = plane->obj->angles.get_z_angle();
+
+	rotation rot_output = plane->obj->angles;
+
 
 	if (needed_angle < 0) {
 		needed_angle = 360 + needed_angle;
@@ -513,11 +528,11 @@ void flight_controller::test_fly(double time, aircraft* plane) {
 	double distance = mathfunc::calc_distance(location, next_point);
 	double angle_change_amount;
 
-	if (current_angle < needed_angle) {
-		angle_change_amount = needed_angle - current_angle;
+	if (current_angle_y < needed_angle) {
+		angle_change_amount = needed_angle - current_angle_y;
 	}
 	else {
-		angle_change_amount = current_angle - needed_angle;
+		angle_change_amount = current_angle_y - needed_angle;
 	}
 
 	double dist_change = time * (plane->get_move_speed(distance, angle_change_amount));  //* 5;
@@ -528,16 +543,16 @@ void flight_controller::test_fly(double time, aircraft* plane) {
 	//std::cout << "needed_angle " << needed_angle << std::endl;
 	//std::cout << "current_angle " << current_angle << std::endl;
 
-	if (current_angle < needed_angle) {
-		current_angle += angle_change;
-		if (current_angle > needed_angle) {
-			current_angle = needed_angle;
+	if (current_angle_y < needed_angle) {
+		current_angle_y += angle_change;
+		if (current_angle_y > needed_angle) {
+			current_angle_y = needed_angle;
 		}
 	}
-	else if (current_angle > needed_angle) {
-		current_angle -= angle_change;
-		if (current_angle < needed_angle) {
-			current_angle = needed_angle;
+	else if (current_angle_y > needed_angle) {
+		current_angle_y -= angle_change;
+		if (current_angle_y < needed_angle) {
+			current_angle_y = needed_angle;
 		}
 	}
 	else {
@@ -553,25 +568,54 @@ void flight_controller::test_fly(double time, aircraft* plane) {
 	}*/
 
 	double apx = 1;
-	if (reached_angle || (current_angle <= needed_angle - apx &&
-		current_angle >= needed_angle + apx)) {
+	if (reached_angle || (current_angle_y <= needed_angle - apx &&
+		current_angle_y >= needed_angle + apx)) {
 		//std::cout << "arrived at angle" << std::endl;
 
 	}
-	if (mathfunc::move_plane_forward(location, dist_change, current_angle, next_point)) {
+	if (mathfunc::move_plane_forward(location, dist_change, current_angle_y, next_point)) {
 		readed_point = true;
 	}
 
 	//std::cout << "dest " << next_point.to_string() << std::endl;
 	//std::cout << "location " << location.to_string() << std::endl;
 
-	plane->update_model_loc(location, current_angle);
+	current_angle_x += 50*time;
+	//current_angle_z += 10*time;
+
+	rot_output.set_x_angle(current_angle_x);
+	rot_output.set_y_angle(current_angle_y);
+	rot_output.set_z_angle(current_angle_z);
+
+	plane->update_model_loc(location, rot_output);
 	updater->update_item(plane->obj);
 
 	if (readed_point) {
 		plane->current_route->increment_index();
 
 	}
+}
+
+void flight_controller::angle_update(double time) {
+
+	double x_angle = sim_craft2->obj->angles.get_x_angle();
+	double y_angle = sim_craft2->obj->angles.get_y_angle();
+	double z_angle = sim_craft2->obj->angles.get_z_angle();
+
+	x_angle += time * 20;
+	y_angle += time * 20;
+
+	rotation rot_output;
+
+	rot_output.set_x_angle(x_angle);
+	rot_output.set_y_angle(y_angle);
+	rot_output.set_z_angle(z_angle);
+
+	loc<double> location(sim_craft2->get_location().x * 2,
+		sim_craft2->get_location().y * 2, sim_craft2->get_location().z * 2);
+
+	sim_craft2->update_model_loc(location, rot_output);
+	updater->update_item(sim_craft2->obj);
 }
 
 bool flight_controller::pos_angle_change(double current_angle, double needed_angle) {

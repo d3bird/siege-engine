@@ -5,8 +5,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+
+
 rotation::rotation():
-	x_angle(0), y_angle(0), z_angle(0) {
+	x_angle(0.0f), y_angle(0.0f), z_angle(0.0f) {
 
 }
 
@@ -16,15 +18,23 @@ rotation::~rotation() {
 
 glm::mat4 rotation::get_matirx(glm::mat4& inputed) {
 
-	if (!double_equals(x_angle, 0)) {
-		inputed = glm::rotate(inputed, glm::radians(x_angle), glm::vec3(1, 0, 0));
-	}
-	if (!double_equals(y_angle, 0)) {
-		inputed = glm::rotate(inputed, glm::radians(y_angle), glm::vec3(0, 1, 0));
-	}
-	if (!double_equals(z_angle, 0)) {
-		inputed = glm::rotate(inputed, glm::radians(z_angle), glm::vec3(0, 0, 1));
-	}
+	rotation_quat = glm::quat(glm::vec3(glm::radians(x_angle), glm::radians(y_angle), glm::radians(z_angle)));
+
+	inputed = inputed * glm::toMat4(rotation_quat);
+
+	//this is the old way of doing roations around a single axis 
+	// this however causes gimble lock that dirasticle affects the way the rotation turns out
+	//if (!double_equals(x_angle, 0)) {
+	//	inputed = glm::rotate(inputed, glm::radians(x_angle), glm::vec3(1, 0, 0));
+	//}
+	//
+	//if (!double_equals(y_angle, 0)) {
+	//	inputed = glm::rotate(inputed, glm::radians(y_angle), glm::vec3(0, 1, 0));
+	//}
+
+	//if (!double_equals(z_angle, 0)) {
+	//	inputed = glm::rotate(inputed, glm::radians(z_angle), glm::vec3(0, 0, 1));
+	//}
 
 	return inputed;
 }
@@ -83,4 +93,16 @@ void rotation::set_z_angle(float anagle) {
 bool rotation::double_equals(float a, float b, float epsilon)
 {
 	return std::abs(a - b) < epsilon;
+}
+
+bool rotation::operator==(const rotation& other) {
+	return (double_equals(x_angle, other.x_angle) &&
+			double_equals(y_angle, other.y_angle) &&
+			double_equals(z_angle, other.z_angle));
+}
+
+void rotation::operator=(const rotation& other) {
+	x_angle = other.x_angle;
+	y_angle = other.y_angle;
+	z_angle = other.z_angle;
 }

@@ -4,8 +4,17 @@
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 
+#include <glm/gtc/quaternion.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
+
 /*
 * preforms the rotation matrix calculation for objects that need a complex angle
+* 
+* x_angle is the angle that deals with the spin of the object
+* y_angle is the angle that deals with the x/z axis
+* z_angle is the angle that deals with the  y axis
+* 
 */
 
 class rotation {
@@ -31,6 +40,9 @@ public:
 	float get_y_angle() { return y_angle; }
 	float get_z_angle() { return z_angle; }
 
+	bool operator==(const rotation& other);
+	void operator=(const rotation& other);
+
 private:
 
 	bool double_equals(float a, float b, float epsilon = 0.001);
@@ -40,5 +52,7 @@ private:
 	float x_angle;
 	float y_angle;
 	float z_angle;
+
+	glm::quat rotation_quat;
 
 };

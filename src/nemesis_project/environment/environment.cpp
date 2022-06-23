@@ -371,6 +371,7 @@ void environment::run_air_sim() {
 	std::vector<item_info*> working_models;
 
 	working_models.push_back(spawner->spawn_item(AIRCRAFT_T, -1, -1, -1));
+	working_models.push_back(spawner->spawn_item(AIRCRAFT_T, -1, -1, -1));
 	working_models.push_back(spawner->spawn_item(CUBE_T, -1, -1, -1));
 	working_models.push_back(spawner->spawn_item(CUBE_T, -1, -1, -1));
 	working_models.push_back(spawner->spawn_item(CUBE_T, -1, -1, -1));
