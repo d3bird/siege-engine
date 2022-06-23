@@ -379,18 +379,17 @@ void environment::run_air_sim() {
 	aircraft_mgr.testing_sim(working_models);
 }
 
-void environment::spawn_missile(const loc<int>& spawn) {
+int environment::spawn_missile(const loc<int>& spawn) {
 	item_info* mis = spawner->spawn_item(MISSILE3X1, spawn.x, spawn.y, spawn.z);
-	missile_mgr.spawn_missile(spawn, mis);
-
+	return missile_mgr.spawn_missile(spawn, mis);
 }
 
-void environment::spawn_missile_lancher(const loc<int>& spawn) {
+int environment::spawn_missile_lancher(const loc<int>& spawn) {
 	item_info* lan = spawner->spawn_item(M_LAUNCHER, spawn.x, spawn.y, spawn.z);
-	missile_mgr.spawn_launcher(spawn, lan);
+	return missile_mgr.spawn_launcher(spawn, lan);
 }
 
-void environment::spawn_missile_w_lancher(const loc<int>& spawn) {
+int environment::spawn_missile_w_lancher(const loc<int>& spawn) {
 	item_info* mis = spawner->spawn_item(MISSILE3X1, spawn.x, spawn.y+ 5, spawn.z);
 	item_info* lan = spawner->spawn_item(M_LAUNCHER, spawn.x, spawn.y, spawn.z);
 
@@ -399,6 +398,11 @@ void environment::spawn_missile_w_lancher(const loc<int>& spawn) {
 
 	missile_mgr.move_missile_to_launcher(mis_lan, lan_id);
 
+	return lan_id;
+}
+
+bool environment::fire_launcher(int launcher_id, const loc<int>& target) {
+	return missile_mgr.fire_launcher(launcher_id, target);
 }
 
 

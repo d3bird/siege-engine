@@ -9,7 +9,29 @@ public:
 	missile(int id, loc<int> aLocation);
 	~missile();
 
-	loc<int> get_location() { return location; }
+	enum flight_state { TAKE_OFF, ANGLE_TOWARD, HOMING, FULL_SPEED };
+
+	void fire(const loc<double>& atarget);
+	bool is_fired();
+
+	void explode();
+
+	double get_velocity();
+	double get_angle_changle();
+
+	double get_fuel() { return fuel; }
+	double get_max_fuel() { return max_fuel; }
+	double add_fuel(double amount);
+
+	void set_fly_state(flight_state new_state);
+
+	void set_grid_location(const loc<int>& alocation);
+	void update_model_location(const loc<double>& alocation, double angle = 0);
+
+	void update_model_info();
+
+	loc<int> get_start_location() { return location; }
+	loc<double> get_location() { return actual_location; }
 	int get_ID() { return ID; }
 
 	item_info* model;
@@ -17,5 +39,24 @@ public:
 private:
 	int ID;
 	loc<int> location;
+	loc<double> actual_location;
+
+	loc<double> target;
+	bool target_set;
+	bool fired;
+
+	double fuel;
+	double max_fuel;
+	double fuel_burn;
+
+	flight_state state;
+
+	double acceleration;
+	double velocity;
+	double max_velocity;
+
+	double angle_change;
+	double horizontal_angle;
+
 
 };

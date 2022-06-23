@@ -79,10 +79,11 @@ public:
 
 	//everything to do with the missile system
 
-	void spawn_missile(const loc<int>& spawn);
-	void spawn_missile_lancher(const loc<int>& spawn);
-	void spawn_missile_w_lancher(const loc<int>& spawn);
+	int spawn_missile(const loc<int>& spawn);
+	int spawn_missile_lancher(const loc<int>& spawn);
+	int spawn_missile_w_lancher(const loc<int>& spawn);
 
+	bool fire_launcher(int launcher_id, const loc<int>& target);
 
 	// everything to do with the decoration
 

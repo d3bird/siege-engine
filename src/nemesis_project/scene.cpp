@@ -492,8 +492,8 @@ void scene::world_generation_test() {
 
 	env->spawn_missile(loc<int>(27, 2, 15));
 	env->spawn_missile_lancher(loc<int>(30, 2, 15));
-	env->spawn_missile_w_lancher(loc<int>(34, 2, 15));
-
+	int test_lan = env->spawn_missile_w_lancher(loc<int>(34, 2, 15));
+	env->fire_launcher(test_lan, loc<int>(0, 0, 0));
 
 }
 
