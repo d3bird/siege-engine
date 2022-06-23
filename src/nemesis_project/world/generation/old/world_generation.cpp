@@ -786,7 +786,7 @@ void world_generator::update_obj_angle(item_info* obj, float angle) {
 	update_pac.y_scale = 1;
 	update_pac.z_scale = 1;
 
-	update_pac.angle = angle;
+	update_pac.angle.set_y_angle(angle);
 
 	update_pac.buffer_loc = obj->buffer_loc;
 	update_pac.item_id = obj->item_id;

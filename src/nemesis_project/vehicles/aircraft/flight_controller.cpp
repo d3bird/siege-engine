@@ -186,7 +186,7 @@ void flight_controller::turning_fly(double time, aircraft* plane) {
 
 		bool changed = false;
 
-		double current_angle = plane->obj->angle;
+		double current_angle = plane->obj->angles.get_y_angle();
 
 		//if (!current_route->found_angle) {
 		//	double needed_angle = calc_angle(location, point);
@@ -234,7 +234,7 @@ void flight_controller::turning_fly(double time, aircraft* plane) {
 		plane->obj->x_m = location.x;
 		plane->obj->y_m = location.y;
 		plane->obj->z_m = location.z;
-		plane->obj->angle = current_angle;
+		plane->obj->angles.set_y_angle(current_angle);
 		updater->update_item(plane->obj);
 
 		if (!changed) {
@@ -428,7 +428,7 @@ void flight_controller::rotate_then_fly(double time, aircraft* plane) {
 	bool reached_angle = false;
 
 	float needed_angle = mathfunc::calc_angle(location, next_point);
-	float current_angle = plane->obj->angle;
+	float current_angle = plane->obj->angles.get_y_angle();
 
 	if (needed_angle < 0) {
 		needed_angle = 360 + needed_angle;
@@ -484,7 +484,7 @@ void flight_controller::rotate_then_fly(double time, aircraft* plane) {
 	plane->obj->x_m = location.x;
 	plane->obj->y_m = location.y;
 	plane->obj->z_m = location.z;
-	plane->obj->angle = current_angle;
+	plane->obj->angles.set_y_angle(current_angle);
 	updater->update_item(plane->obj);
 
 	if (readed_point) {
@@ -504,7 +504,7 @@ void flight_controller::test_fly(double time, aircraft* plane) {
 	bool reached_angle = false;
 
 	float needed_angle = mathfunc::calc_angle(location, next_point);
-	float current_angle = plane->obj->angle;
+	float current_angle = plane->obj->angles.get_y_angle();
 
 	if (needed_angle < 0) {
 		needed_angle = 360 + needed_angle;

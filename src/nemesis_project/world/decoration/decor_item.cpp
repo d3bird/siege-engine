@@ -18,12 +18,12 @@ void decor::decor_item::update(double time) {
 	{
 	case decor::FAN:
 		double angle_change = turn_speed * time;
-		float angle = obj2->angle;
+		float angle = obj2->angles.get_y_angle();
 		angle += angle_change;
 		if (angle >= 360) {
 			angle -= 360;
 		}
-		obj2->angle = angle;
+		obj2->angles.set_y_angle(angle);
 		break;
 	}
 

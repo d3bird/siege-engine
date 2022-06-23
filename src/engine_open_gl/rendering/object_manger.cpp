@@ -162,7 +162,8 @@ void object_manger::update_item_matrix(update_pak* data, glm::mat4 given_mat) {
 		//model = glm::scale(model, glm::vec3(data->x_scale, data->y_scale, data->z_scale));
 		if (given_mat == glm::mat4(-1.0f)) {
 			model = glm::translate(model, glm::vec3(data->x, data->y, data->z));
-			model = glm::rotate(model, glm::radians(data->angle), glm::vec3(data->rox_x, data->rox_y, data->rox_z));
+			model = data->angle.get_matirx(model);
+			//model = glm::rotate(model, glm::radians(data->angle), glm::vec3(data->rox_x, data->rox_y, data->rox_z));
 		}
 		else {
 			model = given_mat;
@@ -216,7 +217,7 @@ item_info* object_manger::spawn_item(int type, int x, int y, int z, float angle)
 	temp = glm::translate(temp, glm::vec3(x_f, y_f, z_f));
 	temp = glm::rotate(temp, glm::radians(angle), glm::vec3(0,1,0));
 	item_info* output =spawn_item(type, x, y, z, &temp);
-	output->angle = angle;
+	output->angles.set_y_angle(angle);
 
 	return output;
 }

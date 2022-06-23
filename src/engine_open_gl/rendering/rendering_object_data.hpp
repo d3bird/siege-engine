@@ -34,11 +34,11 @@ struct item_info
 
 	int rendering_group = -1;
 
-	float x_rot = 0;
+	/*float x_rot = 0;
 	float y_rot = 1;
 	float z_rot = 0;
 
-	float angle = 0;
+	float angle = 0;*/
 
 	std::string* item_name;
 	int type;

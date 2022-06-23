@@ -41,7 +41,7 @@ struct update_pak {
 	float rox_x = 0;
 	float rox_y = 1;
 	float rox_z = 0;
-	float angle =0;
+	rotation angle;
 };
 
 //transfer object to tell the map where all the maps are located

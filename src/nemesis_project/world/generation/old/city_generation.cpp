@@ -204,10 +204,10 @@ bool city_generator::hook_wheel_box_up(local_map_data* input, bool just_furnace)
 
 		for (int i = 0; i < num_wheels; i++) {
 
-			float angle = input->Wheels->wheel_blocks[i]->angle;
-			int x_loc = input->Wheels->wheel_blocks[i]->x;
-			int y_loc = input->Wheels->wheel_blocks[i]->y;
-			int z_loc = input->Wheels->wheel_blocks[i]->z;
+			float angle = input->Wheels->wheel_blocks[i]->angles.get_y_angle();
+			int x_loc = input->Wheels->wheel_blocks[i]->x_m/2;
+			int y_loc = input->Wheels->wheel_blocks[i]->y_m/2;
+			int z_loc = input->Wheels->wheel_blocks[i]->z_m/2;
 
 			if (angle == 0) {
 				//place the GEAR_BOX_FRAME
@@ -872,35 +872,35 @@ void city_generator::place_wheel_on_city(local_map_data* input) {
 		}
 	}
 
-	//placing wheels
-	for (int i = 0; i < Wheels->wheel_blocks.size(); i++) {
-		wheel* temp = new wheel;
-		int x = Wheels->wheel_blocks[i]->x;
-		int y = Wheels->wheel_blocks[i]->y;
-		int z = Wheels->wheel_blocks[i]->z;
+	////placing wheels
+	//for (int i = 0; i < Wheels->wheel_blocks.size(); i++) {
+	//	wheel* temp = new wheel;
+	//	int x = Wheels->wheel_blocks[i]->x;
+	//	int y = Wheels->wheel_blocks[i]->y;
+	//	int z = Wheels->wheel_blocks[i]->z;
 
-		float angle = 0;
+	//	float angle = 0;
 
-		if (Wheels->wheel_blocks[i]->angle == 90) {
+	//	if (Wheels->wheel_blocks[i]->angles.get_y_angle() == 90) {
 
-		}
-		else if (Wheels->wheel_blocks[i]->angle == 180) {
-			x -= 4;
-			angle = 180;
-		}
-		if (Wheels->wheel_blocks[i]->angle == 270) {
+	//	}
+	//	else if (Wheels->wheel_blocks[i]->angles.get_y_angle() == 180) {
+	//		x -= 4;
+	//		angle = 180;
+	//	}
+	//	if (Wheels->wheel_blocks[i]->angles.get_y_angle() == 270) {
 
-		}
-		else {
-			x += 2;
-		}
-		//Wheels->wheel_blocks[i]->angle == 0:
+	//	}
+	//	else {
+	//		x += 2;
+	//	}
+	//	//Wheels->wheel_blocks[i]->angle == 0:
 
 
-		temp->obj = OBJM->spawn_item(SMALL_WHEEL_T, x, y, z, angle);
-		temp->wheel_block_link = Wheels->wheel_blocks[i];
-		Wheels->wheels.push_back(temp);
-	}
+	//	temp->obj = OBJM->spawn_item(SMALL_WHEEL_T, x, y, z, angle);
+	//	temp->wheel_block_link = Wheels->wheel_blocks[i];
+	//	Wheels->wheels.push_back(temp);
+	//}
 
 	std::cout << "information about the wheels" << std::endl;
 	std::cout << "wheel blocks:" << Wheels->wheel_blocks.size() << std::endl;

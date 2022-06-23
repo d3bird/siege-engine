@@ -645,10 +645,12 @@ void GUI::spawn_object() {
         fresh_item = OBJM->spawn_item(type, -1, -1, -1, &trans);
     }
 
-    fresh_item->x_rot = rot.x;
-    fresh_item->y_rot = rot.y;
-    fresh_item->z_rot = rot.z;
-    fresh_item->angle = angle;
+    //TODO fix the gui to work with the new angle class
+
+  //  fresh_item->angles.set_x_angle(rot.x);
+   // fresh_item->angles.set_y_angle(rot.y);
+    //fresh_item->angles.set_x_angle(rot.z);
+   // fresh_item->angle = angle;
 
     if (!spawned) {
         spawned = true;

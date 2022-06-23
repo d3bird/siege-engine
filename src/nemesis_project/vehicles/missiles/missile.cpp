@@ -90,6 +90,6 @@ void missile::update_model_info() {
 		model->x_m = actual_location.x;
 		model->y_m = actual_location.y;
 		model->z_m = actual_location.z;
-		model->angle = horizontal_angle;
+		model->angles.set_y_angle(horizontal_angle);
 	}
 }

@@ -100,12 +100,12 @@ void aircraft::update_model_loc(const loc<double>& alocation, double asangle) {
 	obj->x_m = current_location.x;
 	obj->y_m = current_location.y;
 	obj->z_m = current_location.z;
-	obj->angle = angle;
+	obj->angles.set_y_angle(angle);
 }
 
 void aircraft::update_model_loc_from_saved() {
 	obj->x_m = current_location.x;
 	obj->y_m = current_location.y;
 	obj->z_m = current_location.z;
-	obj->angle = angle;
+	obj->angles.set_y_angle(angle);
 }

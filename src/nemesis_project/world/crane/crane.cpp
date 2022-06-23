@@ -116,7 +116,7 @@ void crane::update(double detlaTime) {
 		arm[i]->y_m = (y * 2);
 		arm[i]->z_m = (z * 2);
 
-		arm[i]->angle = current_angle;
+		arm[i]->angles.set_y_angle(current_angle);
 
 		updated = true;
 
@@ -154,7 +154,7 @@ void crane::update(double detlaTime) {
 			attachment->y_m = (y * 2);
 			attachment->z_m = (z * 2);
 
-			attachment->angle = current_angle;
+			attachment->angles.set_y_angle(current_angle);
 
 			update_arm = true;
 		}

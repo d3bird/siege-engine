@@ -41,7 +41,7 @@ void mobil_platform::update_pos(float delta_time) {
 						pak.y_scale = 1;
 						pak.z_scale = 1;
 
-						pak.angle = map_info->map[y][x][z].ground->angle;
+						pak.angle.set_y_angle(map_info->map[y][x][z].ground->angles.get_y_angle());
 
 						pak.buffer_loc = map_info->map[y][x][z].ground->buffer_loc;
 						pak.item_id = map_info->map[y][x][z].ground->item_id;

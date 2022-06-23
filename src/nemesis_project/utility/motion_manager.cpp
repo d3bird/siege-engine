@@ -32,7 +32,7 @@ void motion_manger::update_item(item_info* obj) {
 	update_pac.y_scale = 1;
 	update_pac.z_scale = 1;
 
-	update_pac.angle = obj->angle;
+	update_pac.angle = obj->angles;
 
 	update_pac.buffer_loc = obj->buffer_loc;
 	update_pac.item_id = obj->item_id;

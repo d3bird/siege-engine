@@ -257,27 +257,27 @@ void generation_pipeline::offset_world_map(local_map_data* input){//moves the ob
 			for (int z = 0; z < input->z_size; z++) {
 				
 				if (grid[y][x][z].floor != NULL) {
-					grid[y][x][z].floor->x = (x + new_x);
-					grid[y][x][z].floor->y = (y + new_y);
-					grid[y][x][z].floor->z = (z + new_z);
+				//	grid[y][x][z].floor->x = (x + new_x);
+				//	grid[y][x][z].floor->y = (y + new_y);
+					//grid[y][x][z].floor->z = (z + new_z);
 
 					grid[y][x][z].floor->x_m = (float)(x + new_x) * 2.0f;
 					grid[y][x][z].floor->y_m = (float)(y + new_y) * 2.0f;
 					grid[y][x][z].floor->z_m = (float)(z + new_z) * 2.0f;
 
-					update_obj_angle(grid[y][x][z].floor, grid[y][x][z].floor->angle);
+					update_obj_angle(grid[y][x][z].floor, grid[y][x][z].floor->angles.get_y_angle());
 
 				}
 				if (grid[y][x][z].ground != NULL) {
-					grid[y][x][z].ground->x = (x + new_x);
-					grid[y][x][z].ground->y = (y + new_y);
-					grid[y][x][z].ground->z = (z + new_z);
+				//	grid[y][x][z].ground->x = (x + new_x);
+				//	grid[y][x][z].ground->y = (y + new_y);
+				//	grid[y][x][z].ground->z = (z + new_z);
 
 					grid[y][x][z].ground->x_m = (float)(x + new_x) * 2.0f;
 					grid[y][x][z].ground->y_m = (float)(y + new_y) * 2.0f;
 					grid[y][x][z].ground->z_m = (float)(z + new_z) * 2.0f;
 
-					update_obj_angle(grid[y][x][z].ground, grid[y][x][z].ground->angle);
+					update_obj_angle(grid[y][x][z].ground, grid[y][x][z].ground->angles.get_y_angle());
 
 				}
 
@@ -336,7 +336,7 @@ void generation_pipeline::update_obj_angle(item_info* obj, float angle) {
 	update_pac.y_scale = 1;
 	update_pac.z_scale = 1;
 
-	update_pac.angle = angle;
+	update_pac.angle.set_y_angle(angle);
 
 	update_pac.buffer_loc = obj->buffer_loc;
 	update_pac.item_id = obj->item_id;

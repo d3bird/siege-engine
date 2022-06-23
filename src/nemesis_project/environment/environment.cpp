@@ -93,7 +93,7 @@ bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_typ
 		}
 
 		if (!x_axis) {
-			temp->angle = 90;
+			temp->angles.set_y_angle(90);
 			updater->update_item(temp);
 		}
 
@@ -144,7 +144,7 @@ int environment::place_cart(loc<int>& location) {
 
 			//the rail is facing another direction
 			if (rail_state == 2) {
-				temp->angle = 90;
+				temp->angles.set_y_angle(90);
 				updater->update_item(temp);
 			}
 
