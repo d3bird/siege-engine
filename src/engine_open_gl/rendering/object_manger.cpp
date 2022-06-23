@@ -173,7 +173,7 @@ void object_manger::update_item_matrix(update_pak* data, glm::mat4 given_mat) {
 		//delete data;//clean mem
 	}
 	else {
-		std::cout << "could not update item, item_id out of range" << std::endl;
+		std::cout << "could not update item, item_id out of range, or was NULL" << std::endl;
 	}
 
 }
@@ -269,10 +269,6 @@ item_info* object_manger::spawn_item(int type, int x, int y, int z, glm::mat4* g
 	output->x_scale = 1;
 	output->y_scale = 1;
 	output->z_scale = 1;
-	//the location in map
-	output->x = x;
-	output->y = y;
-	output->z = z;
 
 	//output->zone_location = NULL;
 	output->item_name = items[item_id]->item_name;

@@ -13,7 +13,7 @@ public:
 	rotation();
 	~rotation();
 
-	glm::mat4 get_matirx();
+	glm::mat4 get_matirx(glm::mat4 & inputed);
 
 	void inc_x_angle(float amount);
 	void inc_y_angle(float amount);
@@ -33,10 +33,9 @@ public:
 
 private:
 
-	void calc_new_matirix();
-	float check_angle(float input);
+	bool double_equals(float a, float b, float epsilon = 0.001);
 
-	glm::mat4 current_anlge;
+	void check_angle(float &input);
 
 	float x_angle;
 	float y_angle;

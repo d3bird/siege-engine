@@ -10,15 +10,16 @@
 //opengl information
 #include "model.h"
 #include "shader.h"
+#include "rotation.h"
 
 struct item_info
 {
 	bool custom_rot_angle = false;
 	glm::vec3 rot;
 	glm::vec3 loc;//on the screen
-	int x;//for the map
-	int y;
-	int z;
+
+	rotation angles;
+
 	glm::mat4* mat;
 
 	//old information

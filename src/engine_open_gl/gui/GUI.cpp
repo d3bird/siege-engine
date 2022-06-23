@@ -649,9 +649,6 @@ void GUI::spawn_object() {
     fresh_item->y_rot = rot.y;
     fresh_item->z_rot = rot.z;
     fresh_item->angle = angle;
-    fresh_item->x = (int) loc.x;
-    fresh_item->y = (int) loc.y;
-    fresh_item->z = (int) loc.z;
 
     if (!spawned) {
         spawned = true;
