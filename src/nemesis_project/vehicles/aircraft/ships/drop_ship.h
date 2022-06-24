@@ -4,7 +4,9 @@
 #include "../air_route.hpp"
 #include <rendering/rendering_object_data.hpp>
 
-class drop_ship {
+#include "../../common/fuel.h"
+
+class drop_ship: public fuel {
 public:
 	drop_ship(int id);
 	~drop_ship();

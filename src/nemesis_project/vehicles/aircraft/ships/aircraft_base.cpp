@@ -1,6 +1,6 @@
 #include "aircraft_base.h"
 
-aircraft::aircraft(int id) :
+aircraft::aircraft(int id) : fuel(10, 1),
 	ID(id),
 	obj(NULL),
 	current_route(NULL),

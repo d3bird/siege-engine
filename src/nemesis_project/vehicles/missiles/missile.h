@@ -3,7 +3,9 @@
 #include "../../common_obj/location.h"
 #include <rendering/rendering_object_data.hpp>
 
-class missile
+#include "../common/fuel.h"
+
+class missile : public fuel
 {
 public:
 	missile(int id, loc<int> aLocation);
@@ -18,10 +20,6 @@ public:
 
 	double get_velocity();
 	double get_angle_changle();
-
-	double get_fuel() { return fuel; }
-	double get_max_fuel() { return max_fuel; }
-	double add_fuel(double amount);
 
 	void set_fly_state(flight_state new_state);
 
@@ -44,10 +42,6 @@ private:
 	loc<double> target;
 	bool target_set;
 	bool fired;
-
-	double fuel;
-	double max_fuel;
-	double fuel_burn;
 
 	flight_state state;
 

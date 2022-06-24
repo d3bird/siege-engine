@@ -1,7 +1,7 @@
 #include "drop_ship.h"
 
 
-drop_ship::drop_ship(int id) {
+drop_ship::drop_ship(int id): fuel(20,0.5) {
 	ID = id;
 
 	turn_speed = 30;

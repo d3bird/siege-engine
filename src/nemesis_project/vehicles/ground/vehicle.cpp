@@ -1,6 +1,6 @@
 #include "vehicle.h"
 
-grnd_vehicle::grnd_vehicle(const loc<double>& location){
+grnd_vehicle::grnd_vehicle(const loc<double>& location): fuel(10, 0.1) {
 
 	obj_cords = location;
 
@@ -16,7 +16,7 @@ grnd_vehicle::grnd_vehicle(const loc<double>& location){
 	headlights = NULL;
 }
 
-grnd_vehicle::grnd_vehicle(const loc<int>& location) {
+grnd_vehicle::grnd_vehicle(const loc<int>& location) : fuel(10, 0.1) {
 
 	obj_cords.x = location.x;
 	obj_cords.y = location.y;

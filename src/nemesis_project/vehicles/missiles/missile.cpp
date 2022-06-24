@@ -1,9 +1,10 @@
 #include "missile.h"
 
 
-missile::missile(int id, loc<int> aLocation) :ID(id),
+missile::missile(int id, loc<int> aLocation) : fuel(20,0.25),
+	ID(id),
 	location(aLocation), actual_location(aLocation.x * 2, aLocation.y * 2, aLocation.z * 2), target(-1, -1, -1),
-	target_set(false), fired(false), max_fuel(10), fuel(0), fuel_burn(1),
+	target_set(false), fired(false), 
 	state(TAKE_OFF), acceleration(1), velocity(10), max_velocity(100),
 	angle_change(30), horizontal_angle(0),
 	model(NULL)
@@ -26,7 +27,7 @@ bool missile::is_fired() {
 
 void missile::explode() {
 	fired = false;
-	fuel = 0;
+	
 }
 
 
@@ -47,21 +48,6 @@ double missile::get_velocity() {
 	}
 	return output;
 }
-
-double missile::add_fuel(double amount) {
-	double remaining = amount;
-
-	if (amount > 0 && fuel != max_fuel) {
-		fuel += amount;
-		if (fuel > max_fuel) {
-			remaining = fuel - max_fuel;
-			fuel = max_fuel;
-		}
-	}
-
-	return remaining;
-}
-
 
 double missile::get_angle_changle() {
 	return angle_change;

@@ -3,7 +3,9 @@
 #include "../../common_obj/location.h"
 #include <rendering/rendering_object_data.hpp>
 
-class grnd_vehicle
+#include "../common/fuel.h"
+
+class grnd_vehicle : public fuel
 {
 public:
 	grnd_vehicle(const loc<double>& location);
