@@ -26,6 +26,12 @@ public:
 	//returns the object that replaced
 	item_info* replace_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground);
 
+	//returns the object wqas deleted
+	item_info* delete_obj(const loc<int>& cords,  bool floor, bool ground);
+
+	item_info* get_grnd_obj(const loc<int>& cords);
+	item_info* get_floor_obj(const loc<int>& cords);
+
 private:
 	
 	//check for validation

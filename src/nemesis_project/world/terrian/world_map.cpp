@@ -131,11 +131,53 @@ bool map_data::attach_obj(const loc<int>& cords, item_info* obj, bool floor, boo
 
 item_info* map_data::replace_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground){
 	item_info* output = NULL;
+	std::pair < loc<int>, loc<int> > temp = get_map_local_cords(cords);
+	bool valid = is_valid_locaL_cords(temp.first, temp.second);
+	if (valid) {
 
+		if (ground) {
+			if (!is_cords_ground_NULL(temp.first, temp.second)) {
+				output = get_grnd_obj(cords);
+				set_ground_obj(temp.first, temp.second, obj);
+			}
+		}
+		if (floor) {
+			if (!is_cords_floor_NULL(temp.first, temp.second)) {
+				output = get_floor_obj(cords);
+				set_floor_obj(temp.first, temp.second, obj);
+			}
+		}
 
+	}
 
 	return output;
 }
+
+item_info* map_data::delete_obj(const loc<int>& cords,  bool floor, bool ground) {
+	item_info* output = replace_obj(cords, NULL, floor, ground);
+	return output;
+}
+
+item_info* map_data::get_grnd_obj(const loc<int>& cords) {
+	item_info* output = NULL;
+	std::pair < loc<int>, loc<int> > temp = get_map_local_cords(cords);
+	if (is_valid_locaL_cords(temp.first, temp.second)) {
+		output = world_map[temp.first.y][temp.first.x][temp.first.z].
+			map[temp.second.y][temp.second.x][temp.second.z].ground;
+	}
+	return output;
+}
+
+item_info* map_data::get_floor_obj(const loc<int>& cords) {
+	item_info* output = NULL;
+	std::pair < loc<int>, loc<int> > temp = get_map_local_cords(cords);
+	if (is_valid_locaL_cords(temp.first, temp.second)) {
+		output = world_map[temp.first.y][temp.first.x][temp.first.z].
+			map[temp.second.y][temp.second.x][temp.second.z].floor;
+	}
+	return output;
+}
+
 
 bool map_data::is_valid_chunck(const loc<int>& cords) {
 	return ((cords.x >= 0 && cords.x < x_size) &&

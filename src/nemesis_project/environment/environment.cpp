@@ -65,6 +65,19 @@ void environment::replace_floor_item(item_type type, const loc<int>& location) {
 	}
 }
 
+void environment::delete_grnd_obj(const loc<int>& location) {
+	item_info* temp = world_map->delete_obj(location, false, true);
+	if (temp != NULL) {
+		spawner->delete_item_from_buffer(temp);
+	}
+}
+void environment::delete_floor_obj(const loc<int>& location) {
+	item_info* temp = world_map->delete_obj(location, true, false);
+	if (temp != NULL) {
+		spawner->delete_item_from_buffer(temp);
+	}
+}
+
 bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType) {
 	bool output = can_place_rail(location);
 

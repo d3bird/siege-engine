@@ -34,6 +34,9 @@ public:
 	void replace_ground_item(item_type type, const loc<int>& location);
 	void replace_floor_item(item_type type, const loc<int>& location);
 
+	void delete_grnd_obj(const loc<int>& location);
+	void delete_floor_obj(const loc<int>& location);
+
 	//everything needed for the crane system
 	int place_crane(const loc<int>& location, int height, int radius);
 	void toggle_crane(int id);
