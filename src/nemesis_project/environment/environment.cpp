@@ -2,7 +2,7 @@
 
 environment::environment(optimized_spawner* os, motion_manger* mm):
 	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm),
-	decor_manager(mm), missile_mgr(mm) {
+	decor_manager(mm), missile_mgr(mm), mis_sim(NULL) {
 	spawner = os;
 	updater = mm;
 	world_map = NULL;
@@ -10,6 +10,9 @@ environment::environment(optimized_spawner* os, motion_manger* mm):
 
 environment::~environment(){
 
+	if (mis_sim != NULL) {
+		delete mis_sim;
+	}
 }
 
 void environment::update(double time_change) {
@@ -19,6 +22,10 @@ void environment::update(double time_change) {
 	vehicle_mgr.update(time_change);
 	aircraft_mgr.update(time_change);
 	decor_manager.update(time_change);
+
+	if (mis_sim != NULL) {
+
+	}
 }
 
 bool environment::spawn_ground_item(item_type type, const loc<int>& location) {
@@ -419,6 +426,11 @@ bool environment::fire_launcher(int launcher_id, const loc<int>& target) {
 	return missile_mgr.fire_launcher(launcher_id, target);
 }
 
+void environment::start_missile_sim() {
+
+	mis_sim = new missile_sim(&missile_mgr, spawner);
+	mis_sim->start_sim();
+}
 
 void environment::place_fanx3x3(const loc<int>& location){
 

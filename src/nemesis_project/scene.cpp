@@ -220,6 +220,7 @@ void scene::show_crane_area_test() {
 
 }
 
+
 void scene::world_generation_test() {
 
 	world_generation pipe(spawner);
@@ -229,6 +230,7 @@ void scene::world_generation_test() {
 	testing_w = pipe.create_world(test, updater);
 
 	env = new environment(spawner, updater);
+	
 	env->set_map_data(testing_w->world_map);
 
 
@@ -490,11 +492,12 @@ void scene::world_generation_test() {
 	env->spawn_drop_ship(loc<int>(30, 2, 10));
 	env->spawn_landing_strip(loc<int>(30, 2, 20));
 
-	env->spawn_missile(loc<int>(27, 2, 15));
+//	env->spawn_missile(loc<int>(27, 2, 15));
 	env->spawn_missile_lancher(loc<int>(30, 2, 15));
-	int test_lan = env->spawn_missile_w_lancher(loc<int>(34, 2, 15));
-	env->fire_launcher(test_lan, loc<int>(0, 0, 0));
-
+	int test_lan = env->spawn_missile_lancher(loc<int>(34, 2, 15));
+	//int test_lan = env->spawn_missile_w_lancher(loc<int>(34, 2, 15));
+	//env->fire_launcher(test_lan, loc<int>(0, 0, 0));
+	env->start_missile_sim();
 }
 
 void scene::key_press() {

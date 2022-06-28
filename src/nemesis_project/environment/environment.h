@@ -16,6 +16,7 @@
 #include "../world/decoration/decor_manager.h"
 
 #include "../vehicles/missiles/missile_manager.h"
+#include "../vehicles/missiles/missile_test_sim.h"
 
 class environment
 {
@@ -87,6 +88,8 @@ public:
 	int spawn_missile_w_lancher(const loc<int>& spawn);
 
 	bool fire_launcher(int launcher_id, const loc<int>& target);
+	
+	void start_missile_sim();
 
 	// everything to do with the decoration
 
@@ -106,6 +109,9 @@ private:
 	aircraft_manager aircraft_mgr;
 	decor::decor_mgr decor_manager;
 	missile_manager missile_mgr;
+
+	missile_sim* mis_sim;
+
 
 	//map related information
 	map_data* world_map;
