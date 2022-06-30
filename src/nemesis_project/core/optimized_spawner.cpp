@@ -250,5 +250,11 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("FAN_FRAME", paths.get_objs_loc() + "decoration/frame.obj", buffer_size, FAN_FRAME);
 	obj_temp = OBJM->add_model("FAN", paths.get_objs_loc() + "decoration/fan.obj", buffer_size, FAN);
 
+	obj_temp = OBJM->add_model("BULK_D_MID", paths.get_objs_loc() + "door/bulkhead_wall_mid.obj", buffer_size, BULK_D_MID);
+	obj_temp = OBJM->add_model("BULK_D_F_TRACK", paths.get_objs_loc() + "door/bulkhead_floor_track.obj", buffer_size, BULK_D_F_TRACK);
+	obj_temp = OBJM->add_model("BULK_D_F_FLAT", paths.get_objs_loc() + "door/bulkhead_floor_flat.obj", buffer_size, BULK_D_F_FLAT);
+	obj_temp = OBJM->add_model("BULK_D_GEAR", paths.get_objs_loc() + "door/track_gear.obj", buffer_size, BULK_D_GEAR);
+	obj_temp = OBJM->add_model("BULK_D_MID_TRACK", paths.get_objs_loc() + "door/bulkhead_wall_track.obj", buffer_size, BULK_D_MID_TRACK);
+
 	std::cout << "done" << std::endl;
 }
