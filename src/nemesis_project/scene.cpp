@@ -498,6 +498,10 @@ void scene::world_generation_test() {
 	//int test_lan = env->spawn_missile_w_lancher(loc<int>(34, 2, 15));
 	//env->fire_launcher(test_lan, loc<int>(0, 0, 0));
 	env->start_missile_sim();
+
+
+	env->spawn_bulk_head_door(loc<int>(14, 1, 0), loc<int>(20, 5, 0),true, true);
+
 }
 
 void scene::key_press() {

@@ -18,6 +18,8 @@
 #include "../vehicles/missiles/missile_manager.h"
 #include "../vehicles/missiles/missile_test_sim.h"
 
+#include "../world/doors/door_manager.h"
+
 class environment
 {
 public:
@@ -55,6 +57,13 @@ public:
 	int create_furnace(const std::vector<loc<int> > &spots);
 	void add_mass_to_furnace(int id, double mass);
 	void print_furnace_info(int id = -1);
+
+	//everything to do with doors
+
+	int spawn_bulk_head_door(loc<int> start, loc<int> end, bool y_axis, bool dir1);
+	int get_door_at_loc(loc<int> location);
+	void open_door(int ID);
+	void close_door(int ID);
 
 	//everything to do with the liquid system
 
@@ -109,9 +118,9 @@ private:
 	aircraft_manager aircraft_mgr;
 	decor::decor_mgr decor_manager;
 	missile_manager missile_mgr;
-
 	missile_sim* mis_sim;
 
+	door_manager door_mgr;
 
 	//map related information
 	map_data* world_map;

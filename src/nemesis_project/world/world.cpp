@@ -26,7 +26,7 @@ void world::init(optimized_spawner* objm, motion_manger* mmm) {
 	updater = mmm;
 	//create the managers
 	belts = new belt_manager(OBJM);
-	doors = new door_data::door_manager();
+	doors = new door_data::door_manager_old();
 }
 
 /*

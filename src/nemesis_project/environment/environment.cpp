@@ -2,7 +2,7 @@
 
 environment::environment(optimized_spawner* os, motion_manger* mm):
 	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm),
-	decor_manager(mm), missile_mgr(mm), mis_sim(NULL) {
+	decor_manager(mm), missile_mgr(mm), mis_sim(NULL), door_mgr(mm) {
 	spawner = os;
 	updater = mm;
 	world_map = NULL;
@@ -26,6 +26,8 @@ void environment::update(double time_change) {
 	if (mis_sim != NULL) {
 
 	}
+
+	door_mgr.update(time_change);
 }
 
 bool environment::spawn_ground_item(item_type type, const loc<int>& location) {
@@ -263,6 +265,28 @@ int environment::create_furnace(const std::vector<loc<int> >& spots) {
 
 void environment::add_mass_to_furnace(int id, double mass) {
 	furnace_mgr.add_mass_to_furnace(id, mass);
+}
+
+void environment::print_furnace_info(int id) {
+
+}
+
+int environment::spawn_bulk_head_door(loc<int> start, loc<int> end, bool y_axis, bool dir1) {
+	door_mgr.spawn_bulk_head_door(start, end, y_axis, dir1, spawner);
+	return -1;
+}
+
+int environment::get_door_at_loc(loc<int> location) {
+
+	return -1;
+}
+
+void environment::open_door(int ID) {
+	door_mgr.open_door(ID);
+}
+
+void environment::close_door(int ID) {
+	door_mgr.close_door(ID);
 }
 
 int environment::place_truck(loc<int>& spawn) {

@@ -2,7 +2,7 @@
 
 #include "manager/belt_manager.h"
 #include "manager/manager_guis/door_manager_gui.h"
-#include "manager/door_manager.h"
+#include "manager/door_manager_old.h"
 
 #include "../core/optimized_spawner.h"
 #include "terrian_data.hpp"
@@ -43,7 +43,7 @@ private:
 	int y_size;
 
 	belt_manager* belts;
-	door_data::door_manager* doors;
+	door_data::door_manager_old* doors;
 	door_manager_gui* door_gui;
 	optimized_spawner* OBJM;
 	motion_manger* updater;

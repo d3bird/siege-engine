@@ -53,12 +53,12 @@ namespace door_data {
 		bool need_update;
 	};
 
-	class door_manager
+	class door_manager_old
 	{
 	public:
 
-		door_manager();
-		~door_manager();
+		door_manager_old();
+		~door_manager_old();
 
 		void update(double passed_time);
 

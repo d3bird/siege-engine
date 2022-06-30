@@ -1,21 +1,21 @@
-#include "door_manager.h"
+#include "door_manager_old.h"
 
 #include <iostream>
 
 namespace door_data {
 
-	door_manager::door_manager() {
+	door_manager_old::door_manager_old() {
 		ID_index = 0;
 	}
 
-	door_manager::~door_manager() {
+	door_manager_old::~door_manager_old() {
 		for (int i = 0; i < doors.size(); i++) {
 			delete_door(doors[i]);
 		}
 		doors.clear();
 	}
 
-	door* door_manager::place_door(opening type, int x_start, int y_start, int z_start,
+	door* door_manager_old::place_door(opening type, int x_start, int y_start, int z_start,
 		int x_end, int y_end, int z_end) {
 
 		std::cout << "creating a door" << std::endl;
@@ -164,7 +164,7 @@ namespace door_data {
 		return output;
 	}
 
-	door* door_manager::get_door(int index) {
+	door* door_manager_old::get_door(int index) {
 
 		if (index >= 0 && index < doors.size()) {
 			return doors[index];
@@ -175,7 +175,7 @@ namespace door_data {
 
 	}
 
-	void door_manager::toggle_door(int index) {
+	void door_manager_old::toggle_door(int index) {
 		if (index >= 0 && index < doors.size()) {
 			doors[index]->open = !doors[index]->open;
 			if (!doors[index]->need_update) {
@@ -189,7 +189,7 @@ namespace door_data {
 		}
 	}
 
-	void door_manager::set_door_open_state(int index, bool open) {
+	void door_manager_old::set_door_open_state(int index, bool open) {
 		if (index >= 0 && index < doors.size()) {
 			if (doors[index]->open != open) {
 				doors[index]->open = open;
@@ -206,7 +206,7 @@ namespace door_data {
 
 	//helper functions
 
-	bool door_manager::is_y_opening(int x_start, int y_start, int z_start,
+	bool door_manager_old::is_y_opening(int x_start, int y_start, int z_start,
 		int x_end, int y_end, int z_end) {
 		if (y_start == y_end) {
 			return (x_start != x_end && z_start != z_end);
@@ -214,7 +214,7 @@ namespace door_data {
 		return false;
 	}
 
-	bool door_manager::is_x_opening(int x_start, int y_start, int z_start,
+	bool door_manager_old::is_x_opening(int x_start, int y_start, int z_start,
 		int x_end, int y_end, int z_end) {
 		if (x_start == x_end) {
 			return (y_start != y_end && z_start != z_end);
@@ -222,7 +222,7 @@ namespace door_data {
 		return false;
 	}
 
-	bool door_manager::is_z_opening(int x_start, int y_start, int z_start,
+	bool door_manager_old::is_z_opening(int x_start, int y_start, int z_start,
 		int x_end, int y_end, int z_end) {
 		if (z_start == z_end) {
 			return (y_start != y_end && x_start != x_end);
@@ -230,7 +230,7 @@ namespace door_data {
 		return false;
 	}
 
-	void door_manager::delete_door(door* input) {
+	void door_manager_old::delete_door(door* input) {
 		if (input != NULL) {
 
 			if (input->d_sec != NULL) {
