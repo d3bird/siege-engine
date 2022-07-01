@@ -31,9 +31,20 @@ void door_manager::spawn_bulk_head_door(loc<int> start, loc<int> end, bool y_axi
 	bulk_head_door* door = new bulk_head_door();
 	door->create_door(start, end, y_axis, dir1);
 
-	for (int x = 0; x < door->x_size; x++) {
-		for (int z = 0; z < door->z_size; z++) {
-			door->door_objs[x][z].obj = spawner->spawn_item(CUBE_T, -1, -1, -1);
+	int x_size = door->x_size;
+	int z_size = door->z_size;
+
+	for (int x = 0; x < x_size; x++) {
+		for (int z = 0; z < z_size; z++) {
+			if (x == 0 && z == 0 ||
+				x == x_size-1 && z == 0 ||
+				x == 0 && z == z_size-1 ||
+				x == x_size-1 && z == z_size-1) {
+				door->door_objs[x][z].obj = spawner->spawn_item(BULK_D_MID_TRACK, -1, -1, -1);
+			}
+			else {
+				door->door_objs[x][z].obj = spawner->spawn_item(BULK_D_MID, -1, -1, -1);
+			}
 		}
 	}
 	door->set_models();

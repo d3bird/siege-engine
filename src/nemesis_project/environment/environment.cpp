@@ -273,6 +273,22 @@ void environment::print_furnace_info(int id) {
 
 int environment::spawn_bulk_head_door(loc<int> start, loc<int> end, bool y_axis, bool dir1) {
 	door_mgr.spawn_bulk_head_door(start, end, y_axis, dir1, spawner);
+
+	int x_diff = abs(start.x - end.x);
+	int z_diff = abs(start.z - end.z);
+	std::cout << "x_diff " << x_diff << std::endl;
+	std::cout << "z_diff " << z_diff << std::endl;
+	if (x_diff > 0) {
+		for (int i = start.x; i < end.x + 1; i++) {
+			replace_floor_item(BULK_D_F_FLAT, loc<int>(i, start.y, start.z));
+		}
+	}
+	else if (z_diff > 0) {
+		for (int i = start.z; i < end.z + 1; i++) {
+			replace_floor_item(BULK_D_F_FLAT, loc<int>(start.x, start.y, i));
+		}
+	}
+
 	return -1;
 }
 
