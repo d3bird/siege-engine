@@ -29,6 +29,7 @@ engine_api::engine_api() {
     gui = NULL;
     camera = NULL;
     OBJM = NULL;
+    ANIM = NULL;
     AM = NULL;
 
     //the viewing vars
@@ -54,6 +55,7 @@ void engine_api::draw() {
     Engine->set_cam_pos((*camera->get_pos()));
 
     Engine->draw_deferred();
+   // Engine->draw_only_animations();
 
     sky->set_cam(view);
     sky->set_projection(projection);
@@ -153,9 +155,11 @@ void engine_api::init_objects() {
     sky->set_projection(projection);
     sky->init();
 
-
+    ANIM = new model_animation::animation_manager();
+         
     engine_data = new engine_obj;
     //engine_data->OBJM = OBJM;
+    engine_data->ANIM = ANIM;
     //engine_data->ADM = ADM;
     engine_data->time = Time;
     engine_data->text_render = text_render;

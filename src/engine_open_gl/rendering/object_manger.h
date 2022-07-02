@@ -85,7 +85,7 @@ public:
 	std::vector< item*>* get_all_item_info() { return &items; }
 
 	void clear_all_object();
-
+	void clear_all_models();
 	//new generation based optimization
 	std::vector< item*>* create_blank_item_list();
 

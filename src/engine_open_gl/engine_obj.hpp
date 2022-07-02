@@ -1,6 +1,7 @@
 #pragma once
 
 #include "rendering/object_manger.h"
+#include "rendering/model_animation/animation_manager.h"
 #include "audio/audio_manger.h"
 #include "misc/text_rendering.h"
 #include "misc/time.h"
@@ -12,6 +13,7 @@ enum gui_draw{DRAW_ENGINES_GUI, DRAW_SCENE_GUI, DRAW_BOTH_GUI, DRAW_NONE_GUI};
 
 struct engine_obj {
 	object_manger* OBJM =NULL;
+	model_animation::animation_manager* ANIM = NULL;
 	audio_manger* ADM = NULL;
 	timing* time = NULL;
 
@@ -51,6 +53,13 @@ static void print_engine_data(engine_obj* output) {
 	}
 	else {
 		std::cout << "OBJM was created and linked" << std::endl;
+	}
+
+	if (output->ANIM == NULL) {
+		std::cout << "ANIM was NULL" << std::endl;
+	}
+	else {
+		std::cout << "ANIM was created and linked" << std::endl;
 	}
 
 	if (output->ADM == NULL) {

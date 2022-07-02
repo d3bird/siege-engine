@@ -8,7 +8,8 @@ engine::engine() {
     gui = NULL;
     ADM = NULL;
     OBJM = NULL;
-
+    ANIM = NULL;
+    ANIM_shader = NULL;
     single = false;
     update_lights = true;
 
@@ -19,10 +20,11 @@ engine::engine() {
 
     online = false;
     LM = NULL;
-
+    time_change = NULL;
 }
 
 engine::~engine(){
+    OBJM->clear_all_object();
     delete OBJM;
     delete ADM;
 }
@@ -46,6 +48,7 @@ void engine::draw_single() {
 
     OBJM->set_cam(view);
     OBJM->draw();
+    ANIM->draw();
 }
 
 //draw with deferred shadering
@@ -74,6 +77,7 @@ void engine::draw_deferred() {
     case LINKED_GROUP:
     default:
         OBJM->draw();
+      
         break;
     }
      
@@ -171,6 +175,13 @@ void engine::draw_deferred() {
 
     ADM->draw_speaker_locations();
 
+    if (ANIM_shader != NULL) {
+        ANIM_shader->use();
+        ANIM_shader->setMat4("view", view);
+        ANIM_shader->setMat4("projection", projection);
+        ANIM->draw();
+    }
+
     switch (engine_data->gui_draw_type)
     {
     case DRAW_ENGINES_GUI:
@@ -194,6 +205,13 @@ void engine::draw_deferred() {
     }
 }
 
+void engine::draw_only_animations() {
+    ANIM_shader->use();
+    ANIM_shader->setMat4("view", view);
+    ANIM_shader->setMat4("projection", projection);
+    ANIM->draw();
+}
+
 void engine::draw_all_objects() {
     lighting_in->use();
     lighting_in->setVec3("objectColor", 1.0f, 0.5f, 0.31f);
@@ -210,6 +228,7 @@ void engine::update() {
 
     
     ADM->update();
+    ANIM->update(*time_change);
 
 }
 
@@ -224,6 +243,7 @@ void engine::change_projection(glm::mat4 i) {
     }
 
     OBJM->set_projection(i);
+    ANIM_shader->setMat4("projection", i);
    // City->set_projection(projection);
     //Sky->set_projection(projection);
     //lighting_in
@@ -237,10 +257,22 @@ void engine::init(GUI* g, engine_obj* eng, bool ser) {
     
     engine_data = eng;
 
+    if (ANIM == NULL) {
+        std::cout << "animation_manager was not set beforehand, setting now" << std::endl;
+        ANIM = engine_data->ANIM;
+        if (ANIM == NULL) {
+            std::cout << "animation_manager failed to set" << std::endl;
+        }
+        ANIM_shader = ANIM->get_shader();
+        if (ANIM_shader == NULL) {
+            std::cout << "failed to get shader for the animation" << std::endl;
+        }
+    }
+    time_change = engine_data->time->get_time_change_static();
     std::cout << "creating the lighting" << std::endl;
     lighting_init();
 
-    std::cout << "creating rhe text rendering" << std::endl;
+    std::cout << "creating the text rendering" << std::endl;
 
     if (render_text) {
         if (text_render == NULL) {
@@ -293,7 +325,6 @@ void engine::init(GUI* g, engine_obj* eng, bool ser) {
     print_engine_data(engine_data);
 
 }
-
 
 void engine::lighting_init() {
 

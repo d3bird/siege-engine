@@ -14,8 +14,11 @@ public:
 
 	std::string get_audio_loc(std::string item) { return combine(debug, audio, item); }
 	std::string get_fonts_loc(std::string item) { return combine(debug, fonts, item); }
-	std::string get_objs_loc(std::string item)  { return combine(debug, objects, item); }
+	std::string get_objs_loc(std::string item) { return combine(debug, objects, item); }
 	std::string get_textures_loc(std::string item) { return combine(debug, textures, item); }
+
+	std::string get_external_objs_loc(std::string item) { return combine(external_debug, objects, item); }
+	std::string get_external_objs_loc() { return combine(external_debug, objects); }
 
 	std::string get_audio_loc() { return combine(debug, audio); }
 	std::string get_fonts_loc() { return combine(debug, fonts); }
@@ -41,6 +44,9 @@ private:
 
 	std::string debug = "../../../resources/Assets_libs/";
 	std::string release = "resources/Assets_libs/";
+
+	std::string external_debug = "../../../resources/external_assets/";
+	std::string external_release = "resources/external_assets/";
 
 	std::string audio = "audio/";
 	std::string fonts = "fonts/";

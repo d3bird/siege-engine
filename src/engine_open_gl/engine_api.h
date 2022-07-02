@@ -57,6 +57,7 @@ public:
 	engine* get_engine() { return Engine; }
 	GUI* get_engine_gui() { return gui; }
 	object_manger* get_OBJM() { return OBJM; }
+	model_animation::animation_manager* get_ANIM() { return ANIM; }
 	audio_manger* get_AM() { return AM; }
 
 	
@@ -114,5 +115,6 @@ private:
 	GUI* gui;
 	Camera* camera;
 	object_manger* OBJM;
+	model_animation::animation_manager* ANIM;
 	audio_manger *AM;
 };

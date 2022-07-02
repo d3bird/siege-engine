@@ -305,6 +305,10 @@ void object_manger::clear_all_object() {
 
 }
 
+void object_manger::clear_all_models() {
+	
+}
+
 std::vector< item*>* object_manger::create_blank_item_list() {
 	std::vector< item*>* output = NULL;
 

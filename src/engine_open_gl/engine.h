@@ -39,8 +39,8 @@ public:
 	void update();
 
 	void draw_all_objects();
-	void draw_group_objects();
-	void draw_linked_objects();
+	void draw_only_animations();
+
 
 	void init(GUI* g, engine_obj* engine_dat = NULL, bool ser = true);
 
@@ -64,20 +64,20 @@ public:
 	void set_cam_pos(glm::vec3 i) { cam_pos = i; }
 
 	void change_projection(glm::mat4 i);
-	void set_camera_obj(Camera* cam) {
-		ADM->set_cam(cam); 
-	}
+	void set_camera_obj(Camera* cam) {ADM->set_cam(cam);	}
+	void set_animation_manager(model_animation::animation_manager* anim) { ANIM = anim; }
+
 	void set_text_engine(text_engine* txt) { text_render = txt; }
 
 	void set_online(bool i) { online = i; }
 
 	void set_height_screen(unsigned int h) { SCR_HEIGHT = h; }
-	void set_width_screen(unsigned int h) { SCR_WIDTH  = h; }
+	void set_width_screen(unsigned int h) { SCR_WIDTH = h; }
 
 private:
 
 	engine_obj* engine_data;
-	
+
 
 	void lighting_init();
 
@@ -96,6 +96,9 @@ private:
 
 	audio_manger* ADM;
 	object_manger* OBJM;
+	model_animation::animation_manager* ANIM;
+	Shader* ANIM_shader;
+	float* time_change;
 
 	bool online;
 
@@ -112,8 +115,8 @@ private:
 	Shader* shaderLightingPass;
 	Shader* shaderLightBox;
 
-	 unsigned int SCR_WIDTH;
-	 unsigned int SCR_HEIGHT;
+	unsigned int SCR_WIDTH;
+	unsigned int SCR_HEIGHT;
 
 	unsigned int mod_buffer;
 	unsigned int gBuffer;
