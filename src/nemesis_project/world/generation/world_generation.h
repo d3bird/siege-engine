@@ -1,7 +1,6 @@
 #pragma once
 
 
-#include "../world.h"
 #include "../terrian_data.hpp"
 #include "../../core/optimized_spawner.h"
 
@@ -36,7 +35,7 @@ public:
 	world_generation(optimized_spawner* spawn);
 	~world_generation();
 
-	world* create_world(world_gen_settings* input, motion_manger* updater,  bool force = false);
+	map_data* create_world(world_gen_settings* input, motion_manger* updater,  bool force = false);
 
 	//premade settings
 

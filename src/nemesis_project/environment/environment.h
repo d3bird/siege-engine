@@ -19,6 +19,7 @@
 #include "../vehicles/missiles/missile_test_sim.h"
 
 #include "../world/doors/door_manager.h"
+#include "../world/belts/belt_manager.h"
 
 class environment
 {
@@ -57,6 +58,9 @@ public:
 	int create_furnace(const std::vector<loc<int> > &spots);
 	void add_mass_to_furnace(int id, double mass);
 	void print_furnace_info(int id = -1);
+
+	//everything to do with the belts
+	int spawn_belt(loc<int> location, int output_dir);
 
 	//everything to do with doors
 
@@ -119,7 +123,7 @@ private:
 	decor::decor_mgr decor_manager;
 	missile_manager missile_mgr;
 	missile_sim* mis_sim;
-
+	belt_manager belt_mgr;
 	door_manager door_mgr;
 
 	//map related information

@@ -136,6 +136,7 @@ bool  railRoad::rail::can_connect(rail* other, bool connect) {
 	case railRoad::CURVE:
 	default:
 	//	std::cout << "there is no connection for this rail type" << std::endl;
+		curved_connection(other, connect);
 		break;
 	}
 
@@ -220,7 +221,6 @@ bool railRoad::rail::straight_connection(rail* other, bool connect) {
 	return output;
 
 }
-
 
 bool railRoad::rail::slanted_connection(rail* other, bool connect) {
 	bool output = false;
@@ -331,6 +331,9 @@ bool railRoad::rail::slanted_connection(rail* other, bool connect) {
 	return output;
 }
 
+bool railRoad::rail::curved_connection(rail* other, bool connect) {
+	return false;
+}
 
 bool  railRoad::rail::can_connect_point(rail* other, loc<int> location, int connection) {
 

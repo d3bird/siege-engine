@@ -39,7 +39,7 @@ namespace model_animation {
 	void animation_manager::draw() {
 		shader->use();
 		std::vector<glm::mat4> transforms = animator->GetFinalBoneMatrices();
-		std::cout << "transforms: " << transforms.size() << std::endl;;
+		//std::cout << "transforms: " << transforms.size() << std::endl;;
 		for (int i = 0; i < transforms.size(); ++i) {
 			shader->setMat4("finalBonesMatrices[" + std::to_string(i) + "]", transforms[i]);
 		}

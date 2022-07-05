@@ -11,12 +11,10 @@ world_generation::~world_generation() {
 
 }
 
-world* world_generation::create_world(world_gen_settings* input, motion_manger* updater, bool force) {
-	world* output = NULL;
+map_data* world_generation::create_world(world_gen_settings* input, motion_manger* updater, bool force) {
+	map_data* output = NULL;
 	if (is_settings_valid(input) || force) {
 		//create the base object
-		output = new world;
-		output->init(spawner, updater);
 
 		print_settings(input);
 
@@ -80,7 +78,7 @@ world* world_generation::create_world(world_gen_settings* input, motion_manger* 
 
 		}
 
-		output->world_map = world_map;
+		output = world_map;
 	}
 	return output;
 }

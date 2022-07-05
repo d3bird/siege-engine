@@ -9,20 +9,20 @@ testing::world_test::~world_test() {
 
 }
 
-std::pair<int, int> testing::world_test::test_cords_world_map(world* testing) {
+std::pair<int, int> testing::world_test::test_cords_world_map(map_data* testing) {
 
 	std::pair<int, int> output;
 
 	output.first = 0;//tests run 
 	output.second = 0;//tests passed
 
-	int world_x = testing->world_map->x_size;
-	int world_y = testing->world_map->y_size;
-	int world_z = testing->world_map->z_size;
+	int world_x = testing->x_size;
+	int world_y = testing->y_size;
+	int world_z = testing->z_size;
 
-	int chunk_x = testing->world_map->world_map[0][0][0].x_size;
-	int chunk_y = testing->world_map->world_map[0][0][0].y_size;
-	int chunk_z = testing->world_map->world_map[0][0][0].z_size;
+	int chunk_x = testing->world_map[0][0][0].x_size;
+	int chunk_y = testing->world_map[0][0][0].y_size;
+	int chunk_z = testing->world_map[0][0][0].z_size;
 
 	int test_run = 0;
 	int test_passed = 0;
@@ -39,7 +39,7 @@ std::pair<int, int> testing::world_test::test_cords_world_map(world* testing) {
 							int x_cord = x + (wx * chunk_x);
 							int y_cord = y + (wy * chunk_y);
 							int z_cord = z + (wz * chunk_z);
-							std::pair < loc<int>, loc<int> >output = testing->world_map->get_map_local_cords(
+							std::pair < loc<int>, loc<int> >output = testing->get_map_local_cords(
 								loc<int>(x_cord, y_cord, z_cord));
 
 							test_run++;

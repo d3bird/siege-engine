@@ -2,7 +2,8 @@
 
 environment::environment(optimized_spawner* os, motion_manger* mm):
 	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm),
-	decor_manager(mm), missile_mgr(mm), mis_sim(NULL), door_mgr(mm) {
+	decor_manager(mm), missile_mgr(mm), mis_sim(NULL), belt_mgr(mm),
+	door_mgr(mm) {
 	spawner = os;
 	updater = mm;
 	world_map = NULL;
@@ -271,6 +272,41 @@ void environment::print_furnace_info(int id) {
 
 }
 
+int environment::spawn_belt(loc<int> location, int output_dir) {
+	int output = -1;
+	std::pair<int, int> affected = belt_mgr.spawn_belt(location, output_dir);
+	output = affected.first;
+	if (output >= 0) {
+		item_info* new_obj = spawner->spawn_item(BELT_1, location.x, location.y, location.z);
+		belt_mgr.replace_obj(output, new_obj);
+
+		if (affected.second >= 0) {
+			int connections = belt_mgr.get_num_connections(affected.second);
+			item_info* delete_obj = NULL;
+
+			if (connections == 2) {
+				delete_obj = belt_mgr.replace_obj(affected.second, spawner->spawn_item(BELT_2, -1, -1, -1));
+			}
+			else if (connections == 3) {
+				delete_obj = belt_mgr.replace_obj(affected.second, spawner->spawn_item(BELT_3, -1, -1, -1));
+			}
+			else if (connections == 4) {
+				delete_obj = belt_mgr.replace_obj(affected.second, spawner->spawn_item(BELT_4, -1, -1, -1));
+			}
+
+			if (delete_obj != NULL) {
+				spawner->delete_item_from_buffer(delete_obj);
+			}
+		}
+
+	}
+	else {
+		std::cout << "failed to spawn belt" << std::endl;
+	}
+
+	return output;
+}
+
 int environment::spawn_bulk_head_door(loc<int> start, loc<int> end, bool y_axis, bool dir1) {
 	door_mgr.spawn_bulk_head_door(start, end, y_axis, dir1, spawner);
 
@@ -469,6 +505,7 @@ bool environment::fire_launcher(int launcher_id, const loc<int>& target) {
 void environment::start_missile_sim() {
 
 	mis_sim = new missile_sim(&missile_mgr, spawner);
+	mis_sim->set_bounds(loc<int>(0, 1, 0), loc<int>(30, 12, 30));
 	mis_sim->start_sim();
 }
 

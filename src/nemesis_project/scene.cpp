@@ -9,7 +9,6 @@ scene::scene() {
 	API = NULL;
 	engine = NULL;
 	spawner = NULL;
-	testing_w = NULL;
 	env = NULL;
 }
 
@@ -90,7 +89,6 @@ void scene::init(engine_api* api) {
 void scene::create_blank_world() {
 	//city_generator pipe(spawner);
 
-	worlds = new world();
 
 	//worlds->init(10, 10, 10, spawner);
 }
@@ -227,11 +225,11 @@ void scene::world_generation_test() {
 
 	world_gen_settings* test = pipe.flat_land_settings();
 
-	testing_w = pipe.create_world(test, updater);
+	map_data* world_map = pipe.create_world(test, updater);
 
 	env = new environment(spawner, updater);
 	
-	env->set_map_data(testing_w->world_map);
+	env->set_map_data(world_map);
 
 
 	//creating managers
@@ -502,6 +500,14 @@ void scene::world_generation_test() {
 
 	env->spawn_bulk_head_door(loc<int>(14, 1, 0), loc<int>(20, 5, 0),true, true);
 
+	//testing for the belt manager
+	env->spawn_ground_item(SUPPORT, loc<int>(9, 1, 11));
+
+	env->spawn_belt(loc<int>(12, 1, 6), 0);
+	env->spawn_belt(loc<int>(13, 1, 6), 0);
+	env->spawn_belt(loc<int>(14, 1, 6), 0);
+	env->spawn_belt(loc<int>(14, 1, 7), 1);
+	env->spawn_belt(loc<int>(13, 1, 7), 2);
 }
 
 void scene::key_press() {

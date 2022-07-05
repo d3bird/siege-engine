@@ -58,14 +58,14 @@ void bulk_head_door::update(double time) {
 			m_openeing = false;
 			m_is_close = false;
 			m_closing = false;
-			std::cout << "door was marked as open" << std::endl;
+			//std::cout << "door was marked as open" << std::endl;
 		}
 		else if (mark_close) {
 			m_is_close = true;
 			m_closing = false;
 			m_is_open = false;
 			m_openeing = false;
-			std::cout << "door was marked as closed" << std::endl;
+			//std::cout << "door was marked as closed" << std::endl;
 		}
 		set_models();
 	}

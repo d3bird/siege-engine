@@ -39,7 +39,6 @@ private:
 
 	void create_blank_world();
 
-	world* worlds = NULL;
 
 	void aircraft_test();
 	void radio_test();
@@ -55,7 +54,6 @@ private:
 	bool dir = false;
 	int speed = 5;
 	//item_info* temp_cart = NULL;
-	world* testing_w;
 
 	environment* env;
 

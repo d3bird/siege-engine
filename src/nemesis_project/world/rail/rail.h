@@ -42,6 +42,7 @@ namespace railRoad {
 
 		bool straight_connection(rail* other, bool connect);
 		bool slanted_connection(rail* other, bool connect);
+		bool curved_connection(rail* other, bool connect);
 
 		int rotation;// what angle the section is set to
 
