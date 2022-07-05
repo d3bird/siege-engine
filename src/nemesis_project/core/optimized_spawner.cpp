@@ -20,9 +20,28 @@ item_info* optimized_spawner::spawn_item(item_type type, int x, int y, int z, gl
 		return NULL;
 	}
 }
+
 item_info* optimized_spawner::spawn_item(item_type type, int x, int y, int z, float angle) {
 	if (OBJM != NULL) {
 		return OBJM->spawn_item(type, x, y, z, angle);
+	}
+	else {
+		return NULL;
+	}
+}
+
+item_info* optimized_spawner::spawn_item(item_type type, const loc<int>& location, glm::mat4* given_mat) {
+	if (OBJM != NULL) {
+		return OBJM->spawn_item(type, location.x, location.y, location.z, given_mat);
+	}
+	else {
+		return NULL;
+	}
+}
+
+item_info* optimized_spawner::spawn_item(item_type type, const loc<int>& location, float angle) {
+	if (OBJM != NULL) {
+		return OBJM->spawn_item(type, location.x, location.y, location.z, angle);
 	}
 	else {
 		return NULL;
@@ -35,7 +54,7 @@ void optimized_spawner::delete_item_from_buffer(item_info* obj) {
 	}
 }
 
-void optimized_spawner::update_item_matrix(update_pak* up, glm::mat4 mat) {
+void optimized_spawner::update_item_matrix(update_pak* up, const glm::mat4& mat) {
 	if (OBJM != NULL) {
 		OBJM->update_item_matrix(up, mat);
 	}
