@@ -1,5 +1,7 @@
 #include "bone.h"
 
+#include <iostream>
+
 namespace model_animation {
 
 	Bone::Bone(const std::string& name, int ID, const aiNodeAnim* channel):
@@ -10,7 +12,7 @@ namespace model_animation {
 		for (int positionIndex = 0; positionIndex < m_NumPositions; ++positionIndex)
 		{
 			aiVector3D aiPosition = channel->mPositionKeys[positionIndex].mValue;
-			float timeStamp = channel->mPositionKeys[positionIndex].mTime;
+			float timeStamp = static_cast<float>(channel->mPositionKeys[positionIndex].mTime);
 			KeyPosition data;
 			data.position = AssimpGLMHelpers::GetGLMVec(aiPosition);
 			data.timeStamp = timeStamp;
@@ -21,7 +23,7 @@ namespace model_animation {
 		for (int rotationIndex = 0; rotationIndex < m_NumRotations; ++rotationIndex)
 		{
 			aiQuaternion aiOrientation = channel->mRotationKeys[rotationIndex].mValue;
-			float timeStamp = channel->mRotationKeys[rotationIndex].mTime;
+			float timeStamp = static_cast<float>(channel->mRotationKeys[rotationIndex].mTime);
 			KeyRotation data;
 			data.orientation = AssimpGLMHelpers::GetGLMQuat(aiOrientation);
 			data.timeStamp = timeStamp;
@@ -32,7 +34,7 @@ namespace model_animation {
 		for (int keyIndex = 0; keyIndex < m_NumScalings; ++keyIndex)
 		{
 			aiVector3D scale = channel->mScalingKeys[keyIndex].mValue;
-			float timeStamp = channel->mScalingKeys[keyIndex].mTime;
+			float timeStamp = static_cast<float>(channel->mScalingKeys[keyIndex].mTime);
 			KeyScale data;
 			data.scale = AssimpGLMHelpers::GetGLMVec(scale);
 			data.timeStamp = timeStamp;
@@ -64,7 +66,7 @@ namespace model_animation {
 			if (animationTime < m_Positions[index + 1].timeStamp)
 				return index;
 		}
-		assert(0);
+		return -1;
 	}
 
 	int Bone::GetRotationIndex(float animationTime)
@@ -74,7 +76,7 @@ namespace model_animation {
 			if (animationTime < m_Rotations[index + 1].timeStamp)
 				return index;
 		}
-		assert(0);
+		return -1;
 	}
 
 	int Bone::GetScaleIndex(float animationTime)
@@ -84,7 +86,7 @@ namespace model_animation {
 			if (animationTime < m_Scales[index + 1].timeStamp)
 				return index;
 		}
-		assert(0);
+		return -1;
 	}
 
 
@@ -103,6 +105,9 @@ namespace model_animation {
 			return glm::translate(glm::mat4(1.0f), m_Positions[0].position);
 
 		int p0Index = GetPositionIndex(animationTime);
+		if (p0Index == -1) {
+			std::cout << "ENGINE: ERROR p0Index was -1" << std::endl;
+		}
 		int p1Index = p0Index + 1;
 		float scaleFactor = GetScaleFactor(m_Positions[p0Index].timeStamp,
 			m_Positions[p1Index].timeStamp, animationTime);
@@ -120,6 +125,9 @@ namespace model_animation {
 		}
 
 		int p0Index = GetRotationIndex(animationTime);
+		if(p0Index == -1) {
+			std::cout << "ENGINE: ERROR p0Index was -1" << std::endl;
+		}
 		int p1Index = p0Index + 1;
 		float scaleFactor = GetScaleFactor(m_Rotations[p0Index].timeStamp,
 			m_Rotations[p1Index].timeStamp, animationTime);
@@ -135,6 +143,9 @@ namespace model_animation {
 			return glm::scale(glm::mat4(1.0f), m_Scales[0].scale);
 
 		int p0Index = GetScaleIndex(animationTime);
+		if (p0Index == -1) {
+			std::cout << "ENGINE: ERROR p0Index was -1" << std::endl;
+		}
 		int p1Index = p0Index + 1;
 		float scaleFactor = GetScaleFactor(m_Scales[p0Index].timeStamp,
 			m_Scales[p1Index].timeStamp, animationTime);

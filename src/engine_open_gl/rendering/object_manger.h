@@ -64,7 +64,7 @@ public:
 
 	void draw();
 
-	int add_model(std::string name, std::string loc, unsigned int buffer_size, int type, bool draw = true, Shader* custom_shader = NULL);
+	size_t add_model(std::string name, std::string loc, unsigned int buffer_size, int type, bool draw = true, Shader* custom_shader = NULL);
 
 	void init();
 
@@ -105,7 +105,7 @@ private:
 	glm::mat4 projection;
 	Shader* common;
 
-	const int max_buffer_size = 1000000;
+	const unsigned int max_buffer_size = 1000000;
 
 	std::vector< item*> items;//every item
 	std::vector< bool> draw_item;//wheither to draw item

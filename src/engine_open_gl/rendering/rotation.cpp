@@ -42,13 +42,13 @@ glm::mat4 rotation::get_matirx(glm::mat4& inputed) {
 void rotation::check_angle(float &input) {
 	//check angles 
 	if (input < 0) {
-		int temp = std::floor(input / 360) * -1;
+		float temp = std::floor(input / 360) * -1;
 		input = input + (360 * temp);
 		input = 360 + input;
 		input = 0;
 	}
 	else if (input > 360) {
-		int temp = std::floor(input / 360);
+		float temp = std::floor(input / 360);
 		input = input - (360 * temp);
 	}
 }

@@ -56,7 +56,7 @@ void object_manger::init() {
 	std::cout << "finished creating the object manager" << std::endl;
 }
 
-int object_manger::add_model(std::string name, std::string loc, unsigned int buffer_size, int type, bool draw, Shader* custom_shader) {
+size_t object_manger::add_model(std::string name, std::string loc, unsigned int buffer_size, int type, bool draw, Shader* custom_shader) {
 
 	unsigned int buffer;
 	unsigned int amount;
@@ -107,7 +107,7 @@ int object_manger::add_model(std::string name, std::string loc, unsigned int buf
 	temp->type = type;
 	temp->draw = draw;
 
-	int output = items.size();
+	size_t output = items.size();
 
 	draw_item.push_back(draw);
 	items.push_back(temp);
@@ -140,7 +140,7 @@ bool object_manger::increase_buffer_size(int item_index) {
 		if (output) {
 			glm::mat4* modelMatrices = new glm::mat4[inc->buffer_size];
 
-			for (int i = 0; i < inc->amount; i++) {
+			for (unsigned int i = 0; i < inc->amount; i++) {
 				modelMatrices[i] = inc->modelMatrices[i];
 			}
 			delete[] inc->modelMatrices;
@@ -226,7 +226,6 @@ item_info* object_manger::spawn_item(int type, int x, int y, int z, glm::mat4* g
 	unsigned int buffer_loc;
 	unsigned int item_id;
 	bool stackable = false;
-	int max_stack_size;
 	float x_f = float(x * 2);
 	float y_f = float(y * 2);
 	float z_f = float(z * 2);
