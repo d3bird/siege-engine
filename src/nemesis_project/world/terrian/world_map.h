@@ -21,16 +21,16 @@ public:
 	bool can_place_ground_obj(const loc<int>& cords, bool requires_floor);
 	bool can_place_ground_obj(const loc<int>& chunk_cords,const loc<int>& local_cords, bool requires_floor);
 
-	bool attach_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground);
+	bool attach_obj(const loc<int>& cords, rendering::item_info* obj, bool floor, bool ground);
 
 	//returns the object that replaced
-	item_info* replace_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground);
+	rendering::item_info* replace_obj(const loc<int>& cords, rendering::item_info* obj, bool floor, bool ground);
 
 	//returns the object wqas deleted
-	item_info* delete_obj(const loc<int>& cords,  bool floor, bool ground);
+	rendering::item_info* delete_obj(const loc<int>& cords,  bool floor, bool ground);
 
-	item_info* get_grnd_obj(const loc<int>& cords);
-	item_info* get_floor_obj(const loc<int>& cords);
+	rendering::item_info* get_grnd_obj(const loc<int>& cords);
+	rendering::item_info* get_floor_obj(const loc<int>& cords);
 
 private:
 	
@@ -43,7 +43,7 @@ private:
 	bool is_cords_floor_NULL(const loc<int>& chunk_cords, const loc<int>& local_cords);
 
 	//helper functions
-	inline void set_floor_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, item_info* obj);
-	inline void set_ground_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, item_info* obj);
+	inline void set_floor_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, rendering::item_info* obj);
+	inline void set_ground_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, rendering::item_info* obj);
 };
 

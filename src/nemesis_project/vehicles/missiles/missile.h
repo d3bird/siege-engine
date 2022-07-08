@@ -32,7 +32,7 @@ public:
 	loc<double> get_location() { return actual_location; }
 	int get_ID() { return ID; }
 
-	item_info* model;
+	rendering::item_info* model;
 
 private:
 	int ID;

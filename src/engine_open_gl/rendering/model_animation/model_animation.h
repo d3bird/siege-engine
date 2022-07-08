@@ -22,64 +22,64 @@
 #include "assimp_glm_helpers.hpp"
 #include "animdata.hpp"
 
-using namespace std;
+namespace rendering {
 
-namespace model_animation {
-	class Model_bone
-	{
-	public:
-		// model data 
-		vector<Texture> textures_loaded;	// stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
-		vector<Mesh_bone>    meshes;
-		string directory;
-		bool gammaCorrection;
-
-		// constructor, expects a filepath to a 3D model.
-		Model_bone(string const& path, bool gamma = false) : gammaCorrection(gamma)
+	namespace model_animation {
+		class Model_bone
 		{
-			loadModel(path);
-		}
+		public:
+			// model data 
+			std::vector<Texture> textures_loaded;	// stores all the textures loaded so far, optimization to make sure textures aren't loaded more than once.
+			std::vector<Mesh_bone>    meshes;
+			std::string directory;
+			bool gammaCorrection;
 
-		// draws the model, and thus all its meshes
-		void Draw(Shader& shader)
-		{
-			for (unsigned int i = 0; i < meshes.size(); i++)
-				meshes[i].Draw(shader);
-		}
+			// constructor, expects a filepath to a 3D model.
+			Model_bone(std::string const& path, bool gamma = false) : gammaCorrection(gamma)
+			{
+				loadModel(path);
+			}
 
-		auto& GetBoneInfoMap() { return m_BoneInfoMap; }
-		int& GetBoneCount() { return m_BoneCounter; }
+			// draws the model, and thus all its meshes
+			void Draw(rendering::Shader& shader)
+			{
+				for (unsigned int i = 0; i < meshes.size(); i++)
+					meshes[i].Draw(shader);
+			}
 
-
-	private:
-
-		std::map<string, BoneInfo> m_BoneInfoMap;
-		int m_BoneCounter = 0;
-
-		// loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
-		void loadModel(string const& path);
-
-		// processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
-		void processNode(aiNode* node, const aiScene* scene);
-
-		void SetVertexBoneDataToDefault(Vertex& vertex);
+			auto& GetBoneInfoMap() { return m_BoneInfoMap; }
+			int& GetBoneCount() { return m_BoneCounter; }
 
 
-		Mesh_bone processMesh(aiMesh* mesh, const aiScene* scene);
+		private:
 
-		void SetVertexBoneData(Vertex& vertex, int boneID, float weight);
+			std::map<std::string, BoneInfo> m_BoneInfoMap;
+			int m_BoneCounter = 0;
+
+			// loads a model with supported ASSIMP extensions from file and stores the resulting meshes in the meshes vector.
+			void loadModel(std::string const& path);
+
+			// processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
+			void processNode(aiNode* node, const aiScene* scene);
+
+			void SetVertexBoneDataToDefault(Vertex& vertex);
 
 
-		void ExtractBoneWeightForVertices(std::vector<Vertex>& vertices, aiMesh* mesh, const aiScene* scene);
+			Mesh_bone processMesh(aiMesh* mesh, const aiScene* scene);
+
+			void SetVertexBoneData(Vertex& vertex, int boneID, float weight);
 
 
-		unsigned int TextureFromFile(const char* path, const string& directory, bool gamma = false);
+			void ExtractBoneWeightForVertices(std::vector<Vertex>& vertices, aiMesh* mesh, const aiScene* scene);
 
-		// checks all material textures of a given type and loads the textures if they're not loaded yet.
-		// the required info is returned as a Texture struct.
-		vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, string typeName);
-	};
 
+			unsigned int TextureFromFile(const char* path, const std::string& directory, bool gamma = false);
+
+			// checks all material textures of a given type and loads the textures if they're not loaded yet.
+			// the required info is returned as a Texture struct.
+			std::vector<Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+		};
+
+	}
 }
-
 #endif

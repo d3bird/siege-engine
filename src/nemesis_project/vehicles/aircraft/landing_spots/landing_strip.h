@@ -16,7 +16,7 @@ public:
 
 	loc<int> get_location() { return location; }
 
-	item_info* obj;
+	rendering::item_info* obj;
 
 private:
 	int ID;

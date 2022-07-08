@@ -38,8 +38,8 @@ private:
 	bool update_projection;
 	bool update_cam;
 
-	Shader* shader;
-	Shader* skyboxShader;
+	rendering::Shader* shader;
+	rendering::Shader* skyboxShader;
 
 	external_paths paths;
 

@@ -25,7 +25,7 @@ void missile_manager::update(double time) {
 }
 
 
-int missile_manager::spawn_missile(const loc<int>& location, item_info* model) {
+int missile_manager::spawn_missile(const loc<int>& location, rendering::item_info* model) {
 	int output = -1;
 	if (model != NULL) {
 		missile* temp = new missile(missile_id, location);
@@ -37,7 +37,7 @@ int missile_manager::spawn_missile(const loc<int>& location, item_info* model) {
 	return output;
 }
 
-int missile_manager::spawn_missile_in_launcher(int launcher_ID, item_info* model) {
+int missile_manager::spawn_missile_in_launcher(int launcher_ID, rendering::item_info* model) {
 	int output = -1;
 	if (model != NULL && lancher_exists(launcher_ID)) {
 		loc<int>location = get_lancher_loc(launcher_ID);
@@ -51,7 +51,7 @@ int missile_manager::spawn_missile_in_launcher(int launcher_ID, item_info* model
 	return output;
 }
 
-int missile_manager::spawn_launcher(const loc<int>& location, item_info* model) {
+int missile_manager::spawn_launcher(const loc<int>& location, rendering::item_info* model) {
 	int output = -1;
 	if (model != NULL) {
 		launcher* temp = new launcher(missile_id, location);
@@ -87,9 +87,9 @@ bool missile_manager::fire_launcher(int alauncher, const loc<int>& target) {
 	return preformed;
 }
 
-item_info* missile_manager::explode_missile(int ID) {
+rendering::item_info* missile_manager::explode_missile(int ID) {
 	missile* exploded = NULL;
-	item_info* output = NULL;
+	rendering::item_info* output = NULL;
 	for (int i = 0; i < missiles.size(); i++) {
 		if (missiles[i]->get_ID() == ID) {
 			exploded = missiles[i];

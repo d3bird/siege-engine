@@ -9,11 +9,11 @@ struct wheel {
 	bool pos_directio = true;
 
 	int wheight_limit = 0;
-	item_info* obj = NULL;
-	item_info* wheel_block_link = NULL;
+	rendering::item_info* obj = NULL;
+	rendering::item_info* wheel_block_link = NULL;
 };
 
 struct wheels {
 	std::vector<wheel*> wheels;
-	std::vector<item_info*> wheel_blocks;
+	std::vector<rendering::item_info*> wheel_blocks;
 };

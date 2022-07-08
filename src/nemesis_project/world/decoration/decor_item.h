@@ -13,8 +13,8 @@ namespace decor {
 
 		void update(double time);
 
-		item_info* obj1;
-		item_info* obj2;
+		rendering::item_info* obj1;
+		rendering::item_info* obj2;
 
 		decor_type type;
 

@@ -102,7 +102,7 @@ void text_engine::add_char_to_message(char *i, bool remove) {
 
 // render line of text
 // -------------------
-void text_engine::RenderText(Shader* shader, std::string text, float x, float y, float scale, glm::vec3 color)
+void text_engine::RenderText(rendering::Shader* shader, std::string text, float x, float y, float scale, glm::vec3 color)
 {
     // activate corresponding render state	
     shader->use();
@@ -150,7 +150,7 @@ void text_engine::RenderText(Shader* shader, std::string text, float x, float y,
 void text_engine::init() {
 	std::cout << "creating text rendering system" << std::endl;
 
-    shader = new Shader("text.vs", "text.fs");
+    shader = new rendering::Shader("text.vs", "text.fs");
     glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(SCR_WIDTH), 0.0f, static_cast<float>(SCR_HEIGHT));
     shader->use();
     glUniformMatrix4fv(glGetUniformLocation(shader->ID, "projection"), 1, GL_FALSE, glm::value_ptr(projection));

@@ -45,12 +45,12 @@ int belt_manager::get_num_connections(int ID) {
 	return -1;
 }
 
-item_info* belt_manager::replace_obj(int ID,item_info* new_obj) {
+rendering::item_info* belt_manager::replace_obj(int ID,rendering::item_info* new_obj) {
 
 	for (int i = 0; i < belts_update.size(); i++) {
 		if (belts_update[i]->get_ID() == ID) {
 
-			item_info* old_obj = belts_update[i]->get_obj();
+			rendering::item_info* old_obj = belts_update[i]->get_obj();
 			belts_update[i]->set_obj(new_obj);//should rotate the object to fit connections
 			updater->update_item(new_obj);
 
@@ -61,8 +61,8 @@ item_info* belt_manager::replace_obj(int ID,item_info* new_obj) {
 	return NULL;
 }
 
-std::vector<item_info*> belt_manager::get_all_objs() {
-	std::vector<item_info*> output;
+std::vector<rendering::item_info*> belt_manager::get_all_objs() {
+	std::vector<rendering::item_info*> output;
 
 	for (int i = 0; i < belts_update.size(); i++) {
 		if (belts_update[i]->get_obj() != NULL) {

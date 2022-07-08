@@ -65,7 +65,7 @@ public:
 
 	void change_projection(glm::mat4 i);
 	void set_camera_obj(Camera* cam) {ADM->set_cam(cam);	}
-	void set_animation_manager(model_animation::animation_manager* anim) { ANIM = anim; }
+	void set_animation_manager(rendering::model_animation::animation_manager* anim) { ANIM = anim; }
 
 	void set_text_engine(text_engine* txt) { text_render = txt; }
 
@@ -94,10 +94,10 @@ private:
 
 	text_engine* text_render;
 
-	audio_manger* ADM;
-	object_manger* OBJM;
-	model_animation::animation_manager* ANIM;
-	Shader* ANIM_shader;
+	audio_syst::audio_manger* ADM;
+	rendering::object_manger* OBJM;
+	rendering::model_animation::animation_manager* ANIM;
+	rendering::Shader* ANIM_shader;
 	float* time_change;
 
 	bool online;
@@ -105,15 +105,15 @@ private:
 	bool single;
 	bool render_text;
 	//single source
-	Shader* lighting_in;
+	rendering::Shader* lighting_in;
 	glm::vec3 lighting_loc;
 
 	//deferred shading
 	bool draw_lights_debug;
 	bool update_lights;
-	Shader* shaderGeometryPass;
-	Shader* shaderLightingPass;
-	Shader* shaderLightBox;
+	rendering::Shader* shaderGeometryPass;
+	rendering::Shader* shaderLightingPass;
+	rendering::Shader* shaderLightBox;
 
 	unsigned int SCR_WIDTH;
 	unsigned int SCR_HEIGHT;

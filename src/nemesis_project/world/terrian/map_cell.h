@@ -17,7 +17,7 @@ struct room {
 };
 
 struct additional_proporities {
-	std::vector< item_info*> additional_items;
+	std::vector< rendering::item_info*> additional_items;
 };
 
 class map_cell {
@@ -29,8 +29,8 @@ public:
 	int y;
 	int z;
 
-	item_info* ground = NULL;//this is the main object in the square (could be a wall, table etc..)
-	item_info* floor = NULL;
+	rendering::item_info* ground = NULL;//this is the main object in the square (could be a wall, table etc..)
+	rendering::item_info* floor = NULL;
 
 	bool gen_without_items = false;
 	int ground_type = CUBE_T;

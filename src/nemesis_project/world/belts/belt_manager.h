@@ -16,10 +16,10 @@ public:
 	//first return is the spawned and second is the affected
 	std::pair<int, int> spawn_belt(loc<int> location, int out_dir);
 	int get_num_connections(int ID);
-	item_info* replace_obj(int ID, item_info* new_obj);
+	rendering::item_info* replace_obj(int ID, rendering::item_info* new_obj);
 
 	//for clean up
-	std::vector<item_info*> get_all_objs();
+	std::vector<rendering::item_info*> get_all_objs();
 
 private:
 	motion_manger* updater;

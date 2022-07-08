@@ -25,11 +25,11 @@ public:
 
 
 	struct door_section {
-		item_info* obj;
+		rendering::item_info* obj;
 		loc<double> open_location;
 		loc<double> close_location;
 		loc<double> current_location;
-		rotation angle;
+		rendering::rotation angle;
 	};
 
 	door_section** door_objs;

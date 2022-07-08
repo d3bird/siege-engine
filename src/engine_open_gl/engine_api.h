@@ -56,9 +56,9 @@ public:
 	engine_obj* get_all_engine_componets() { return engine_data; }
 	engine* get_engine() { return Engine; }
 	GUI* get_engine_gui() { return gui; }
-	object_manger* get_OBJM() { return OBJM; }
-	model_animation::animation_manager* get_ANIM() { return ANIM; }
-	audio_manger* get_AM() { return AM; }
+	rendering::object_manger* get_OBJM() { return OBJM; }
+	rendering::model_animation::animation_manager* get_ANIM() { return ANIM; }
+	audio_syst::audio_manger* get_AM() { return AM; }
 
 	
 
@@ -114,7 +114,7 @@ private:
 	skymap* sky;
 	GUI* gui;
 	Camera* camera;
-	object_manger* OBJM;
-	model_animation::animation_manager* ANIM;
-	audio_manger *AM;
+	rendering::object_manger* OBJM;
+	rendering::model_animation::animation_manager* ANIM;
+	audio_syst::audio_manger *AM;
 };

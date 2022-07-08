@@ -12,9 +12,9 @@ enum lighting_mode { LIGH_EVERYTHING, NO_SHADOW, NONE };
 enum gui_draw{DRAW_ENGINES_GUI, DRAW_SCENE_GUI, DRAW_BOTH_GUI, DRAW_NONE_GUI};
 
 struct engine_obj {
-	object_manger* OBJM =NULL;
-	model_animation::animation_manager* ANIM = NULL;
-	audio_manger* ADM = NULL;
+	rendering::object_manger* OBJM =NULL;
+	rendering::model_animation::animation_manager* ANIM = NULL;
+	audio_syst::audio_manger* ADM = NULL;
 	timing* time = NULL;
 
 	Camera* cam = NULL;

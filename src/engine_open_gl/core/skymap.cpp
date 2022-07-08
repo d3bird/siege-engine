@@ -39,8 +39,8 @@ void skymap::draw() {
 
 void skymap::init() {
     std::cout << "creating skymap" << std::endl;
-    shader = new Shader("cubemaps.vs", "cubemaps.fs");
-    skyboxShader = new Shader("skybox.vs", "skybox.fs");
+    shader = new rendering::Shader("cubemaps.vs", "cubemaps.fs");
+    skyboxShader = new rendering::Shader("skybox.vs", "skybox.fs");
 
     float skyboxVertices[] = {
         // positions          

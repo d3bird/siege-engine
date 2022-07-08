@@ -21,7 +21,7 @@ public:
 
 	void send_craft_patrol(aircraft* plane, loc<int> location);
 
-	void start_sim(aircraft* craft, aircraft* craft2, std::vector<item_info*> awaypoints);
+	void start_sim(aircraft* craft, aircraft* craft2, std::vector<rendering::item_info*> awaypoints);
 private:
 	std::vector<aircraft*> planes;
 	motion_manger* updater;
@@ -57,7 +57,7 @@ private:
 	bool running_sim;
 	aircraft* sim_craft;
 	aircraft* sim_craft2;
-	std::vector<item_info*> waypoints;
+	std::vector<rendering::item_info*> waypoints;
 	int index;
 };
 

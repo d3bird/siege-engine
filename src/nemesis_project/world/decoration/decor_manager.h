@@ -15,7 +15,7 @@ namespace decor {
 
 		void update(double time);
 
-		void place_fanx3x3(const loc<int>& location, item_info* frame, item_info* fan);
+		void place_fanx3x3(const loc<int>& location, rendering::item_info* frame, rendering::item_info* fan);
 
 	private:
 

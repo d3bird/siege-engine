@@ -25,7 +25,7 @@ namespace door_data {
 
 		float angle;
 
-		item_info* door_sec = NULL;
+		rendering::item_info* door_sec = NULL;
 
 		bool need_update;
 	};

@@ -314,7 +314,7 @@ void flight_controller::create_orbit_patrol(aircraft* plane) {
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-void flight_controller::start_sim(aircraft* craft, aircraft* craft2,  std::vector<item_info*> awaypoints) {
+void flight_controller::start_sim(aircraft* craft, aircraft* craft2,  std::vector<rendering::item_info*> awaypoints) {
 	//std::cout << "awaypoints" << awaypoints.size() << std::endl;
 	//while (true);
 
@@ -518,7 +518,7 @@ void flight_controller::test_fly(double time, aircraft* plane) {
 	float current_angle_x = plane->obj->angles.get_x_angle();
 	float current_angle_z = plane->obj->angles.get_z_angle();
 
-	rotation rot_output = plane->obj->angles;
+	rendering::rotation rot_output = plane->obj->angles;
 
 
 	if (needed_angle < 0) {
@@ -605,7 +605,7 @@ void flight_controller::angle_update(double time) {
 	x_angle += time * 20;
 	y_angle += time * 20;
 
-	rotation rot_output;
+	rendering::rotation rot_output;
 
 	rot_output.set_x_angle(x_angle);
 	rot_output.set_y_angle(y_angle);

@@ -9,7 +9,7 @@
 #include "../core/spawning_enums.hpp"
 
 struct floor_item {
-	item_info* render_oj = NULL;
+	rendering::item_info* render_oj = NULL;
 	res_item* f_item_data = NULL;
 };
 
@@ -53,7 +53,7 @@ struct thermal_block {
 
 	bool being_updated = false;
 	int updates_since_temp_changed =0;
-	item_info* obj = NULL;
+	rendering::item_info* obj = NULL;
 };
 
 //information for zone data
@@ -63,7 +63,7 @@ struct zone_cell {
 	int x, y, z;
 	bool empty;
 
-	item_info* obj_on_top;
+	rendering::item_info* obj_on_top;
 	unsigned int buffer_index;// location in the zone vector
 	unsigned int ID;
 	zone_type type;

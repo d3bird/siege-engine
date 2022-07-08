@@ -32,10 +32,10 @@ public:
 
 	bool operator==(const int id);
 
-	item_info* body;
-	item_info* engines;
-	item_info* left_doors;
-	item_info* right_doors;
+	rendering::item_info* body;
+	rendering::item_info* engines;
+	rendering::item_info* left_doors;
+	rendering::item_info* right_doors;
 
 	route* current_route;
 

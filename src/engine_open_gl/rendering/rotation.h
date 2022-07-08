@@ -16,43 +16,45 @@
 * z_angle is the angle that deals with the  y axis
 * 
 */
+namespace rendering {
 
-class rotation {
-public:
-	rotation();
-	~rotation();
+	class rotation {
+	public:
+		rotation();
+		~rotation();
 
-	glm::mat4 get_matirx(glm::mat4 & inputed);
+		glm::mat4 get_matirx(glm::mat4& inputed);
 
-	void inc_x_angle(float amount);
-	void inc_y_angle(float amount);
-	void inc_z_angle(float amount);
+		void inc_x_angle(float amount);
+		void inc_y_angle(float amount);
+		void inc_z_angle(float amount);
 
-	void dec_x_angle(float amount);
-	void dec_y_angle(float amount);
-	void dec_z_angle(float amount);
+		void dec_x_angle(float amount);
+		void dec_y_angle(float amount);
+		void dec_z_angle(float amount);
 
-	void set_x_angle(float anagle);
-	void set_y_angle(float anagle);
-	void set_z_angle(float anagle);
+		void set_x_angle(float anagle);
+		void set_y_angle(float anagle);
+		void set_z_angle(float anagle);
 
-	float get_x_angle() { return x_angle; }
-	float get_y_angle() { return y_angle; }
-	float get_z_angle() { return z_angle; }
+		float get_x_angle() { return x_angle; }
+		float get_y_angle() { return y_angle; }
+		float get_z_angle() { return z_angle; }
 
-	bool operator==(const rotation& other);
-	void operator=(const rotation& other);
+		bool operator==(const rotation& other);
+		void operator=(const rotation& other);
 
-private:
+	private:
 
-	bool double_equals(float a, float b, float epsilon = 0.001);
+		bool double_equals(float a, float b, float epsilon = 0.001);
 
-	void check_angle(float &input);
+		void check_angle(float& input);
 
-	float x_angle;
-	float y_angle;
-	float z_angle;
+		float x_angle;
+		float y_angle;
+		float z_angle;
 
-	glm::quat rotation_quat;
+		glm::quat rotation_quat;
 
-};
+	};
+}

@@ -5,8 +5,8 @@
 #include <iostream>
 
 struct data_ball {
-	object_manger* OBJM = NULL;
-	audio_manger* AM = NULL;
+	rendering::object_manger* OBJM = NULL;
+	audio_syst::audio_manger* AM = NULL;
 	light_mgr* LM = NULL;
 	GUI* gui = NULL;
 	timing* time = NULL;

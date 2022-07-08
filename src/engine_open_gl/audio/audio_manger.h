@@ -17,59 +17,63 @@
 #include "../misc/external_files.hpp"
 
 
-enum effect_names { explosion = 0, Explosion_Large_Blast_1 = 1, Explosion_Large_Blast_2 = 2, chicken_alarm_call = 3 };
+namespace audio_syst {
 
-struct sound{
-	irrklang::ISoundSource* sound_data = NULL;
-	float current_volume = 1.0f;
-	float def_volume = 1.0f;
-};
+	enum effect_names { explosion = 0, Explosion_Large_Blast_1 = 1, Explosion_Large_Blast_2 = 2, chicken_alarm_call = 3 };
 
-struct speaker {
-	sound* audio;
-	float max_distance;
-	glm::vec3 loc;
-	bool repeat;
-};
+	struct sound {
+		irrklang::ISoundSource* sound_data = NULL;
+		float current_volume = 1.0f;
+		float def_volume = 1.0f;
+	};
 
-class audio_manger {
-public:
-	audio_manger();
-	~audio_manger();
+	struct speaker {
+		sound* audio;
+		float max_distance;
+		glm::vec3 loc;
+		bool repeat;
+	};
 
-	bool draw_speaker_locations() { return draw_speaker_loc; }
+	class audio_manger {
+	public:
+		audio_manger();
+		~audio_manger();
 
-	void update(glm::vec3 pos, glm::vec3 look, glm::vec3 vel = glm::vec3(0, 0, 0), glm::vec3 up = glm::vec3(0, 1, 0));
-	void update();
+		bool draw_speaker_locations() { return draw_speaker_loc; }
 
-	void init();
-	void play_sound_effect(int i);
-	void play_background_music(int i);
-	
-	void increase_volume();
-	void decrease_volume();
+		void update(glm::vec3 pos, glm::vec3 look, glm::vec3 vel = glm::vec3(0, 0, 0), glm::vec3 up = glm::vec3(0, 1, 0));
+		void update();
 
-	void play_3D_sound(effect_names soun, glm::vec3 pos);
+		void init();
+		void play_sound_effect(int i);
+		void play_background_music(int i);
 
-	void set_cam(Camera* c) { cam = c; }
+		void increase_volume();
+		void decrease_volume();
 
-	std::vector<glm::vec3> get_speaker_locations();
+		void play_3D_sound(effect_names soun, glm::vec3 pos);
 
-private:
+		void set_cam(Camera* c) { cam = c; }
 
-	void create_sound_data();
+		std::vector<glm::vec3> get_speaker_locations();
 
-	Camera *cam;
+	private:
 
-	float volume;
-	irrklang::ISoundEngine* engine;// = createIrrKlangDevice();
-	std::string audio_loc;
+		void create_sound_data();
 
-	std::vector<sound*> effects;
-	std::vector<sound*> background_music;
+		Camera* cam;
 
-	std::vector<speaker*> speaker_locs;
+		float volume;
+		irrklang::ISoundEngine* engine;// = createIrrKlangDevice();
+		std::string audio_loc;
 
-	external_paths paths;
-	bool draw_speaker_loc;
-};
+		std::vector<sound*> effects;
+		std::vector<sound*> background_music;
+
+		std::vector<speaker*> speaker_locs;
+
+		external_paths paths;
+		bool draw_speaker_loc;
+	};
+
+}

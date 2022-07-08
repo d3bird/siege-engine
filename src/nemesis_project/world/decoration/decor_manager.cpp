@@ -18,7 +18,7 @@ void decor::decor_mgr::update(double time) {
 	}
 }
 
-void decor::decor_mgr::place_fanx3x3(const loc<int>& location, item_info* frame, item_info* fan) {
+void decor::decor_mgr::place_fanx3x3(const loc<int>& location, rendering::item_info* frame, rendering::item_info* fan) {
 	decor_item* temp = new decor_item(decor_id);
 	temp->obj1 = frame;
 	temp->obj2 = fan;

@@ -39,7 +39,7 @@ public:
 	void update();
 	void init();
 
-	void RenderText(Shader* shader, std::string text, float x, float y, float scale, glm::vec3 color);
+	void RenderText(rendering::Shader* shader, std::string text, float x, float y, float scale, glm::vec3 color);
 
 	void set_projection(glm::mat4 i) { projection = i; update_projection = true; }
 	void set_cam(glm::mat4 i) { view = i; update_cam = true; }
@@ -87,6 +87,6 @@ private:
 	std::map<GLchar, Character> Characters;
 	unsigned int VAO, VBO;
 	FT_Library ft;
-	Shader* shader;
+	rendering::Shader* shader;
 };
 

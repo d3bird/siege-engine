@@ -56,6 +56,6 @@ bool belt::open_connections() {
 		west_connection != NULL);
 }
 
-void belt::set_obj(item_info* new_obj) {
+void belt::set_obj(rendering::item_info* new_obj) {
 	object = new_obj;
 }

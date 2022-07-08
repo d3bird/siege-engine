@@ -33,8 +33,8 @@ public:
 	void set_cam_pos(glm::vec3 i) { cam_pos = i; }
 
 	//getters
-	Shader* get_gem_shader() { return shaderGeometryPass; }
-	Shader* get_lighting_shader() { return shaderLightingPass; }
+	rendering::Shader* get_gem_shader() { return shaderGeometryPass; }
+	rendering::Shader* get_lighting_shader() { return shaderLightingPass; }
 
 	void set_height_screen(unsigned int h) { SCR_HEIGHT = h; }
 	void set_width_screen(unsigned int h) { SCR_WIDTH = h; }
@@ -55,14 +55,14 @@ private:
 
 
 	//deffered lighting vars
-	Shader* shaderGeometryPass;
-	Shader* shaderLightingPass;
-	Shader* shaderLightBox;
+	rendering::Shader* shaderGeometryPass;
+	rendering::Shader* shaderLightingPass;
+	rendering::Shader* shaderLightBox;
 
 	std::vector<glm::mat4> objectPositions;
 	glm::mat4* modelMatrices;
 	glm::mat4 model;
-	Model* backpack;
+	rendering::Model* backpack;
 	unsigned int mod_buffer;
 	unsigned int gBuffer;
 	unsigned int gPosition, gNormal, gAlbedoSpec;

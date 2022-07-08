@@ -29,7 +29,7 @@ namespace railRoad {
 
 		void print_info();
 
-		item_info* cart_obj;
+		rendering::item_info* cart_obj;
 
 		bool operator ==(const cart& right);
 		bool operator ==(const int& id);

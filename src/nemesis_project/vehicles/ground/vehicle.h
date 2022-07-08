@@ -20,16 +20,16 @@ public:
 	loc<double> get_obj_cords() { return  obj_cords; }
 
 	//body
-	item_info* body;
+	rendering::item_info* body;
 
 	//wheels
-	item_info* BLW;
-	item_info* BRW;
-	item_info* FLW;
-	item_info* FRW;
+	rendering::item_info* BLW;
+	rendering::item_info* BRW;
+	rendering::item_info* FLW;
+	rendering::item_info* FRW;
 
 	//misc
-	item_info* headlights;
+	rendering::item_info* headlights;
 
 private:
 	loc<double> obj_cords;

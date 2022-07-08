@@ -33,10 +33,10 @@ public:
 
 	void print_info();
 
-	std::vector<item_info*> base;
-	std::vector<item_info*> arm;
+	std::vector<rendering::item_info*> base;
+	std::vector<rendering::item_info*> arm;
 
-	item_info* attachment;
+	rendering::item_info* attachment;
 
 private:
 

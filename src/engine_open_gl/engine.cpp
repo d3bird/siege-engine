@@ -253,7 +253,7 @@ void engine::init(GUI* g, engine_obj* eng, bool ser) {
     std::cout << "initing the init " << std::endl;
 
     gui = g;
-    lighting_in = new Shader("lighting_instances.vs", "lighting_instances.fs");
+    lighting_in = new rendering::Shader("lighting_instances.vs", "lighting_instances.fs");
     
     engine_data = eng;
 
@@ -289,14 +289,14 @@ void engine::init(GUI* g, engine_obj* eng, bool ser) {
 
     std::cout << "creating the audio" << std::endl;
 
-    ADM = new audio_manger();
+    ADM = new audio_syst::audio_manger();
     ADM->init();
 
     eng->ADM = ADM;
 
     std::cout << "creating the object manager" << std::endl;
 
-    OBJM = new object_manger();
+    OBJM = new rendering::object_manger();
     OBJM->set_projection(projection);
     OBJM->set_cam(view);
 
@@ -336,9 +336,9 @@ void engine::lighting_init() {
 
     std::cout << "creating SHADERS" << std::endl;
 
-    shaderGeometryPass = new Shader("g_buffer.vs", "g_buffer.fs");
-    shaderLightingPass = new Shader("deferred_shading.vs", "deferred_shading.fs");
-    shaderLightBox = new Shader("deferred_light_box.vs", "deferred_light_box.fs");
+    shaderGeometryPass = new rendering::Shader("g_buffer.vs", "g_buffer.fs");
+    shaderLightingPass = new rendering::Shader("deferred_shading.vs", "deferred_shading.fs");
+    shaderLightBox = new rendering::Shader("deferred_light_box.vs", "deferred_light_box.fs");
 
     std::cout << "creating " << std::endl;
 

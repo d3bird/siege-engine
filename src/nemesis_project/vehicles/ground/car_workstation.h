@@ -13,8 +13,8 @@ public:
 
 	void update(double time);
 
-	item_info* lift;
-	item_info* leaver;
+	rendering::item_info* lift;
+	rendering::item_info* leaver;
 
 	grnd_vehicle* mounted_vehicle;
 

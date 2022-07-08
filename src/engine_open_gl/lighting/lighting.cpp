@@ -75,9 +75,9 @@ void lighting::update() {
 }
 
 void lighting::init() {
-    shaderGeometryPass = new Shader("g_buffer.vs", "g_buffer.fs");
-    shaderLightingPass = new Shader("deferred_shading.vs", "deferred_shading.fs");
-    shaderLightBox = new Shader("deferred_light_box.vs", "deferred_light_box.fs");
+    shaderGeometryPass = new rendering::Shader("g_buffer.vs", "g_buffer.fs");
+    shaderLightingPass = new rendering::Shader("deferred_shading.vs", "deferred_shading.fs");
+    shaderLightBox = new rendering::Shader("deferred_light_box.vs", "deferred_light_box.fs");
 
 
     // load models
@@ -135,7 +135,7 @@ void lighting::init() {
         modelMatrices[i] = objectPositions[i];
     }
 
-    backpack = new Model(("resources/objects/planet/planet.obj"));
+    backpack = new rendering::Model(("resources/objects/planet/planet.obj"));
 
 
     glGenBuffers(1, &mod_buffer);

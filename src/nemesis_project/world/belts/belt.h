@@ -21,14 +21,14 @@ public:
 
 	bool open_connections();
 
-	void set_obj(item_info* new_obj);
-	item_info* get_obj() { return object; }
+	void set_obj(rendering::item_info* new_obj);
+	rendering::item_info* get_obj() { return object; }
 
 private:
 
 	int ID;
 	loc<int> location;
-	item_info* object;
+	rendering::item_info* object;
 
 	//0 x+
 	//1 z+

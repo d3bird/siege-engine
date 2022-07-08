@@ -32,7 +32,7 @@ void environment::update(double time_change) {
 }
 
 bool environment::spawn_ground_item(item_type type, const loc<int>& location) {
-	item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
+	rendering::item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
 	bool ouptut = world_map->attach_obj(location, temp,false,true);
 	//if it failed to attach the item then delete the object
 	if (!ouptut) {
@@ -44,7 +44,7 @@ bool environment::spawn_ground_item(item_type type, const loc<int>& location) {
 }
 
 bool environment::spawn_floor_item(item_type type, const loc<int>& location) {
-	item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
+	rendering::item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
 	bool ouptut = world_map->attach_obj(location, temp, true, false);
 	//if it failed to attach the item then delete the object
 	if (!ouptut) {
@@ -56,8 +56,8 @@ bool environment::spawn_floor_item(item_type type, const loc<int>& location) {
 }
 
 void environment::replace_ground_item(item_type type, const loc<int>& location) {
-	item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
-	item_info* old = world_map->replace_obj(location, temp, false, true);
+	rendering::item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
+	rendering::item_info* old = world_map->replace_obj(location, temp, false, true);
 	//if it failed to attach the item then delete the object
 	if (old != NULL) {
 		std::cout << "removing replaced object" << std::endl;
@@ -66,8 +66,8 @@ void environment::replace_ground_item(item_type type, const loc<int>& location) 
 }
 
 void environment::replace_floor_item(item_type type, const loc<int>& location) {
-	item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
-	item_info* old = world_map->replace_obj(location, temp, true, false);
+	rendering::item_info* temp = spawner->spawn_item(type, location.x, location.y, location.z);
+	rendering::item_info* old = world_map->replace_obj(location, temp, true, false);
 	//if it failed to attach the item then delete the object
 	if (old != NULL) {
 		std::cout << "removing replaced object" << std::endl;
@@ -76,13 +76,13 @@ void environment::replace_floor_item(item_type type, const loc<int>& location) {
 }
 
 void environment::delete_grnd_obj(const loc<int>& location) {
-	item_info* temp = world_map->delete_obj(location, false, true);
+	rendering::item_info* temp = world_map->delete_obj(location, false, true);
 	if (temp != NULL) {
 		spawner->delete_item_from_buffer(temp);
 	}
 }
 void environment::delete_floor_obj(const loc<int>& location) {
-	item_info* temp = world_map->delete_obj(location, true, false);
+	rendering::item_info* temp = world_map->delete_obj(location, true, false);
 	if (temp != NULL) {
 		spawner->delete_item_from_buffer(temp);
 	}
@@ -92,7 +92,7 @@ bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_typ
 	bool output = can_place_rail(location);
 
 	if (output) {
-		item_info* temp = NULL;
+		rendering::item_info* temp = NULL;
 
 		switch (aType)
 		{
@@ -163,7 +163,7 @@ int environment::place_cart(loc<int>& location) {
 
 		if (output != -1) {
 
-			item_info* temp = spawner->spawn_item(CART, location.x, location.y, location.z);
+			rendering::item_info* temp = spawner->spawn_item(CART, location.x, location.y, location.z);
 
 			//the rail is facing another direction
 			if (rail_state == 2) {
@@ -205,7 +205,7 @@ void environment::prin_rail_info() {
 
 int environment::place_crane(const loc<int>& location, int height, int radius) {
 	int output = -1;
-	item_info* temp = 0;
+	rendering::item_info* temp = 0;
 
 	std::cout << "creating crane" << std::endl;
 
@@ -277,12 +277,12 @@ int environment::spawn_belt(loc<int> location, int output_dir) {
 	std::pair<int, int> affected = belt_mgr.spawn_belt(location, output_dir);
 	output = affected.first;
 	if (output >= 0) {
-		item_info* new_obj = spawner->spawn_item(BELT_1, location.x, location.y, location.z);
+		rendering::item_info* new_obj = spawner->spawn_item(BELT_1, location.x, location.y, location.z);
 		belt_mgr.replace_obj(output, new_obj);
 
 		if (affected.second >= 0) {
 			int connections = belt_mgr.get_num_connections(affected.second);
-			item_info* delete_obj = NULL;
+			rendering::item_info* delete_obj = NULL;
 
 			if (connections == 2) {
 				delete_obj = belt_mgr.replace_obj(affected.second, spawner->spawn_item(BELT_2, -1, -1, -1));
@@ -464,7 +464,7 @@ void environment::draw_plane_route(int id) {
 }
 
 void environment::run_air_sim() {
-	std::vector<item_info*> working_models;
+	std::vector<rendering::item_info*> working_models;
 
 	working_models.push_back(spawner->spawn_item(AIRCRAFT_T, -1, -1, -1));
 	working_models.push_back(spawner->spawn_item(AIRCRAFT_T, -1, -1, -1));
@@ -477,18 +477,18 @@ void environment::run_air_sim() {
 }
 
 int environment::spawn_missile(const loc<int>& spawn) {
-	item_info* mis = spawner->spawn_item(MISSILE3X1, spawn.x, spawn.y, spawn.z);
+	rendering::item_info* mis = spawner->spawn_item(MISSILE3X1, spawn.x, spawn.y, spawn.z);
 	return missile_mgr.spawn_missile(spawn, mis);
 }
 
 int environment::spawn_missile_lancher(const loc<int>& spawn) {
-	item_info* lan = spawner->spawn_item(M_LAUNCHER, spawn.x, spawn.y, spawn.z);
+	rendering::item_info* lan = spawner->spawn_item(M_LAUNCHER, spawn.x, spawn.y, spawn.z);
 	return missile_mgr.spawn_launcher(spawn, lan);
 }
 
 int environment::spawn_missile_w_lancher(const loc<int>& spawn) {
-	item_info* mis = spawner->spawn_item(MISSILE3X1, spawn.x, spawn.y+ 5, spawn.z);
-	item_info* lan = spawner->spawn_item(M_LAUNCHER, spawn.x, spawn.y, spawn.z);
+	rendering::item_info* mis = spawner->spawn_item(MISSILE3X1, spawn.x, spawn.y+ 5, spawn.z);
+	rendering::item_info* lan = spawner->spawn_item(M_LAUNCHER, spawn.x, spawn.y, spawn.z);
 
 	int lan_id = missile_mgr.spawn_launcher(spawn, lan);
 	int mis_lan = missile_mgr.spawn_missile(spawn, mis);
@@ -511,7 +511,7 @@ void environment::start_missile_sim() {
 
 void environment::place_fanx3x3(const loc<int>& location){
 
-	item_info* frame = spawner->spawn_item(FAN_FRAME, location.x, location.y, location.z);
-	item_info* fan = spawner->spawn_item(FAN, location.x, location.y, location.z);
+	rendering::item_info* frame = spawner->spawn_item(FAN_FRAME, location.x, location.y, location.z);
+	rendering::item_info* fan = spawner->spawn_item(FAN, location.x, location.y, location.z);
 	decor_manager.place_fanx3x3(location, frame, fan);
 }

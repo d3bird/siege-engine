@@ -16,7 +16,7 @@ public:
 	loc<int> get_location() { return location; }
 	int get_ID() { return ID; }
 
-	item_info* model;
+	rendering::item_info* model;
 
 	missile* slotted_missile;
 private:

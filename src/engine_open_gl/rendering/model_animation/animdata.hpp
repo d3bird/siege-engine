@@ -1,15 +1,18 @@
 #pragma once
 
 #include<glm/glm.hpp>
-namespace model_animation {
+namespace rendering {
 
-	struct BoneInfo
-	{
-		/*id is index in finalBoneMatrices*/
-		int id;
+	namespace model_animation {
 
-		/*offset matrix transforms vertex from model space to bone space*/
-		glm::mat4 offset;
+		struct BoneInfo
+		{
+			/*id is index in finalBoneMatrices*/
+			int id;
 
-	};
+			/*offset matrix transforms vertex from model space to bone space*/
+			glm::mat4 offset;
+
+		};
+	}
 }

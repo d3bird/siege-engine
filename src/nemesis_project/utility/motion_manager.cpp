@@ -15,14 +15,14 @@ motion_manger::~motion_manger()
 {
 }
 
-void motion_manger::update_item(item_info* obj) {
+void motion_manger::update_item(rendering::item_info* obj) {
 
 	if (obj == NULL) {
 		std::cout << "can not update the obj was NULL" << std::endl;
 		return;
 	}
 
-	update_pak update_pac;
+	rendering::update_pak update_pac;
 
 	update_pac.x = obj->x_m;
 	update_pac.y = obj->y_m;
@@ -42,7 +42,7 @@ void motion_manger::update_item(item_info* obj) {
 }
 
 
-void motion_manger::update_item_matrix(update_pak& up) {
+void motion_manger::update_item_matrix(rendering::update_pak& up) {
 	OBJM->update_item_matrix(&up);
 }
 

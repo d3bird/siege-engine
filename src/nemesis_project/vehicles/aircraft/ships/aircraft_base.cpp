@@ -93,7 +93,7 @@ double aircraft::get_angle_speed(double distance, double angle_change_req) {
 	return output;
 }
 
-void aircraft::update_model_loc(const loc<double>& alocation,const rotation& asangle) {
+void aircraft::update_model_loc(const loc<double>& alocation,const rendering::rotation& asangle) {
 	current_location = alocation;
 	angle = asangle;
 

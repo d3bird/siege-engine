@@ -151,7 +151,7 @@ void aircraft_manager::send_craft_patrol(int plane, loc<int> location) {
 	}
 }
 
-void aircraft_manager::testing_sim(std::vector<item_info*> working_models) {
+void aircraft_manager::testing_sim(std::vector<rendering::item_info*> working_models) {
 	sim_models = working_models;
 
 	if (sim_models.size() > 0) {

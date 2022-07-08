@@ -155,7 +155,7 @@ void engine_api::init_objects() {
     sky->set_projection(projection);
     sky->init();
 
-    ANIM = new model_animation::animation_manager();
+    ANIM = new rendering::model_animation::animation_manager();
          
     engine_data = new engine_obj;
     //engine_data->OBJM = OBJM;

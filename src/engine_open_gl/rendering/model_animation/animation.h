@@ -9,40 +9,43 @@
 #include "animdata.hpp"
 #include "model_animation.h"
 
-namespace model_animation {
+namespace rendering {
 
-	struct AssimpNodeData
-	{
-		glm::mat4 transformation;
-		std::string name;
-		int childrenCount;
-		std::vector<AssimpNodeData> children;
-	};
+	namespace model_animation {
 
-	class Animation
-	{
-	public:
-		Animation() = delete;
-		Animation(const std::string& animationPath, Model_bone* model);
-		~Animation();
+		struct AssimpNodeData
+		{
+			glm::mat4 transformation;
+			std::string name;
+			int childrenCount;
+			std::vector<AssimpNodeData> children;
+		};
 
-		Bone* FindBone(const std::string& name);
+		class Animation
+		{
+		public:
+			Animation() = delete;
+			Animation(const std::string& animationPath, Model_bone* model);
+			~Animation();
 
-		 float GetTicksPerSecond();
-		 float GetDuration();
-		 const AssimpNodeData& GetRootNode();
-		 const std::map<std::string, BoneInfo>& GetBoneIDMap();
+			Bone* FindBone(const std::string& name);
 
-	private:
+			float GetTicksPerSecond();
+			float GetDuration();
+			const AssimpNodeData& GetRootNode();
+			const std::map<std::string, BoneInfo>& GetBoneIDMap();
 
-		void ReadMissingBones(const aiAnimation* animation, Model_bone& model);
-		void ReadHeirarchyData(AssimpNodeData& dest, const aiNode* src);
+		private:
 
-		float m_Duration;
-		float m_TicksPerSecond;
-		std::vector<Bone> m_Bones;
-		AssimpNodeData m_RootNode;
-		std::map<std::string, BoneInfo> m_BoneInfoMap;
-	};
+			void ReadMissingBones(const aiAnimation* animation, Model_bone& model);
+			void ReadHeirarchyData(AssimpNodeData& dest, const aiNode* src);
 
+			float m_Duration;
+			float m_TicksPerSecond;
+			std::vector<Bone> m_Bones;
+			AssimpNodeData m_RootNode;
+			std::map<std::string, BoneInfo> m_BoneInfoMap;
+		};
+
+	}
 }

@@ -37,7 +37,7 @@ public:
 	void set_text_engine(text_engine* txt) { text_render = txt; }
 	void set_online(bool i) { online = i; }
 
-	void set_OBJM(object_manger* i) { OBJM = i; }
+	void set_OBJM(rendering::object_manger* i) { OBJM = i; }
 	void set_LM(light_mgr* lm) { LM = lm; }
 	void set_draw_debug_info(bool i) { draw_debug_info = i; }
 	void toggle_draw_debug_info() { draw_debug_info = !draw_debug_info; }
@@ -74,7 +74,7 @@ private:
 	bool show_animation_stats;
 	bool edit_routine;
 	bool edit_rendering;
-	std::vector< item*>* item_data;
+	std::vector< rendering::item*>* item_data;
 	float* item_amounts;
 	int routines_edit_index;
 	int show_actors_that_follow_routine;
@@ -103,7 +103,7 @@ private:
 	bool is_actor;
 	bool select_routine;
 	bool spawned;
-	item_info* fresh_item;
+	rendering::item_info* fresh_item;
 	int type;
 	bool clear_on_spawn;
 
@@ -128,9 +128,9 @@ private:
 	bool online;
 	bool server;
 	text_engine* text_render;
-	object_manger* OBJM;
+	rendering::object_manger* OBJM;
 	unsigned int VBO, VAO;
-	Shader* gui_window;
+	rendering::Shader* gui_window;
 	Camera* cam;
 
 	int x_start_off;

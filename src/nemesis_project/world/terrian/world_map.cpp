@@ -102,7 +102,7 @@ bool map_data::can_place_ground_obj(const loc<int>& chunk_cords, const loc<int>&
 	return output;
 }
 
-bool map_data::attach_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground) {
+bool map_data::attach_obj(const loc<int>& cords, rendering::item_info* obj, bool floor, bool ground) {
 	bool output = false;
 
 	if (floor || ground) {
@@ -129,8 +129,8 @@ bool map_data::attach_obj(const loc<int>& cords, item_info* obj, bool floor, boo
 	return output;
 }
 
-item_info* map_data::replace_obj(const loc<int>& cords, item_info* obj, bool floor, bool ground){
-	item_info* output = NULL;
+rendering::item_info* map_data::replace_obj(const loc<int>& cords, rendering::item_info* obj, bool floor, bool ground){
+	rendering::item_info* output = NULL;
 	std::pair < loc<int>, loc<int> > temp = get_map_local_cords(cords);
 	bool valid = is_valid_locaL_cords(temp.first, temp.second);
 	if (valid) {
@@ -153,13 +153,13 @@ item_info* map_data::replace_obj(const loc<int>& cords, item_info* obj, bool flo
 	return output;
 }
 
-item_info* map_data::delete_obj(const loc<int>& cords,  bool floor, bool ground) {
-	item_info* output = replace_obj(cords, NULL, floor, ground);
+rendering::item_info* map_data::delete_obj(const loc<int>& cords,  bool floor, bool ground) {
+	rendering::item_info* output = replace_obj(cords, NULL, floor, ground);
 	return output;
 }
 
-item_info* map_data::get_grnd_obj(const loc<int>& cords) {
-	item_info* output = NULL;
+rendering::item_info* map_data::get_grnd_obj(const loc<int>& cords) {
+	rendering::item_info* output = NULL;
 	std::pair < loc<int>, loc<int> > temp = get_map_local_cords(cords);
 	if (is_valid_locaL_cords(temp.first, temp.second)) {
 		output = world_map[temp.first.y][temp.first.x][temp.first.z].
@@ -168,8 +168,8 @@ item_info* map_data::get_grnd_obj(const loc<int>& cords) {
 	return output;
 }
 
-item_info* map_data::get_floor_obj(const loc<int>& cords) {
-	item_info* output = NULL;
+rendering::item_info* map_data::get_floor_obj(const loc<int>& cords) {
+	rendering::item_info* output = NULL;
 	std::pair < loc<int>, loc<int> > temp = get_map_local_cords(cords);
 	if (is_valid_locaL_cords(temp.first, temp.second)) {
 		output = world_map[temp.first.y][temp.first.x][temp.first.z].
@@ -218,12 +218,12 @@ bool map_data::is_cords_floor_NULL(const loc<int>& chunk_cords, const loc<int>& 
 	return output;
 }
 
-inline void map_data::set_floor_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, item_info* obj) {
+inline void map_data::set_floor_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, rendering::item_info* obj) {
 	world_map[chunk_cords.y][chunk_cords.x][chunk_cords.z].
 		map[local_cords.y][local_cords.x][local_cords.z].floor = obj;
 }
 
-inline void map_data::set_ground_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, item_info* obj) {
+inline void map_data::set_ground_obj(const loc<int>& chunk_cords, const loc<int>& local_cords, rendering::item_info* obj) {
 	world_map[chunk_cords.y][chunk_cords.x][chunk_cords.z].
 		map[local_cords.y][local_cords.x][local_cords.z].floor = obj;
 }

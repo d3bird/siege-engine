@@ -49,7 +49,7 @@ void missile_sim::start_sim() {
 		if (mis_manager->is_launcher_empty(lan_IDs[i])) {
 			launchers.push_back(lan_IDs[i]);
 			loc<int> lan_loc = mis_manager->get_lancher_loc(lan_IDs[i]);
-			item_info* miss_obj = spawner->spawn_item(MISSILE3X1, lan_loc.x, lan_loc.y, lan_loc.z);
+			rendering::item_info* miss_obj = spawner->spawn_item(MISSILE3X1, lan_loc.x, lan_loc.y, lan_loc.z);
 			missiles_obj.push_back(miss_obj);
 			int mis_spawn = mis_manager->spawn_missile_in_launcher(lan_IDs[i], miss_obj);
 			missiles.push_back(mis_spawn);

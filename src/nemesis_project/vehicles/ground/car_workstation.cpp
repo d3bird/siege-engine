@@ -2,8 +2,8 @@
 
 car_workstation::car_workstation(int id) {
 	ID = id;
-	item_info* lift = NULL;
-	item_info* leaver = NULL;
+	lift = NULL;
+	leaver = NULL;
 
 	start_pos = -1;
 	end_pos = -1;

@@ -7,28 +7,30 @@
 #include <assimp/Importer.hpp>
 #include "animation.h"
 #include "bone.h"
+namespace rendering {
 
-namespace model_animation {
+	namespace model_animation {
 
-	class Animator
-	{
-	public:
-		Animator(Animation* animation);
+		class Animator
+		{
+		public:
+			Animator(Animation* animation);
 
-		void UpdateAnimation(float dt);
-		void PlayAnimation(Animation* pAnimation);
+			void UpdateAnimation(float dt);
+			void PlayAnimation(Animation* pAnimation);
 
-		void CalculateBoneTransform(const AssimpNodeData* node, glm::mat4 parentTransform);
+			void CalculateBoneTransform(const AssimpNodeData* node, glm::mat4 parentTransform);
 
-		std::vector<glm::mat4> GetFinalBoneMatrices();
+			std::vector<glm::mat4> GetFinalBoneMatrices();
 
-	private:
+		private:
 
-		std::vector<glm::mat4> m_FinalBoneMatrices;
-		Animation* m_CurrentAnimation;
+			std::vector<glm::mat4> m_FinalBoneMatrices;
+			Animation* m_CurrentAnimation;
 
-		float m_CurrentTime;
-		float m_DeltaTime;
+			float m_CurrentTime;
+			float m_DeltaTime;
 
-	};
+		};
+	}
 }

@@ -31,7 +31,7 @@ private:
 	bool use_fuel;
 	bool random_targets;
 
-	std::vector<item_info*>missiles_obj;
+	std::vector<rendering::item_info*>missiles_obj;
 	std::vector<int>missiles;
 	std::vector<int >launchers;
 
@@ -39,7 +39,7 @@ private:
 	struct target {
 		loc<int> map_loc;
 		loc<double> real_space;
-		item_info* target_model = NULL;
+		rendering::item_info* target_model = NULL;
 		double blink_time = 0;
 	};
 

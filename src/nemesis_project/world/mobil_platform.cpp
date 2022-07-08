@@ -23,7 +23,7 @@ void mobil_platform::update(float delta_time) {
 void mobil_platform::update_pos(float delta_time) {
 
 	if (map_info != NULL && velocity != 0) {
-		update_pak pak;
+		rendering::update_pak pak;
 
 		double change = velocity * delta_time;
 		for (int y = 0; y < map_info->y_size; y++) {

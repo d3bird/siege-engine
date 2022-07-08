@@ -18,15 +18,15 @@ public:
 
 	void update(double time);
 
-	int spawn_missile(const loc<int>& location, item_info* model);
-	int spawn_missile_in_launcher(int launcher_ID, item_info* model);
-	int spawn_launcher(const loc<int>& location, item_info* model);
+	int spawn_missile(const loc<int>& location, rendering::item_info* model);
+	int spawn_missile_in_launcher(int launcher_ID, rendering::item_info* model);
+	int spawn_launcher(const loc<int>& location, rendering::item_info* model);
 
 	bool move_missile_to_launcher(int amissile, int alauncher);
 
 	bool fire_launcher(int alauncher, const loc<int>& target);
 
-	item_info* explode_missile(int ID);
+	rendering::item_info* explode_missile(int ID);
 
 	//lancher information
 	bool is_launcher_empty(int alauncher);
