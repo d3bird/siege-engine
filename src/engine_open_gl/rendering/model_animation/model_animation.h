@@ -19,8 +19,8 @@
 #include <iostream>
 #include <map>
 #include <vector>
-#include "assimp_glm_helpers.h"
-#include "animdata.h"
+#include "assimp_glm_helpers.hpp"
+#include "animdata.hpp"
 
 using namespace std;
 
@@ -33,8 +33,6 @@ namespace model_animation {
 		vector<Mesh_bone>    meshes;
 		string directory;
 		bool gammaCorrection;
-
-
 
 		// constructor, expects a filepath to a 3D model.
 		Model_bone(string const& path, bool gamma = false) : gammaCorrection(gamma)
