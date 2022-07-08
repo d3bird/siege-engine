@@ -1,5 +1,7 @@
 #include "object_manger.h"
 
+#include <iostream>
+
 namespace rendering {
 
 

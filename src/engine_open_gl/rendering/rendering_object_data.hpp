@@ -30,7 +30,7 @@ namespace rendering {
 		unsigned int item_id;
 		unsigned int buffer_loc;
 		unsigned int amount;
-		float x_m, y_m, z_m;// the location in the engine
+		double x_m, y_m, z_m;// the location in the engine
 		float x_scale = 1;
 		float y_scale = 1;
 		float z_scale = 1;

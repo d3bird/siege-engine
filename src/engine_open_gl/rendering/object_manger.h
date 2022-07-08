@@ -6,7 +6,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <iostream>
 #include <vector>
 #include <queue>
 #include <string>
@@ -37,7 +36,7 @@ namespace rendering {
 	struct update_pak {
 		unsigned int item_id;
 		unsigned int buffer_loc;
-		float x, y, z;
+		double x, y, z;
 		float x_scale;
 		float y_scale;
 		float z_scale;

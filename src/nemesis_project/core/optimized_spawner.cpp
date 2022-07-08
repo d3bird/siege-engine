@@ -89,7 +89,7 @@ void optimized_spawner::import_models() {
 	external_paths paths;
 	unsigned int buffer_size = 50;
 
-	int obj_temp = OBJM->add_model("CUBE", paths.get_objs_loc() + "terrian/cube.obj", buffer_size, CUBE_T);
+	size_t obj_temp = OBJM->add_model("CUBE", paths.get_objs_loc() + "terrian/cube.obj", buffer_size, CUBE_T);
 	//table["CUBE"] = obj_temp;
 
 	obj_temp = OBJM->add_model("MOON", paths.get_objs_loc() + "planet/planet.obj", buffer_size, MOON_T);
