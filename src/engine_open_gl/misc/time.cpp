@@ -35,7 +35,7 @@ void timing::update_time() {
 	nbFrames++;
 	if (currentFrame - lastTime >= 1.0) {
 		if (draw_frame_rate) {
-			printf("%f ms/frame\n", 1000.0 / double(nbFrames));//the number of milliseconds needed to reder the frame
+			printf("%f ms/frame\n", 1000.0 / float(nbFrames));//the number of milliseconds needed to reder the frame
 		}
 		nbFrames = 0;
 		lastTime += 1.0;

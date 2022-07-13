@@ -33,7 +33,7 @@ private:
 	int passed_days;
 
 	//timing between frames
-	double lastTime;
+	float lastTime;
 	float currentFrame;
 	float lastFrame;
 	float* deltaTime;//for time that can change with state
