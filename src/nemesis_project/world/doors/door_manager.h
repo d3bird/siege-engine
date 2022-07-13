@@ -3,7 +3,7 @@
 #include "bulk_head_door.h"
 #include <rendering/rendering_object_data.hpp>
 #include "../../common_obj/location.h"
-#include "../../utility/motion_manager.h"
+#include "../../core/motion_manager.h"
 
 #include <vector>
 

@@ -4,7 +4,7 @@
 #include "../terrian_data.hpp"
 #include "../../core/optimized_spawner.h"
 
-#include "../../utility/motion_manager.h"
+#include "../../core/motion_manager.h"
 
 //these are chunks that are to be hard coded
 struct hard_chunk {

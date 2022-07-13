@@ -1,4 +1,4 @@
-#include "environment.h"
+#include "world.h"
 
 environment::environment(optimized_spawner* os, motion_manger* mm):
 	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm),

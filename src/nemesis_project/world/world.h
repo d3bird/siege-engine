@@ -1,25 +1,25 @@
 #pragma once
 
 #include "../core/optimized_spawner.h"
-#include "../utility/motion_manager.h"
+#include "../core/motion_manager.h"
 
-#include "../world/crane/crane_manager.h"
-#include "../world/rail/rail_manager.h"
+#include "crane/crane_manager.h"
+#include "rail/rail_manager.h"
 
-#include "../world/furnace/furnace_manager.h"
-#include "../world/liquid/liquid_manager.h"
+#include "furnace/furnace_manager.h"
+#include "liquid/liquid_manager.h"
 
 #include "../vehicles/ground/vehicle_manager.h"
-#include "../world/terrian/world_map.h"
+#include "terrian/world_map.h"
 
 #include "../vehicles/aircraft/aircraft_manager.h"
-#include "../world/decoration/decor_manager.h"
+#include "decoration/decor_manager.h"
 
 #include "../vehicles/missiles/missile_manager.h"
 #include "../vehicles/missiles/missile_test_sim.h"
 
-#include "../world/doors/door_manager.h"
-#include "../world/belts/belt_manager.h"
+#include "doors/door_manager.h"
+#include "belts/belt_manager.h"
 
 class environment
 {

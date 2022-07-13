@@ -148,7 +148,7 @@ void optimized_spawner::import_models() {
 	//table["GEAR_BOX_G_S"] = obj_temp;
 
 
-	obj_temp = OBJM->add_model("head", paths.get_objs_loc() + "person/head.obj", buffer_size, HEAD_T);
+	obj_temp = OBJM->add_model("head", paths.get_objs_loc() + "person/head4.obj", buffer_size, HEAD_T);
 	//table["head"] = obj_temp;
 	obj_temp = OBJM->add_model("body", paths.get_objs_loc() + "person/body.obj", buffer_size, BODY_T);
 	//table["body"] = obj_temp;

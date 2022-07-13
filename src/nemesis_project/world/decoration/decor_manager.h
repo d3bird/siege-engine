@@ -1,7 +1,7 @@
 #pragma once
 
 #include "decor_item.h"
-#include "../../utility/motion_manager.h"
+#include "../../core/motion_manager.h"
 #include "../../common_obj/location.h"
 
 #include <vector>
