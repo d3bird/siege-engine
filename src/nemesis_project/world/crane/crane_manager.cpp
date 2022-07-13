@@ -66,6 +66,7 @@ std::vector<loc<int> >  crane_manager::get_converate(int id, int y) {
 	crane* input =get_crane(id);
 
 	if (input != NULL) {
+		std::cout << "finding locatios that the crane can hit" << std::endl;
 		for (int x = 0; x < 20; x++) {
 			for (int z = 0; z < 20; z++) {
 				loc<int> new_dest(x, y, z);
@@ -74,8 +75,8 @@ std::vector<loc<int> >  crane_manager::get_converate(int id, int y) {
 				}
 			}
 		}
+	std::cout << "found " << output.size() << " spots for the crane with radius " << input->get_radius() << std::endl;
 	}
-
 	return output;
 }
 
@@ -102,9 +103,9 @@ void crane_manager::create_rand_dest(crane* input) {
 	bool result = input->set_dest(destination);
 
 	if (!result) {
-		////std::cout << "failed to create a new destination" << std::endl;
-		//std::cout << "dest: "<<destination.x << " " << destination.z << std::endl;
-		//std::cout << "dest: " << input->get_location().x << " " << input->get_location().z << std::endl;
+		std::cout << "failed to create a new destination" << std::endl;
+		std::cout << "dest loc : "<<destination.x << " " << destination.z << std::endl;
+		std::cout << "crane loc: " << input->get_location().x << " " << input->get_location().z << std::endl;
 	}
 
 }

@@ -45,8 +45,7 @@ private:
 
 	void world_generation_test();
 
-	void show_crane_area_test();
-	bool running_tests = false;
+	bool running_tests = true;
 
 	//misc vars
 	int start;

@@ -1,6 +1,7 @@
 #include "crane.h"
 
 #include <iostream>
+#include "../../utility/math/circle_math.h"
 
 crane::crane() {
 	ID = -1;
@@ -174,7 +175,11 @@ bool crane::set_dest(const loc<int>& aDest) {
 	if (output) {
 		dest = aDest;
 		aproaching_dest = true;
-		destination_angle = atan(aDest.z / aDest.x) * 180 / PI;
+		loc<double>start;
+		start = base_loc;
+		loc<double>end;
+		end = aDest;
+		destination_angle = mathfunc::calc_angle(start, end);
 
 	}
 	else {
@@ -189,6 +194,11 @@ bool crane::can_reach_dest(const loc<int>& aDest) {
 
 	double x_com = aDest.x - base_loc.x;
 	double z_com = aDest.z - base_loc.z;
+	loc<double>start;
+	start = base_loc;
+	loc<double>end;
+	end= aDest;
+	return mathfunc::is_point_in_circle(start, end, radius);
 
 	return ((x_com * x_com) + (z_com * z_com) < (radius * radius));
 	/*return (base_loc != aDest)&&((aDest.x - base_loc.x) * (aDest.x - base_loc.x) +

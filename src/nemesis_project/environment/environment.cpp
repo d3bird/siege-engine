@@ -259,6 +259,19 @@ crane* environment::get_crane(int id) {
 	return crane_mgr.get_crane(id);
 }
 
+void environment::show_crane_area(int id) {
+	std::vector<loc<int> > list = crane_mgr.get_converate(id);
+	if (list.empty()) {
+		std::cout << "could not show crane area, crane was null" << std::endl;
+	}
+	else {
+
+		for (int i = 0; i < list.size(); i++) {
+			spawner->spawn_item(CUBE_T, list[i].x, list[i].y+2, list[i].z);
+		}
+	}
+	std::cout << "placing " << list.size()<<" to show the crane area" << std::endl;
+}
 
 int environment::create_furnace(const std::vector<loc<int> >& spots) {
 	return furnace_mgr.create_furnace(spots);

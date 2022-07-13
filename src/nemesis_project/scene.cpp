@@ -204,19 +204,7 @@ void scene::radio_test() {
 	}
 }
 
-void scene::show_crane_area_test() {
 
-	//crane_mgr = crane_manager(updater);
-
-	//int output = place_crane(loc<int>(10, 2, 10), 7, 7);
-
-	//std::vector<loc<int> > list =crane_mgr.get_converate(0);
-
-	//for (int i = 0; i < list.size(); i++) {
-	//	spawner->spawn_item(CUBE_T, list[i].x, list[i].y, list[i].z);
-	//}
-
-}
 
 
 void scene::world_generation_test() {
@@ -235,10 +223,6 @@ void scene::world_generation_test() {
 	//creating managers
 	//crane_mgr = crane_manager(updater);
 
-	if (running_tests) {
-		show_crane_area_test();
-		return;
-	}
 	//spawn some trees 
 
 	env->spawn_ground_item(CUBE_TREE_T, loc<int>(8, 1, 5));
@@ -462,6 +446,8 @@ void scene::world_generation_test() {
 
 	int new_crane = env->place_crane(loc<int>(10, 1, 6), 12, 10);
 	env->toggle_crane(new_crane);
+
+	env->show_crane_area(new_crane);
 
 	//spawner->spawn_item(HOPPER, 2, 1, 3);
 
