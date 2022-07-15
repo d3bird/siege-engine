@@ -1,9 +1,11 @@
 #pragma once 
 
+
 namespace grnd_items {
 
-	enum recipe_type
+	enum grnd_obj_type
 	{
-		BOX_RECIPE
+		INGOT, BOX, BARREL
 	};
+
 }

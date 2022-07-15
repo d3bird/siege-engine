@@ -21,6 +21,8 @@
 #include "doors/door_manager.h"
 #include "belts/belt_manager.h"
 
+#include "ground_items/grnd_obj_manager.h"
+
 class environment
 {
 public:
@@ -111,6 +113,12 @@ public:
 
 	void place_fanx3x3(const loc<int>& location);
 
+	//everything to do with ground objects
+
+	void place_ground_object(grnd_items::grnd_obj_type type, const loc<int>& location);
+	void remove_ground_object(const loc<int>& location);
+	void remove_ground_object(int ID);
+
 private:
 
 	//engine related objects
@@ -128,6 +136,7 @@ private:
 	missile_sim* mis_sim;
 	belt_manager belt_mgr;
 	door_manager door_mgr;
+	grnd_items::grnd_obj_mgr grnd_objs_man;
 
 	//map related information
 	map_data* world_map;

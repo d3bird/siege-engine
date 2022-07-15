@@ -480,6 +480,12 @@ void scene::world_generation_test() {
 
 	env->spawn_bulk_head_door(loc<int>(14, 1, 0), loc<int>(20, 5, 0),true, true);
 
+	//testing for the ground item manager
+
+	env->place_ground_object(grnd_items::BOX, loc<int>(0, 1, 1));
+	env->place_ground_object(grnd_items::INGOT, loc<int>(1, 1, 1));
+	env->place_ground_object(grnd_items::BARREL, loc<int>(2,1,1));
+
 	//testing for the belt manager
 	env->spawn_ground_item(SUPPORT, loc<int>(9, 1, 11));
 
@@ -488,6 +494,8 @@ void scene::world_generation_test() {
 	env->spawn_belt(loc<int>(14, 1, 6), 0);
 	env->spawn_belt(loc<int>(14, 1, 7), 1);
 	env->spawn_belt(loc<int>(13, 1, 7), 2);
+
+
 }
 
 void scene::key_press() {

@@ -3,7 +3,8 @@
 environment::environment(optimized_spawner* os, motion_manger* mm):
 	crane_mgr(mm), rail_mgr(mm), vehicle_mgr(mm), aircraft_mgr(mm),
 	decor_manager(mm), missile_mgr(mm), mis_sim(NULL), belt_mgr(mm),
-	door_mgr(mm) {
+	grnd_objs_man(os, mm),	door_mgr(mm)
+{
 	spawner = os;
 	updater = mm;
 	world_map = NULL;
@@ -537,4 +538,16 @@ void environment::place_fanx3x3(const loc<int>& location){
 	rendering::item_info* frame = spawner->spawn_item(FAN_FRAME, location.x, location.y, location.z);
 	rendering::item_info* fan = spawner->spawn_item(FAN, location.x, location.y, location.z);
 	decor_manager.place_fanx3x3(location, frame, fan);
+}
+
+void environment::place_ground_object(grnd_items::grnd_obj_type type, const loc<int>& location) {
+	grnd_objs_man.spawn_obj(location, type);
+}
+
+void environment::remove_ground_object(const loc<int>& location) {
+	grnd_objs_man.delete_obj(location);
+}
+
+void environment::remove_ground_object(int ID) {
+	grnd_objs_man.delete_obj(ID);
 }
