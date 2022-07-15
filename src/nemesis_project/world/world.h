@@ -41,6 +41,8 @@ public:
 	void delete_grnd_obj(const loc<int>& location);
 	void delete_floor_obj(const loc<int>& location);
 
+	void spawn_person(const loc<int>& location);
+
 	//everything needed for the crane system
 	int place_crane(const loc<int>& location, int height, int radius);
 	void toggle_crane(int id);

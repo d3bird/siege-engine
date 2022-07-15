@@ -88,6 +88,16 @@ void environment::delete_floor_obj(const loc<int>& location) {
 	}
 }
 
+void environment::spawn_person(const loc<int>& location) {
+
+	spawner->spawn_item(HEAD_T, location);
+	spawner->spawn_item(BODY_T, location);
+	spawner->spawn_item(LEFT_LEG, location);
+	spawner->spawn_item(RIGHT_LEG, location);
+	spawner->spawn_item(LEFT_ARM, location);
+	spawner->spawn_item(RIGHT_ARM, location);
+}
+
 bool environment::place_rail(loc<int>& location, bool x_axis, railRoad::rail_type aType) {
 	bool output = can_place_rail(location);
 

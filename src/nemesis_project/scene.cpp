@@ -269,13 +269,7 @@ void scene::world_generation_test() {
 
 	//spawn the human for scale
 
-	spawner->spawn_item(HEAD_T, 3, 1, -1 + z_off);
-	spawner->spawn_item(BODY_T, 3, 1, -1 + z_off);
-	spawner->spawn_item(LEFT_LEG, 3, 1, -1 + z_off);
-	spawner->spawn_item(RIGHT_LEG, 3, 1, -1 + z_off);
-	spawner->spawn_item(LEFT_ARM, 3, 1, -1 + z_off);
-	spawner->spawn_item(RIGHT_ARM, 3, 1, -1 + z_off);
-
+	env->spawn_person(loc<int>(3, 1, -1 + z_off));
 
 	//code to test out the weapon system
 	spawner->spawn_item(ROATING_TURRET, 2, 1, 9 + z_off);
