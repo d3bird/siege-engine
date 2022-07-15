@@ -106,4 +106,9 @@ namespace rendering {
 		y_angle = other.y_angle;
 		z_angle = other.z_angle;
 	}
+
+	std::string rotation::to_string() {
+		return ("x angle: " + std::to_string(x_angle), ", y angle: " + std::to_string(y_angle),
+			", z angle: " + std::to_string(z_angle));
+	}
 }

@@ -8,6 +8,8 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
+#include <string>
+
 /*
 * preforms the rotation matrix calculation for objects that need a complex angle
 * 
@@ -43,6 +45,8 @@ namespace rendering {
 
 		bool operator==(const rotation& other);
 		void operator=(const rotation& other);
+
+		std::string to_string();
 
 	private:
 
