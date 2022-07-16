@@ -446,7 +446,7 @@ void scene::world_generation_test() {
 	//spawner->spawn_item(HOPPER, 2, 1, 3);
 
 	//misc testing
-	env->place_fanx3x3(loc<int>(40, 1, 6));
+	//env->place_fanx3x3(loc<int>(40, 1, 6));
 
 	//the testing code for the vehicles
 
@@ -468,6 +468,7 @@ void scene::world_generation_test() {
 	env->run_air_sim();
 
 	env->spawn_drop_ship(loc<int>(30, 2, 10));
+	env->spawn_thopter(loc<int>(40, 1, 10));
 	env->spawn_landing_strip(loc<int>(30, 2, 20));
 
 //	env->spawn_missile(loc<int>(27, 2, 15));

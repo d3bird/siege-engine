@@ -462,6 +462,22 @@ int environment::spawn_drop_ship(loc<int> location) {
 	return ship;
 }
 
+int environment::spawn_thopter(loc<int> location) {
+	int ship_id = -1;
+
+	//if (ship_id != -1) {
+
+		spawner->spawn_item(THOPTER_BODY, location, 90);
+		spawner->spawn_item(THOPTER_FL_WING, location, 90);
+		spawner->spawn_item(THOPTER_FR_WING, location, 90);
+		spawner->spawn_item(THOPTER_BL_WING, location, 90);
+		spawner->spawn_item(THOPTER_BR_WING, location, 90);
+//	}
+
+	return ship_id;
+}
+
+
 void environment::send_craft_to_site(int plane, loc<int> location) {
 	 aircraft_mgr.send_craft_to_site(plane ,location);
 }

@@ -90,6 +90,7 @@ public:
 	int spawn_plane(int landing_pad);
 
 	int spawn_drop_ship(loc<int> location);
+	int spawn_thopter(loc<int> location);
 
 	void send_craft_to_site(int plane, loc<int> location);
 	void send_craft_to_land_site(int plane, int land_pad);
