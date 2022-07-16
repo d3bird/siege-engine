@@ -13,6 +13,8 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 
 void key_board_input(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+void additional_guis();
+
 // settings
 //const unsigned int SCR_WIDTH = 800;
 //const unsigned int SCR_HEIGHT = 600;
@@ -95,6 +97,7 @@ int main() {
     //load the test application scene
     scene testing;
     testing.init(API);
+    API->additional_gui = &additional_guis;
 
     std::cout << "starting the main loop " << std::endl;
 
@@ -104,7 +107,7 @@ int main() {
             process_movement(window);
         }
         API->draw();
-        testing.display_guis();
+
         testing.update(*deltaTime);
     }
 
@@ -279,5 +282,10 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset){
 // ----------------------------------------------------------------------
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods){
     std::cout << "mouse_button_callback called" << std::endl;
+
+}
+
+void additional_guis() {
+    
 
 }

@@ -46,6 +46,9 @@ public:
 	//checks to see if the windiow is open
 	bool is_window_open() { return !glfwWindowShouldClose(window); }
 
+	//adddition function 
+	void (*additional_gui)();
+	
 	//getters
 
 	Camera* get_camera() { return camera; }
@@ -60,8 +63,6 @@ public:
 	rendering::model_animation::animation_manager* get_ANIM() { return ANIM; }
 	audio_syst::audio_manger* get_AM() { return AM; }
 
-	
-
 	//window callback setters
 
 	void set_key_callback(GLFWkeyfun callback);
@@ -73,6 +74,7 @@ public:
 	void set_frame_buffer_callback(GLFWframebuffersizefun callback);
 
 private:
+
 
 	//core functions
 	void update();

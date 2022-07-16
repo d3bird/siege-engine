@@ -35,6 +35,7 @@ engine_api::engine_api() {
     //the viewing vars
     view = glm::mat4(0.0f);
     projection = glm::mat4(0.0f);
+    additional_gui = NULL;
 }
 
 engine_api::~engine_api() {
@@ -62,6 +63,10 @@ void engine_api::draw() {
     sky->draw();
 
     Engine->update();
+
+    if (additional_gui != NULL) {
+        additional_gui();
+    }
 
     ImGui::Render();
     ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
