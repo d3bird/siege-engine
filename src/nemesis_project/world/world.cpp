@@ -463,16 +463,20 @@ int environment::spawn_drop_ship(loc<int> location) {
 }
 
 int environment::spawn_thopter(loc<int> location) {
-	int ship_id = -1;
+	int ship_id = aircraft_mgr.spawn_thopter(location);
+	thopter* shipper = aircraft_mgr.get_thopter(ship_id);
 
-	//if (ship_id != -1) {
+	if (ship_id != -1) {
 
-		spawner->spawn_item(THOPTER_BODY, location, 90);
-		spawner->spawn_item(THOPTER_FL_WING, location, 90);
-		spawner->spawn_item(THOPTER_FR_WING, location, 90);
-		spawner->spawn_item(THOPTER_BL_WING, location, 90);
-		spawner->spawn_item(THOPTER_BR_WING, location, 90);
-//	}
+		shipper->base = spawner->spawn_item(THOPTER_BODY, location, 90);
+		shipper->fl_wing = spawner->spawn_item(THOPTER_FL_WING, location, 90);
+		shipper->fr_wing = spawner->spawn_item(THOPTER_FR_WING, location, 90);
+		shipper->bl_wing = spawner->spawn_item(THOPTER_BL_WING, location, 90);
+		shipper->br_wing = spawner->spawn_item(THOPTER_BR_WING, location, 90);
+	}
+	else {
+		std::cout << "failed to spawn a thopter" << std::endl;
+	}
 
 	return ship_id;
 }

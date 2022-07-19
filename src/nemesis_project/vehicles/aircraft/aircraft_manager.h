@@ -8,6 +8,8 @@
 #include "flight_controller.h"
 #include "route_planner.h"
 
+#include "ships/thopter.h"
+
 #include <vector>
 #include "../../common_obj/location.h"
 #include "../../core/motion_manager.h"
@@ -35,6 +37,7 @@ public:
 	int spawn_plane(int landing_pad);
 
 	int spawn_drop_ship(loc<int> location);
+	int spawn_thopter(loc<int> location);
 
 	void send_craft_to_site(int plane, loc<int> location);
 	void send_craft_to_land_site(int plane, int land_pad);
@@ -45,6 +48,7 @@ public:
 	//getters
 	aircraft* get_aircraft(int id);
 	drop_ship* get_drop_ship(int id);
+	thopter* get_thopter(int id);
 
 	landing_site* get_landing_site(int id);
 	landing_strip* get_landing_strip(int id);
@@ -57,6 +61,7 @@ private:
 	route_planner route_plan;
 
 	std::vector<aircraft*> aircrafts;
+	std::vector<thopter *> thopters;
 	std::vector<drop_ship*> drop_ships;
 
 	std::vector<landing_site*> landing_areas;
