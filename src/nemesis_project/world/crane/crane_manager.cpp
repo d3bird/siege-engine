@@ -103,9 +103,9 @@ void crane_manager::create_rand_dest(crane* input) {
 	bool result = input->set_dest(destination);
 
 	if (!result) {
-		std::cout << "failed to create a new destination" << std::endl;
-		std::cout << "dest loc : "<<destination.x << " " << destination.z << std::endl;
-		std::cout << "crane loc: " << input->get_location().x << " " << input->get_location().z << std::endl;
+		//std::cout << "failed to create a new destination" << std::endl;
+		//std::cout << "dest loc : "<<destination.x << " " << destination.z << std::endl;
+		//std::cout << "crane loc: " << input->get_location().x << " " << input->get_location().z << std::endl;
 	}
 
 }

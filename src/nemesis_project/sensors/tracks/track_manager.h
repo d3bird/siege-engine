@@ -1,6 +1,7 @@
 #pragma once
 #include "track_data.h"
 
+#include <vector>
 
 class track_manager {
 public:
@@ -12,6 +13,6 @@ public:
 	void init();
 
 private:
-
-
+	std::vector<track*> active_tracks;
+	
 };

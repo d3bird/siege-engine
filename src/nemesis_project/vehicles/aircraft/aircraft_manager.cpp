@@ -31,6 +31,16 @@ void aircraft_manager::update(double time) {
 		updater->update_item(drop_ships[i]->left_doors);
 		updater->update_item(drop_ships[i]->right_doors);
 	}
+
+
+	for (int i = 0; i < thopters.size(); i++) {
+		thopters[i]->update(time);
+		updater->update_item(thopters[i]->base);
+		updater->update_item(thopters[i]->fl_wing);
+		updater->update_item(thopters[i]->fr_wing);
+		updater->update_item(thopters[i]->bl_wing);
+		updater->update_item(thopters[i]->br_wing);
+	}
 }
 
 int aircraft_manager::spawn_landing_pad(loc<int> location) {
@@ -78,6 +88,7 @@ int aircraft_manager::spawn_thopter(loc<int> location) {
 	temp->set_location(location);
 	aircraft_id++;
 	thopters.push_back(temp);
+	temp->start_flying();
 	return temp->get_ID();
 }
 

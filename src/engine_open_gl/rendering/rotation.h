@@ -22,7 +22,10 @@ namespace rendering {
 
 	class rotation {
 	public:
+
 		rotation();
+		rotation(float aX_angle, float aY_angle, float aZ_angle);
+
 		~rotation();
 
 		glm::mat4 get_matirx(glm::mat4& inputed);
@@ -39,6 +42,15 @@ namespace rendering {
 		void set_y_angle(float anagle);
 		void set_z_angle(float anagle);
 
+		void set_angles(float aX_angle, float aY_angle, float aZ_angle);
+
+		bool rotate_to(double change, float aX_angle, float aY_angle, float aZ_angle);
+		bool rotate_to(double change,rotation& new_angle );
+
+		bool rotate_angle_to(double change, float target_angle, int which_angle);
+		bool rotate_angle_clock_wise(double change, float target_angle, int which_angle);
+		bool rotate_angle_counter_clock_wise(double change, float target_angle, int which_angle);
+
 		float get_x_angle() { return x_angle; }
 		float get_y_angle() { return y_angle; }
 		float get_z_angle() { return z_angle; }
@@ -50,15 +62,13 @@ namespace rendering {
 
 	private:
 
-		bool double_equals(float a, float b, float epsilon = 0.001);
+		bool float_equals(float a, float b, float epsilon = 0.001);
 
 		void check_angle(float& input);
 
 		float x_angle;
 		float y_angle;
 		float z_angle;
-
-		glm::quat rotation_quat;
 
 	};
 }

@@ -50,6 +50,7 @@ void scene::update(double deltaTime) {
 
 void scene::display_guis() {
 //	worlds->draw_gui();
+	updater->draw_gui_window();
 }
 
 void scene::init(engine_api* api) {
@@ -63,6 +64,7 @@ void scene::init(engine_api* api) {
 	engine = new create_engine();
 	spawner = engine->init(API);
 	updater = new motion_manger(spawner);
+	updater->show_gui();
 	if (spawner == NULL) {
 		return;
 	}

@@ -231,12 +231,9 @@ void optimized_spawner::import_models() {
 	obj_temp = OBJM->add_model("LANDING_STRIP", paths.get_objs_loc() + "aircraft/landing_strip.obj", buffer_size, LANDING_STRIP);
 
 	obj_temp = OBJM->add_model("THOPTER_BODY", paths.get_objs_loc() + "aircraft/thopter_body.obj", buffer_size, THOPTER_BODY);
-	obj_temp = OBJM->add_model("THOPTER_FL_WING", paths.get_objs_loc() + "aircraft/thopter_wing_fl.obj", buffer_size, THOPTER_FL_WING);
-	obj_temp = OBJM->add_model("THOPTER_FR_WING", paths.get_objs_loc() + "aircraft/thopter_wing_fr.obj", buffer_size, THOPTER_FR_WING);
-	obj_temp = OBJM->add_model("THOPTER_BL_WING", paths.get_objs_loc() + "aircraft/thopter_wing_bl.obj", buffer_size, THOPTER_BL_WING);
-	obj_temp = OBJM->add_model("THOPTER_BR_WING", paths.get_objs_loc() + "aircraft/thopter_wing_br.obj", buffer_size, THOPTER_BR_WING);
+	obj_temp = OBJM->add_model("THOPTER_WING", paths.get_objs_loc() + "aircraft/thopter_wing.obj", buffer_size, THOPTER_WING);
 
-
+	
 	obj_temp = OBJM->add_model("BROADCAST_TOWER", paths.get_objs_loc() + "radio/radio_tower_temp.obj", buffer_size, BROADCAST_TOWER);
 	obj_temp = OBJM->add_model("RADIO_CONSOLE", paths.get_objs_loc() + "radio/console.obj", buffer_size, RADIO_CONSOLE);
 	obj_temp = OBJM->add_model("WALL_SPEAKER", paths.get_objs_loc() + "radio/wall_speaker.obj", buffer_size, WALL_SPEAKER);

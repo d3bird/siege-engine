@@ -469,10 +469,13 @@ int environment::spawn_thopter(loc<int> location) {
 	if (ship_id != -1) {
 
 		shipper->base = spawner->spawn_item(THOPTER_BODY, location, 90);
-		shipper->fl_wing = spawner->spawn_item(THOPTER_FL_WING, location, 90);
-		shipper->fr_wing = spawner->spawn_item(THOPTER_FR_WING, location, 90);
-		shipper->bl_wing = spawner->spawn_item(THOPTER_BL_WING, location, 90);
-		shipper->br_wing = spawner->spawn_item(THOPTER_BR_WING, location, 90);
+		shipper->fl_wing = spawner->spawn_item(THOPTER_WING, location, 90);
+		shipper->fr_wing = spawner->spawn_item(THOPTER_WING, location, 90);
+		shipper->bl_wing = spawner->spawn_item(THOPTER_WING, location, 90);
+		shipper->br_wing = spawner->spawn_item(THOPTER_WING, location, 90);
+		loc<double> do_loc(location.x * 2, location.y * 2, location.z * 2);
+		rendering::rotation rot;
+		shipper->update_model_loc(do_loc, rot);
 	}
 	else {
 		std::cout << "failed to spawn a thopter" << std::endl;

@@ -46,6 +46,7 @@ text_engine* text_render;
 bool take_input = true;;
 
 bool freecam = false;
+scene scene_testing;
 
 int main() {
 
@@ -95,8 +96,7 @@ int main() {
 
 
     //load the test application scene
-    scene testing;
-    testing.init(API);
+    scene_testing.init(API);
     API->additional_gui = &additional_guis;
 
     std::cout << "starting the main loop " << std::endl;
@@ -108,7 +108,7 @@ int main() {
         }
         API->draw();
 
-        testing.update(*deltaTime);
+        scene_testing.update(*deltaTime);
     }
 
 
@@ -286,6 +286,5 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 }
 
 void additional_guis() {
-    
-
+    scene_testing.display_guis();
 }
