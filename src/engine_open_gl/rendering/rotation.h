@@ -65,6 +65,7 @@ namespace rendering {
 		bool float_equals(float a, float b, float epsilon = 0.001);
 
 		void check_angle(float& input);
+		bool rotate_angle(float& input,float change, float target, bool clock_wise);
 
 		float x_angle;
 		float y_angle;
