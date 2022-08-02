@@ -1,5 +1,5 @@
 #pragma	once 
-#include "../../common_obj/location.h"
+#include "location.h"
 #include <rendering/rendering_object_data.hpp>
 
 /* the track class
@@ -38,6 +38,7 @@ public:
 	bool operator==(int other_id);
 	
 private:
+
 	int ID;
 	rendering::item_info* tracking_model;
 	bool track_stale;

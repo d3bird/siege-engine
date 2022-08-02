@@ -574,3 +574,11 @@ void environment::remove_ground_object(const loc<int>& location) {
 void environment::remove_ground_object(int ID) {
 	grnd_objs_man.delete_obj(ID);
 }
+
+int environment::spawn_turret(loc<double> location){
+	return weapons.spawn_turret(location);
+}
+
+void environment::delete_weapon(int ID) {
+	weapons.delete_weapon(ID);
+}

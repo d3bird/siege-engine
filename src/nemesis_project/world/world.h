@@ -23,6 +23,9 @@
 
 #include "ground_items/grnd_obj_manager.h"
 
+#include "../weapons/weapons_manager.h"
+#include "../weapons/projectile_manager.h"
+
 class environment
 {
 public:
@@ -120,6 +123,10 @@ public:
 	void remove_ground_object(const loc<int>& location);
 	void remove_ground_object(int ID);
 
+	//everything to do with weapons
+	int spawn_turret(loc<double> location);
+	void delete_weapon(int ID);
+
 private:
 
 	//engine related objects
@@ -138,6 +145,8 @@ private:
 	belt_manager belt_mgr;
 	door_manager door_mgr;
 	grnd_items::grnd_obj_mgr grnd_objs_man;
+	weapons::projectile_manager projectiles;
+	weapons::weapons_manager weapons;
 
 	//map related information
 	map_data* world_map;
